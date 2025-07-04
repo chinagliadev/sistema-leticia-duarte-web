@@ -1,0 +1,59 @@
+@font-face {
+    font-family: "Bulgee";
+    src: url(../fonts/Bungee-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Baloo2";
+    src: url(../fonts/Baloo2-VariableFont_wght.ttf);
+}
+
+* {
+    margin: 0;
+    font-family: "Baloo2";
+}
+
+.fundo_apresentacao {
+    background: url(../img/apresentacao_img/background_fundo.png);
+    background-position: center;
+    background-color: #E6FBFF;
+}
+
+/* Tela Apresentação */
+
+.tela_apresentacao h1 {
+    font-family: "Bulgee";
+    color: #000;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+}
+
+.tela_apresentacao h2 {
+    font-family: "Baloo2";
+}
+
+.tela_apresentacao img {
+    max-width: 300px;
+}
+
+.tela_apresentacao .botao_apresentacao>a {
+    background-color: #1C86CC;
+    padding: 5px 100px;
+    width: 1000px;
+    color: white;
+    transition: 0.3s;
+    border-radius: 8px;
+}
+
+.tela_apresentacao .botao_apresentacao>a:hover {
+    background-color: #00568E;
+    transition: 0.3s;
+}
+
+.tela_conteudo {
+    background-color: #fff;
+    height: 600px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+
+}
