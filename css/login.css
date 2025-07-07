@@ -1,12 +1,27 @@
+@font-face {
+    font-family: Baloo2;
+    src: url(../fonts/Baloo2-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: Bungee;
+    src: url(../fonts/Bungee-Regular.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Baloo2";
+    font-weight: 400;
 }
 
 body {
     background-image: url(../img/apresentacao_img/background_fundo.png);
     background-color: #E6FBFF;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .container {
@@ -27,6 +42,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    overflow: hidden;
 }
 
 .container img {
@@ -40,6 +56,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .formLogin, .formCadastro {
@@ -47,20 +64,93 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
 }
 
-input, button {
+input {
     padding: 12px 20px;
     border-radius: 8px;
+    border-color: #00000027;
     outline: none;
+    width: 410px;
+}
+
+input::placeholder {
+    color: #00000027;
+    font-size: 20px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-family: "Baloo2";
+    font-weight: 800;
+    font-size: 20px;
+    background-color: #1C86CC;
+    color: #FFFFFF;
+    width: 410px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 h2 {
-    margin-bottom: 32px;
+    margin-bottom: 20px;
+    font-family: "Bungee";
+    font-size: 32px;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+.imgCadastro, .imgLogin {
+    position: absolute;
+}
+
+.card::after {
+    width: 50%;
+    height: 100%;
+    content: "";
+    background-image: url(../img/cadastro_login/cadastro-login.png);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+/* Lógica de visibilidade */
+.card.loginActive .formCadastro {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.card.loginActive .formLogin {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.card:not(.loginActive) .formLogin {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.card:not(.loginActive) .formCadastro {
+    opacity: 1;
+    pointer-events: auto;
 }
