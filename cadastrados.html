@@ -2,59 +2,186 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Leticia Duarte - Inicio</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="./css/cadastros.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sistema com seu CSS e sidebar Semantic UI</title>
+
+    <!-- Seu CSS -->
+    <link rel="stylesheet" href="./css/cadastros.css" />
+
+    <!-- Semantic UI CSS para o botão e js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
+
+    <!-- jQuery + Semantic UI JS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 </head>
 
 <body>
 
-    <section class="corpo_pagina">
-        <aside class="menu_lateral">
+    <!-- Botão para abrir/fechar o menu lateral -->
+    <button id="btn-menu" class="ui icon button">
+        <i class="sidebar icon"></i>
+    </button>
 
-            <!-- Sessao com opcoes -->
+    <section class="corpo_pagina">
+
+        <!-- Menu lateral -->
+        <aside class="menu_lateral">
             <section class="opcoes_menu">
                 <div class="perfil">
-                    <i class="bi bi-person-circle"></i>
+                    <!-- Foto do usuario -->
                     <div class="descricao_perfil">
                         <h4>Admin</h4>
-                        <h5>Admin@email.com</h5>
+                        <h5>admin@email.com</h5>
                     </div>
                 </div>
 
                 <div class="lista_opcoes">
                     <ul>
-                        <li><i class="bi bi-house"></i><a href="#">Inicio</a></li>
-                        <li><i class="bi bi-bar-chart"></i><a href="#">Cadastrar Alunos</a></li>
-                        <li><i class="bi bi-clock-history"></i><a href="#">Historico</a></li>
+                        <li><i class="home icon"></i><a href="#">Início</a></li>
+                        <li><i class="chart bar outline icon"></i><a href="#">Cadastrar</a></li>
+                        <li><i class="history icon"></i><a href="#">Histórico</a></li>
                     </ul>
                 </div>
-
             </section>
-
 
             <section class="container_sair">
-                <i class="bi bi-box-arrow-left"></i><a href="#">Sair</a>
+                <i class="sign-out icon"></i><a href="#">Sair</a>
+            </section>
+        </aside>
+
+        <main class="conteudo_cadastrados">
+            <section class="cabecalho_cadastrados ">
+                <h2>Alunos<br>cadastrados</h2>
+                <img class="ui small image" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
+                    alt="logo da leticia duarte na tela de cadastros de alunos">
             </section>
 
-        </aside>
-        <!-- Menu lateral -->
-        <main class="container_cadastros">
-            <section class="header_cadastrados">
-                <h2>Alunos cadastrados</h2>
-                <div class="img_header">
-                    <img src="./img/apresentacao_img/Logo Leiticia Duarte.png" alt="">
+            <section class="pesquisa_alunos">
+                <div class="container_pesquisar ui action input">
+                    <input type="text" placeholder="Pesquisar aluno (Nome/RA)">
+                    <button class="ui button "><i class="search icon"></i></button>
+                </div>
+
+                <div class="container_filtrar">
+                    <button></button>
                 </div>
             </section>
 
-            <section class="pesquisar_cadastros">
-                <input type="text" placeholder="Pesquisar aluno (Nome/RA)">
-                <a href="#"><i class="bi bi-filter"></i>Filtro</a>
+            <section class="sessao_tabela">
+                <table class="ui single line table">
+                    <thead class="center aligned">
+                        <tr class=" cabecalho_tabela">
+                            <th>Registro do aluno (RA)</th>
+                            <th>Nome do aluno</th>
+                            <th>Data nascimento</th>
+                            <th>Responsável</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody class="center aligned">
+                        <tr>
+                            <td>123444</td>
+                            <td>Victor Oliveira</td>
+                            <td>20/02/2004</td>
+                            <td>Vanessa Oliveira</td>
+                            <td>
+                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
+                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
+                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>123445</td>
+                            <td>Fernanda Mendes</td>
+                            <td>15/08/2005</td>
+                            <td>Paulo Mendes</td>
+                            <td>
+                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
+                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
+                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>123446</td>
+                            <td>João Pedro</td>
+                            <td>03/01/2003</td>
+                            <td>Maria Pedro</td>
+                            <td>
+                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
+                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
+                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>123447</td>
+                            <td>Ana Beatriz</td>
+                            <td>29/07/2006</td>
+                            <td>Cláudia Beatriz</td>
+                            <td>
+                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
+                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
+                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>123448</td>
+                            <td>Matheus Silva</td>
+                            <td>11/12/2004</td>
+                            <td>Eduardo Silva</td>
+                            <td>
+                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
+                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
+                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>123449</td>
+                            <td>Juliana Costa</td>
+                            <td>24/03/2005</td>
+                            <td>Fernanda Costa</td>
+                            <td>
+                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
+                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
+                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>123450</td>
+                            <td>Lucas Ferreira</td>
+                            <td>17/09/2003</td>
+                            <td>Adriana Ferreira</td>
+                            <td>
+                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
+                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
+                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
             </section>
         </main>
     </section>
+
+    <script>
+        const btnMenu = document.getElementById('btn-menu');
+        const menu = document.querySelector('.menu_lateral');
+        const body = document.body;
+
+        btnMenu.addEventListener('click', () => {
+            menu.classList.toggle('ativo');
+            body.classList.toggle('menu-aberto');
+        });
+    </script>
 </body>
 
 </html>

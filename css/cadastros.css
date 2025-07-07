@@ -3,157 +3,225 @@
     src: url(../fonts/Baloo2-VariableFont_wght.ttf);
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: "Baloo2";
 }
 
-.corpo_pagina{
+.corpo_pagina {
     display: flex;
     background-color: #F6F6F6;
     min-height: 100vh;
 }
 
 /* Retirar o sublinhado de todos a */
-a{
+a {
     text-decoration: none;
 }
 
 /* Menu lateral */
-.menu_lateral{
+.menu_lateral {
     background-color: #ffffff;
-    min-width: 200px;
+    min-width: 230px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px;
 }
 
 
 /* Opcoes de navegacao e perfil */
-.menu_lateral .opcoes_menu{
+.menu_lateral .opcoes_menu {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     align-items: center;
 }
 
 /* Area do pefil e descricao - Email / Nome */
-.menu_lateral .opcoes_menu .perfil{
-    display:flex;
+.menu_lateral .opcoes_menu .perfil {
+    display: flex;
     gap: 10px;
     align-items: center;
 }
 
-.menu_lateral .opcoes_menu .perfil .descricao_perfil{
+.menu_lateral .opcoes_menu .perfil .descricao_perfil {
     font-size: 15px;
 }
 
-.menu_lateral .opcoes_menu .perfil h4{
+.menu_lateral .opcoes_menu .perfil h4 {
     font-weight: bold;
+    margin: 0;
 }
 
-.menu_lateral .opcoes_menu .perfil h5{
+.menu_lateral .opcoes_menu .perfil h5 {
     font-weight: 400;
+    margin: 0;
 }
 
-.menu_lateral .opcoes_menu .perfil > i{
+.menu_lateral .opcoes_menu .perfil>i {
     font-size: 40px;
 }
 
 /* Navegacao menu lateral */
-.opcoes_menu a{
+.opcoes_menu a {
     margin-left: 20px;
     color: black;
     font-size: 20px;
     transition: 0.3s;
 }
 
-.opcoes_menu .lista_opcoes{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 
-.opcoes_menu .lista_opcoes ul{
+.opcoes_menu .lista_opcoes ul {
     list-style: none;
     padding: 0;
     margin: 0;
     font-size: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
 }
 
-.opcoes_menu .lista_opcoes li:hover{
+.opcoes_menu .lista_opcoes li:hover {
     color: #003a61;
     transition: 0.3s;
 }
 
-.opcoes_menu .lista_opcoes a:hover{
+.opcoes_menu .lista_opcoes a:hover {
     color: #003a61;
     transition: 0.3s;
 }
 
-
-.menu_lateral .container_sair a{
-    margin-left: 20px; 
+.menu_lateral .container_sair a {
+    margin-left: 20px;
     font-size: 20px;
     color: black;
 }
 
-.menu_lateral .container_sair > i{
+.menu_lateral .container_sair>i {
     font-size: 20px;
 }
 
-.menu_lateral .container_sair a:hover{
+.menu_lateral .container_sair a:hover {
     color: #003a61;
     transition: 0.3s;
 }
 
-.menu_lateral .container_sair i:hover{
+.menu_lateral .container_sair i:hover {
     color: #003a61;
     transition: 0.3s;
 }
 
-/* Main */
-.container_cadastros{
-    padding: 20px 100px;
+
+@media (max-width: 768px) {
+    .menu_lateral {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        height: 100vh;
+        z-index: 1100;
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu_lateral.ativo {
+        left: 0;
+    }
+
+    /* Evita scroll horizontal quando menu aberto */
+    body.menu-aberto {
+        overflow-x: hidden;
+    }
+
+
+}
+
+/* Botão menu mobile */
+#btn-menu {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1200;
+    opacity: 0.7;
+    /* Mais transparente que 1.0, mas ainda bem visível */
+}
+
+@media (max-width: 768px) {
+    #btn-menu {
+        display: block;
+    }
+}
+
+/* Tela principal do projeto */
+
+.conteudo_cadastrados {
+    padding: 40px 2vw 20px 2vw;
+    /* top, right, bottom, left */
+    width: 100%;
+    background-color: #F6F6F6;
+}
+
+.cabecalho_cadastrados {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
-.container_cadastros .header_cadastrados{
-    display: flex;
-    font-size: 22px;
-    justify-content: space-between;
+.cabecalho_cadastrados h2 {
+    font-size: 3rem;
+    transition: 0.5s;
 }
 
-.container_cadastros .header_cadastrados img{
-    width: 130px;
-    height: 70px;
+@media screen and (max-width: 768px) {
+    .conteudo_cadastrados {
+        padding: 50px 5vw 20px 5vw;
+        width: 100%;
+    }
+
+    .cabecalho_cadastrados{
+        margin-top: 30px;
+    }
+
+    .cabecalho_cadastrados h2 {
+        font-size: 1.8rem;
+        transition: 0.5s;
+    }
 }
 
-/* Area de pesquisar alunos */
-.pesquisar_cadastros{
+/* Sessao pesquisar alunos */
+
+.pesquisa_alunos {
     margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
 }
 
-.pesquisar_cadastros input{
-    padding: 7px;
-    outline: none;
-    min-width: 300px;
-    border-radius: 7px;
-    border: 1px #c2c1c1 solid;
-    font-size: 15px;
+.pesquisa_alunos .container_pesquisar {
+    min-width: 400px;
 }
 
-.pesquisar_cadastros  a{
-    padding: 7px 40px;
-    background-color: #ffffff;
-    border: 2px solid #e0e0e0;
-    border-radius: 7px;
-    color: #5c5c5c;
+@media screen and (max-width:768px) {
+    .pesquisa_alunos .container_pesquisar {
+        min-width: 100px;
+    }
+
+    .pesquisa_alunos .container_pesquisar input {
+        font-size: 13px;
+    }
+
+    .pesquisa_alunos .container_pesquisar input::placeholder {
+        font-size: 12px;
+    }
+}
+
+/* Sessao tabela */
+
+.sessao_tabela {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.sessao_tabela table tfoot {
+    text-align: center;
 }
