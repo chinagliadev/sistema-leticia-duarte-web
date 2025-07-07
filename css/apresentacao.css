@@ -14,18 +14,40 @@
 }
 
 .fundo_apresentacao {
-    background: url(../img/apresentacao_img/background_fundo.png);
+    background:
+        linear-gradient(135deg, #E6FBFF, #ffffff),
+        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+        url(../img/apresentacao_img/background_fundo.png);
+    background-size: cover;
     background-position: center;
-    background-color: #E6FBFF;
+    background-position: center;
 }
 
 /* Tela Apresentação */
+.tela_conteudo {
+    background-color: #fff;
+    min-height: 600px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: transform 0.5s ease;
+
+}
+
+.tela_conteudo:hover {
+    transform: translateY(-5px);
+    transition: transform 0.5s ease;
+}
 
 .tela_apresentacao h1 {
     font-family: "Bulgee";
     color: #000;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 
+}
+
+.tela_apresentacao h1 span {
+    color: #00568E;
+    font-family: "Bulgee";
 }
 
 .tela_apresentacao h2 {
@@ -42,18 +64,10 @@
     width: 1000px;
     color: white;
     transition: 0.3s;
-    border-radius: 8px;
+    border-radius: 20px;
 }
 
 .tela_apresentacao .botao_apresentacao>a:hover {
     background-color: #00568E;
     transition: 0.3s;
-}
-
-.tela_conteudo {
-    background-color: #fff;
-    height: 600px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-
 }

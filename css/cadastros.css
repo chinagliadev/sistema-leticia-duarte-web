@@ -1,0 +1,159 @@
+@font-face {
+    font-family: "Baloo2";
+    src: url(../fonts/Baloo2-VariableFont_wght.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Baloo2";
+}
+
+.corpo_pagina{
+    display: flex;
+    background-color: #F6F6F6;
+    min-height: 100vh;
+}
+
+/* Retirar o sublinhado de todos a */
+a{
+    text-decoration: none;
+}
+
+/* Menu lateral */
+.menu_lateral{
+    background-color: #ffffff;
+    min-width: 200px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px;
+}
+
+
+/* Opcoes de navegacao e perfil */
+.menu_lateral .opcoes_menu{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+/* Area do pefil e descricao - Email / Nome */
+.menu_lateral .opcoes_menu .perfil{
+    display:flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.menu_lateral .opcoes_menu .perfil .descricao_perfil{
+    font-size: 15px;
+}
+
+.menu_lateral .opcoes_menu .perfil h4{
+    font-weight: bold;
+}
+
+.menu_lateral .opcoes_menu .perfil h5{
+    font-weight: 400;
+}
+
+.menu_lateral .opcoes_menu .perfil > i{
+    font-size: 40px;
+}
+
+/* Navegacao menu lateral */
+.opcoes_menu a{
+    margin-left: 20px;
+    color: black;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.opcoes_menu .lista_opcoes{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.opcoes_menu .lista_opcoes ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.opcoes_menu .lista_opcoes li:hover{
+    color: #003a61;
+    transition: 0.3s;
+}
+
+.opcoes_menu .lista_opcoes a:hover{
+    color: #003a61;
+    transition: 0.3s;
+}
+
+
+.menu_lateral .container_sair a{
+    margin-left: 20px; 
+    font-size: 20px;
+    color: black;
+}
+
+.menu_lateral .container_sair > i{
+    font-size: 20px;
+}
+
+.menu_lateral .container_sair a:hover{
+    color: #003a61;
+    transition: 0.3s;
+}
+
+.menu_lateral .container_sair i:hover{
+    color: #003a61;
+    transition: 0.3s;
+}
+
+/* Main */
+.container_cadastros{
+    padding: 20px 100px;
+    width: 100%;
+}
+
+.container_cadastros .header_cadastrados{
+    display: flex;
+    font-size: 22px;
+    justify-content: space-between;
+}
+
+.container_cadastros .header_cadastrados img{
+    width: 130px;
+    height: 70px;
+}
+
+/* Area de pesquisar alunos */
+.pesquisar_cadastros{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pesquisar_cadastros input{
+    padding: 7px;
+    outline: none;
+    min-width: 300px;
+    border-radius: 7px;
+    border: 1px #c2c1c1 solid;
+    font-size: 15px;
+}
+
+.pesquisar_cadastros  a{
+    padding: 7px 40px;
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 7px;
+    color: #5c5c5c;
+}
