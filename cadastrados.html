@@ -30,11 +30,12 @@
         <aside class="menu_lateral">
             <section class="opcoes_menu">
                 <div class="perfil">
-                    <!-- Foto do usuario -->
-                    <div class="descricao_perfil">
-                        <h4>Admin</h4>
-                        <h5>admin@email.com</h5>
-                    </div>
+                    <img class="ui avatar image" src="./img/apresentacao_img/Logo Leiticia Duarte.png" alt="">
+                    
+                    <span class="usuario-info">
+                        <span class="usuario-nome"><strong>Admin</strong></span><br>
+                        <span class="usuario-email">Admin@email.com</span>
+                    </span>
                 </div>
 
                 <div class="lista_opcoes">
@@ -52,15 +53,15 @@
         </aside>
 
         <main class="conteudo_cadastrados">
-            <section class="cabecalho_cadastrados ">
+            <section class="cabecalho_cadastrados">
                 <h2>Alunos<br>cadastrados</h2>
-                <img class="ui small image" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
+                <img class="ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
                     alt="logo da leticia duarte na tela de cadastros de alunos">
             </section>
 
             <section class="pesquisa_alunos">
                 <div class="container_pesquisar ui action input">
-                    <input type="text" placeholder="Pesquisar aluno (Nome/RA)">
+                    <input type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
                     <button class="ui button "><i class="search icon"></i></button>
                 </div>
 
@@ -70,104 +71,86 @@
             </section>
 
             <section class="sessao_tabela">
-                <table class="ui single line table">
-                    <thead class="center aligned">
-                        <tr class=" cabecalho_tabela">
-                            <th>Registro do aluno (RA)</th>
-                            <th>Nome do aluno</th>
-                            <th>Data nascimento</th>
-                            <th>Responsável</th>
+                <table class="ui single line table center aligned">
+                    <thead >
+                        <tr>
+                            <th>Registro do aluno</th>
+                            <th>Nome</th>
+                            <th>Data de nascimento</th>
+                            <th>Responsavel</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
-                    <tbody class="center aligned">
+                    <tbody>
                         <tr>
-                            <td>123444</td>
-                            <td>Victor Oliveira</td>
-                            <td>20/02/2004</td>
-                            <td>Vanessa Oliveira</td>
+                            <td>123788</td>
+                            <td>Keno Estoque</td>
+                            <td>12/06/2006</td>
+                            <td>Katia Estoque</td>
                             <td>
-                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
-                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
-                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
+                                <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
                         </tr>
                         <tr>
-                            <td>123445</td>
-                            <td>Fernanda Mendes</td>
-                            <td>15/08/2005</td>
-                            <td>Paulo Mendes</td>
+                            <td>123789</td>
+                            <td>Laura Martins</td>
+                            <td>25/09/2007</td>
+                            <td>Fernanda Martins</td>
                             <td>
-                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
-                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
-                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
+                                <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
                         </tr>
                         <tr>
-                            <td>123446</td>
-                            <td>João Pedro</td>
-                            <td>03/01/2003</td>
-                            <td>Maria Pedro</td>
+                            <td>123790</td>
+                            <td>Enzo Silva</td>
+                            <td>03/02/2005</td>
+                            <td>Roberta Silva</td>
                             <td>
-                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
-                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
-                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
+                                <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
                         </tr>
                         <tr>
-                            <td>123447</td>
-                            <td>Ana Beatriz</td>
-                            <td>29/07/2006</td>
-                            <td>Cláudia Beatriz</td>
+                            <td>123791</td>
+                            <td>Isabela Rocha</td>
+                            <td>19/07/2008</td>
+                            <td>Lucas Rocha</td>
                             <td>
-                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
-                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
-                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
+                                <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
                         </tr>
                         <tr>
-                            <td>123448</td>
-                            <td>Matheus Silva</td>
-                            <td>11/12/2004</td>
-                            <td>Eduardo Silva</td>
+                            <td>123792</td>
+                            <td>Pedro Almeida</td>
+                            <td>30/11/2006</td>
+                            <td>Juliana Almeida</td>
                             <td>
-                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
-                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
-                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
+                                <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
                         </tr>
                         <tr>
-                            <td>123449</td>
-                            <td>Juliana Costa</td>
-                            <td>24/03/2005</td>
-                            <td>Fernanda Costa</td>
+                            <td>123793</td>
+                            <td>Ana Beatriz Lima</td>
+                            <td>08/04/2007</td>
+                            <td>Marcelo Lima</td>
                             <td>
-                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
-                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
-                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>123450</td>
-                            <td>Lucas Ferreira</td>
-                            <td>17/09/2003</td>
-                            <td>Adriana Ferreira</td>
-                            <td>
-                                <button class="ui yellow button"><i class="pencil alternate icon"></i> Editar</button>
-                                <button class="ui red button"><i class="trash alternate icon"></i> Deletar</button>
-                                <button class="ui blue button"><i class="eye icon"></i> Detalhes</button>
+                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
+                                <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
                         </tr>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="5">
-
-                            </td>
-                        </tr>
-                    </tfoot>
+                    
                 </table>
-
             </section>
         </main>
     </section>

@@ -1,61 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/login.css">
+    <!-- jQuery + Semantic UI JS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
     <title>Login</title>
 </head>
+
 <body>
-    <section class="container">
-        <div class="card loginActive">
-            <div class="esquerda">
-                <div class="formCadastro">
-                    <h2>Cadastro</h2>
-                    <form>
-                        <input type="text" placeholder="Digite seu nome completo">
-                        <input type="email" placeholder="Digite seu E-mail">
-                        <input type="password" placeholder="Digite sua senha">
-                        <input type="password" placeholder="Digite novamente sua senha">
-                        <input type="number" placeholder="(99) 99999-9999">
-                        <input type="text" placeholder="000.000.000-00">
-                        <button type="submit">CADASTRAR</button>
-                        <p>Já tem uma conta? <a href="#" id="linkLogin">Faça Login</a></p>
-                    </form>
-                </div> 
-                <div class="imgLogin">
-                </div>    
-            </div>
-            <div class="direita">
-                <div class="imgCadastro">
+
+    <section class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>Cadastro</h1>
+                <input type="text" placeholder="Digite seu nome completo">
+                <input type="email" placeholder="Digite seu E-mail">
+                <input type="password" placeholder="Digite sua Senha">
+                <input type="password" placeholder="Digite novamente sua Senha">
+                <input type="number" placeholder="(99) 99999-9999">
+                <input type="text" placeholder="000.000.000-00">
+                <button>Cadastrar</button>
+                <p>Já tem uma conta? <a href="#" id="login">Faça o Login</a></p>
+            </form>
+        </div>
+
+        <div class="form-container sign-in">
+            <form>
+                <h1>Login</h1>
+                <input type="email" placeholder="Digite seu E-mail">
+                <input type="password" placeholder="Digite sua Senha">
+                <div class="ui checkbox checkPassword">
+                    <input type="checkbox" name="example">
+                    <label>Lembrar de mim</label>
                 </div>
-                <div class="formLogin">
-                    <h2>Login</h2>
-                    <form>
-                        <input type="email" placeholder="Digite seu E-mail">
-                        <input type="password" placeholder="Digite sua senha">
-                        <button type="submit">ENTRAR</button>
-                        <p>Ainda não tem uma conta? <a href="#" id="linkCadastro">Faça o Cadastro</a></p>
-                    </form>  
-                </div>
+                <button>Entrar</button>
+                <p>Ainda não tem uma conta? <a href="#" id="register">Faça o Cadastro</a></p>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
             </div>
         </div>
     </section>
 
-    <script>
-        const card = document.querySelector('.card');
-        const linkLogin = document.getElementById('linkLogin');
-        const linkCadastro = document.getElementById('linkCadastro');
+    <script src="./js/login.js"></script>
 
-        linkLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            card.classList.add('loginActive');
-        });
-
-        linkCadastro.addEventListener('click', (e) => {
-            e.preventDefault();
-            card.classList.remove('loginActive');
-        });
-    </script>
 </body>
+
 </html>

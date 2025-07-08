@@ -27,6 +27,7 @@ a {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    align-items: center;
     padding: 30px;
 }
 
@@ -186,9 +187,15 @@ a {
     }
 
     .cabecalho_cadastrados h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
         transition: 0.5s;
     }
+
+    .cabecalho_cadastrados img{
+        margin-bottom: 16px;
+    }
+
+
 }
 
 /* Sessao pesquisar alunos */
@@ -213,15 +220,22 @@ a {
     .pesquisa_alunos .container_pesquisar input::placeholder {
         font-size: 12px;
     }
+
 }
 
 /* Sessao tabela */
 
 .sessao_tabela {
-    margin-top: 30px;
     font-size: 18px;
 }
 
-.sessao_tabela table tfoot {
-    text-align: center;
+
+
+@media screen and (max-width:768px){
+    .sessao_tabela {
+        width: 100%;
+        min-height: 100vh;
+    }
+
+   
 }
