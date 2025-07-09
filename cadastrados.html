@@ -29,15 +29,16 @@
         <!-- Menu lateral -->
         <aside class="menu_lateral">
             <section class="opcoes_menu">
-                <div class="perfil">
-                    <img class="ui avatar image" src="./img/apresentacao_img/Logo Leiticia Duarte.png" alt="">
-                    
-                    <span class="usuario-info">
-                        <span class="usuario-nome"><strong>Admin</strong></span><br>
-                        <span class="usuario-email">Admin@email.com</span>
-                    </span>
-                </div>
 
+                <div class="perfil"  onclick="window.location.href='perfil.html'">
+                        <img class="ui avatar image" src="./img/apresentacao_img/Logo Leiticia Duarte.png" alt="">
+
+                        <span class="usuario-info">
+                            <span class="usuario-nome"><strong>Admin</strong></span><br>
+                            <span class="usuario-email">Admin@email.com</span>
+                        </span>
+                    </div>
+                    
                 <div class="lista_opcoes">
                     <ul>
                         <li><i class="home icon"></i><a href="#">Início</a></li>
@@ -48,7 +49,7 @@
             </section>
 
             <section class="container_sair">
-                <i class="sign-out icon"></i><a href="#">Sair</a>
+                <a href="#"><i class="sign-out icon"></i>Sair</a>
             </section>
         </aside>
 
@@ -62,7 +63,7 @@
             <section class="pesquisa_alunos">
                 <div class="container_pesquisar ui action input">
                     <input type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
-                    <button class="ui button "><i class="search icon"></i></button>
+                    <button class="ui button primary"><i class="search icon"></i></button>
                 </div>
 
                 <div class="container_filtrar">
@@ -71,8 +72,8 @@
             </section>
 
             <section class="sessao_tabela">
-                <table class="ui single line table center aligned">
-                    <thead >
+                <table class="ui stackable single line center aligned table">
+                    <thead>
                         <tr>
                             <th>Registro do aluno</th>
                             <th>Nome</th>
@@ -88,7 +89,8 @@
                             <td>12/06/2006</td>
                             <td>Katia Estoque</td>
                             <td>
-                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small yellow"><i
+                                        class="pencil alternate icon"></i>Editar</button>
                                 <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
                                 <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
@@ -99,7 +101,8 @@
                             <td>25/09/2007</td>
                             <td>Fernanda Martins</td>
                             <td>
-                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small yellow"><i
+                                        class="pencil alternate icon"></i>Editar</button>
                                 <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
                                 <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
@@ -110,7 +113,8 @@
                             <td>03/02/2005</td>
                             <td>Roberta Silva</td>
                             <td>
-                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small yellow"><i
+                                        class="pencil alternate icon"></i>Editar</button>
                                 <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
                                 <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
@@ -121,7 +125,8 @@
                             <td>19/07/2008</td>
                             <td>Lucas Rocha</td>
                             <td>
-                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small yellow"><i
+                                        class="pencil alternate icon"></i>Editar</button>
                                 <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
                                 <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
@@ -132,7 +137,8 @@
                             <td>30/11/2006</td>
                             <td>Juliana Almeida</td>
                             <td>
-                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small yellow"><i
+                                        class="pencil alternate icon"></i>Editar</button>
                                 <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
                                 <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
@@ -143,13 +149,14 @@
                             <td>08/04/2007</td>
                             <td>Marcelo Lima</td>
                             <td>
-                                <button class="ui button small yellow"><i class="pencil alternate icon"></i>Editar</button>
+                                <button class="ui button small yellow"><i
+                                        class="pencil alternate icon"></i>Editar</button>
                                 <button class="ui button small red"><i class="trash alternate icon"></i>Deletar</button>
                                 <button class="ui button small blue"><i class="eye icon"></i>Detalhes</button>
                             </td>
                         </tr>
                     </tbody>
-                    
+
                 </table>
             </section>
         </main>

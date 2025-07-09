@@ -1,17 +1,6 @@
-@font-face {
-    font-family: "Baloo2";
-    src: url(../fonts/Baloo2-VariableFont_wght.ttf);
-}
-
 * {
     margin: 0;
     padding: 0;
-    font-family: "Baloo2";
-}
-
-/* Links */
-a {
-    text-decoration: none;
 }
 
 /* Estrutura da página */
@@ -59,7 +48,7 @@ a {
     font-size: 15px;
 }
 
-.menu_lateral .opcoes_menu .perfil > i {
+.menu_lateral .opcoes_menu .perfil>i {
     font-size: 40px;
 }
 
@@ -105,7 +94,7 @@ a {
     color: black;
 }
 
-.menu_lateral .container_sair > i {
+.menu_lateral .container_sair>i {
     font-size: 20px;
 }
 
@@ -155,83 +144,10 @@ a {
     }
 }
 
-/* Conteúdo principal */
-.conteudo_cadastrados {
+/* Conteudo do perfil e historico - main */
+.conteudo_perfil {
     padding: 40px 2vw 20px 2vw;
     width: 100%;
     background-color: #F6F6F6;
     background-image: url(../img/apresentacao_img/background_fundo-removebg.png);
-}
-
-.cabecalho_cadastrados {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.cabecalho_cadastrados h2 {
-    font-size: 3rem;
-    transition: 0.5s;
-    color: #3b3b3b;
-}
-
-/* Responsividade conteúdo */
-@media screen and (max-width: 768px) {
-    .conteudo_cadastrados {
-        padding: 50px 5vw 20px 5vw;
-        width: 100%;
-    }
-
-    .cabecalho_cadastrados {
-        margin-top: 30px;
-    }
-
-    .cabecalho_cadastrados h2 {
-        font-size: 2rem;
-        transition: 0.5s;
-    }
-
-    .cabecalho_cadastrados img {
-        margin-bottom: 16px;
-    }
-}
-
-/* Pesquisa de alunos */
-.pesquisa_alunos {
-    margin-top: 30px;
-}
-
-.pesquisa_alunos .container_pesquisar {
-    min-width: 400px;
-}
-
-@media screen and (max-width: 768px) {
-    .pesquisa_alunos .container_pesquisar {
-        min-width: 100px;
-    }
-
-    .pesquisa_alunos .container_pesquisar input {
-        font-size: 13px;
-    }
-
-    .pesquisa_alunos .container_pesquisar input::placeholder {
-        font-size: 12px;
-    }
-}
-
-/* Tabela */
-.sessao_tabela {
-    font-size: 18px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08); 
-}
-
-@media screen and (max-width: 768px) {
-    .sessao_tabela {
-        width: 100%;
-        min-height: 100vh;
-    }
 }
