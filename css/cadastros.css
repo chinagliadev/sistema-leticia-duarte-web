@@ -220,18 +220,32 @@ a {
     }
 }
 
-/* Tabela */
 .sessao_tabela {
-    font-size: 18px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08); 
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  font-size: 17px;
 }
+
+.sessao_tabela table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sessao_tabela tfoot{
+    background-color: #f9fafb;
+}
+
 
 @media screen and (max-width: 768px) {
     .sessao_tabela {
         width: 100%;
         min-height: 100vh;
     }
+}
+
+.sessao_tabela tr:hover {
+    background-color: #f5f5f5;
 }
