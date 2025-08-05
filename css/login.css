@@ -211,16 +211,14 @@ p {
     transform: translateX(200%);
 }
 
-.sign-up form .inputH3 {
+.cpf,
+.cell,
+.password,
+.email,
+.name {
     text-align: start;
     width: 100%;
-    font-size: 15px;
-}
-
-.sign-in form .inputH3 {
-    text-align: start;
-    width: 100%;
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .checkPassword {
@@ -238,6 +236,10 @@ p {
     cursor: pointer;
 }
 
+.checkPassword input {
+    margin: 0px;
+}
+
 .lembrarMim {
     cursor: pointer;
 }
@@ -246,7 +248,6 @@ p {
     display: flex;
     align-items: center;
     gap: 8px;
-    cursor: pointer;
 }
 
 @media (max-width: 768px) {

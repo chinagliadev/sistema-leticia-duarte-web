@@ -14,33 +14,21 @@
 <body>
 
     <section class="container" id="container">
-        <div class="form-container sign-up">
+        <div class="ui form form-container sign-up">
             <form>
                 <h1>Cadastro</h1>
-                <div class="inputH3">
-                    <h3>Nome completo</h3>
-                </div>
-                <input type="text" placeholder="Digite seu nome completo">
-                <div class="inputH3">
-                    <h3>E-mail</h3>
-                </div>
-                <input type="email" placeholder="Digite seu E-mail">
-                <div class="inputH3">
-                    <h3>Senha</h3>
-                </div>
-                <input type="password" placeholder="Digite sua Senha">
-                <div class="inputH3">
-                    <h3>Confirmar senha</h3>
-                </div>
-                <input type="password" placeholder="Digite novamente sua Senha">
-                <div class="inputH3">
-                    <h3>Celular</h3>
-                </div>
-                <input type="number" placeholder="(99) 99999-9999">
-                <div class="inputH3">
-                    <h3>CPF</h3>
-                </div>
-                <input type="text" placeholder="000.000.000-00">
+                <label for="nameComplete" class="name">Nome Completo</label>
+                <input type="text" placeholder="Digite seu nome completo" id="nameComplete">
+                <label for="email" class="email">E-mail</label>
+                <input type="email" placeholder="Digite seu E-mail" id="emailCad">
+                <label for="password" class="password">Senha</label>
+                <input type="password" placeholder="Digite sua Senha" id="passwordCad">
+                <label for="passwordConfirm" class="password">Confirmar senha</label>
+                <input type="password" placeholder="Digite novamente sua Senha" id="passwordConfirm">
+                <label for="celular" class="cell">Celular</label>
+                <input type="text" placeholder="(xx) xxxxx-xxxx" id="celular">
+                <label for="cpf" class="cpf">CPF</label>
+                <input type="text" placeholder="000.000.000-00" id="cpf">
                 <button>Cadastrar</button>
                 <p>Já tem uma conta? <a href="#" id="login">Faça o Login</a></p>
             </form>
@@ -49,22 +37,18 @@
         <div class="form-container sign-in">
             <form>
                 <h1>Login</h1>
-                <div class="inputH3">
-                    <h3>E-mail</h6>
-                </div>
-                <input type="email" placeholder="Digite seu E-mail">
-                <div class="inputH3">
-                    <h3>Senha</h3>
-                </div>
-                <input type="password" placeholder="Digite sua Senha">
+                <label for="emailLogin" class="email">E-mail</label>
+                <input type="email" placeholder="Digite seu E-mail" id="emailLogin">
+                <label for="passwordLogin" class="password">Senha</label>
+                <input type="password" placeholder="Digite sua Senha" id="passwordLogin">
                 <div class="checkPassword">
-                    <div class="ui checkbox">
+                    <div class="checkbox">
                         <input type="checkbox" id="checkboxPassword">
                         <label for="checkboxPassword" class="lembrarMim">Lembrar de mim</label>
                     </div>
                     <a href="#">Esqueceu a senha?</a>
                 </div>
-                </a><button>Entrar</button>
+                <button>Entrar</button>
                 <p>Ainda não tem uma conta? <a href="#" id="register">Faça o Cadastro</a></p>
             </form>
         </div>
