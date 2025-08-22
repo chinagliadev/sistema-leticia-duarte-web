@@ -1,3 +1,19 @@
+<?php
+
+$dns = 'mysql:dbname=leticia_duarte;host=127.0.0.1';
+$usuario = 'root';
+$senha = ''; 
+
+$conn = new PDO($dns, $usuario, $senha);
+
+$scriptConsulta = 'SELECT * FROM tb_alunos';
+$scriptConsultaResponsavel = 'SELECT * FROM tb_mae';
+$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
+$resultadoConsultaResponsavel = $conn->query($scriptConsultaResponsavel)->fetchAll();
+var_dump($resultadoConsultaResponsavel);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -6,52 +22,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sistema com seu CSS e sidebar Semantic UI</title>
 
-    <!-- Seu CSS -->
     <link rel="stylesheet" href="./css/cadastros.css" />
 
-    <!-- Semantic UI CSS para o botão e js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
 
-    <!-- jQuery + Semantic UI JS -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 </head>
 
 <body>
 
-    <!-- Botão para abrir/fechar o menu lateral -->
     <button id="btn-menu" class="ui icon button">
         <i class="sidebar icon"></i>
     </button>
 
     <section class="corpo_pagina">
-
-        <!-- Menu lateral -->
-        <aside class="menu_lateral">
-            <section class="opcoes_menu">
-
-                <div class="perfil" onclick="window.location.href='perfil.html'">
-                    <img class="ui avatar image" src="./img/apresentacao_img/Logo Leiticia Duarte.png" alt="">
-
-                    <span class="usuario-info">
-                        <span class="usuario-nome"><strong>Admin</strong></span><br>
-                        <span class="usuario-email">Admin@email.com</span>
-                    </span>
-                </div>
-
-                <div class="lista_opcoes">
-                    <ul>
-                        <li><i class="home icon"></i><a href="cadastrados.html">Início</a></li>
-                        <li><i class="chart bar outline icon"></i><a href="cadastros.html">Cadastrar</a></li>
-                        <li><i class="history icon"></i><a href="#">Histórico</a></li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="container_sair">
-                <a href="#"><i class="sign-out icon"></i>Sair</a>
-            </section>
-        </aside>
+        <?php
+            include './template/menuLateral.php'
+        ?>
 
         <main class="conteudo_cadastrados">
             <section class="cabecalho_cadastrados">
@@ -62,7 +50,7 @@
 
             <section class="pesquisa_alunos">
                 <div class="container_pesquisar ui action input">
-                    <input type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
+                    <input id="txtPesquisar" type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
                     <button class="ui button primary"><i class="search icon"></i></button>
                 </div>
 
@@ -84,23 +72,26 @@
                     </thead>
                     <tbody>
                     <tbody>
-                        <tr>
-                            <td>123456</td>
-                            <td>John Lilki</td>
-                            <td>14/09/2013</td>
-                            <td>Maria Lilki</td>
-                            <td>
-                                <button class="ui small icon button blue" title="Detalhes">
-                                    <i class="eye icon"></i> Detalhes
-                                </button>
-                                <button class="ui small icon button red" title="Excluir">
-                                    <i class="trash icon"></i> Excluir
-                                </button>
-                                <button class="ui small icon button yellow" title="Editar">
-                                    <i class="edit icon"></i> Editar
-                                </button>
-                            </td>
-                        </tr>
+                        <?php foreach($resultadoConsulta as $linha){?>
+                            <tr>
+                                <td><?=$linha['ra_aluno']?></td>
+                                <td><?=$linha['nome']?></td>
+                                <td><?=$linha['data_nascimento']?></td>
+                                
+                                <td><?=$linha['responsavel']?></td>
+                                <td>
+                                    <button class="ui small icon button blue" title="Detalhes">
+                                        <i class="eye icon"></i> Detalhes
+                                    </button>
+                                    <button class="ui small icon button red" title="Excluir">
+                                        <i class="trash icon"></i> Excluir
+                                    </button>
+                                    <button class="ui small icon button yellow" title="Editar">
+                                        <i class="edit icon"></i> Editar
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php }?>
                         <tr>
                             <td>234567</td>
                             <td>Jamie Harington</td>

@@ -14,13 +14,11 @@ a {
     text-decoration: none;
 }
 
-/* Estrutura da página */
 .corpo_pagina {
     display: flex;
     min-height: 100vh;
 }
 
-/* Menu lateral */
 .menu_lateral {
     background-color: #ffffff;
     min-width: 230px;
@@ -31,7 +29,6 @@ a {
     padding: 30px;
 }
 
-/* Opções do menu lateral */
 .menu_lateral .opcoes_menu {
     display: flex;
     flex-direction: column;
@@ -39,7 +36,6 @@ a {
     align-items: center;
 }
 
-/* Perfil */
 .menu_lateral .opcoes_menu .perfil {
     display: flex;
     gap: 10px;
@@ -63,7 +59,6 @@ a {
     font-size: 40px;
 }
 
-/* Links do menu */
 .opcoes_menu a {
     margin-left: 20px;
     color: black;
@@ -71,7 +66,6 @@ a {
     transition: 0.3s;
 }
 
-/* Lista de opções */
 .opcoes_menu .lista_opcoes ul {
     list-style: none;
     padding: 0;
@@ -98,7 +92,6 @@ a {
     transition: 0.3s;
 }
 
-/* Botão sair */
 .menu_lateral .container_sair a {
     margin-left: 20px;
     font-size: 20px;
@@ -118,7 +111,6 @@ a {
     color: #bd0808;
 }
 
-/* Responsividade menu lateral */
 @media (max-width: 768px) {
     .menu_lateral {
         position: fixed;
@@ -139,7 +131,6 @@ a {
     }
 }
 
-/* Botão menu mobile */
 #btn-menu {
     display: none;
     position: fixed;
@@ -155,7 +146,6 @@ a {
     }
 }
 
-/* Conteúdo principal */
 .conteudo_cadastrados {
     padding: 40px 2vw 20px 2vw;
     width: 100%;
@@ -176,7 +166,6 @@ a {
     color: #3b3b3b;
 }
 
-/* Responsividade conteúdo */
 @media screen and (max-width: 768px) {
     .conteudo_cadastrados {
         padding: 50px 5vw 20px 5vw;
