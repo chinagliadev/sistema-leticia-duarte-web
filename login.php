@@ -18,17 +18,17 @@
             <form>
                 <h1>Cadastro</h1>
                 <label for="nameComplete" class="name">Nome Completo</label>
-                <input type="text" placeholder="Digite seu nome completo" id="nameComplete">
+                <input type="text" placeholder="Digite seu nome completo" id="nameComplete" required>
                 <label for="email" class="email">E-mail</label>
-                <input type="email" placeholder="Digite seu E-mail" id="emailCad">
+                <input type="email" placeholder="Digite seu E-mail" id="emailCad" required>
                 <label for="password" class="password">Senha</label>
-                <input type="password" placeholder="Digite sua Senha" id="passwordCad">
+                <input type="password" placeholder="Digite sua Senha" id="passwordCad" required>
                 <label for="passwordConfirm" class="password">Confirmar senha</label>
-                <input type="password" placeholder="Digite novamente sua Senha" id="passwordConfirm">
+                <input type="password" placeholder="Digite novamente sua Senha" id="passwordConfirm" required>
                 <label for="celular" class="cell">Celular</label>
-                <input type="text" placeholder="(xx) xxxxx-xxxx" id="celular">
+                <input type="text" placeholder="(xx) xxxxx-xxxx" id="celular" required>
                 <label for="cpf" class="cpf">CPF</label>
-                <input type="text" placeholder="000.000.000-00" id="cpf">
+                <input type="text" placeholder="000.000.000-00" id="cpf" required>
                 <button>Cadastrar</button>
                 <p>Já tem uma conta? <a href="#" id="login">Faça o Login</a></p>
             </form>
@@ -38,9 +38,9 @@
             <form>
                 <h1>Login</h1>
                 <label for="emailLogin" class="email">E-mail</label>
-                <input type="email" placeholder="Digite seu E-mail" id="emailLogin">
+                <input type="email" placeholder="Digite seu E-mail" id="emailLogin" required>
                 <label for="passwordLogin" class="password">Senha</label>
-                <input type="password" placeholder="Digite sua Senha" id="passwordLogin">
+                <input type="password" placeholder="Digite sua Senha" id="passwordLogin" required>
                 <div class="checkPassword">
                     <div class="checkbox">
                         <input type="checkbox" id="checkboxPassword">
