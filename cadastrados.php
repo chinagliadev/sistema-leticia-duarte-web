@@ -1,17 +1,24 @@
 <?php
-
 $dns = 'mysql:dbname=leticia_duarte;host=127.0.0.1';
 $usuario = 'root';
-$senha = ''; 
+$senha = '';
 
 $conn = new PDO($dns, $usuario, $senha);
 
-$scriptConsulta = 'SELECT * FROM tb_alunos';
-$scriptConsultaResponsavel = 'SELECT * FROM tb_mae';
-$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
-$resultadoConsultaResponsavel = $conn->query($scriptConsultaResponsavel)->fetchAll();
-var_dump($resultadoConsultaResponsavel);
-
+// Fazendo o relacionamento direto no SELECT
+$scriptConsulta = "
+SELECT 
+    tb_alunos.ra_aluno, 
+    tb_alunos.nome AS nome_aluno, 
+    tb_alunos.data_nascimento, 
+    tb_mae.nome AS nome_mae
+FROM tb_alunos
+INNER JOIN tb_matricula 
+    ON tb_matricula.aluno = tb_alunos.ra_aluno
+INNER JOIN tb_mae 
+    ON tb_matricula.mae = tb_mae.id_mae;
+";
+$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +30,6 @@ var_dump($resultadoConsultaResponsavel);
     <title>Sistema com seu CSS e sidebar Semantic UI</title>
 
     <link rel="stylesheet" href="./css/cadastros.css" />
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -37,9 +43,7 @@ var_dump($resultadoConsultaResponsavel);
     </button>
 
     <section class="corpo_pagina">
-        <?php
-            include './template/menuLateral.php'
-        ?>
+        <?php include './template/menuLateral.php' ?>
 
         <main class="conteudo_cadastrados">
             <section class="cabecalho_cadastrados">
@@ -52,10 +56,6 @@ var_dump($resultadoConsultaResponsavel);
                 <div class="container_pesquisar ui action input">
                     <input id="txtPesquisar" type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
                     <button class="ui button primary"><i class="search icon"></i></button>
-                </div>
-
-                <div class="container_filtrar">
-                    <button></button>
                 </div>
             </section>
 
@@ -71,63 +71,26 @@ var_dump($resultadoConsultaResponsavel);
                         </tr>
                     </thead>
                     <tbody>
-                    <tbody>
-                        <?php foreach($resultadoConsulta as $linha){?>
+                        <?php foreach ($resultadoConsulta as $linha) { ?>
                             <tr>
-                                <td><?=$linha['ra_aluno']?></td>
-                                <td><?=$linha['nome']?></td>
-                                <td><?=$linha['data_nascimento']?></td>
-                                
-                                <td><?=$linha['responsavel']?></td>
+                                <td><?= $linha['ra_aluno'] ?></td>
+                                <td><?= $linha['nome_aluno'] ?></td>
+                                <td><?= $linha['data_nascimento'] ?></td>
+                                <td><?= $linha['nome_mae'] ?? 'Não informado' ?></td>
                                 <td>
                                     <button class="ui small icon button blue" title="Detalhes">
                                         <i class="eye icon"></i> Detalhes
                                     </button>
-                                    <button class="ui small icon button red" title="Excluir">
+                                    <a href="./cadastradosExcluir.php?idExluir=<?= $linha['ra_aluno']?>" class="ui small red icon button" title="Excluir">
                                         <i class="trash icon"></i> Excluir
-                                    </button>
+                                    </a>
                                     <button class="ui small icon button yellow" title="Editar">
                                         <i class="edit icon"></i> Editar
                                     </button>
                                 </td>
                             </tr>
-                            <?php }?>
-                        <tr>
-                            <td>234567</td>
-                            <td>Jamie Harington</td>
-                            <td>11/01/2014</td>
-                            <td>João Harington</td>
-                            <td>
-                                <button class="ui small icon button blue" >
-                                    <i class="eye icon"></i> Detalhes
-                                </button>
-                                <button class="ui small icon button red">
-                                    <i class="trash icon"></i> Excluir
-                                </button>
-                                <button class="ui small icon button yellow">
-                                    <i class="edit icon"></i> Editar
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>345678</td>
-                            <td>Jill Lewis</td>
-                            <td>11/05/2014</td>
-                            <td>Lucas Lewis</td>
-                            <td>
-                                <button class="ui small icon button blue">
-                                    <i class="eye icon"></i> Detalhes
-                                </button>
-                                <button class="ui small icon button red">
-                                    <i class="trash icon"></i> Excluir
-                                </button>
-                                <button class="ui small icon button yellow">
-                                    <i class="edit icon"></i> Editar
-                                </button>
-                            </td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
-
                 </table>
             </section>
         </main>

@@ -193,3 +193,7 @@ a {
 .form-cadastro-aluno input{
     margin-bottom: 15px !important;
 }
+
+.sessao_tabela {
+    margin-top: 20px; /* ajusta o valor conforme quiser */
+}
