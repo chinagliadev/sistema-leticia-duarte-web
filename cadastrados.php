@@ -6,8 +6,7 @@ $senha = '';
 $conn = new PDO($dns, $usuario, $senha);
 
 // Fazendo o relacionamento direto no SELECT
-$scriptConsulta = "
-SELECT 
+$scriptConsulta = "SELECT 
     tb_alunos.ra_aluno, 
     tb_alunos.nome AS nome_aluno, 
     tb_alunos.data_nascimento, 
@@ -16,9 +15,9 @@ FROM tb_alunos
 INNER JOIN tb_matricula 
     ON tb_matricula.aluno = tb_alunos.ra_aluno
 INNER JOIN tb_mae 
-    ON tb_matricula.mae = tb_mae.id_mae;
-";
-$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll(PDO::FETCH_ASSOC);
+    ON tb_matricula.mae = tb_mae.id_mae;";
+
+$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -96,16 +95,6 @@ $resultadoConsulta = $conn->query($scriptConsulta)->fetchAll(PDO::FETCH_ASSOC);
         </main>
     </section>
 
-    <script>
-        const btnMenu = document.getElementById('btn-menu');
-        const menu = document.querySelector('.menu_lateral');
-        const body = document.body;
-
-        btnMenu.addEventListener('click', () => {
-            menu.classList.toggle('ativo');
-            body.classList.toggle('menu-aberto');
-        });
-    </script>
 </body>
 
 </html>

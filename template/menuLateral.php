@@ -23,3 +23,14 @@
         <a href="#"><i class="sign-out icon"></i>Sair</a>
     </section>
 </aside>
+
+    <script>
+        const btnMenu = document.getElementById('btn-menu');
+        const menu = document.querySelector('.menu_lateral');
+        const body = document.body;
+
+        btnMenu.addEventListener('click', () => {
+            menu.classList.toggle('ativo');
+            body.classList.toggle('menu-aberto');
+        });
+    </script>
