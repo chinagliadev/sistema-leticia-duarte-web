@@ -3,13 +3,11 @@
     padding: 0;
 }
 
-/* Estrutura da página */
 .corpo_pagina {
     display: flex;
     min-height: 100vh;
 }
 
-/* Menu lateral */
 .menu_lateral {
     background-color: #ffffff;
     min-width: 230px;
@@ -20,7 +18,6 @@
     padding: 30px;
 }
 
-/* Opções do menu lateral */
 .menu_lateral .opcoes_menu {
     display: flex;
     flex-direction: column;
@@ -28,7 +25,6 @@
     align-items: center;
 }
 
-/* Perfil */
 .menu_lateral .opcoes_menu .perfil {
     display: flex;
     gap: 10px;
@@ -52,7 +48,6 @@
     font-size: 40px;
 }
 
-/* Links do menu */
 .opcoes_menu a {
     margin-left: 20px;
     color: black;
@@ -60,7 +55,6 @@
     transition: 0.3s;
 }
 
-/* Lista de opções */
 .opcoes_menu .lista_opcoes ul {
     list-style: none;
     padding: 0;
@@ -87,7 +81,6 @@
     transition: 0.3s;
 }
 
-/* Botão sair */
 .menu_lateral .container_sair a {
     margin-left: 20px;
     font-size: 20px;
@@ -107,7 +100,6 @@
     color: #bd0808;
 }
 
-/* Responsividade menu lateral */
 @media (max-width: 768px) {
     .menu_lateral {
         position: fixed;
@@ -128,7 +120,6 @@
     }
 }
 
-/* Botão menu mobile */
 #btn-menu {
     display: none;
     position: fixed;
@@ -144,7 +135,6 @@
     }
 }
 
-/* Conteudo do perfil e historico - main */
 .conteudo_perfil {
     padding: 40px 2vw 20px 2vw;
     width: 100%;

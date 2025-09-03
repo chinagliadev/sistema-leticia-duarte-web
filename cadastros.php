@@ -6,51 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sistema</title>
 
-    <link rel="stylesheet" href="./css/cadastros.css" />
     
-    <!-- Semantic UI CSS para o botão e js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
-    
-    <!-- jQuery + Semantic UI JS -->
+    <link rel="stylesheet" href="./css/cadastros.css"  />
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 </head>
 
 <body>
-
-    <!-- Botão para abrir/fechar o menu lateral -->
     <button id="btn-menu" class="ui icon button">
         <i class="sidebar icon"></i>
     </button>
 
     <section class="corpo_pagina">
-
-        <!-- Menu lateral -->
-        <aside class="menu_lateral">
-            <section class="opcoes_menu">
-
-                <div class="perfil" onclick="window.location.href='perfil.html'">
-                    <img class="ui avatar image" src="./img/apresentacao_img/Logo Leiticia Duarte.png" alt="">
-
-                    <span class="usuario-info">
-                        <span class="usuario-nome"><strong>Admin</strong></span><br>
-                        <span class="usuario-email">Admin@email.com</span>
-                    </span>
-                </div>
-
-                <div class="lista_opcoes">
-                    <ul>
-                        <li><i class="home icon"></i><a href="cadastrados.html">Início</a></li>
-                        <li><i class="chart bar outline icon"></i><a href="cadastros.html">Cadastrar</a></li>
-                        <li><i class="history icon"></i><a href="#">Histórico</a></li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="container_sair">
-                <a href="#"><i class="sign-out icon"></i>Sair</a>
-            </section>
-        </aside>
+        <?php
+        include './template/menuLateral.php'
+        ?>
 
         <main class="conteudo_cadastrados">
             <section class="cabecalho_cadastrados">
@@ -60,6 +32,39 @@
             </section>
 
             <section class="sessao_cadastro ui segment blue ">
+                <div class="ui steps full-width">
+                    <a class="active step">
+                        <i class="user icon"></i>
+                        <div class="content">
+                            <div class="title">Alunos</div>
+                            <div class="description">Cadastrar alunos</div>
+                        </div>
+                    </a>
+
+                    <a class="step">
+                        <i class="users icon"></i>
+                        <div class="content">
+                            <div class="title">Responsável</div>
+                            <div class="description">Cadastrar responsável</div>
+                        </div>
+                    </a>
+
+                    <a class="step">
+                        <i class="home icon"></i>
+                        <div class="content">
+                            <div class="title">Estrutura Familiar</div>
+                            <div class="description">Informações familiares</div>
+                        </div>
+                    </a>
+
+                    <a class="step">
+                        <i class="id card icon"></i>
+                        <div class="content">
+                            <div class="title">Pessoas Autorizadas</div>
+                            <div class="description">Cadastrar pessoas autorizadas</div>
+                        </div>
+                    </a>
+                </div>
                 <form class="ui form form-cadastro-aluno">
                     <div class="fields">
                         <div class="ten wide field">
@@ -113,19 +118,19 @@
                     </div>
                     <div class="fields">
                         <div class="ten wide field">
-                                <div class="ui form">
-                                    <div class="fields">
-                                        <div class="field">
-                                            <label>
-                                               Em caso de febre autoriza medicar a criança ?
-                                            </label>
-                                            <div class="ui toggle checkbox">
-                                                <input type="checkbox" name="public" id="chkPublic">
-                                                <label for="chkPublic"></label>
-                                            </div>
+                            <div class="ui form">
+                                <div class="fields">
+                                    <div class="field">
+                                        <label>
+                                            Em caso de febre autoriza medicar a criança ?
+                                        </label>
+                                        <div class="ui toggle checkbox">
+                                            <input type="checkbox" name="public" id="chkPublic">
+                                            <label for="chkPublic"></label>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                         <div class="three wide field">
                             <label for="txtGotas">Quantas gotas</label>
