@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sistema</title>
 
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
-    <link rel="stylesheet" href="./css/cadastros.css"  />
+    <link rel="stylesheet" href="./css/cadastros.css" />
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.css">
 </head>
 
 <body>
@@ -20,9 +21,7 @@
     </button>
 
     <section class="corpo_pagina">
-        <?php
-        include './template/menuLateral.php'
-        ?>
+        <?php include './template/menuLateral.php' ?>
 
         <main class="conteudo_cadastrados">
             <section class="cabecalho_cadastrados">
@@ -31,50 +30,26 @@
                     alt="logo da leticia duarte na tela de cadastros de alunos">
             </section>
 
-            <section class="sessao_cadastro ui segment blue ">
-                <div class="ui steps full-width">
-                    <a class="active step">
-                        <i class="user icon"></i>
-                        <div class="content">
-                            <div class="title">Alunos</div>
-                            <div class="description">Cadastrar alunos</div>
-                        </div>
-                    </a>
-
-                    <a class="step">
-                        <i class="users icon"></i>
-                        <div class="content">
-                            <div class="title">Responsável</div>
-                            <div class="description">Cadastrar responsável</div>
-                        </div>
-                    </a>
-
-                    <a class="step">
-                        <i class="home icon"></i>
-                        <div class="content">
-                            <div class="title">Estrutura Familiar</div>
-                            <div class="description">Informações familiares</div>
-                        </div>
-                    </a>
-
-                    <a class="step">
-                        <i class="id card icon"></i>
-                        <div class="content">
-                            <div class="title">Pessoas Autorizadas</div>
-                            <div class="description">Cadastrar pessoas autorizadas</div>
-                        </div>
-                    </a>
-                </div>
+            <section class="sessao_cadastro ui segment blue">
+                <!-- Etapas de cadastro incluindo no php -->
+                <?php include './etapas-cadastro.php'?> 
                 <form class="ui form form-cadastro-aluno">
                     <div class="fields">
                         <div class="ten wide field">
                             <label for="txtNomeCriança">Nome da Criança</label>
                             <input type="text" placeholder="Digite o nome da criança">
                         </div>
+
+                        <!-- Calendar Semantic UI para data de nascimento -->
                         <div class="three wide field">
-                            <label for="txtDataNascimento">Data Nascimento</label>
-                            <input type="date" id="txtDataNascimento">
+                            <label>Data Nascimento</label>
+                            <div class="ui calendar" id="dataNascimentoCalendar">
+                                <div class="ui input">
+                                    <input type="text" placeholder="dd/mm/aaaa">
+                                </div>
+                            </div>
                         </div>
+
                         <div class="three wide field">
                             <label for="txtRaca">Cor / Raça</label>
                             <select class="ui search dropdown" name="corRaca" required>
@@ -88,6 +63,8 @@
                             </select>
                         </div>
                     </div>
+
+                    <!-- Campos de endereço -->
                     <div class="fields">
                         <div class="three wide field">
                             <label for="txtCep">CEP</label>
@@ -102,6 +79,7 @@
                             <input type="text" id="txtNumero" placeholder="Nº">
                         </div>
                     </div>
+
                     <div class="fields">
                         <div class="ten wide field">
                             <label for="txtBairro">Bairro</label>
@@ -116,20 +94,14 @@
                             <input type="text" id="txtComplemento" placeholder="Escola, apartamento...">
                         </div>
                     </div>
+
+                    <!-- Autorização de medicação -->
                     <div class="fields">
                         <div class="ten wide field">
-                            <div class="ui form">
-                                <div class="fields">
-                                    <div class="field">
-                                        <label>
-                                            Em caso de febre autoriza medicar a criança ?
-                                        </label>
-                                        <div class="ui toggle checkbox">
-                                            <input type="checkbox" name="public" id="chkPublic">
-                                            <label for="chkPublic"></label>
-                                        </div>
-                                    </div>
-                                </div>
+                            <label>Em caso de febre autoriza medicar a criança?</label>
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="autorizacaoMed">
+                                <label></label>
                             </div>
                         </div>
                         <div class="three wide field">
@@ -141,35 +113,27 @@
                             <input type="text" id="txtRemedio" placeholder="">
                         </div>
                     </div>
+
+                    <!-- Autorização de imagem -->
                     <div class="fields">
                         <div class="ten wide field">
-                            <div class="sixteen wide field">
-                                <div class="ui form">
-                                    <div class="fields">
-                                        <div class="field">
-                                            <label>
-                                                Autorizo a divulgação de imagem do meu filho(a) para uso de projetos na
-                                                escola,
-                                                fotos, filmagem, facebook, instagram e site.
-                                            </label>
-                                            <div class="ui toggle checkbox">
-                                                <input type="checkbox" name="public" id="chkPublic">
-                                                <label for="chkPublic"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <label>Autorizo a divulgação de imagem do meu filho(a) para uso de projetos na escola, fotos, filmagem, Facebook, Instagram e site.</label>
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="autorizacaoImagem">
+                                <label></label>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Botões -->
                     <div class="fields">
-                        <div class="eight wide right aligned field " style="text-align: left;">
-                            <a href="#" class="ui red icon button" title="Sair">
+                        <div class="eight wide field" style="text-align: left;">
+                            <a href="#" class="ui red icon button">
                                 <i class="sign-out alternate icon"></i> Sair
                             </a>
                         </div>
-                        <div class="eight wide right aligned field" style="text-align: right;">
-                            <a href="#" class="ui blue icon button" title="Próximo">
+                        <div class="eight wide field" style="text-align: right;">
+                            <a href="#" class="ui blue icon button">
                                 <i class="angle right icon"></i> Próximo
                             </a>
                         </div>
@@ -179,6 +143,36 @@
         </main>
     </section>
 
+    <script>
+ $('#dataNascimentoCalendar').calendar({
+    type: 'date',
+    maxDate: new Date(), // bloqueia datas futuras
+    formatter: {
+        date: function (date) {
+            if (!date) return '';
+            const day = ("0" + date.getDate()).slice(-2);
+            const month = ("0" + (date.getMonth() + 1)).slice(-2);
+            const year = date.getFullYear();
+            return day + '/' + month + '/' + year; // dd/mm/yyyy
+        }
+    },
+    text: {
+        days: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+        months: [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+        ],
+        monthsShort: [
+            'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+            'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+        ],
+        today: 'Hoje',
+        now: 'Agora',
+        am: 'AM',
+        pm: 'PM'
+    }
+});
+    </script>
 </body>
 
 </html>
