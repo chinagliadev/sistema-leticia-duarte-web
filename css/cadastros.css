@@ -225,5 +225,18 @@ a {
   }
 }
 
+select.ui.dropdown {
+    height: 38px;
+    padding: .5em;
+    border: 1px solid rgba(34, 36, 38, .15);
+    visibility: visible;
+    font-size: 1.2rem; /* Aumenta a fonte */
+}
+
+.ui.checkbox {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-top: 10px;
+}
 
 

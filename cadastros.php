@@ -31,7 +31,7 @@
             </section>
 
             <section class="sessao_cadastro ui segment blue">
-                <!-- Etapas de cadastro incluindo no php -->
+                <!-- Etapas de cadastro incluindo no -->
                 <?php include './etapas-cadastro.php'?> 
                 <form class="ui form form-cadastro-aluno">
                     <div class="fields">
