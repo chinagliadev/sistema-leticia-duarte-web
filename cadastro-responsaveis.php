@@ -1,3 +1,7 @@
+<?php
+include './template/modal-remover-responsavel.php'
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -39,7 +43,7 @@
                         <div class="fields">
                             <div class="four wide field">
                                 <label for="txtTipoResponsavel">Tipo do responsavel</label>
-                                <select class="ui search dropdown" name="corRaca" required>
+                                <select class="ui search dropdown" name="txtTipoResponsavel" required>
                                     <option value="" disabled selected hidden>Selecione o tipo do responsavel</option>
                                     <option value="Pai">Pai</option>
                                     <option value="Mãe">Mãe</option>
@@ -242,7 +246,7 @@
                                 </a>
                             </div>
                             <div class="right floated column">
-                                <a href="./cadastroEstruturaFamiliar.php" class="ui basic blue icon button right floated column" style="margin-top: 10px;">
+                                <a href="./cadastro-estrutura-familiar.php" class="ui basic blue icon button right floated column" style="margin-top: 10px;">
                                     <i class="angle right icon"></i> Próximo
                                 </a>
                             </div>
@@ -256,33 +260,14 @@
     </section>
 
     <script>
-        $('#dataNascimentoCalendar').calendar({
-            type: 'date',
-            maxDate: new Date(), // bloqueia datas futuras
-            formatter: {
-                date: function(date) {
-                    if (!date) return '';
-                    const day = ("0" + date.getDate()).slice(-2);
-                    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-                    const year = date.getFullYear();
-                    return day + '/' + month + '/' + year; // dd/mm/yyyy
-                }
-            },
-            text: {
-                days: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-                months: [
-                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-                ],
-                monthsShort: [
-                    'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-                    'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-                ],
-                today: 'Hoje',
-                now: 'Agora',
-                am: 'AM',
-                pm: 'PM'
-            }
+      
+
+            $(document).ready(function() {
+            $('#btnRemoverResponsavel').on('click', function() {
+                $('.ui.basic.modal').modal({
+                    centered: true
+                }).modal('show');
+            });
         });
     </script>
     <script src="./js/adicionarResponsavel.js"></script>
