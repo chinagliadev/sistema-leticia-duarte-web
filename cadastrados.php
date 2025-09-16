@@ -1,24 +1,3 @@
-<?php
-$dns = 'mysql:dbname=leticia_duarte;host=127.0.0.1';
-$usuario = 'root';
-$senha = '';
-
-$conn = new PDO($dns, $usuario, $senha);
-
-// Fazendo o relacionamento direto no SELECT
-$scriptConsulta = "SELECT 
-    tb_alunos.ra_aluno, 
-    tb_alunos.nome AS nome_aluno, 
-    tb_alunos.data_nascimento, 
-    tb_mae.nome AS nome_mae
-FROM tb_alunos
-INNER JOIN tb_matricula 
-    ON tb_matricula.aluno = tb_alunos.ra_aluno
-INNER JOIN tb_mae 
-    ON tb_matricula.mae = tb_mae.id_mae;";
-
-$resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
-?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -70,12 +49,8 @@ $resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($resultadoConsulta as $linha) { ?>
                             <tr>
-                                <td><?= $linha['ra_aluno'] ?></td>
-                                <td><?= $linha['nome_aluno'] ?></td>
-                                <td><?= $linha['data_nascimento'] ?></td>
-                                <td><?= $linha['nome_mae'] ?? 'Não informado' ?></td>
+
                                 <td>
                                     <button class="ui small icon button blue" title="Detalhes">
                                         <i class="eye icon"></i> Detalhes
@@ -88,7 +63,6 @@ $resultadoConsulta = $conn->query($scriptConsulta)->fetchAll();
                                     </button>
                                 </td>
                             </tr>
-                        <?php } ?>
                     </tbody>
                 </table>
             </section>

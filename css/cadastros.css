@@ -111,7 +111,7 @@ a {
     color: #bd0808;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .menu_lateral {
         position: fixed;
         top: 0;
@@ -140,7 +140,7 @@ a {
     opacity: 0.7;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     #btn-menu {
         display: block;
     }
@@ -196,6 +196,47 @@ a {
 
 .sessao_tabela {
     margin-top: 20px; /* ajusta o valor conforme quiser */
+}
+
+.ui.steps {
+    display: flex;              /* ✅ flex normal, não inline-flex */
+    flex-wrap: wrap;            /* ✅ deixa quebrar linha se precisar */
+    flex-direction: row;
+    align-items: stretch;
+    margin: 1em 0;
+    background: none;
+    box-shadow: none;
+    line-height: 1.14285714em;
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34, 36, 38, .15);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+  .ui.steps {
+    flex-direction: column;  /* empilha */
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .ui.steps .step {
+    width: 100%;             /* cada step ocupa a largura toda */
+    text-align: center;
+  }
+}
+
+select.ui.dropdown {
+    height: 38px;
+    padding: .5em;
+    border: 1px solid rgba(34, 36, 38, .15);
+    visibility: visible;
+    font-size: 1.2rem; /* Aumenta a fonte */
+}
+
+.ui.checkbox {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-top: 10px;
 }
 
 
