@@ -55,7 +55,7 @@ a {
     font-size: 15px;
 }
 
-.menu_lateral .opcoes_menu .perfil > i {
+.menu_lateral .opcoes_menu .perfil>i {
     font-size: 40px;
 }
 
@@ -98,7 +98,7 @@ a {
     color: black;
 }
 
-.menu_lateral .container_sair > i {
+.menu_lateral .container_sair>i {
     font-size: 20px;
 }
 
@@ -149,8 +149,10 @@ a {
 .conteudo_cadastrados {
     padding: 40px 2vw 20px 2vw;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: #F6F6F6;
-    background-image: url(../img/apresentacao_img/background_fundo-removebg.png);
+    gap: 20px;
 }
 
 .cabecalho_cadastrados {
@@ -186,21 +188,24 @@ a {
     }
 }
 
-.form-cadastro-aluno label{
-    font-size: 1.1rem !important; 
+.form-cadastro-aluno label {
+    font-size: 1.1rem !important;
 }
 
-.form-cadastro-aluno input{
+.form-cadastro-aluno input {
     margin-bottom: 15px !important;
 }
 
 .sessao_tabela {
-    margin-top: 20px; /* ajusta o valor conforme quiser */
+    margin-top: 20px;
+    /* ajusta o valor conforme quiser */
 }
 
 .ui.steps {
-    display: flex;              /* ✅ flex normal, não inline-flex */
-    flex-wrap: wrap;            /* ✅ deixa quebrar linha se precisar */
+    display: flex;
+    /* ✅ flex normal, não inline-flex */
+    flex-wrap: wrap;
+    /* ✅ deixa quebrar linha se precisar */
     flex-direction: row;
     align-items: stretch;
     margin: 1em 0;
@@ -213,16 +218,18 @@ a {
 }
 
 @media (max-width: 768px) {
-  .ui.steps {
-    flex-direction: column;  /* empilha */
-    align-items: stretch;
-    width: 100%;
-  }
+    .ui.steps {
+        flex-direction: column;
+        /* empilha */
+        align-items: stretch;
+        width: 100%;
+    }
 
-  .ui.steps .step {
-    width: 100%;             /* cada step ocupa a largura toda */
-    text-align: center;
-  }
+    .ui.steps .step {
+        width: 100%;
+        /* cada step ocupa a largura toda */
+        text-align: center;
+    }
 }
 
 select.ui.dropdown {
@@ -230,7 +237,8 @@ select.ui.dropdown {
     padding: .5em;
     border: 1px solid rgba(34, 36, 38, .15);
     visibility: visible;
-    font-size: 1.2rem; /* Aumenta a fonte */
+    font-size: 1.2rem;
+    /* Aumenta a fonte */
 }
 
 .ui.checkbox {
@@ -238,5 +246,3 @@ select.ui.dropdown {
     vertical-align: baseline;
     margin-top: 10px;
 }
-
-
