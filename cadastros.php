@@ -32,7 +32,7 @@
 
             <section class="sessao_cadastro ui segment blue">
                 <!-- Etapas de cadastro incluindo no -->
-                <?php include './etapas-cadastro.php'?> 
+                <?php include './etapas-cadastro.php' ?>
                 <form class="ui form form-cadastro-aluno">
                     <div class="fields">
                         <div class="ten wide field">
@@ -126,16 +126,13 @@
                     </div>
 
                     <!-- Botões -->
-                    <div class="fields">
-                        <div class="eight wide field" style="text-align: left;">
-                            <a href="#" class="ui red icon button">
-                                <i class="sign-out alternate icon"></i> Sair
-                            </a>
-                        </div>
-                        <div class="eight wide field" style="text-align: right;">
-                            <a href="#" class="ui blue icon button">
-                                <i class="angle right icon"></i> Próximo
-                            </a>
+                    <div class="ui grid">
+                        <div class="four column row">
+                            <div class="right floated column">
+                                <a href="./cadastro-responsaveis.php" class="ui basic blue icon button right floated column" style="margin-top: 10px;">
+                                    <i class="angle right icon"></i> Próximo
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -144,34 +141,34 @@
     </section>
 
     <script>
- $('#dataNascimentoCalendar').calendar({
-    type: 'date',
-    maxDate: new Date(), // bloqueia datas futuras
-    formatter: {
-        date: function (date) {
-            if (!date) return '';
-            const day = ("0" + date.getDate()).slice(-2);
-            const month = ("0" + (date.getMonth() + 1)).slice(-2);
-            const year = date.getFullYear();
-            return day + '/' + month + '/' + year; // dd/mm/yyyy
-        }
-    },
-    text: {
-        days: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-        months: [
-            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-        ],
-        monthsShort: [
-            'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-            'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-        ],
-        today: 'Hoje',
-        now: 'Agora',
-        am: 'AM',
-        pm: 'PM'
-    }
-});
+        $('#dataNascimentoCalendar').calendar({
+            type: 'date',
+            maxDate: new Date(), // bloqueia datas futuras
+            formatter: {
+                date: function(date) {
+                    if (!date) return '';
+                    const day = ("0" + date.getDate()).slice(-2);
+                    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+                    const year = date.getFullYear();
+                    return day + '/' + month + '/' + year; // dd/mm/yyyy
+                }
+            },
+            text: {
+                days: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                months: [
+                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+                ],
+                monthsShort: [
+                    'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+                    'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+                ],
+                today: 'Hoje',
+                now: 'Agora',
+                am: 'AM',
+                pm: 'PM'
+            }
+        });
     </script>
 </body>
 

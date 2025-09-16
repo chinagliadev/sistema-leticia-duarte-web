@@ -255,36 +255,7 @@
         </main>
     </section>
 
-    <script>
-        $('#dataNascimentoCalendar').calendar({
-            type: 'date',
-            maxDate: new Date(), // bloqueia datas futuras
-            formatter: {
-                date: function(date) {
-                    if (!date) return '';
-                    const day = ("0" + date.getDate()).slice(-2);
-                    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-                    const year = date.getFullYear();
-                    return day + '/' + month + '/' + year; // dd/mm/yyyy
-                }
-            },
-            text: {
-                days: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-                months: [
-                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-                ],
-                monthsShort: [
-                    'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-                    'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-                ],
-                today: 'Hoje',
-                now: 'Agora',
-                am: 'AM',
-                pm: 'PM'
-            }
-        });
-    </script>
+    <script></script>
     <script src="./js/adicionarResponsavel.js"></script>
 </body>
 

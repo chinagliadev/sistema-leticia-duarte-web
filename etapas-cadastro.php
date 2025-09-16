@@ -4,8 +4,8 @@ $pagina_atual = basename($_SERVER['PHP_SELF']);
 $etapas = [
     ['arquivo' => 'cadastros.php', 'title' => 'Alunos', 'desc' => 'Cadastrar alunos', 'icon' => 'user'],
     ['arquivo' => 'cadastro-responsaveis.php', 'title' => 'Responsável', 'desc' => 'Cadastrar responsável', 'icon' => 'users'],
-    ['arquivo' => 'cadastro-estrutura.php', 'title' => 'Estrutura Familiar', 'desc' => 'Informações familiares', 'icon' => 'home'],
-    ['arquivo' => 'cadastro-autorizadas.php', 'title' => 'Pessoas Autorizadas', 'desc' => 'Cadastrar pessoas autorizadas', 'icon' => 'id card']
+    ['arquivo' => 'cadastro-estrutura-familiar.php', 'title' => 'Estrutura Familiar', 'desc' => 'Informações familiares', 'icon' => 'home'],
+    ['arquivo' => 'cadastro-pessoas-autorizadas.php', 'title' => 'Pessoas Autorizadas', 'desc' => 'Cadastrar pessoas autorizadas', 'icon' => 'id card']
 ];
 
 // Encontrar o índice da etapa atual
