@@ -25,7 +25,7 @@
 
         <main class="conteudo_cadastrados">
             <section class="cabecalho_cadastrados">
-                <h2>Alunos<br>cadastrados</h2>
+                <h2>Alunos<br>Cadastrados</h2>
                 <img class="ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
                     alt="logo da leticia duarte na tela de cadastros de alunos">
             </section>
