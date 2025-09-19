@@ -15,32 +15,34 @@
 
     <section class="container" id="container">
         <div class="ui form form-container sign-up">
-            <form>
+            <form action="auth.php" method="POST">
+                <input type="hidden" name="acao" value="cadastro">
                 <h1>Cadastro</h1>
                 <label for="nameComplete" class="name">Nome Completo</label>
-                <input type="text" placeholder="Digite seu nome completo" id="nameComplete" required>
+                <input type="text" name="nome" placeholder="Digite seu nome completo" id="nameComplete" required>
                 <label for="email" class="email">E-mail</label>
-                <input type="email" placeholder="Digite seu E-mail" id="emailCad" required>
+                <input type="email" name="email" placeholder="Digite seu E-mail" id="emailCad" required>
                 <label for="password" class="password">Senha</label>
-                <input type="password" placeholder="Digite sua Senha" id="passwordCad" required>
+                <input type="password" name="senha" placeholder="Digite sua Senha" id="passwordCad" required>
                 <label for="passwordConfirm" class="password">Confirmar senha</label>
-                <input type="password" placeholder="Digite novamente sua Senha" id="passwordConfirm" required>
+                <input type="password" name="senha_confirm" placeholder="Digite novamente sua Senha" id="passwordConfirm" required>
                 <label for="celular" class="cell">Celular</label>
-                <input type="text" placeholder="(xx) xxxxx-xxxx" id="celular" required>
+                <input type="text" name="celular" placeholder="(xx) xxxxx-xxxx" id="celular" required>
                 <label for="cpf" class="cpf">CPF</label>
-                <input type="text" placeholder="000.000.000-00" id="cpf" required>
+                <input type="text" name="cpf" placeholder="000.000.000-00" id="cpf" required>
                 <button>Cadastrar</button>
                 <p>Já tem uma conta? <a href="#" id="login">Faça o Login</a></p>
             </form>
         </div>
 
         <div class="form-container sign-in">
-            <form>
+            <form action="auth.php" method="POST">
+                <input type="hidden" name="acao" value="login">
                 <h1>Login</h1>
                 <label for="emailLogin" class="email">E-mail</label>
-                <input type="email" placeholder="Digite seu E-mail" id="emailLogin" required>
+                <input type="email" name="email" placeholder="Digite seu E-mail" id="emailLogin" required>
                 <label for="passwordLogin" class="password">Senha</label>
-                <input type="password" placeholder="Digite sua Senha" id="passwordLogin" required>
+                <input type="password" name="senha" placeholder="Digite sua Senha" id="passwordLogin" required>
                 <div class="checkPassword">
                     <div class="checkbox">
                         <input type="checkbox" id="checkboxPassword">
