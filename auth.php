@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 if (password_verify($senha, $usuario['senha'])) {
                     $_SESSION['usuario'] = $usuario['nome'];
-                    echo "<script>alert('Login realizado com sucesso!'); window.location.href='area_restrita.php';</script>";
+                    echo "<script>alert('Login realizado com sucesso!'); window.location.href='cadastrados.php';</script>";
                 } else {
                     echo "<script>alert('Senha incorreta!'); window.location.href='login.php';</script>";
                 }
