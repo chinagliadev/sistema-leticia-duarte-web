@@ -45,7 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 if (password_verify($senha, $usuario['senha'])) {
-                    $_SESSION['usuario'] = $usuario['nome'];
+                    $_SESSION['usuario'] = [
+                        'id' => $usuario['id_funcionario'],
+                        'nome' => $usuario['nome'],
+                        'email' => $usuario['email']
+                    ];
                     echo "<script>alert('Login realizado com sucesso!'); window.location.href='cadastrados.php';</script>";
                 } else {
                     echo "<script>alert('Senha incorreta!'); window.location.href='login.php';</script>";

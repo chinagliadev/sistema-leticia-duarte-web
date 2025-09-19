@@ -1,12 +1,25 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$nome_usuario = $_SESSION['usuario']['nome'];
+$email_usuario = $_SESSION['usuario']['email'];
+
+
+?>
+
 <aside class="menu_lateral">
     <section class="opcoes_menu">
 
         <div class="perfil" onclick="window.location.href='perfil.php'">
-            <img class="ui avatar image" src="./img/apresentacao_img/Logo Leiticia Duarte.png" alt="">
 
             <span class="usuario-info">
-                <span class="usuario-nome"><strong>Admin</strong></span><br>
-                <span class="usuario-email">Admin@email.com</span>
+                <span class="usuario-nome"><strong><?= $nome_usuario?></strong></span><br>
+                <span class="usuario-email"><?= $email_usuario?></span>
             </span>
         </div>
 
