@@ -36,3 +36,5 @@ confirmarRemocaoResponsavel.on('click', () => {
 
     modalRemoverResponsavel.modal('hide');
 });
+
+
