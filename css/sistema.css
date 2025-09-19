@@ -196,6 +196,12 @@ a {
     margin-bottom: 15px !important;
 }
 
+/** input remedios */
+
+.oculto{
+    display: none;
+}
+
 .sessao_tabela {
     margin-top: 20px;
     /* ajusta o valor conforme quiser */

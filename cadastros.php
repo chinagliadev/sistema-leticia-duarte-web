@@ -7,7 +7,7 @@
     <title>Sistema</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
-    <link rel="stylesheet" href="./css/cadastros.css" />
+    <link rel="stylesheet" href="./css/sistema.css" />
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
@@ -31,28 +31,26 @@
             </section>
 
             <section class="sessao_cadastro ui segment blue">
-                <!-- Etapas de cadastro incluindo no -->
                 <?php include './etapas-cadastro.php' ?>
-                <form class="ui form form-cadastro-aluno">
+                <form class="ui form form-cadastro-aluno" id="formulario-aluno">
+
+                    <!-- Nome, nascimento e raça -->
                     <div class="fields">
                         <div class="ten wide field">
-                            <label for="txtNomeCriança">Nome da Criança</label>
-                            <input type="text" placeholder="Digite o nome da criança">
+                            <label for="txtNomeCrianca">Nome da Criança</label>
+                            <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança">
                         </div>
-
-                        <!-- Calendar Semantic UI para data de nascimento -->
                         <div class="three wide field">
-                            <label>Data Nascimento</label>
+                            <label for="txtDataNascimento">Data Nascimento</label>
                             <div class="ui calendar" id="dataNascimentoCalendar">
                                 <div class="ui input">
-                                    <input type="text" placeholder="dd/mm/aaaa">
+                                    <input id="txtDataNascimento" name="txtDataNascimento" type="text" placeholder="dd/mm/aaaa">
                                 </div>
                             </div>
                         </div>
-
                         <div class="three wide field">
                             <label for="txtRaca">Cor / Raça</label>
-                            <select class="ui search dropdown" name="corRaca" required>
+                            <select class="ui search dropdown" id="txtRaca" name="corRaca">
                                 <option value="" disabled selected hidden>Selecione Cor / Raça</option>
                                 <option value="branca">Branca</option>
                                 <option value="preta">Preta</option>
@@ -64,57 +62,59 @@
                         </div>
                     </div>
 
-                    <!-- Campos de endereço -->
+                    <!-- Endereço -->
                     <div class="fields">
                         <div class="three wide field">
                             <label for="txtCep">CEP</label>
-                            <input type="text" id="txtCep" placeholder="00000-000">
+                            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000">
                         </div>
                         <div class="ten wide field">
                             <label for="txtEndereco">Endereço</label>
-                            <input type="text" id="txtEndereco" placeholder="Rua, Avenida...">
+                            <input type="text" id="txtEndereco" name="txtEndereco" placeholder="Rua, Avenida...">
                         </div>
                         <div class="three wide field">
                             <label for="txtNumero">Número</label>
-                            <input type="text" id="txtNumero" placeholder="Nº">
+                            <input type="text" id="txtNumero" name="txtNumero" placeholder="Nº">
                         </div>
                     </div>
 
+                    <!-- Bairro, cidade, complemento -->
                     <div class="fields">
                         <div class="ten wide field">
                             <label for="txtBairro">Bairro</label>
-                            <input type="text" id="txtBairro" placeholder="Bairro...">
+                            <input type="text" id="txtBairro" name="txtBairro" placeholder="Bairro...">
                         </div>
                         <div class="three wide field">
                             <label for="txtCidade">Cidade</label>
-                            <input type="text" id="txtCidade" placeholder="Americana...">
+                            <input type="text" id="txtCidade" name="txtCidade" placeholder="Americana...">
                         </div>
                         <div class="three wide field">
                             <label for="txtComplemento">Complemento</label>
-                            <input type="text" id="txtComplemento" placeholder="Escola, apartamento...">
+                            <input type="text" id="txtComplemento" name="txtComplemento" placeholder="Escola, apartamento...">
                         </div>
                     </div>
 
-                    <!-- Autorização de medicação -->
+                    <!-- Autorização medicação -->
                     <div class="fields">
                         <div class="ten wide field">
                             <label>Em caso de febre autoriza medicar a criança?</label>
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="autorizacaoMed">
+                                <input type="checkbox" id="autorizacaoMed" name="autorizacaoMed">
                                 <label></label>
                             </div>
                         </div>
-                        <div class="three wide field">
+
+                        <div class="three wide field oculto" id="fieldGotas">
                             <label for="txtGotas">Quantas gotas</label>
-                            <input type="number" id="txtGotas" placeholder="1, 2, 3...">
+                            <input type="number" id="txtGotas" name="txtGotas" placeholder="1, 2, 3...">
                         </div>
-                        <div class="three wide field">
+                        <div class="three wide field oculto" id="fieldRemedio">
                             <label for="txtRemedio">Qual remédio</label>
-                            <input type="text" id="txtRemedio" placeholder="">
+                            <input type="text" id="txtRemedio" name="txtRemedio" placeholder="">
                         </div>
                     </div>
 
-                    <!-- Autorização de imagem -->
+                    <!-- Autorização imagem -->
                     <div class="fields">
                         <div class="ten wide field">
                             <label>Autorizo a divulgação de imagem do meu filho(a) para uso de projetos na escola, fotos, filmagem, Facebook, Instagram e site.</label>
@@ -125,13 +125,15 @@
                         </div>
                     </div>
 
-                    <!-- Botões -->
+                    <div class="ui error message"></div>
+
+                    <!-- Botão -->
                     <div class="ui grid">
                         <div class="four column row">
                             <div class="right floated column">
-                                <a href="./cadastro-responsaveis.php" class="ui basic blue icon button right floated column" style="margin-top: 10px;">
+                                <button type="submit" class="ui basic blue icon button right floated">
                                     <i class="angle right icon"></i> Próximo
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -140,36 +142,7 @@
         </main>
     </section>
 
-    <script>
-        $('#dataNascimentoCalendar').calendar({
-            type: 'date',
-            maxDate: new Date(), // bloqueia datas futuras
-            formatter: {
-                date: function(date) {
-                    if (!date) return '';
-                    const day = ("0" + date.getDate()).slice(-2);
-                    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-                    const year = date.getFullYear();
-                    return day + '/' + month + '/' + year; 
-                }
-            },
-            text: {
-                days: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-                months: [
-                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-                ],
-                monthsShort: [
-                    'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-                    'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-                ],
-                today: 'Hoje',
-                now: 'Agora',
-                am: 'AM',
-                pm: 'PM'
-            }
-        });
-    </script>
+    <script src="./js/validarCadastroAluno.js"></script>
 </body>
 
 </html>
