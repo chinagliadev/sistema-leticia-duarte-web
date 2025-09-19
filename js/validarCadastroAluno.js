@@ -1,4 +1,8 @@
 $(document).ready(function () {
+
+    // Ativa dropdown de Turma
+    $('#txtTurma').parent('.ui.dropdown').dropdown();
+
     const $form = $('#formulario-aluno');
     const $campoGotas = $('#fieldGotas');
     const $campoRemedio = $('#fieldRemedio');
@@ -9,22 +13,23 @@ $(document).ready(function () {
 
     $('.ui.checkbox').checkbox();
 
+    // Validação do formulário
     $form.form({
         fields: {
             txtNomeCrianca: { rules: [{ type: 'empty', prompt: 'Por favor informe o nome da criança' }] },
             txtDataNascimento: { rules: [{ type: 'empty', prompt: 'Por favor informe a data de nascimento' }] },
             corRaca: { rules: [{ type: 'empty', prompt: 'Por favor informe a raça/cor do aluno' }] },
+            turma: { rules: [{ type: 'empty', prompt: 'Por favor selecione a turma' }] }, // NOVO CAMPO
             txtCep: { rules: [{ type: 'empty', prompt: 'Por favor insira o CEP' }] },
             txtEndereco: { rules: [{ type: 'empty', prompt: 'Por favor insira o endereço do aluno' }] },
             txtNumero: { rules: [{ type: 'empty', prompt: 'Por favor informe o número do endereço' }] },
             txtBairro: { rules: [{ type: 'empty', prompt: 'Por favor informe o bairro' }] },
             txtCidade: { rules: [{ type: 'empty', prompt: 'Por favor informe a cidade' }] },
-            txtComplemento: { rules: [{ type: 'empty', prompt: 'Por favor informe o complemento' }] }
         },
         inline: false
     });
 
-
+    // Toggle para campos de medicação
     $toggle.on('change', function () {
         if (this.checked) {
             $campoGotas.show();
@@ -42,7 +47,10 @@ $(document).ready(function () {
         }
     });
 
+    // Dropdown de Raça
     $('#txtRaca').dropdown();
+
+    // Calendar
     $('#dataNascimentoCalendar').calendar({
         type: 'date',
         maxDate: new Date(),
@@ -57,11 +65,10 @@ $(document).ready(function () {
         }
     });
 
-    // O seu evento de submit, que já está correto
+    // Submit
     $form.on('submit', function (e) {
-        e.preventDefault();
-        if ($form.form('is valid')) {
-        } else {
+        if (!$form.form('is valid')) {
+            e.preventDefault();
         }
     });
 });

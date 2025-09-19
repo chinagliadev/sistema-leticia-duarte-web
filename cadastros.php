@@ -32,13 +32,33 @@
 
             <section class="sessao_cadastro ui segment blue">
                 <?php include './etapas-cadastro.php' ?>
-                <form class="ui form form-cadastro-aluno" id="formulario-aluno">
+                <form method="post" action="./salvar-cadastro-aluno.php" class="ui form form-cadastro-aluno" id="formulario-aluno">
 
                     <!-- Nome, nascimento e raça -->
                     <div class="fields">
-                        <div class="ten wide field">
+                        <div class="seven wide field">
                             <label for="txtNomeCrianca">Nome da Criança</label>
                             <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança">
+                        </div>
+                        <div class="three wide field">
+                            <label for="txtTurma">Turma</label>
+                            <div class="ui selection dropdown">
+                                <input type="hidden" name="turma" id="txtTurma">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Selecione a turma</div>
+                                <div class="menu">
+                                    <div class="item" data-value="Bercario 2 A">Bercario 2 A</div>
+                                    <div class="item" data-value="Bercario 2 B">Bercario 2 B</div>
+                                    <div class="item" data-value="Bercario 2 C">Bercario 2 C</div>
+                                    <div class="item" data-value="Maternal I A">Maternal I A</div>
+                                    <div class="item" data-value="Maternal I B">Maternal I B</div>
+                                    <div class="item" data-value="Maternal I C">Maternal I C</div>
+                                    <div class="item" data-value="Maternal II A">Maternal II A</div>
+                                    <div class="item" data-value="Maternal II B">Maternal II B</div>
+                                    <div class="item" data-value="Multisseriada M.M">Multisseriada M.M</div>
+                                    <div class="item" data-value="Multisseriada B.M">Multisseriada B.M</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="three wide field">
                             <label for="txtDataNascimento">Data Nascimento</label>
