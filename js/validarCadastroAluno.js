@@ -1,8 +1,7 @@
 $(document).ready(function () {
-
     const $form = $('#formulario-aluno');
-    const $campoGotas = $('#fieldGotas');   // Div do campo gotas
-    const $campoRemedio = $('#fieldRemedio'); // Div do campo remédio
+    const $campoGotas = $('#fieldGotas');
+    const $campoRemedio = $('#fieldRemedio');
     const $toggle = $('#autorizacaoMed');
 
     $campoGotas.hide();
@@ -10,25 +9,36 @@ $(document).ready(function () {
 
     $('.ui.checkbox').checkbox();
 
+    $form.form({
+        fields: {
+            txtNomeCrianca: { rules: [{ type: 'empty', prompt: 'Por favor informe o nome da criança' }] },
+            txtDataNascimento: { rules: [{ type: 'empty', prompt: 'Por favor informe a data de nascimento' }] },
+            corRaca: { rules: [{ type: 'empty', prompt: 'Por favor informe a raça/cor do aluno' }] },
+            txtCep: { rules: [{ type: 'empty', prompt: 'Por favor insira o CEP' }] },
+            txtEndereco: { rules: [{ type: 'empty', prompt: 'Por favor insira o endereço do aluno' }] },
+            txtNumero: { rules: [{ type: 'empty', prompt: 'Por favor informe o número do endereço' }] },
+            txtBairro: { rules: [{ type: 'empty', prompt: 'Por favor informe o bairro' }] },
+            txtCidade: { rules: [{ type: 'empty', prompt: 'Por favor informe a cidade' }] },
+            txtComplemento: { rules: [{ type: 'empty', prompt: 'Por favor informe o complemento' }] }
+        },
+        inline: false
+    });
+
+
     $toggle.on('change', function () {
         if (this.checked) {
             $campoGotas.show();
             $campoRemedio.show();
 
-            $form.form('add rule', 'txtGotas', [{
-                type: 'empty',
-                prompt: 'Por favor informe a quantidade de gotas'
-            }]);
-            $form.form('add rule', 'txtRemedio', [{
-                type: 'empty',
-                prompt: 'Por favor informe o nome do remédio'
-            }]);
+            $form.form('add fields', {
+                txtGotas: { rules: [{ type: 'empty', prompt: 'Por favor informe a quantidade de gotas' }] },
+                txtRemedio: { rules: [{ type: 'empty', prompt: 'Por favor informe o nome do remédio' }] }
+            });
         } else {
             $campoGotas.hide();
             $campoRemedio.hide();
 
-            $form.form('remove rule', 'txtGotas');
-            $form.form('remove rule', 'txtRemedio');
+            $form.form('remove fields', ['txtGotas', 'txtRemedio']);
         }
     });
 
@@ -47,57 +57,11 @@ $(document).ready(function () {
         }
     });
 
-    $form.form({
-        fields: {
-            nome: {
-                identifier: 'txtNomeCrianca',
-                rules: [{ type: 'empty', prompt: 'Por favor informe o nome da criança' }]
-            },
-            dataNascimento: {
-                identifier: 'txtDataNascimento',
-                rules: [{ type: 'empty', prompt: 'Por favor informe a data de nascimento' }]
-            },
-            corRaca: {
-                identifier: 'corRaca',
-                rules: [{ type: 'empty', prompt: 'Por favor informe a raça/cor do aluno' }]
-            },
-            cep: {
-                identifier: 'txtCep',
-                rules: [{ type: 'empty', prompt: 'Por favor insira o CEP' }]
-            },
-            endereco: {
-                identifier: 'txtEndereco',
-                rules: [{ type: 'empty', prompt: 'Por favor insira o endereço do aluno' }]
-            },
-            numero: {
-                identifier: 'txtNumero',
-                rules: [{ type: 'empty', prompt: 'Por favor informe o número do endereço' }]
-            },
-            bairro: {
-                identifier: 'txtBairro',
-                rules: [{ type: 'empty', prompt: 'Por favor informe o bairro' }]
-            },
-            cidade: {
-                identifier: 'txtCidade',
-                rules: [{ type: 'empty', prompt: 'Por favor informe a cidade' }]
-            },
-            complemento: {
-                identifier: 'txtComplemento',
-                rules: [{ type: 'empty', prompt: 'Por favor informe o complemento' }]
-            }
-        },
-        inline: false
-    });
-
+    // O seu evento de submit, que já está correto
     $form.on('submit', function (e) {
-        e.preventDefault(); 
-
-        const isValid = $form.form('is valid');
-
-        if (!isValid) {
-            const errors = $form.form('get errors');
-            $('.ui.error.message').html(errors.join('<br>')).show();
-        } 
+        e.preventDefault();
+        if ($form.form('is valid')) {
+        } else {
+        }
     });
-
 });
