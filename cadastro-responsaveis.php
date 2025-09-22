@@ -135,6 +135,13 @@ include './template/modal-remover-responsavel.php'
                                     <option value="" disabled selected hidden>Selecione o tipo</option>
                                     <option value="Pai">Pai</option>
                                     <option value="Mãe">Mãe</option>
+                                    <option value="Avô">Avô</option>
+                                    <option value="Avó">Avó</option>
+                                    <option value="Irmão">Irmão</option>
+                                    <option value="Irmã">Irmã</option>
+                                    <option value="Tio">Tio</option>
+                                    <option value="Tia">Tia</option>
+                                    <option value="Outro">Outro</option>
                                 </select>
                             </div>
                             <div class="eight wide field">
@@ -216,15 +223,7 @@ include './template/modal-remover-responsavel.php'
                         </div>
                     </div>
 
-                    <div class="fields">
-                        <div class="sixteen wide field">
-                            <div class="right floated column">
-                                <button class="ui blue button right floated" id="btnAdicionarResponsavel">
-                                    <i class="plus circle icon"></i> Adicionar Responsável
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="ui error message"></div>
 
                     <div class="ui grid">
                         <div class="four column row">
@@ -234,27 +233,30 @@ include './template/modal-remover-responsavel.php'
                                 </a>
                             </div>
                             <div class="right floated column">
-                                <a href="./cadastro-estrutura-familiar.php" class="ui basic blue icon button right floated column" style="margin-top: 10px;">
+                                <button type="submit" class="ui basic blue icon button right floated">
                                     <i class="angle right icon"></i> Próximo
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </form>
 
+
+                <div class="fields">
+                    <div class="sixteen wide field">
+                        <div class="right floated column">
+                            <button class="ui blue button right floated" id="btnAdicionarResponsavel">
+                                <i class="plus circle icon"></i> Adicionar Responsável
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </section>
         </main>
     </section>
 
-    <script>
-        $(document).ready(function() {
-            $('#btnRemoverResponsavel').on('click', function() {
-                $('.ui.basic.modal').modal({
-                    centered: true
-                }).modal('show');
-            });
-        });
-    </script>
+    <script src="./js/validarCadastroResponsavel.js"></script>
     <script src="./js/adicionarResponsavel.js"></script>
 </body>
 

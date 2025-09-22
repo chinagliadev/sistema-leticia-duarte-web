@@ -87,6 +87,7 @@
                         <div class="three wide field">
                             <label for="txtCep">CEP</label>
                             <input type="text" id="txtCep" name="txtCep" placeholder="00000-000">
+                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank">Não sei o meu cep</a>
                         </div>
                         <div class="ten wide field">
                             <label for="txtEndereco">Endereço</label>

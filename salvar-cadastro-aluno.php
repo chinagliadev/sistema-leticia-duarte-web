@@ -3,6 +3,8 @@ session_start();
 include './config.php'; 
 
 if (
+    $_SERVER['REQUEST_METHOD'] == 'POST'
+    &&
     isset(
         $_POST['txtNomeCrianca'],
         $_POST['txtDataNascimento'],
@@ -27,7 +29,6 @@ if (
     $cidade         = $_POST['txtCidade'];
     $complemento    = $_POST['txtComplemento'];
 
-    // ✅ Conversão da data se vier no formato brasileiro dd/mm/yyyy
     if (!empty($dataNascimento)) {
         if (strpos($dataNascimento, "/") !== false) {
             $partes = explode("/", $dataNascimento);
@@ -54,7 +55,6 @@ if (
     }
 
     try {
-        // ✅ Primeiro cadastra endereço
         $sqlEndereco = "INSERT INTO endereco (cep, endereco, numero, bairro, cidade, complemento)
                         VALUES (:cep, :endereco, :numero, :bairro, :cidade, :complemento)";
         $stmt = $conn->prepare($sqlEndereco);
@@ -69,7 +69,6 @@ if (
 
         $endereco_id = $conn->lastInsertId();
 
-        // ✅ Depois cadastra aluno
         $sqlAluno = "INSERT INTO tb_alunos (
                         nome, data_nascimento, etnia, turma,
                         autorizacao_febre, remedio, gotas, permissao_foto,
@@ -94,12 +93,11 @@ if (
             'funcionario_id' => $funcionario_id
         ]);
 
-        echo "Aluno cadastrado com sucesso!";
         header('location:cadastro-responsaveis.php');
     } catch (PDOException $e) {
         echo "Erro ao cadastrar aluno: " . $e->getMessage();
     }
 } else {
-    echo "Erro: campos obrigatórios não foram preenchidos.";
+    echo "<h2>Não foi possivel cadastrar usuario</h2>";
 }
 ?>
