@@ -13,7 +13,6 @@ $(document).ready(function () {
 
     $('.ui.checkbox').checkbox();
 
-    // Validação do formulário
     $form.form({
         fields: {
             txtNomeCrianca: { rules: [{ type: 'empty', prompt: 'Por favor informe o nome da criança' }] },
@@ -29,7 +28,6 @@ $(document).ready(function () {
         inline: false
     });
 
-    // Toggle para campos de medicação
     $toggle.on('change', function () {
         if (this.checked) {
             $campoGotas.show();
@@ -47,10 +45,8 @@ $(document).ready(function () {
         }
     });
 
-    // Dropdown de Raça
     $('#txtRaca').dropdown();
 
-    // Calendar
     $('#dataNascimentoCalendar').calendar({
         type: 'date',
         maxDate: new Date(),
@@ -65,7 +61,6 @@ $(document).ready(function () {
         }
     });
 
-    // Submit
     $form.on('submit', function (e) {
         if (!$form.form('is valid')) {
             e.preventDefault();
