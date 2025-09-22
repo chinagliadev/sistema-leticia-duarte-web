@@ -3,6 +3,8 @@ session_start();
 include './config.php'; 
 
 if (
+    $_SERVER['REQUEST_METHOD'] == 'POST'
+    &&
     isset(
         $_POST['txtNomeCrianca'],
         $_POST['txtDataNascimento'],
@@ -26,6 +28,15 @@ if (
     $bairro         = $_POST['txtBairro'];
     $cidade         = $_POST['txtCidade'];
     $complemento    = $_POST['txtComplemento'];
+
+    if (!empty($dataNascimento)) {
+        if (strpos($dataNascimento, "/") !== false) {
+            $partes = explode("/", $dataNascimento);
+            if (count($partes) === 3) {
+                $dataNascimento = $partes[2] . "-" . $partes[1] . "-" . $partes[0];
+            }
+        }
+    }
 
     $autorizacaoMed = isset($_POST['autorizacaoMed']) ? 1 : 0;
 
@@ -82,11 +93,11 @@ if (
             'funcionario_id' => $funcionario_id
         ]);
 
-        echo "Aluno cadastrado com sucesso!";
+        header('location:cadastro-responsaveis.php');
     } catch (PDOException $e) {
         echo "Erro ao cadastrar aluno: " . $e->getMessage();
     }
 } else {
-    echo "Erro: campos obrigatórios não foram preenchidos.";
+    echo "<h2>Não foi possivel cadastrar usuario</h2>";
 }
 ?>
