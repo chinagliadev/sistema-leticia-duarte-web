@@ -35,10 +35,9 @@ include './template/modal-remover-responsavel.php'
             </section>
 
             <section class="sessao_cadastro ui segment blue">
-                <!-- Etapas de cadastro incluindo no -->
                 <?php include './etapas-cadastro.php' ?>
-                <form class="ui form form-cadastro-aluno" id="responsavelFormulario">
 
+                <form class="ui form form-cadastro-aluno" id="responsavelFormulario">
                     <div class="responsavel" id="responsavel-1">
                         <div class="fields">
                             <div class="four wide field">
@@ -239,18 +238,17 @@ include './template/modal-remover-responsavel.php'
                             </div>
                         </div>
                     </div>
-                </form>
-
-
-                <div class="fields">
-                    <div class="sixteen wide field">
-                        <div class="right floated column">
-                            <button class="ui blue button right floated" id="btnAdicionarResponsavel">
-                                <i class="plus circle icon"></i> Adicionar Responsável
-                            </button>
+                    
+                    <div class="fields">
+                        <div class="sixteen wide field">
+                            <div class="right floated column">
+                                <button class="ui blue button right floated" id="btnAdicionarResponsavel" type="button">
+                                    <i class="plus circle icon"></i> Adicionar Responsável
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
 
             </section>
         </main>
@@ -258,6 +256,7 @@ include './template/modal-remover-responsavel.php'
 
     <script src="./js/validarCadastroResponsavel.js"></script>
     <script src="./js/adicionarResponsavel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </body>
 
 </html>
