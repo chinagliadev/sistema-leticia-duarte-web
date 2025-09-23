@@ -8,11 +8,11 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
     <link rel="stylesheet" href="./css/sistema.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.css">
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.css">
 </head>
 
 <body>
@@ -31,10 +31,10 @@
             </section>
 
             <section class="sessao_cadastro ui segment blue">
-                <!-- Etapas de cadastro incluindo no -->
                 <?php include './etapas-cadastro.php' ?>
                 <form class="ui form">
 
+                    <!-- PRIMEIRA LINHA -->
                     <div class="fields">
                         <div class="four wide field">
                             <label>Pais vivem juntos</label>
@@ -45,57 +45,59 @@
                         </div>
                         <div class="four wide field">
                             <label>Nº de filhos</label>
-                            <input type="number" placeholder="0">
+                            <input type="number" placeholder="0" name="numero_filhos">
                         </div>
                         <div class="four wide field">
                             <label>Recebe bolsa família</label>
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="bolsa_familia">
+                                <input type="checkbox" name="bolsa_familia" id="toggle-bolsa-familia">
                                 <label></label>
                             </div>
                         </div>
-                        <div class="four wide field">
+                        <div class="four wide field" id="valor-bolsa-field">
                             <label>Valor</label>
-                            <input type="number" placeholder="R$">
+                            <input type="number" placeholder="R$" name="valor_bolsa">
                         </div>
                     </div>
 
+                    <!-- SEGUNDA LINHA -->
                     <div class="fields">
                         <div class="four wide field">
                             <label>Possui alergia</label>
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="alergia">
+                                <input type="checkbox" name="alergia" id="toggle-alergia">
                                 <label></label>
                             </div>
                         </div>
-                        <div class="four wide field">
+                        <div class="four wide field" id="especifique-alergia-field">
                             <label>Especifique</label>
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder="" name="especifique_alergia">
                         </div>
                         <div class="four wide field">
                             <label>Possui convênio</label>
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="convenio">
+                                <input type="checkbox" name="convenio" id="toggle-convenio">
                                 <label></label>
                             </div>
                         </div>
-                        <div class="four wide field">
+                        <div class="four wide field" id="qual-convenio-field">
                             <label>Qual convênio</label>
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder="" name="qual_convenio">
                         </div>
                     </div>
 
+                    <!-- TERCEIRA LINHA -->
                     <div class="fields">
                         <div class="four wide field">
                             <label>Portador de alguma necessidade especial</label>
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="necessidade_especial">
+                                <input type="checkbox" name="necessidade_especial" id="toggle-necessidade-especial">
                                 <label></label>
                             </div>
                         </div>
-                        <div class="four wide field">
+                        <div class="four wide field" id="qual-necessidade-field">
                             <label>Qual</label>
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder="" name="qual_necessidade">
                         </div>
                         <div class="four wide field">
                             <label>Problemas de visão</label>
@@ -123,6 +125,7 @@
                         </div>
                     </div>
 
+                    <!-- TRANSPORTE -->
                     <h4 class="ui dividing header">Transporte para a escola</h4>
                     <div class="fields">
                         <div class="field">
@@ -151,10 +154,9 @@
                         </div>
                     </div>
 
+                    <!-- DOENÇAS -->
                     <h4 class="ui dividing header">Doenças que a criança já teve</h4>
-
                     <div class="ui grid">
-                        <!-- Coluna 1 -->
                         <div class="five wide column">
                             <div class="field">
                                 <div class="ui checkbox"><input type="checkbox" name="doenca" value="anemia"><label>Anemia</label></div>
@@ -172,8 +174,6 @@
                                 <div class="ui checkbox"><input type="checkbox" name="doenca" value="diabetes"><label>Diabetes</label></div>
                             </div>
                         </div>
-
-                        <!-- Coluna 2 -->
                         <div class="five wide column">
                             <div class="field">
                                 <div class="ui checkbox"><input type="checkbox" name="doenca" value="hepatite"><label>Hepatite</label></div>
@@ -191,8 +191,6 @@
                                 <div class="ui checkbox"><input type="checkbox" name="doenca" value="convulsao"><label>Convulsão</label></div>
                             </div>
                         </div>
-
-                        <!-- Coluna 3 -->
                         <div class="five wide column">
                             <div class="field">
                                 <div class="ui checkbox"><input type="checkbox" name="doenca" value="dengue"><label>Dengue</label></div>
@@ -215,6 +213,9 @@
                         </div>
                     </div>
 
+                    <div class="ui error message"></div>
+
+                    <!-- BOTÕES -->
                     <div class="ui grid">
                         <div class="four column row">
                             <div class="left floated column">
@@ -223,22 +224,19 @@
                                 </a>
                             </div>
                             <div class="right floated column">
-                                <a href="./cadastro-pessoas-autorizadas.php" class="ui basic blue icon button right floated column" style="margin-top: 10px;">
+                                <button type="submit" class="ui blue icon button right floated">
                                     <i class="angle right icon"></i> Próximo
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </form>
 
+                </form>
             </section>
         </main>
     </section>
 
-    <script>
-
-    </script>
-    <script src="./js/adicionarResponsavel.js"></script>
+    <script src="./js/validarEstruturaFamiliar.js"></script>
 </body>
 
 </html>
