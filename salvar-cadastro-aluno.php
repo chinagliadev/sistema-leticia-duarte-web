@@ -1,6 +1,7 @@
 <?php
 session_start();
-include './config.php'; 
+require './class/Aluno.php';
+require './config.php';
 
 if (
     $_SERVER['REQUEST_METHOD'] == 'POST'
@@ -18,16 +19,19 @@ if (
         $_POST['txtComplemento']
     )
 ) {
-    $nome           = $_POST['txtNomeCrianca'];
-    $dataNascimento = $_POST['txtDataNascimento'];
-    $raca           = $_POST['corRaca'];
-    $turma          = $_POST['turma'];
-    $cep            = $_POST['txtCep'];
-    $endereco       = $_POST['txtEndereco'];
-    $numero         = $_POST['txtNumero'];
-    $bairro         = $_POST['txtBairro'];
-    $cidade         = $_POST['txtCidade'];
-    $complemento    = $_POST['txtComplemento'];
+
+    $aluno = new Aluno();
+
+    $aluno->nome           = $_POST['txtNomeCrianca'];
+    $aluno->dataNascimento = $_POST['txtDataNascimento'];
+    $aluno->corRaca           = $_POST['corRaca'];
+    $aluno->turma          = $_POST['turma'];
+    $aluno->cep            = $_POST['txtCep'];
+    $aluno->endereco       = $_POST['txtEndereco'];
+    $aluno->numero         = $_POST['txtNumero'];
+    $aluno->bairro         = $_POST['txtBairro'];
+    $aluno->cidade         = $_POST['txtCidade'];
+    $aluno->complemento    = $_POST['txtComplemento'];
 
     if (!empty($dataNascimento)) {
         if (strpos($dataNascimento, "/") !== false) {
