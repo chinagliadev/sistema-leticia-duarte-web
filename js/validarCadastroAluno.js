@@ -8,7 +8,6 @@ $(document).ready(function () {
     const $campoRemedio = $('#fieldRemedio');
     const $toggle = $('#autorizacaoMed');
 
-    //mask do cep
     $("#txtCep").mask("99999-999");
 
     $campoGotas.hide();
