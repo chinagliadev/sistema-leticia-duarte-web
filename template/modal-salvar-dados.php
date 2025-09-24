@@ -13,9 +13,4 @@
             <i class="times icon"></i> Cancelar
         </button>
     </div>
-    <!-- Loader oculto inicialmente -->
-    <div class="ui active inverted dimmer" id="loaderSalvar" style="display:none;">
-        <div class="ui text loader">Salvando dados...</div>
-    </div>
 </div>
-

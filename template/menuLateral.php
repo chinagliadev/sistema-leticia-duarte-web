@@ -13,14 +13,22 @@ include './config.php';
 
 ?>
 
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
 <aside class="menu_lateral">
     <section class="opcoes_menu">
 
         <div class="perfil" onclick="window.location.href='perfil.php'">
 
             <span class="usuario-info">
-                <span class="usuario-nome"><strong><?= $nome_usuario?></strong></span><br>
-                <span class="usuario-email"><?= $email_usuario?></span>
+                <span class="usuario-nome"><strong><?= $nome_usuario ?></strong></span><br>
+                <span class="usuario-email"><?= $email_usuario ?></span>
             </span>
         </div>
 
@@ -38,13 +46,13 @@ include './config.php';
     </section>
 </aside>
 
-    <script>
-        const btnMenu = document.getElementById('btn-menu');
-        const menu = document.querySelector('.menu_lateral');
-        const body = document.body;
+<script>
+    const btnMenu = document.getElementById('btn-menu');
+    const menu = document.querySelector('.menu_lateral');
+    const body = document.body;
 
-        btnMenu.addEventListener('click', () => {
-            menu.classList.toggle('ativo');
-            body.classList.toggle('menu-aberto');
-        });
-    </script>
+    btnMenu.addEventListener('click', () => {
+        menu.classList.toggle('ativo');
+        body.classList.toggle('menu-aberto');
+    });
+</script>
