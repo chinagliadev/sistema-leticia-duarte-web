@@ -46,6 +46,7 @@ window.addEventListener("load", () => {
   }
 });
 
+// ====== Máscara Celular ======
 const inputCelular = document.getElementById('celular');
 
 inputCelular.addEventListener('input', function (e) {
@@ -71,6 +72,7 @@ inputCelular.addEventListener('input', function (e) {
   el.value = formatted;
 });
 
+// ====== Validação + Máscara CPF ======
 const cpfInput = document.getElementById('cpf');
 
 function validarCPF(cpf) {
@@ -110,3 +112,116 @@ cpfInput.addEventListener('input', (e) => {
 
   e.target.value = formatted;
 });
+
+// ====== Validação Senha x Confirmar Senha ======
+const formCadastro = document.querySelector('.sign-up form');
+const password = document.getElementById('passwordCad');
+const confirmPassword = document.getElementById('passwordConfirm');
+
+// cria um span de erro dinamicamente (logo abaixo do campo confirmar senha)
+let errorMsg = document.createElement('span');
+errorMsg.id = 'errorSenha';
+errorMsg.style.color = 'red';
+errorMsg.style.fontSize = '14px';
+errorMsg.style.display = 'none';
+confirmPassword.insertAdjacentElement('afterend', errorMsg);
+
+formCadastro.addEventListener('submit', function (event) {
+  if (password.value !== confirmPassword.value) {
+    event.preventDefault(); // cancela envio
+    errorMsg.textContent = 'As senhas não conferem';
+    errorMsg.style.display = 'block';
+    confirmPassword.focus();
+  } else {
+    errorMsg.style.display = 'none';
+  }
+});
+
+// feedback em tempo real
+confirmPassword.addEventListener('input', function () {
+  if (password.value !== confirmPassword.value) {
+    errorMsg.textContent = 'As senhas não conferem';
+    errorMsg.style.display = 'block';
+  } else {
+    errorMsg.style.display = 'none';
+  }
+});
+
+// ====== Bloquear espaços nas senhas ======
+function removerEspacos(input) {
+  input.addEventListener('input', function () {
+    this.value = this.value.replace(/\s/g, '');
+  });
+}
+
+// Cadastro
+removerEspacos(password);
+removerEspacos(confirmPassword);
+
+// Login
+const emailLogin = document.getElementById('emailLogin');
+const passwordLogin = document.getElementById('passwordLogin');
+removerEspacos(emailLogin);
+removerEspacos(passwordLogin);
+
+// ====== Validação de sintaxe de senha ======
+function validarSintaxeSenha(senha) {
+  const regras = [
+    { regex: /.{10,}/, mensagem: "Mínimo de 10 caracteres" },
+    { regex: /[A-Z]/, mensagem: "Ao menos 1 letra maiúscula" },
+    { regex: /[a-z]/, mensagem: "Ao menos 1 letra minúscula" },
+    { regex: /[0-9]/, mensagem: "Ao menos 1 número" },
+    { regex: /[^A-Za-z0-9]/, mensagem: "Ao menos 1 caractere especial" }
+  ];
+
+  return regras.filter(r => !r.regex.test(senha)).map(r => r.mensagem);
+}
+
+const senhaCadastro = document.getElementById("passwordCad");
+const confirmarSenhaCadastro = document.getElementById("passwordConfirm");
+
+// Span para mostrar erro de sintaxe
+let erroSintaxe = document.createElement("span");
+erroSintaxe.style.color = "red";
+erroSintaxe.style.fontSize = "14px";
+erroSintaxe.style.display = "none";
+senhaCadastro.insertAdjacentElement("afterend", erroSintaxe);
+
+// Feedback em tempo real
+senhaCadastro.addEventListener("input", function () {
+  const erros = validarSintaxeSenha(this.value);
+  if (erros.length > 0) {
+    erroSintaxe.innerHTML = "Senha inválida:<br>• " + erros.join("<br>• ");
+    erroSintaxe.style.display = "block";
+  } else {
+    erroSintaxe.style.display = "none";
+  }
+});
+
+// Validação no submit do formulário
+const formCadastroSenha = document.querySelector(".sign-up form");
+
+formCadastroSenha.addEventListener("submit", function (e) {
+  const erros = validarSintaxeSenha(senhaCadastro.value);
+  if (erros.length > 0) {
+    e.preventDefault();
+    erroSintaxe.innerHTML = "Senha inválida:<br>• " + erros.join("<br>• ");
+    erroSintaxe.style.display = "block";
+    senhaCadastro.focus();
+  }
+  else if (senhaCadastro.value !== confirmarSenhaCadastro.value) {
+    e.preventDefault();
+    erroSintaxe.innerHTML = "As senhas não conferem.";
+    erroSintaxe.style.display = "block";
+    confirmarSenhaCadastro.focus();
+  }
+});
+
+function toggleSenha(id) {
+    const input = document.getElementById(id);
+    if (input.type === "password") {
+        input.type = "text";
+    } else {
+        input.type = "password";
+    }
+}
