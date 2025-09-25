@@ -1,10 +1,8 @@
 <?php
 include './template/modal-remover-responsavel.php'
 ?>
-<button id="btn-menu" class="ui icon button">
-    <i class="sidebar icon"></i>
-</button>
-<section class="sessao_cadastro ui segment blue">
+<section class="ui segment ui segment blue sessao-tab">
+    <h2>Responsavel</h2>
     <div class="responsavel" id="responsavel-1">
         <div class="fields">
             <div class="four wide field">
@@ -188,22 +186,6 @@ include './template/modal-remover-responsavel.php'
         </div>
     </div>
 
-    <div class="ui error message"></div>
-
-    <div class="ui grid">
-        <div class="four column row">
-            <div class="left floated column">
-                <a href="./cadastros.php" class="ui basic blue icon button" style="margin-top: 10px;">
-                    <i class="angle left icon"></i> Voltar
-                </a>
-            </div>
-            <div class="right floated column">
-                <button type="submit" class="ui basic blue icon button right floated">
-                    <i class="angle right icon"></i> Próximo
-                </button>
-            </div>
-        </div>
-    </div>
 
     <div class="fields">
         <div class="sixteen wide field">
@@ -214,7 +196,6 @@ include './template/modal-remover-responsavel.php'
             </div>
         </div>
     </div>
+
+ 
 </section>
-<script src="./js/validarCadastroResponsavel.js"></script>
- <script src="./js/adicionarResponsavel.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>

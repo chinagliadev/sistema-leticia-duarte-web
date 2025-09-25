@@ -35,7 +35,7 @@ include './config.php';
         <div class="lista_opcoes">
             <ul>
                 <li><i class="home icon"></i><a href="cadastrados.php">Início</a></li>
-                <li><i class="chart bar outline icon"></i><a href="cadastros.php">Cadastrar</a></li>
+                <li><i class="chart bar outline icon"></i><a href="formulario-cadastro.php">Cadastrar</a></li>
                 <li><i class="history icon"></i><a href="">Histórico</a></li>
             </ul>
         </div>
