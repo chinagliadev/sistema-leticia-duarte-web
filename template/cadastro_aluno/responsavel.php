@@ -1,7 +1,7 @@
 <?php
 include './template/modal-remover-responsavel.php'
 ?>
-<section class="ui segment ui segment red sessao-tab">
+<section class="ui segment red raised sessao-tab">
     <h2>Responsavel</h2>
     <div class="responsavel" id="responsavel-1">
         <div class="fields">

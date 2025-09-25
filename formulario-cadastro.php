@@ -32,8 +32,8 @@
 
             <section class="sessao_cadastro">
                 <section class="cabecalho_cadastrados ui segment blue">
-                    <h2>Alunos<br>cadastrados</h2>
-                    <img class="ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
+                    <h2>Cadastro <br>de alunos</h2>
+                    <img class="tamanho-img ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
                         alt="logo da leticia duarte na tela de cadastros de alunos">
                 </section>
                 <form method="post" action="./salvar-cadastro-aluno.php" class="ui form form-cadastro-aluno" id="formulario-aluno">

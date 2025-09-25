@@ -158,7 +158,7 @@ a {
     display: flex;
     flex-direction: column;
     background: url(../img/cadastro_img/Background.png);
-    background-color: #E6FBFF;
+    background-color: #e6fbffe0;
 }
 
 .cabecalho_cadastrados {
@@ -263,4 +263,10 @@ select.ui.dropdown {
 
 .sessao-tab{
     margin-top: 20px;
+}
+
+.ui.small.image, .ui.small.images .image, .ui.small.images img, .ui.small.images svg {
+    width: 130px;
+    height: auto;
+    font-size: .92857143rem;
 }
