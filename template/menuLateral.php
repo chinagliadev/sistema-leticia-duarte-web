@@ -1,10 +1,14 @@
 <?php
+require_once './config.php';
+
 session_start();
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit;
 }
+
+
 
 $nome_usuario = $_SESSION['usuario']['nome'];
 $email_usuario = $_SESSION['usuario']['email'];
