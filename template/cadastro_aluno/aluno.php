@@ -1,5 +1,5 @@
     <!-- Nome, nascimento e raça -->
-    <section class="ui segment blue">
+    <section class="ui segment blue raised ">
         <div class="fields">
             <div class="seven wide field">
                 <label for="txtNomeCrianca">Nome da Criança</label>

@@ -1,4 +1,4 @@
-<section class="ui segment blue">
+<section class="ui segment yellow raised">
     <h2>Estrutura Familiar</h2>
     <div class="fields">
         <div class="four wide field">

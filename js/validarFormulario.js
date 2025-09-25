@@ -28,18 +28,15 @@ $(document).ready(function () {
         $(this).hide();
     });
 
-    // Remover Pessoa Autorizada 2
     $('#btnRemoverAutorizada').on('click', function (e) {
         e.preventDefault();
         $('#autorizada-2').hide();
         $('#autorizada-2').find('input, select').prop('disabled', true); // Disable fields
         $('#btnAdicionarAutorizada').show();
-        // Clear fields of the removed section
         $('#autorizada-2').find('input').val('');
         $('#autorizada-2').find('select').dropdown('restore defaults');
     });
 
-    // Initialize Semantic UI components
     $('.ui.dropdown').dropdown();
     $('.ui.checkbox').checkbox();
     $('.ui.calendar').calendar({
@@ -55,7 +52,6 @@ $(document).ready(function () {
         }
     });
 
-    // Handle conditional field visibility based on checkboxes
     function toggleFields() {
         $('input[name="bolsa_familia"]').is(':checked') ? $('#valor-bolsa-field').show() : $('#valor-bolsa-field').hide();
         $('input[name="alergia"]').is(':checked') ? $('#especifique-alergia-field').show() : $('#especifique-alergia-field').hide();
@@ -73,12 +69,10 @@ $(document).ready(function () {
     toggleFields();
     $('input[type="checkbox"]').on('change', toggleFields);
 
-    // Custom conditional required rule
     $.fn.form.settings.rules.conditionalRequired = function (value, parameter) {
         var $field = $(this);
         var $form = $field.closest('.ui.form');
         var $target = $form.find(parameter);
-        // The key change is to also check if the target is NOT disabled
         if ($target.is(':visible') && !$target.find('input, select').first().is(':disabled')) {
             return value !== undefined && value !== '';
         }
@@ -133,7 +127,6 @@ $(document).ready(function () {
         },
         inline: true,
         onSuccess: function (event) {
-            // Action to perform on success
         }
     });
 });

@@ -31,7 +31,7 @@
         <main class="conteudo_cadastrados">
 
             <section class="sessao_cadastro">
-                <section class="cabecalho_cadastrados">
+                <section class="cabecalho_cadastrados ui segment blue">
                     <h2>Alunos<br>cadastrados</h2>
                     <img class="ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
                         alt="logo da leticia duarte na tela de cadastros de alunos">

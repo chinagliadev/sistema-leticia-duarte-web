@@ -2,7 +2,7 @@
 include './template/modal-remover-autorizada.php';
 include './template/modal-salvar-dados.php';
 ?>
-<section class="ui segment blue">
+<section class="ui segment green raised">
     <h2>Parentesco</h2>
     <div class="pessoaAutorizada" id="autorizada-1">
         <div class="fields">
