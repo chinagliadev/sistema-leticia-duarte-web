@@ -1,13 +1,12 @@
 <?php
+require './class/Aluno.php';
+require './class/Endereco.php';
+require './config.php';
 
 
 session_start();
 
 echo "<h1>Arquivo carregou com sucesso...</h1>";
-
-require './class/Aluno.php';
-require './class/Endereco.php';
-require './config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -45,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $enderecoObj = new Endereco();
         $funcionario_id = $_SESSION['usuario']['id'];
 
-        $enderecoObj->cadastrarEndereco($cep, $logradouro, $numero, $bairro, $cidade, $complemento);
+        $endereco_id = $enderecoObj->cadastrarEndereco($cep, $logradouro, $numero, $bairro, $cidade, $complemento);
 
-        $aluno->cadastrarAluno($nome, $dataNascimento, $corRaca, $turma, $autorizacaoMed, $remedio, $gotas, $autorizacaoImagem, $enderecoObj, $funcionario_id);
+        $aluno->cadastrarAluno($nome, $dataNascimento, $corRaca, $turma, $autorizacaoMed, $remedio, $gotas, $autorizacaoImagem, $endereco_id, $funcionario_id);
 
         echo "<script>
             alert('dados salvos com sucesso !')
