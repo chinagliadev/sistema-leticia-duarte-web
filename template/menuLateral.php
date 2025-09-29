@@ -8,12 +8,9 @@ if (!isset($_SESSION['usuario'])) {
     exit;
 }
 
-
-
 $nome_usuario = $_SESSION['usuario']['nome'];
 $email_usuario = $_SESSION['usuario']['email'];
 
-include './config.php';
 
 ?>
 

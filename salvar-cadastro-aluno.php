@@ -7,6 +7,7 @@ echo "<h1>Arquivo carregou com sucesso...</h1>";
 
 require './class/Aluno.php';
 require './class/Endereco.php';
+require './config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
