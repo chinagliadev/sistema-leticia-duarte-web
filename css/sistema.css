@@ -33,6 +33,7 @@ a {
     align-items: center;
     padding: 30px;
     border-right: 2px solid rgb(222, 222, 222);
+    border-radius: 0px 20px ;
 }
 
 .menu_lateral .opcoes_menu {
