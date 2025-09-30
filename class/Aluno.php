@@ -25,7 +25,7 @@ class Aluno{
     }
 
 
-    public function cadastrarAluno($nome, $data_nascimento, $etnia, $turma, $autorizacao_febre = 0, $remedio = '', $gotas = 0, $permissao_foto = 0, $endereco_id, $funcionario_id){
+    public function cadastrarAluno($nome, $data_nascimento, $etnia, $turma, $autorizacao_febre, $remedio, $gotas, $permissao_foto, $endereco_id, $funcionario_id){
 
         $sqlInserir = "INSERT INTO tb_alunos 
         (nome, data_nascimento, etnia, turma, autorizacao_febre, remedio, gotas, permissao_foto, endereco_id, funcionario_id)
@@ -48,7 +48,7 @@ class Aluno{
             ':funcionario_id' => $funcionario_id
         ]);
 
-        return $dados;
+        return $this->conn->lastInsertId();
     }
 
 

@@ -1,5 +1,4 @@
 <?php
-
 class PessoaAutorizada
 {
 
@@ -32,3 +31,4 @@ class PessoaAutorizada
     }
 
 }
+
