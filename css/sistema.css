@@ -3,6 +3,11 @@
     src: url(../fonts/Baloo2-VariableFont_wght.ttf);
 }
 
+@font-face {
+    font-family: "Bungee";
+    src: url(../fonts/Bungee-Regular.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -27,6 +32,8 @@ a {
     flex-direction: column;
     align-items: center;
     padding: 30px;
+    border-right: 2px solid rgb(222, 222, 222);
+    border-radius: 0px 20px ;
 }
 
 .menu_lateral .opcoes_menu {
@@ -147,12 +154,12 @@ a {
 }
 
 .conteudo_cadastrados {
-    padding: 40px 2vw 20px 2vw;
+    padding: 60px 2vw 20px 2vw;
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #F6F6F6;
-    gap: 20px;
+    background: url(../img/cadastro_img/Background.png);
+    background-color: #e6fbffe0;
 }
 
 .cabecalho_cadastrados {
@@ -163,9 +170,10 @@ a {
 }
 
 .cabecalho_cadastrados h2 {
-    font-size: 3rem;
+    font-size: 2rem;
     transition: 0.5s;
     color: #3b3b3b;
+    font-family: 'Bungee';
 }
 
 @media screen and (max-width: 768px) {
@@ -206,6 +214,7 @@ a {
     margin-top: 20px;
     /* ajusta o valor conforme quiser */
 }
+
 
 .ui.steps {
     display: flex;
@@ -253,3 +262,12 @@ select.ui.dropdown {
     margin-top: 10px;
 }
 
+.sessao-tab{
+    margin-top: 20px;
+}
+
+.ui.small.image, .ui.small.images .image, .ui.small.images img, .ui.small.images svg {
+    width: 130px;
+    height: auto;
+    font-size: .92857143rem;
+}

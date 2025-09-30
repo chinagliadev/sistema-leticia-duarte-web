@@ -15,7 +15,7 @@
 }
 
 .fundo_apresentacao {
-    background-image: url(../img/apresentacao_img/background_fundo.png);
+    background-image:  rgba(0, 0, 0, 0.5)  url(../img/apresentacao_img/background_fundo.png);
     background-color: #E6FBFF;
 }
 

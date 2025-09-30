@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/09/2025 às 13:11
+-- Tempo de geração: 29/09/2025 às 22:02
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `endereco` (
   `id_endereco` int(11) NOT NULL,
-  `rua` varchar(100) DEFAULT NULL,
+  `cep` varchar(10) DEFAULT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
   `bairro` varchar(100) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT 'Americana',
@@ -47,9 +48,14 @@ CREATE TABLE `tb_alunos` (
   `nome` varchar(200) DEFAULT NULL,
   `data_nascimento` date DEFAULT NULL,
   `etnia` varchar(20) DEFAULT NULL,
+  `turma` enum('Bercario 2 A','Bercario 2 B','Bercario 2 C','Maternal I A','Maternal I B','Maternal I C','Maternal II A','Maternal II B','Multisseriada M.M','Multisseriada B.M') DEFAULT NULL,
+  `autorizacao_febre` tinyint(1) DEFAULT 0 COMMENT 'Autoriza medicar em caso de febre',
+  `remedio` varchar(100) DEFAULT NULL COMMENT 'Nome do remédio autorizado',
+  `gotas` int(11) DEFAULT NULL COMMENT 'Quantidade de gotas',
+  `permissao_foto` tinyint(1) DEFAULT 0 COMMENT 'Autoriza divulgação de imagem',
+  `data_cadastro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `endereco_id` int(11) DEFAULT NULL,
-  `funcionario_id` int(11) DEFAULT NULL,
-  `turma` enum('Bercario 2 A','Bercario 2 B','Bercario 2 C','Maternal I A','Maternal I B','Maternal I C','Maternal II A','Maternal II B','Multisseriada M.M','Multisseriada B.M') NOT NULL
+  `funcionario_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -69,24 +75,7 @@ CREATE TABLE `tb_estrutura_familiar` (
   `portador_necessidade_especial` tinyint(1) DEFAULT NULL,
   `problemas_visao` tinyint(1) DEFAULT NULL,
   `ja_fez_cirurgia` tinyint(1) DEFAULT NULL,
-  `vacina_catapora_varicela` tinyint(1) DEFAULT NULL,
-  `anemia` tinyint(1) DEFAULT 0,
-  `bronquite` tinyint(1) DEFAULT 0,
-  `cardiaca` tinyint(1) DEFAULT 0,
-  `catapora` tinyint(1) DEFAULT 0,
-  `caxumba` tinyint(1) DEFAULT 0,
-  `convulsao` tinyint(1) DEFAULT 0,
-  `dengue` tinyint(1) DEFAULT 0,
-  `desidratacao` tinyint(1) DEFAULT 0,
-  `diabetes` tinyint(1) DEFAULT 0,
-  `hepatite` tinyint(1) DEFAULT 0,
-  `meningite` tinyint(1) DEFAULT 0,
-  `pneumonia` tinyint(1) DEFAULT 0,
-  `refluxo` tinyint(1) DEFAULT 0,
-  `rubeola` tinyint(1) DEFAULT 0,
-  `sarampo` tinyint(1) DEFAULT 0,
-  `verminose` tinyint(1) DEFAULT 0,
-  `outra_doenca` text DEFAULT NULL
+  `vacina_catapora_varicela` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -109,7 +98,8 @@ CREATE TABLE `tb_funcionario` (
 --
 
 INSERT INTO `tb_funcionario` (`id_funcionario`, `nome`, `email`, `senha`, `celular`, `cpf`) VALUES
-(1, 'victor', 'teste@teste2.com', '$2y$10$Mjqp8cD5ekxlTpyFDG5TN.ZDponQLkQOHUo1EwcL.MsbDI3acgkYe', '(32) 13123-1231', '233.123.123-12');
+(1, 'victor chinaglia', 'neto@neto', '$2y$10$Tz1QRAkbDkW4YLB6zk0mR.CSGF3qH/S3FSsOBXzy/IsPoGiF.FphK', '(21) 31231-2313', '231.231.231-23'),
+(2, 'VICTOR CHINAGLIA NETO', 'victor@sistema.com', '$2y$10$28FI7QcRf2iv0AdTkqfLG.o7cQInhCZNn47eie9RWmTTrg1ZHqKZu', '(12) 31231-2312', '312.312.312-31');
 
 -- --------------------------------------------------------
 
@@ -261,7 +251,7 @@ ALTER TABLE `tb_estrutura_familiar`
 -- AUTO_INCREMENT de tabela `tb_funcionario`
 --
 ALTER TABLE `tb_funcionario`
-  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tb_matricula`
