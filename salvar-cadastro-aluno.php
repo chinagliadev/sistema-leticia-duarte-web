@@ -2,7 +2,7 @@
 require './class/Aluno.php';
 require './class/Responsavel.php';
 require './class/Endereco.php';
-require './class/EstruturaFamiliar.php'; // <-- INCLUSÃO DA NOVA CLASSE
+require'./class/PessoaAutorizada.php';
 require './config.php';
 
 var_dump($_POST);
@@ -11,9 +11,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // ------------------------------------
-    // 1. Dados do Aluno e Endereço (Mantidos)
-    // ------------------------------------
+   
     $nome = $_POST['txtNomeCrianca'] ?? null;
     $turma = $_POST['turma'] ?? null;
     $dataNascimento = $_POST['txtDataNascimento'] ?? null;
@@ -38,9 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $autorizacaoImagem = isset($_POST['autorizacaoImagem']) ? 1 : 0;
 
-    // ------------------------------------
-    // 2. Processamento do Responsável (Mantido)
-    // ------------------------------------
+   
     $responsavel = new Responsavel();
 
     $tipo_responsavel_1 = $_POST['txtTipoResponsavel_1'] ?? null;
@@ -107,9 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         );
     }
 
-    // ------------------------------------
-    // 3. Cadastro do Endereço e do Aluno (Necessário para obter o aluno_id)
-    // ------------------------------------
+    
     $aluno = new Aluno();
     $enderecoObj = new Endereco();
     $funcionario_id = $_SESSION['usuario']['id'] ?? null;
@@ -138,7 +132,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     var_dump($aluno_id);
 
+    $txtNomePessoaAutorizada = $_POST['txtNomePessoaAutorizada'];
+    $txtCpfAutorizada = $_POST['txtCpfAutorizada'];
+    $txtTelefoneAutorizada = $_POST['txtTelefoneAutorizada'];
+    $txtParentenco = $_POST['txtParentenco'];
 
+    $pessoa_autorizada = new PessoaAutorizada();
+
+    $pessoa_autorizada_id = $pessoa_autorizada->cadastrarPessoaAutorizada(
+        $txtNomePessoaAutorizada,
+        $txtCpfAutorizada,
+        $txtTelefoneAutorizada,
+        $txtParentenco
+    );
 
     echo "<script>alert('Dados salvos com sucesso!');</script>";
 }
