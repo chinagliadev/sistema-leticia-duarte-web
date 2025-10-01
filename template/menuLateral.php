@@ -11,7 +11,6 @@ if (!isset($_SESSION['usuario'])) {
 $nome_usuario = $_SESSION['usuario']['nome'];
 $email_usuario = $_SESSION['usuario']['email'];
 
-
 ?>
 
 <!DOCTYPE html>

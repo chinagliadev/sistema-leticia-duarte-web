@@ -6,8 +6,6 @@ $matricula = new Matricula();
 
 $dadosMatricula = $matricula->listarMatricula();
 
-var_dump($dadosMatricula);
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
