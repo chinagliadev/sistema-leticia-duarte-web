@@ -8,15 +8,15 @@ include './template/modal-salvar-dados.php';
         <div class="fields">
             <div class="eight wide field">
                 <label for="txtNomePessoaAutorizada">Nome</label>
-                <input type="text" id="txtNomePessoaAutorizada" placeholder="">
+                <input type="text" id="txtNomePessoaAutorizada" name="txtNomePessoaAutorizada" placeholder="">
             </div>
             <div class="four wide field">
                 <label for="txtCpfAutorizada">CPF</label>
-                <input type="text" id="txtCpfAutorizada" placeholder="">
+                <input type="text" id="txtCpfAutorizada" name="txtCpfAutorizada" placeholder="">
             </div>
             <div class="four wide field">
                 <label for="txtTelefoneAutorizada">Telefone</label>
-                <input type="text" id="txtTelefoneAutorizada" placeholder="">
+                <input type="text" id="txtTelefoneAutorizada" name="txtTelefoneAutorizada" placeholder="">
             </div>
         </div>
 
