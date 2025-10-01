@@ -1,4 +1,14 @@
+<?php
+require './config.php';
+include './class/Matricula.php';
 
+$matricula = new Matricula();
+
+$dadosMatricula = $matricula->listarMatricula();
+
+var_dump($dadosMatricula);
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -49,8 +59,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($dadosMatricula as $matricula) {?>
                             <tr>
-
+                                <td><?= $matricula['ra_aluno']?></td>
+                                <td><?= $matricula['nome_aluno']?></td>
+                                <td><?= $matricula['data_nascimento']?></td>
+                                <td><?= $matricula['nome_responsavel']?></td>
                                 <td>
                                     <button class="ui small icon button blue" title="Detalhes">
                                         <i class="eye icon"></i> Detalhes
@@ -63,6 +77,7 @@
                                     </button>
                                 </td>
                             </tr>
+                        <?php }?>
                     </tbody>
                 </table>
             </section>
