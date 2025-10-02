@@ -270,3 +270,7 @@ select.ui.dropdown {
     height: auto;
     font-size: .92857143rem;
 }
+
+.mensagem-modal{
+    font-size: 20px;
+}

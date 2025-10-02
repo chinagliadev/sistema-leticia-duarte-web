@@ -1,18 +1,19 @@
-<div id="modal-salvar-dados" class="ui modal">
-  <i class="close icon"></i>
-  <div class="header">
-    Modal Title
+<div class="ui basic modal">
+  <div class="ui icon header">
+    <i class="save icon"></i>
+   Salvar Cadastro do Aluno
   </div>
-  <div class="image content">
-    <div class="image">
-      An image can appear on left or an icon
-    </div>
-    <div class="description">
-      A description can appear on the right
-    </div>
+  <div class="content" style="text-align:center;">
+    <p class="mensagem-modal">As informações do aluno estão quase completas. Clique em Salvar para registrar os dados com segurança!</p>
   </div>
   <div class="actions">
-    <div class="ui button">Cancel</div>
-    <div class="ui button">OK</div>
+    <div class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      Cancelar
+    </div>
+    <div class="ui green ok inverted button">
+      <i class="checkmark icon"></i>
+      Salvar Dados do Aluno
+    </div>
   </div>
 </div>

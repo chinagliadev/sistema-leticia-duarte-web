@@ -205,6 +205,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $matriculaPessoaAutorizada = new matriculaPessoaAutorizada();
     $matriculaPessoaAutorizada->cadastrarMatriculaPessoaAutorizada($matricula_id, $pessoa_autorizada_id);
 
-    echo "<script>alert('Dados salvos com sucesso!');</script>";
+    header('location: ./cadastrados.php');
 }
 ?>

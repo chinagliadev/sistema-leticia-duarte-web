@@ -108,17 +108,3 @@
         </div>
     </div>
 </section>
-<!-- <script>
-    $(document).ready(function() {
-        $('.ui.dropdown').dropdown();
-
-        function abrirModal(modalId) {
-            $(`#${modalId}`).modal('show');
-        }
-
-        $("#btn-salvar-dados").on("click", function(e) {
-            e.preventDefault(); // Impede o submit automático
-            abrirModal("modal-salvar-dados");
-        });
-    });
-</script> -->
