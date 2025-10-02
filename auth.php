@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if ($acao === "login") {
+    if ($acao == "login") {
         $email = $_POST['email'];
         $senha = $_POST['senha'];
 
@@ -52,14 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ];
                     echo "<script>alert('Login realizado com sucesso!'); window.location.href='cadastrados.php';</script>";
                 } else {
-                    echo "<script>alert('Senha incorreta!'); window.location.href='login.php';</script>";
+                    header("Location: login.php?erro=1");
+                    exit;
                 }
             } else {
-                echo "<script>alert('Usuário não encontrado!'); window.location.href='login.php';</script>";
+                echo "<script>alert('Usuário ou Senha incorreta!'); window.location.href='login.php';</script>";
             }
         } catch (PDOException $e) {
             echo "<script>alert('Erro: " . $e->getMessage() . "'); window.location.href='login.php';</script>";
         }
     }
 }
-?>
