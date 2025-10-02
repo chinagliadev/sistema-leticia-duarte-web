@@ -1,7 +1,3 @@
-<?php
-include './template/modal-remover-autorizada.php';
-include './template/modal-salvar-dados.php';
-?>
 <section class="ui segment green raised">
     <h2>Parentesco</h2>
     <div class="pessoaAutorizada" id="autorizada-1">
@@ -96,37 +92,33 @@ include './template/modal-salvar-dados.php';
             </div>
         </div>
     </div>
-<!-- BOTÕES -->
-<div class="ui grid">
-    <div class="four column row">
-        <div class="left floated column">
-            <button type="submit" class="ui icon button left floated">
-                <i class="angle left icon"></i> Voltar
-            </button>
-        </div>
-        <div class="right floated column">
-            <button type="submit" class="ui blue icon button right floated">
-                <i class="angle right icon"></i> Próximo
-            </button>
+    <!-- BOTÕES -->
+    <div class="ui grid">
+        <div class="four column row">
+            <div class="left floated column">
+                <button type="submit" class="ui icon button left floated">
+                    <i class="angle left icon"></i> Voltar
+                </button>
+            </div>
+            <div class="right floated column">
+                <button type="submit" id="btn-salvar-dados" class="ui green icon button right floated ">
+                    <i class="save icon"></i> Salvar Cadastro
+                </button>
+            </div>
         </div>
     </div>
-</div>
 </section>
-<script>
+<!-- <script>
     $(document).ready(function() {
-        $('#btnAbrirModal').on('click', function(e) {
-            e.preventDefault(); // evita ação padrão
+        $('.ui.dropdown').dropdown();
 
-            $('#modalSalvar').modal({
-                centered: true,
-                closable: false,
-                onApprove: function() {
-                    $('#autorizadaFormulario').submit(); // envia pro PHP
-                },
-                onDeny: function() {
-                    console.log('Usuário cancelou.');
-                }
-            }).modal('show');
+        function abrirModal(modalId) {
+            $(`#${modalId}`).modal('show');
+        }
+
+        $("#btn-salvar-dados").on("click", function(e) {
+            e.preventDefault(); // Impede o submit automático
+            abrirModal("modal-salvar-dados");
         });
     });
-</script>
+</script> -->

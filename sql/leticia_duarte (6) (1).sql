@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/09/2025 às 22:02
+-- Tempo de geração: 02/10/2025 às 00:13
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,6 +37,21 @@ CREATE TABLE `endereco` (
   `complemento` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `endereco`
+--
+
+INSERT INTO `endereco` (`id_endereco`, `cep`, `endereco`, `numero`, `bairro`, `cidade`, `complemento`) VALUES
+(1, '2131231231', 'sadasdasd', 123, 'asdasdas', 'd123123', 'asdasdasd'),
+(2, '', '', 0, '', '', ''),
+(3, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(4, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(5, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(6, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(7, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(8, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(9, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd');
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +73,21 @@ CREATE TABLE `tb_alunos` (
   `funcionario_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `tb_alunos`
+--
+
+INSERT INTO `tb_alunos` (`ra_aluno`, `nome`, `data_nascimento`, `etnia`, `turma`, `autorizacao_febre`, `remedio`, `gotas`, `permissao_foto`, `data_cadastro`, `endereco_id`, `funcionario_id`) VALUES
+(1, 'dasdas', '0000-00-00', 'parda', 'Maternal I A', 0, NULL, NULL, 0, '2025-10-01 00:06:50', 1, 3),
+(2, 'dsfsdfsdfsd', '0000-00-00', NULL, 'Bercario 2 C', 0, NULL, NULL, 0, '2025-10-01 11:52:59', 2, 3),
+(3, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'parda', 'Bercario 2 C', 0, NULL, NULL, 0, '2025-10-01 11:57:57', 3, 3),
+(4, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'parda', 'Bercario 2 C', 1, '', 0, 1, '2025-10-01 12:41:42', 4, 1),
+(5, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'preta', 'Bercario 2 A', 0, NULL, NULL, 0, '2025-10-01 13:36:46', 5, 3),
+(6, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'preta', 'Bercario 2 A', 0, NULL, NULL, 0, '2025-10-01 13:39:44', 6, 3),
+(7, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'preta', 'Bercario 2 A', 0, NULL, NULL, 0, '2025-10-01 13:44:11', 7, 3),
+(8, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'preta', 'Bercario 2 A', 0, NULL, NULL, 0, '2025-10-01 13:49:45', 8, 3),
+(9, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'preta', 'Bercario 2 A', 0, NULL, NULL, 0, '2025-10-01 13:50:17', 9, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -75,8 +105,37 @@ CREATE TABLE `tb_estrutura_familiar` (
   `portador_necessidade_especial` tinyint(1) DEFAULT NULL,
   `problemas_visao` tinyint(1) DEFAULT NULL,
   `ja_fez_cirurgia` tinyint(1) DEFAULT NULL,
-  `vacina_catapora_varicela` tinyint(1) DEFAULT NULL
+  `vacina_catapora_varicela` tinyint(1) DEFAULT NULL,
+  `doenca_anemia` tinyint(1) DEFAULT NULL,
+  `doenca_bronquite` tinyint(1) DEFAULT NULL,
+  `doenca_cardiaca` tinyint(1) DEFAULT NULL,
+  `doenca_catapora` tinyint(1) DEFAULT NULL,
+  `doenca_diabetes` tinyint(1) DEFAULT NULL,
+  `doenca_hepatite` tinyint(1) DEFAULT NULL,
+  `doenca_meningite` tinyint(1) DEFAULT NULL,
+  `doenca_pneumonia` tinyint(1) DEFAULT NULL,
+  `doenca_caxumba` tinyint(1) DEFAULT NULL,
+  `doenca_convulsao` tinyint(1) DEFAULT NULL,
+  `doenca_dengue` tinyint(1) DEFAULT NULL,
+  `doenca_desidratacao` tinyint(1) DEFAULT NULL,
+  `doenca_refluxo` tinyint(1) DEFAULT NULL,
+  `doenca_rubeola` tinyint(1) DEFAULT NULL,
+  `doenca_sarampo` tinyint(1) DEFAULT NULL,
+  `doenca_verminose` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_estrutura_familiar`
+--
+
+INSERT INTO `tb_estrutura_familiar` (`id`, `pais_vivem_juntos`, `numero_filhos`, `recebe_bolsa_familia`, `valor`, `possui_alergia`, `possui_convenio`, `portador_necessidade_especial`, `problemas_visao`, `ja_fez_cirurgia`, `vacina_catapora_varicela`, `doenca_anemia`, `doenca_bronquite`, `doenca_cardiaca`, `doenca_catapora`, `doenca_diabetes`, `doenca_hepatite`, `doenca_meningite`, `doenca_pneumonia`, `doenca_caxumba`, `doenca_convulsao`, `doenca_dengue`, `doenca_desidratacao`, `doenca_refluxo`, `doenca_rubeola`, `doenca_sarampo`, `doenca_verminose`) VALUES
+(1, 0, NULL, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0),
+(2, 0, 12, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1),
+(3, 0, 12, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1),
+(4, 0, 12, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1),
+(5, 0, 12, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1),
+(6, 0, 12, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1),
+(7, 0, 12, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -99,7 +158,8 @@ CREATE TABLE `tb_funcionario` (
 
 INSERT INTO `tb_funcionario` (`id_funcionario`, `nome`, `email`, `senha`, `celular`, `cpf`) VALUES
 (1, 'victor chinaglia', 'neto@neto', '$2y$10$Tz1QRAkbDkW4YLB6zk0mR.CSGF3qH/S3FSsOBXzy/IsPoGiF.FphK', '(21) 31231-2313', '231.231.231-23'),
-(2, 'VICTOR CHINAGLIA NETO', 'victor@sistema.com', '$2y$10$28FI7QcRf2iv0AdTkqfLG.o7cQInhCZNn47eie9RWmTTrg1ZHqKZu', '(12) 31231-2312', '312.312.312-31');
+(2, 'VICTOR CHINAGLIA NETO', 'victor@sistema.com', '$2y$10$28FI7QcRf2iv0AdTkqfLG.o7cQInhCZNn47eie9RWmTTrg1ZHqKZu', '(12) 31231-2312', '312.312.312-31'),
+(3, 'dasda', 'teste@testepedro.com', '$2y$10$bFY.7R/rnZP1RwmQlgyEeO.TNrBWoWOIHPFCyEI8Mdu4xVBBj33Su', '(12) 31231-2312', '123.123.123-12');
 
 -- --------------------------------------------------------
 
@@ -112,10 +172,21 @@ CREATE TABLE `tb_matricula` (
   `aluno_id` int(11) DEFAULT NULL,
   `estrutura_familiar_id` int(11) DEFAULT NULL,
   `funcionario_id` int(11) DEFAULT NULL,
-  `data` datetime DEFAULT NULL,
+  `data` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Data e hora de criação do registro',
   `responsavel_1_id` int(11) DEFAULT NULL,
   `responsavel_2_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_matricula`
+--
+
+INSERT INTO `tb_matricula` (`id_matricula`, `aluno_id`, `estrutura_familiar_id`, `funcionario_id`, `data`, `responsavel_1_id`, `responsavel_2_id`) VALUES
+(1, 5, 3, 3, '0000-00-00 00:00:00', 5, NULL),
+(2, 6, 4, 3, '0000-00-00 00:00:00', 6, NULL),
+(3, 7, 5, 3, '2025-10-01 10:44:11', 7, NULL),
+(4, 8, 6, 3, '2025-10-01 10:49:45', 8, NULL),
+(5, 9, 7, 3, '2025-10-01 10:50:17', 9, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,6 +198,13 @@ CREATE TABLE `tb_matricula_pessoas_autorizadas` (
   `matricula_id` int(11) NOT NULL,
   `pessoa_autorizada_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_matricula_pessoas_autorizadas`
+--
+
+INSERT INTO `tb_matricula_pessoas_autorizadas` (`matricula_id`, `pessoa_autorizada_id`) VALUES
+(5, 9);
 
 -- --------------------------------------------------------
 
@@ -141,6 +219,21 @@ CREATE TABLE `tb_pessoas_autorizadas` (
   `celular` varchar(20) DEFAULT NULL,
   `parentesco` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_pessoas_autorizadas`
+--
+
+INSERT INTO `tb_pessoas_autorizadas` (`id`, `nome`, `cpf`, `celular`, `parentesco`) VALUES
+(1, 'sdasdas', 'd123123123', 'asdasdasda', 'Irmão'),
+(2, 'asdasdas', '21312312', '3123123123', 'Avó'),
+(3, 'sadasda', '12312323123', '123123123123', 'Avó'),
+(4, 'VICTOR CHINAGLIA NETO', '23423423423423', '19983541308', 'Irmã'),
+(5, 'VICTOR CHINAGLIA NETO', 'd123123123', '19983541308', 'Irmão'),
+(6, 'VICTOR CHINAGLIA NETO', 'd123123123', '19983541308', 'Irmão'),
+(7, 'VICTOR CHINAGLIA NETO', 'd123123123', '19983541308', 'Irmão'),
+(8, 'VICTOR CHINAGLIA NETO', 'd123123123', '19983541308', 'Irmão'),
+(9, 'VICTOR CHINAGLIA NETO', 'd123123123', '19983541308', 'Irmão');
 
 -- --------------------------------------------------------
 
@@ -164,6 +257,21 @@ CREATE TABLE `tb_responsaveis` (
   `salario` decimal(10,2) DEFAULT NULL,
   `renda_extra` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `tb_responsaveis`
+--
+
+INSERT INTO `tb_responsaveis` (`id_responsavel`, `tipo_responsavel`, `nome`, `data_nascimento`, `estado_civil`, `escolaridade`, `celular`, `email`, `nome_empresa`, `profissao`, `telefone_trabalho`, `horario_trabalho`, `salario`, `renda_extra`) VALUES
+(1, 'Avô', 'dasdasdas', '2020-02-02', 'Divorciado', '', '123123123123', 'asdadsasdasd@asdasdasd', 'sadasdasdasda', 'sdasdasdasd', '12312312312', '838:59:59', 99999999.99, 0),
+(2, 'Avô', 'asdasdas', '0000-00-00', 'Divorciado', '', '3213123123123', '', '', '', '', '00:00:00', 0.00, 0),
+(3, 'Avô', 'asdasdasdasd', '0000-00-00', 'Casado', '', '19983541308', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(4, 'Avô', 'VICTOR CHINAGLIA NETO', '0000-00-00', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', 'sadasdasdasda', 'sdasdasdasd', NULL, NULL, NULL, 0),
+(5, 'Avô', 'asdasdasda', '0000-00-00', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', NULL, NULL, NULL, NULL, NULL, 0),
+(6, 'Avô', 'asdasdasda', '0000-00-00', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', NULL, NULL, NULL, NULL, NULL, 0),
+(7, 'Avô', 'asdasdasda', '0000-00-00', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', NULL, NULL, NULL, NULL, NULL, 0),
+(8, 'Avô', 'asdasdasda', '0000-00-00', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', NULL, NULL, NULL, NULL, NULL, 0),
+(9, 'Avô', 'asdasdasda', '0000-00-00', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', NULL, NULL, NULL, NULL, NULL, 0);
 
 --
 -- Índices para tabelas despejadas
@@ -233,43 +341,43 @@ ALTER TABLE `tb_responsaveis`
 -- AUTO_INCREMENT de tabela `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `tb_alunos`
 --
 ALTER TABLE `tb_alunos`
-  MODIFY `ra_aluno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ra_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `tb_estrutura_familiar`
 --
 ALTER TABLE `tb_estrutura_familiar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `tb_funcionario`
 --
 ALTER TABLE `tb_funcionario`
-  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_matricula`
 --
 ALTER TABLE `tb_matricula`
-  MODIFY `id_matricula` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_matricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tb_pessoas_autorizadas`
 --
 ALTER TABLE `tb_pessoas_autorizadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `tb_responsaveis`
 --
 ALTER TABLE `tb_responsaveis`
-  MODIFY `id_responsavel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_responsavel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restrições para tabelas despejadas

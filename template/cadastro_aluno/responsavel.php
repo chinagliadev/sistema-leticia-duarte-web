@@ -1,6 +1,3 @@
-<?php
-include './template/modal-remover-responsavel.php'
-?>
 <section class="ui segment red raised sessao-tab">
     <h2>Responsavel</h2>
     <div class="responsavel" id="responsavel-1">
