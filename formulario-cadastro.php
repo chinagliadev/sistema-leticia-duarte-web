@@ -45,7 +45,7 @@
                 </form>
 
                 <?php include './template/modal/modal-salvar-dados.php'?>
-                <?php include './template/modal/modal-excluir-aluno.php'?>
+                 <?php include './template/modal/modal-excluir-aluno.php'?> 
             </section>
         </main>
     </section>

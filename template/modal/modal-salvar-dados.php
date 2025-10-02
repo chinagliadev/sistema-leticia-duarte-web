@@ -1,4 +1,4 @@
-<div class="ui basic modal">
+<div class="ui basic modal" id="modal-salvar-dados">
   <div class="ui icon header">
     <i class="save icon"></i>
    Salvar Cadastro do Aluno

@@ -3,16 +3,16 @@ $(document).ready(function () {
 
     $("#btn-salvar-dados").on("click", function (e) {
         e.preventDefault();
-        $('.ui.basic.modal').modal('show');
+        $('#modal-salvar-dados').modal('show');
     });
 
     $('.ui.basic.modal .ok.button').on("click", function () {
         $('#formulario-aluno').submit();
     });
 
-    //Realizar crud - Deletar, Editar e Detalhes
 
     $("#btn-deletar-aluno").on("click", function(){
+        e.preventDefault();
         $('#modal-excluir-aluno').modal('show');
 
         alert('Chamou o botao de deletar')
