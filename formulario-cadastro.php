@@ -8,12 +8,12 @@
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
         <link rel="stylesheet" href="./css/sistema.css" />
-        <script src="./js/semantic_ui.js"></script>
         
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.js"></script>
         
+        <script src="./js/semantic_ui.js"></script>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.css">
     
@@ -43,6 +43,8 @@
                     <?php include './template/cadastro_aluno/pessoas-autorizadas.php'; ?>
                     <div class="ui error message"></div>
                 </form>
+
+                <?php include './template/modal/modal-salvar-dados.php'?>
             </section>
         </main>
     </section>

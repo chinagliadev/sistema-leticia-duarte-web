@@ -6,6 +6,7 @@ $matricula = new Matricula();
 
 $dadosMatricula = $matricula->listarMatricula();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,11 +16,13 @@ $dadosMatricula = $matricula->listarMatricula();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sistema com seu CSS e sidebar Semantic UI.</title>
 
-    <link rel="stylesheet" href="./css/sistema.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
-
+    <link rel="stylesheet" href="./css/sistema.css" />
+    
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+    <script src="./js/semantic_ui.js"></script>
+
 </head>
 
 <body>
@@ -57,31 +60,37 @@ $dadosMatricula = $matricula->listarMatricula();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($dadosMatricula as $matricula) {?>
+                        <?php foreach ($dadosMatricula as $matricula) { ?>
                             <tr>
-                                <td><?= $matricula['ra_aluno']?></td>
-                                <td><?= $matricula['nome_aluno']?></td>
-                                <td><?= $matricula['data_nascimento']?></td>
-                                <td><?= $matricula['nome_responsavel']?></td>
+                                <td><?= $matricula['ra_aluno'] ?></td>
+                                <td><?= $matricula['nome_aluno'] ?></td>
+                                <td><?= $matricula['data_nascimento'] ?></td>
+                                <td><?= $matricula['nome_responsavel'] ?></td>
                                 <td>
                                     <button class="ui small icon button blue" title="Detalhes">
-                                        <i class="eye icon"></i> Detalhes
+                                        <i class="eye icon"></i>
                                     </button>
-                                    <a href="./cadastradosExcluir.php?idExluir=<?= $linha['ra_aluno']?>" class="ui small red icon button" title="Excluir">
-                                        <i class="trash icon"></i> Excluir
-                                    </a>
+                                    <button
+                                        id="btn-deletar-aluno"
+                                        type="button"
+                                        class="btn-deletar-aluno ui small red icon button"
+                                        data-id="<?= $matricula['ra_aluno'] ?>"
+                                        data-nome="<?= $matricula['nome_aluno'] ?>"
+                                        title="Excluir">
+                                        <i class="trash icon"></i> 
+                                    </button>
                                     <button class="ui small icon button yellow" title="Editar">
-                                        <i class="edit icon"></i> Editar
+                                        <i class="edit icon"></i> 
                                     </button>
                                 </td>
                             </tr>
-                        <?php }?>
+                        <?php } ?>
                     </tbody>
                 </table>
             </section>
         </main>
     </section>
-
+    <?php include './template/modal/modal-excluir-aluno.php'?>
 </body>
 
 </html>

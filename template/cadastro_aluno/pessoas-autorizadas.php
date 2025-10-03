@@ -101,24 +101,10 @@
                 </button>
             </div>
             <div class="right floated column">
-                <button type="submit" id="btn-salvar-dados" class="ui green icon button right floated ">
+                <button type="button" id="btn-salvar-dados" class="ui green icon button right floated ">
                     <i class="save icon"></i> Salvar Cadastro
                 </button>
             </div>
         </div>
     </div>
 </section>
-<!-- <script>
-    $(document).ready(function() {
-        $('.ui.dropdown').dropdown();
-
-        function abrirModal(modalId) {
-            $(`#${modalId}`).modal('show');
-        }
-
-        $("#btn-salvar-dados").on("click", function(e) {
-            e.preventDefault(); // Impede o submit automático
-            abrirModal("modal-salvar-dados");
-        });
-    });
-</script> -->
