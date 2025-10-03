@@ -6,6 +6,7 @@ $matricula = new Matricula();
 
 $dadosMatricula = $matricula->listarMatricula();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -67,18 +68,17 @@ $dadosMatricula = $matricula->listarMatricula();
                                 <td><?= $matricula['nome_responsavel'] ?></td>
                                 <td>
                                     <button class="ui small icon button blue" title="Detalhes">
-                                        <i class="eye icon"></i> Detalhes
+                                        <i class="eye icon"></i>
                                     </button>
                                     <button
-                                        id="btn-deletar-aluno"
                                         type="button"
                                         class="btn-deletar-aluno ui small red icon button"
                                         data-id="<?= $matricula['ra_aluno'] ?>"
                                         title="Excluir">
-                                        <i class="trash icon"></i> Excluir
+                                        <i class="trash icon"></i> 
                                     </button>
                                     <button class="ui small icon button yellow" title="Editar">
-                                        <i class="edit icon"></i> Editar
+                                        <i class="edit icon"></i> 
                                     </button>
                                 </td>
                             </tr>
@@ -88,7 +88,7 @@ $dadosMatricula = $matricula->listarMatricula();
             </section>
         </main>
     </section>
-
+    <?php include './template/modal/modal-excluir-aluno.php'?>
 </body>
 
 </html>

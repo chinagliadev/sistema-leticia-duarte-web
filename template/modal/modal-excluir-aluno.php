@@ -1,19 +1,23 @@
-<div id="modal-excluir-aluno" class="ui basic modal">
-  <div class="ui icon header">
-    <i class="trash icon"></i>
-     Excluir Aluno
-  </div>
-  <div class="content" style="text-align:center;">
-    <p class="mensagem-modal">Deseja realmente excluir o cadastro do aluno? Todos os dados serão apagados permanentemente e não poderão ser recuperados.</p>
-  </div>
-  <div class="actions">
-    <div class="ui red basic cancel inverted button">
-      <i class="remove icon"></i>
-      Cancelar
+<div class="ui basic modal" id="modal-excluir">
+    <div class="header">
+        Excluir Aluno
     </div>
-    <div class="ui green ok inverted button">
-      <i class="checkmark icon"></i>
-      Exxcluir Dados do Aluno
+    <div class="content">
+        <p>Você tem certeza que deseja excluir o aluno com o RA: <strong id="ra-aluno-no-modal"></strong>?</p>
+        <p>Esta ação não poderá ser desfeita.</p>
     </div>
-  </div>
+    <div class="actions">
+        <form method="POST" action="./excluir-cadastro-aluno.php" id="form-excluir-aluno">
+            
+            <input type="hidden" name="ra_aluno" id="input-ra-excluir" value="">
+            
+            <div class="ui inverted cancel button">
+                Cancelar
+            </div>
+            
+            <button type="submit" class="ui inverted red ok button">
+                Excluir
+            </button>
+        </form>
+    </div>
 </div>
