@@ -1,4 +1,3 @@
-// CÓDIGO JAVASCRIPT/JQUERY CORRIGIDO
 $(document).ready(function () {
     $('.ui.dropdown').dropdown();
 
@@ -15,15 +14,23 @@ $(document).ready(function () {
     $('.btn-deletar-aluno').on("click", function(){
        
         let raAluno = $(this).data('id'); 
+        let nomeAluno = $(this).data('nome'); 
 
         $('#input-ra-excluir').val(raAluno);
         
         $('#ra-aluno-no-modal').text(raAluno); 
+        $('#nome-aluno-modal').text(nomeAluno); 
 
         $('#modal-excluir').modal('show'); 
+        console.log("oi")
     });
     
     $('#modal-excluir').modal({
-        // Adicione opções se necessário, mas o padrão funciona para submissão
+        
     });
+
+
+    $('#btn-excluir-cadastro').on("click", function(){
+        $('btn-excluir-cadastro').submit();
+    })
 });

@@ -3,7 +3,7 @@
         Excluir Aluno
     </div>
     <div class="content">
-        <p>Você tem certeza que deseja excluir o aluno com o RA: <strong id="ra-aluno-no-modal"></strong>?</p>
+        <p>Você tem certeza que deseja excluir o <strong id="nome-aluno-modal"></strong> com o RA: <strong id="ra-aluno-no-modal"></strong>?</p>
         <p>Esta ação não poderá ser desfeita.</p>
     </div>
     <div class="actions">
@@ -15,7 +15,7 @@
                 Cancelar
             </div>
             
-            <button type="submit" class="ui inverted red ok button">
+            <button id="btn-excluir-cadastro" type="submit" class="ui inverted red ok button">
                 Excluir
             </button>
         </form>

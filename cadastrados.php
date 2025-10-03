@@ -16,13 +16,13 @@ $dadosMatricula = $matricula->listarMatricula();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sistema com seu CSS e sidebar Semantic UI.</title>
 
-    <link rel="stylesheet" href="./css/sistema.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
-
+    <link rel="stylesheet" href="./css/sistema.css" />
+    
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-
     <script src="./js/semantic_ui.js"></script>
+
 </head>
 
 <body>
@@ -71,9 +71,11 @@ $dadosMatricula = $matricula->listarMatricula();
                                         <i class="eye icon"></i>
                                     </button>
                                     <button
+                                        id="btn-deletar-aluno"
                                         type="button"
                                         class="btn-deletar-aluno ui small red icon button"
                                         data-id="<?= $matricula['ra_aluno'] ?>"
+                                        data-nome="<?= $matricula['nome_aluno'] ?>"
                                         title="Excluir">
                                         <i class="trash icon"></i> 
                                     </button>
