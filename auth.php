@@ -41,20 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(":email", $email);
             $stmt->execute();
 
-            if ($stmt->rowCount() > 0) {
-                $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if (password_verify($senha, $usuario['senha'])) {
-                    $_SESSION['usuario'] = [
-                        'id' => $usuario['id_funcionario'],
-                        'nome' => $usuario['nome'],
-                        'email' => $usuario['email']
-                    ];
-                    echo "<script>alert('Login realizado com sucesso!'); window.location.href='cadastrados.php';</script>";
-                } else {
-                    header("Location: login.php?erro=1");
-                    exit;
-                }
+            if (password_verify($senha, $usuario['senha'])) {
+                $_SESSION['usuario'] = $usuario['nome'];
+                echo "<script>alert('Login realizado com sucesso!'); window.location.href='cadastrados.php';</script>";
             } else {
                 echo "<script>alert('Usuário ou Senha incorreta!'); window.location.href='login.php';</script>";
             }

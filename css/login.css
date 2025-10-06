@@ -127,15 +127,11 @@ p {
 }
 
 @keyframes move {
-
-    0%,
-    49.99% {
+    0%, 49.99% {
         opacity: 0;
         z-index: 1;
     }
-
-    50%,
-    100% {
+    50%, 100% {
         opacity: 1;
         z-index: 5;
     }
@@ -165,17 +161,13 @@ p {
     color: #fff;
     position: relative;
     left: -100%;
-    height: 100%;
     width: 200%;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
 }
 
 .container.active .toggle {
-    background: url(../img/cadastro_login/cadastro-login.png);
     background-position: left;
-    background-size: 50%;
-    background-repeat: no-repeat;
     transform: translateX(50%);
 }
 
@@ -250,6 +242,7 @@ p {
     gap: 8px;
 }
 
+/* ===== RESPONSIVO ===== */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -295,4 +288,36 @@ p {
         align-items: flex-start;
         gap: 5px;
     }
+}
+
+/* ===== PASSWORD WRAPPER - ÍCONE DENTRO DO INPUT ===== */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* espaço para o ícone */
+    border-radius: 10px;
+    border: 1px solid #00000027;
+    padding: 10px 15px;
+    font-size: 13px;
+    outline: none;
+}
+
+.password-wrapper .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-55%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #888;
+    transition: 0.2s ease-in-out;
+}
+
+.password-wrapper .toggle-password:hover {
+    color: #333;
 }
