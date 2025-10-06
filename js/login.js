@@ -1,227 +1,173 @@
-const container = document.getElementById("container");
-const registerBtn = document.getElementById("register");
-const loginBtn = document.getElementById("login");
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
 
-function isMobile() {
-  return window.innerWidth <= 768;
+const container = $("#container");
+const registerBtn = $("#register");
+const loginBtn = $("#login");
+const formCadastro = $(".sign-up form");
+const formLogin = $(".sign-in form");
+
+// ========= Funções utilitárias =========
+const isMobile = () => window.innerWidth <= 768;
+const show = (el, display = "block") => (el.style.display = display);
+const hide = (el) => (el.style.display = "none");
+
+// ========= Mensagem de erro =========
+const msgErro = document.createElement("span");
+msgErro.style = "color:red;font-size:14px;display:none;";
+
+const senhaCadastro = $("#passwordCad");
+senhaCadastro.insertAdjacentElement("afterend", msgErro);
+
+// ========= Limpar campos =========
+function limparCampos() {
+  // limpa todos os inputs de cada formulário
+  [formCadastro, formLogin].forEach((form) => {
+    form.querySelectorAll("input").forEach((input) => {
+      if (input.type !== "hidden" && input.type !== "checkbox" && input.type !== "radio") {
+        input.value = "";
+      } else if (input.type === "checkbox" || input.type === "radio") {
+        input.checked = false;
+      }
+    });
+  });
+
+  hide(msgErro);
 }
 
+// ========= Alternância Login / Cadastro =========
+function toggleForms(isRegister) {
+  limparCampos();
+
+  if (isMobile()) {
+    show($(".sign-in"), isRegister ? "none" : "block");
+    show($(".sign-up"), isRegister ? "block" : "none");
+  } else {
+    container.classList.toggle("active", isRegister);
+  }
+}
+
+// Eventos dos botões
 registerBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  if (isMobile()) {
-    document.querySelector(".sign-in").style.display = "none";
-    document.querySelector(".sign-up").style.display = "block";
-  } else {
-    container.classList.add("active");
-  }
+  toggleForms(true);
 });
 
 loginBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  if (isMobile()) {
-    document.querySelector(".sign-in").style.display = "block";
-    document.querySelector(".sign-up").style.display = "none";
-  } else {
-    container.classList.remove("active");
+  toggleForms(false);
+});
+
+window.addEventListener("resize", () => toggleForms(container.classList.contains("active")));
+window.addEventListener("load", () => toggleForms(false));
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted || (window.performance && performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+    limparCampos();
   }
 });
 
-// Garante que o layout se ajuste ao redimensionar
-window.addEventListener("resize", () => {
-  if (isMobile()) {
-    const isLoginVisible = container.classList.contains("active") === false;
-    document.querySelector(".sign-in").style.display = isLoginVisible ? "block" : "none";
-    document.querySelector(".sign-up").style.display = isLoginVisible ? "none" : "block";
-  } else {
-    document.querySelector(".sign-in").style.display = "block";
-    document.querySelector(".sign-up").style.display = "block";
-  }
+// ========= Máscara Celular =========
+const inputCelular = $("#celular");
+inputCelular.addEventListener("input", (e) => {
+  let d = e.target.value.replace(/\D/g, "").slice(0, 11);
+  e.target.value = d.replace(/(\d{0,2})(\d{0,5})(\d{0,4}).*/, (m, a, b, c) =>
+    [a && `(${a}`, b && `) ${b}`, c && `-${c}`].filter(Boolean).join("")
+  );
 });
 
-// Inicializa o layout corretamente ao carregar
-window.addEventListener("load", () => {
-  if (isMobile()) {
-    document.querySelector(".sign-in").style.display = "block";
-    document.querySelector(".sign-up").style.display = "none";
-  }
+// ========= CPF =========
+const cpfInput = $("#cpf");
+cpfInput.addEventListener("input", (e) => {
+  let v = e.target.value.replace(/\D/g, "").slice(0, 11);
+  e.target.value = v.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, "$1.$2.$3-$4").replace(/[-.]$/, "");
 });
-
-// ====== Máscara Celular ======
-const inputCelular = document.getElementById('celular');
-
-inputCelular.addEventListener('input', function (e) {
-  let el = e.target;
-  let digits = el.value.replace(/\D/g, ''); // só números
-
-  if (digits.length > 11) digits = digits.slice(0, 11);
-
-  let formatted = '';
-
-  if (digits.length > 0) {
-    formatted += '(' + digits.substring(0, 2);
-  }
-  if (digits.length >= 3) {
-    formatted += ') ' + digits.substring(2, 7);
-  } else if (digits.length > 2) {
-    formatted += ') ' + digits.substring(2);
-  }
-  if (digits.length >= 8) {
-    formatted += '-' + digits.substring(7, 11);
-  }
-
-  el.value = formatted;
-});
-
-// ====== Validação + Máscara CPF ======
-const cpfInput = document.getElementById('cpf');
 
 function validarCPF(cpf) {
-  cpf = cpf.replace(/[^\d]+/g, '');
-  if (cpf.length !== 11) return false;
-  if (/^(\d)\1{10}$/.test(cpf)) return false;
-
-  let soma = 0;
-  let resto;
-
-  for (let i = 1; i <= 9; i++) {
-    soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+  cpf = cpf.replace(/\D/g, "");
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+  for (let j = 9; j < 11; j++) {
+    let soma = cpf
+      .slice(0, j)
+      .split("")
+      .reduce((acc, n, i) => acc + n * (j + 1 - i), 0);
+    let resto = (soma * 10) % 11 % 10;
+    if (resto != cpf[j]) return false;
   }
-  resto = (soma * 10) % 11;
-  if (resto === 10 || resto === 11) resto = 0;
-  if (resto !== parseInt(cpf.substring(9, 10))) return false;
-
-  soma = 0;
-  for (let i = 1; i <= 10; i++) {
-    soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
-  }
-  resto = (soma * 10) % 11;
-  if (resto === 10 || resto === 11) resto = 0;
-  if (resto !== parseInt(cpf.substring(10, 11))) return false;
-
   return true;
 }
 
-cpfInput.addEventListener('input', (e) => {
-  let val = e.target.value.replace(/\D/g, '').slice(0, 11);
-  let formatted = '';
+// ========= Validação Senhas =========
+const confirmarSenhaCadastro = $("#passwordConfirm");
+const emailLogin = $("#emailLogin");
+const passwordLogin = $("#passwordLogin");
 
-  if (val.length > 0) formatted = val.substring(0, 3);
-  if (val.length >= 4) formatted += '.' + val.substring(3, 6);
-  if (val.length >= 7) formatted += '.' + val.substring(6, 9);
-  if (val.length >= 10) formatted += '-' + val.substring(9, 11);
-
-  e.target.value = formatted;
-});
-
-// ====== Validação Senha x Confirmar Senha ======
-const formCadastro = document.querySelector('.sign-up form');
-const password = document.getElementById('passwordCad');
-const confirmPassword = document.getElementById('passwordConfirm');
-
-// cria um span de erro dinamicamente (logo abaixo do campo confirmar senha)
-let errorMsg = document.createElement('span');
-errorMsg.id = 'errorSenha';
-errorMsg.style.color = 'red';
-errorMsg.style.fontSize = '14px';
-errorMsg.style.display = 'none';
-confirmPassword.insertAdjacentElement('afterend', errorMsg);
-
-formCadastro.addEventListener('submit', function (event) {
-  if (password.value !== confirmPassword.value) {
-    event.preventDefault(); // cancela envio
-    errorMsg.textContent = 'As senhas não conferem';
-    errorMsg.style.display = 'block';
-    confirmPassword.focus();
-  } else {
-    errorMsg.style.display = 'none';
-  }
-});
-
-// feedback em tempo real
-confirmPassword.addEventListener('input', function () {
-  if (password.value !== confirmPassword.value) {
-    errorMsg.textContent = 'As senhas não conferem';
-    errorMsg.style.display = 'block';
-  } else {
-    errorMsg.style.display = 'none';
-  }
-});
-
-// ====== Bloquear espaços nas senhas ======
-function removerEspacos(input) {
-  input.addEventListener('input', function () {
-    this.value = this.value.replace(/\s/g, '');
-  });
+function removerEspacos(...inputs) {
+  inputs.forEach((input) =>
+    input.addEventListener("input", () => (input.value = input.value.replace(/\s/g, "")))
+  );
 }
+removerEspacos(senhaCadastro, confirmarSenhaCadastro, emailLogin, passwordLogin);
 
-// Cadastro
-removerEspacos(password);
-removerEspacos(confirmPassword);
-
-// Login
-const emailLogin = document.getElementById('emailLogin');
-const passwordLogin = document.getElementById('passwordLogin');
-removerEspacos(emailLogin);
-removerEspacos(passwordLogin);
-
-// ====== Validação de sintaxe de senha ======
 function validarSintaxeSenha(senha) {
-  const regras = [
-    { regex: /.{10,}/, mensagem: "Mínimo de 10 caracteres" },
-    { regex: /[A-Z]/, mensagem: "Ao menos 1 letra maiúscula" },
-    { regex: /[a-z]/, mensagem: "Ao menos 1 letra minúscula" },
-    { regex: /[0-9]/, mensagem: "Ao menos 1 número" },
-    { regex: /[^A-Za-z0-9]/, mensagem: "Ao menos 1 caractere especial" }
-  ];
-
-  return regras.filter(r => !r.regex.test(senha)).map(r => r.mensagem);
+  return [
+    [/.{10,}/, "Mínimo de 10 caracteres"],
+    [/[A-Z]/, "1 letra maiúscula"],
+    [/[a-z]/, "1 letra minúscula"],
+    [/[0-9]/, "1 número"],
+    [/[^A-Za-z0-9]/, "1 caractere especial"],
+  ]
+    .filter(([r]) => !r.test(senha))
+    .map(([, m]) => m);
 }
 
-const senhaCadastro = document.getElementById("passwordCad");
-const confirmarSenhaCadastro = document.getElementById("passwordConfirm");
+function mostrarErro(msg) {
+  msgErro.innerHTML = msg;
+  msgErro.style.display = "block";
+}
 
-// Span para mostrar erro de sintaxe
-let erroSintaxe = document.createElement("span");
-erroSintaxe.style.color = "red";
-erroSintaxe.style.fontSize = "14px";
-erroSintaxe.style.display = "none";
-senhaCadastro.insertAdjacentElement("afterend", erroSintaxe);
-
-// Feedback em tempo real
-senhaCadastro.addEventListener("input", function () {
-  const erros = validarSintaxeSenha(this.value);
-  if (erros.length > 0) {
-    erroSintaxe.innerHTML = "Senha inválida:<br>• " + erros.join("<br>• ");
-    erroSintaxe.style.display = "block";
-  } else {
-    erroSintaxe.style.display = "none";
+function validarSenhas() {
+  if (!senhaCadastro.value && !confirmarSenhaCadastro.value) {
+    hide(msgErro);
+    return true;
   }
-});
 
-// Validação no submit do formulário
-const formCadastroSenha = document.querySelector(".sign-up form");
-
-formCadastroSenha.addEventListener("submit", function (e) {
   const erros = validarSintaxeSenha(senhaCadastro.value);
-  if (erros.length > 0) {
-    e.preventDefault();
-    erroSintaxe.innerHTML = "Senha inválida:<br>• " + erros.join("<br>• ");
-    erroSintaxe.style.display = "block";
-    senhaCadastro.focus();
+  let msg = "";
+
+  if (erros.length) {
+    msg += "Senha inválida:<br>• " + erros.join("<br>• ");
   }
-  else if (senhaCadastro.value !== confirmarSenhaCadastro.value) {
-    e.preventDefault();
-    erroSintaxe.innerHTML = "As senhas não conferem.";
-    erroSintaxe.style.display = "block";
-    confirmarSenhaCadastro.focus();
+
+  if (senhaCadastro.value && confirmarSenhaCadastro.value && senhaCadastro.value !== confirmarSenhaCadastro.value) {
+    if (msg) msg += "<br>";
+    msg += "As senhas não coincidem.";
   }
+
+  if (msg) {
+    mostrarErro(msg);
+    return false;
+  } else {
+    hide(msgErro);
+    return true;
+  }
+}
+
+senhaCadastro.addEventListener("input", validarSenhas);
+confirmarSenhaCadastro.addEventListener("input", validarSenhas);
+
+formCadastro.addEventListener("submit", (e) => {
+  if (!validarSenhas()) e.preventDefault();
 });
 
-function toggleSenha(id) {
-    const input = document.getElementById(id);
-    if (input.type === "password") {
-        input.type = "text";
-    } else {
-        input.type = "password";
-    }
-}
+// ========= Mostrar/Ocultar Senha =========
+document.querySelectorAll(".toggle-password").forEach((icon) => {
+  icon.addEventListener("click", () => {
+    const targetSelector = icon.getAttribute("data-target");
+    const input = document.querySelector(targetSelector);
+    const isHidden = input.type === "password";
+
+    input.type = isHidden ? "text" : "password";
+    icon.classList.toggle("bi-eye");
+    icon.classList.toggle("bi-eye-slash");
+  });
+});
