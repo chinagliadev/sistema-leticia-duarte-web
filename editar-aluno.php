@@ -19,7 +19,7 @@ $resp2 = $dadosCompletos['responsavel_2'];
 $estrutura = $dadosCompletos['estrutura_familiar'];
 $autorizados = $dadosCompletos['autorizados'];
 
-var_dump($autorizados);
+var_dump($autorizados[0]['celular']);
 ?>
 
 <!DOCTYPE html>
@@ -530,16 +530,17 @@ var_dump($autorizados);
                                 <div class="eight wide field">
                                     <label for="txtNomePessoaAutorizada">Nome</label>
                                     <input type="text" id="txtNomePessoaAutorizada" name="txtNomePessoaAutorizada" placeholder=""
-                                      value="">
+                                        value="<?= $autorizados[0]['nome'] ?>">
                                 </div>
                                 <div class="four wide field">
                                     <label for="txtCpfAutorizada">CPF</label>
                                     <input type="text" id="txtCpfAutorizada" name="txtCpfAutorizada" placeholder=""
-                                    value="">
+                                        value="<?= $autorizados[0]['cpf'] ?>">
                                 </div>
                                 <div class="four wide field">
                                     <label for="txtTelefoneAutorizada">Telefone</label>
-                                    <input type="text" id="txtTelefoneAutorizada" name="txtTelefoneAutorizada" placeholder="">
+                                    <input type="text" id="txtTelefoneAutorizada" name="txtTelefoneAutorizada" placeholder=""
+                                        <?= $autorizados[0]['celular'] ?>>
                                 </div>
                             </div>
 
@@ -547,16 +548,21 @@ var_dump($autorizados);
                                 <div class="four wide field">
                                     <label for="txtParentenco">Parentesco</label>
                                     <select class="ui search dropdown" name="txtParentenco">
-                                        <option value="" disabled selected hidden>Selecione o parentesco</option>
-                                        <option value="Pai">Pai</option>
-                                        <option value="Mãe">Mãe</option>
-                                        <option value="Avô">Avô</option>
-                                        <option value="Avó">Avó</option>
-                                        <option value="Irmão">Irmão</option>
-                                        <option value="Irmã">Irmã</option>
-                                        <option value="Tio">Tio</option>
-                                        <option value="Tia">Tia</option>
-                                        <option value="Outro">Outro</option>
+                                        <?php
+                                        $parentesco_selecionado = $autorizados[0]['parentesco'] ?? '';
+                                        ?>
+
+                                        <option value="" disabled <?= empty($parentesco_selecionado) ? 'selected' : '' ?> hidden>Selecione o parentesco</option>
+
+                                        <option value="Pai" <?= ($parentesco_selecionado === 'Pai') ? 'selected' : '' ?>>Pai</option>
+                                        <option value="Mãe" <?= ($parentesco_selecionado === 'Mãe') ? 'selected' : '' ?>>Mãe</option>
+                                        <option value="Avô" <?= ($parentesco_selecionado === 'Avô') ? 'selected' : '' ?>>Avô</option>
+                                        <option value="Avó" <?= ($parentesco_selecionado === 'Avó') ? 'selected' : '' ?>>Avó</option>
+                                        <option value="Irmão" <?= ($parentesco_selecionado === 'Irmão') ? 'selected' : '' ?>>Irmão</option>
+                                        <option value="Irmã" <?= ($parentesco_selecionado === 'Irmã') ? 'selected' : '' ?>>Irmã</option>
+                                        <option value="Tio" <?= ($parentesco_selecionado === 'Tio') ? 'selected' : '' ?>>Tio</option>
+                                        <option value="Tia" <?= ($parentesco_selecionado === 'Tia') ? 'selected' : '' ?>>Tia</option>
+                                        <option value="Outro" <?= ($parentesco_selecionado === 'Outro') ? 'selected' : '' ?>>Outro</option>
                                     </select>
                                 </div>
                             </div>
