@@ -10,27 +10,35 @@ $(document).ready(function () {
         $('#formulario-aluno').submit();
     });
 
-    
-    $('.btn-deletar-aluno').on("click", function(){
-       
-        let raAluno = $(this).data('id'); 
-        let nomeAluno = $(this).data('nome'); 
+
+    $('.btn-deletar-aluno').on("click", function () {
+
+        let raAluno = $(this).data('id');
+        let nomeAluno = $(this).data('nome');
 
         $('#input-ra-excluir').val(raAluno);
-        
-        $('#ra-aluno-no-modal').text(raAluno); 
-        $('#nome-aluno-modal').text(nomeAluno); 
 
-        $('#modal-excluir').modal('show'); 
+        $('#ra-aluno-no-modal').text(raAluno);
+        $('#nome-aluno-modal').text(nomeAluno);
+
+        $('#modal-excluir').modal('show');
         console.log("oi")
     });
-    
+
     $('#modal-excluir').modal({
-        
+
     });
 
 
-    $('#btn-excluir-cadastro').on("click", function(){
+    $('#btn-excluir-cadastro').on("click", function () {
         $('btn-excluir-cadastro').submit();
     })
+
+
+    $('#btn-editar-aluno').on("click", function(){
+        $('#modal-editar').modal('show');
+
+    })
+
+
 });

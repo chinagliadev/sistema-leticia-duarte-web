@@ -51,6 +51,7 @@ class Aluno{
         return $this->conn->lastInsertId();
     }
 
+    
 
 }
 

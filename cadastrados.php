@@ -18,7 +18,7 @@ $dadosMatricula = $matricula->listarMatricula();
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
     <link rel="stylesheet" href="./css/sistema.css" />
-    
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
     <script src="./js/semantic_ui.js"></script>
@@ -77,11 +77,11 @@ $dadosMatricula = $matricula->listarMatricula();
                                         data-id="<?= $matricula['ra_aluno'] ?>"
                                         data-nome="<?= $matricula['nome_aluno'] ?>"
                                         title="Excluir">
-                                        <i class="trash icon"></i> 
+                                        <i class="trash icon"></i>
                                     </button>
-                                    <button class="ui small icon button yellow" title="Editar">
-                                        <i class="edit icon"></i> 
-                                    </button>
+                                    <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>" class="ui small yellow icon button">
+                                        <i class="edit icon"></i>
+                                    </a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -90,7 +90,7 @@ $dadosMatricula = $matricula->listarMatricula();
             </section>
         </main>
     </section>
-    <?php include './template/modal/modal-excluir-aluno.php'?>
+    <?php include './template/modal/modal-excluir-aluno.php' ?>
 </body>
 
 </html>
