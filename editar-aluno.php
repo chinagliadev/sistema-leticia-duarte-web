@@ -19,7 +19,7 @@ $resp2 = $dadosCompletos['responsavel_2'];
 $estrutura = $dadosCompletos['estrutura_familiar'];
 $autorizados = $dadosCompletos['autorizados'];
 
-var_dump($autorizados[0]['celular']);
+
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +92,7 @@ var_dump($autorizados[0]['celular']);
                                 <label for="txtDataNascimento">Data Nascimento</label>
                                 <div class="ui calendar" id="dataNascimentoCalendar">
                                     <div class="ui input">
-                                        <input id="txtDataNascimento" name="txtDataNascimento" type="text" placeholder="dd/mm/aaaa">
+                                        <input id="txtDataNascimento" name="txtDataNascimento" type="date" placeholder="dd/mm/aaaa" value="<?= $aluno['data_nascimento']?>">
                                     </div>
                                 </div>
                             </div>
@@ -192,7 +192,6 @@ var_dump($autorizados[0]['celular']);
                                         <option value="" disabled selected hidden>Selecione o tipo</option>
 
                                         <?php
-                                        // Variável PHP para determinar a opção selecionada
                                         $tipo_selecionado = $resp1['tipo_responsavel'] ?? '';
                                         ?>
 
@@ -215,7 +214,7 @@ var_dump($autorizados[0]['celular']);
                                     <label>Data Nascimento</label>
                                     <div class="ui calendar" id="dataNascimentoCalendar_1">
                                         <div class="ui input">
-                                            <input type="text" id="txtDataNascimento_1" name="txtDataNascimento_1" placeholder="dd/mm/aaaa" value="<?= $resp1['data_nascimento'] ?? '' ?>">
+                                            <input type="date" id="txtDataNascimento_1" name="txtDataNascimento_1" placeholder="dd/mm/aaaa" value="<?= $resp1['data_nascimento'] ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -290,7 +289,7 @@ var_dump($autorizados[0]['celular']);
                                 <label>Pais vivem juntos</label>
                                 <div class="ui toggle checkbox">
                                     <input type="checkbox" name="pais_vivem_juntos"
-                                        value="1" <?= ($estrutura['pais_vivem_juntos'] ?? 0) == 1 ? 'checked' : '' ?>>
+                                        value="1" <?= ($estrutura['pais_vivem_juntos'] ?? 1) == 0 ? 'checked' : '' ?>>
                                     <label></label>
                                 </div>
                             </div>
@@ -306,7 +305,7 @@ var_dump($autorizados[0]['celular']);
                                     <label></label>
                                 </div>
                             </div>
-                            <div class="four wide field <?= (($estrutura['recebe_bolsa_familia'] ?? 0) == 1) ? '' : 'oculto' ?>" id="valor-bolsa-field">
+                            <div class="four wide field" id="valor-bolsa-field">
                                 <label>Valor</label>
                                 <input type="number" placeholder="R$" name="valor" value="<?= $estrutura['valor'] ?? '' ?>">
                             </div>
@@ -317,7 +316,7 @@ var_dump($autorizados[0]['celular']);
                                 <label>Possui alergia</label>
                                 <div class="ui toggle checkbox">
                                     <input type="checkbox" name="possui_alergia" id="toggle-alergia" value="1"
-                                        <?= ($estrutura['possui_alergia'] ?? 0) == 1 ? 'checked' : '' ?>>
+                                        <?= ($estrutura['possui_alergia'] ?? 1) == 0 ? 'checked' : '' ?>>
                                     <label></label>
                                 </div>
                             </div>
@@ -344,19 +343,19 @@ var_dump($autorizados[0]['celular']);
                                 <label>Portador de alguma necessidade especial</label>
                                 <div class="ui toggle checkbox">
                                     <input type="checkbox" name="portador_necessidade_especial" id="toggle-necessidade-especial" value="1"
-                                        <?= ($estrutura['portador_necessidade_especial'] ?? 0) == 1 ? 'checked' : '' ?>>
+                                        <?= ($estrutura['portador_necessidade_especial'] ?? 1) == 0 ? 'checked' : '' ?>>
                                     <label></label>
                                 </div>
                             </div>
                             <div class="four wide field" id="qual-necessidade-field">
                                 <label>Qual</label>
-                                <input type="text" placeholder="" name="qual_necessidade" value="<?= $estrutura['qual_necessidade'] ?? '' ?>">
+                                <input type="text" placeholder="" name="qual_necessidade" value="<?= $estrutura['qual_necessidade_especial'] ?? '' ?>">
                             </div>
                             <div class="four wide field">
                                 <label>Problemas de visão</label>
                                 <div class="ui toggle checkbox">
                                     <input type="checkbox" name="problemas_visao" value="1"
-                                        <?= ($estrutura['problemas_visao'] ?? 0) == 1 ? 'checked' : '' ?>>
+                                        <?= ($estrutura['problemas_visao'] ?? 1) == 0 ? 'checked' : '' ?>>
                                     <label></label>
                                 </div>
                             </div>
@@ -364,7 +363,7 @@ var_dump($autorizados[0]['celular']);
                                 <label>Já fez cirurgia</label>
                                 <div class="ui toggle checkbox">
                                     <input type="checkbox" name="ja_fez_cirurgia" value="1"
-                                        <?= ($estrutura['ja_fez_cirurgia'] ?? 0) == 1 ? 'checked' : '' ?>>
+                                        <?= ($estrutura['ja_fez_cirurgia'] ?? 1) == 0 ? 'checked' : '' ?>>
                                     <label></label>
                                 </div>
                             </div>
@@ -375,43 +374,39 @@ var_dump($autorizados[0]['celular']);
                                 <label>Tomou vacina contra catapora ou varicela</label>
                                 <div class="ui toggle checkbox">
                                     <input type="checkbox" name="vacina_catapora_varicela" value="1"
-                                        <?= ($estrutura['vacina_catapora_varicela'] ?? 0) == 1 ? 'checked' : '' ?>>
+                                        <?= ($estrutura['vacina_catapora_varicela'] ?? 1) == 0 ? 'checked' : '' ?>>
                                     <label></label>
                                 </div>
                             </div>
                         </div>
 
                         <h4 class="ui dividing header">Transporte para a escola</h4>
-                        <?php
-                        // Assume-se que $estrutura['transporte'] contém o valor único salvo (ex: 'carro')
-                        $transporte_selecionado = $estrutura['transporte'] ?? '';
-                        ?>
                         <div class="fields">
                             <div class="field">
                                 <div class="ui checkbox">
-                                    <input type="checkbox" name="transporte" value="carro"
-                                        <?= $transporte_selecionado == 'carro' ? 'checked' : '' ?>>
+                                    <input type="checkbox" name="transporte" value="0"
+                                       <?= ($estrutura['transporte_carro'] ?? 0) == 1 ? 'checked' : '' ?>>
                                     <label>Carro</label>
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="ui checkbox">
                                     <input type="checkbox" name="transporte" value="van"
-                                        <?= $transporte_selecionado == 'van' ? 'checked' : '' ?>>
+                                     <?= ($estrutura['transporte_van'] ?? 0) == 1 ? 'checked' : '' ?>>
                                     <label>Van Escolar</label>
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="ui checkbox">
                                     <input type="checkbox" name="transporte" value="pe"
-                                        <?= $transporte_selecionado == 'pe' ? 'checked' : '' ?>>
+                                    <?= ($estrutura['transporte_a_pe'] ?? 0) == 1 ? 'checked' : '' ?>>
                                     <label>A Pé</label>
                                 </div>
                             </div>
                             <div class="field">
                                 <div class="ui checkbox">
                                     <input type="checkbox" name="transporte" value="outros"
-                                        <?= $transporte_selecionado == 'outros' ? 'checked' : '' ?>>
+                                    <?= ($estrutura['transporte_a_pe'] ?? 0) == 1 ? 'checked' : '' ?>>
                                     <label>Outros</label>
                                 </div>
                             </div>
@@ -540,7 +535,7 @@ var_dump($autorizados[0]['celular']);
                                 <div class="four wide field">
                                     <label for="txtTelefoneAutorizada">Telefone</label>
                                     <input type="text" id="txtTelefoneAutorizada" name="txtTelefoneAutorizada" placeholder=""
-                                        <?= $autorizados[0]['celular'] ?>>
+                                       value="<?= $autorizados[0]['celular']?>" >
                                 </div>
                             </div>
 

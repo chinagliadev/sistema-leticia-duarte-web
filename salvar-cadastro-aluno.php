@@ -30,22 +30,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bairro = $_POST['txtBairro'] ?? null;
     $cidade = $_POST['txtCidade'] ?? null;
     $complemento = $_POST['txtComplemento'] ?? null;
-    
-    $pais_vivem_juntos           = isset($_POST['pais_vivem']) ? 1 : 0;
-    $recebe_bolsa_familia        = isset($_POST['bolsa_familia']) ? 1 : 0;
-    $possui_alergia              = isset($_POST['alergia']) ? 1 : 0;
-    $possui_convenio             = isset($_POST['convenio']) ? 1 : 0;
+
+    $pais_vivem_juntos             = isset($_POST['pais_vivem']) ? 1 : 0;
+    $recebe_bolsa_familia          = isset($_POST['bolsa_familia']) ? 0 : 1;
+    $possui_alergia                = isset($_POST['alergia']) ? 1 : 0;
+    $especifique_alergia =          $_POST['especifique_alergia'] ?? null;
+    $possui_convenio               = isset($_POST['convenio']) ? 0 : 1;
+    $qual_convenio                 = $possui_convenio ? ($_POST['qual_convenio']) : null;
     $portador_necessidade_especial = isset($_POST['necessidade_especial']) ? 1 : 0;
-    $problemas_visao             = isset($_POST['problema_visao']) ? 1 : 0;
-    $ja_fez_cirurgia             = isset($_POST['cirurgia']) ? 1 : 0;
-    $vacina_catapora_varicela    = isset($_POST['vacina_catapora']) ? 1 : 0; 
-    
-    $numero_filhos               = !empty($_POST['numero_filhos']) ? $_POST['numero_filhos'] : null; 
-    $valor                       = $recebe_bolsa_familia ? ($_POST['valor_bolsa'] ?? null) : null;
+    $qual_necessidade_especial     = $_POST['qual_necessidade'] ?? null;
+    $problemas_visao               = isset($_POST['problema_visao']) ? 1 : 0;
+    $ja_fez_cirurgia               = isset($_POST['cirurgia']) ? 1 : 0;
+    $vacina_catapora_varicela      = isset($_POST['vacina_catapora']) ? 1 : 0;
+
+    $numero_filhos               = $_POST['numero_filhos'] ?? null;
+    $valor                       = $recebe_bolsa_familia ? ($_POST['valor']) : null;
 
     $doenca_anemia      = isset($_POST['doenca_anemia']) ? 1 : 0;
     $doenca_bronquite   = isset($_POST['doenca_bronquite']) ? 1 : 0;
-    $doenca_cardiaca    = isset($_POST['doenca_cardiaca']) ? 1 : 0; 
+    $doenca_cardiaca    = isset($_POST['doenca_cardiaca']) ? 1 : 0;
     $doenca_catapora    = isset($_POST['doenca_catapora']) ? 1 : 0;
     $doenca_diabetes    = isset($_POST['doenca_diabetes']) ? 1 : 0;
     $doenca_hepatite    = isset($_POST['doenca_hepatite']) ? 1 : 0;
@@ -54,12 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $doenca_caxumba     = isset($_POST['doenca_caxumba']) ? 1 : 0;
     $doenca_convulsao   = isset($_POST['doenca_convulsao']) ? 1 : 0;
     $doenca_dengue      = isset($_POST['doenca_dengue']) ? 1 : 0;
-    $doenca_desidratacao= isset($_POST['doenca_desidratacao']) ? 1 : 0;
+    $doenca_desidratacao = isset($_POST['doenca_desidratacao']) ? 1 : 0;
     $doenca_refluxo     = isset($_POST['doenca_refluxo']) ? 1 : 0;
     $doenca_rubeola     = isset($_POST['doenca_rubeola']) ? 1 : 0;
     $doenca_sarampo     = isset($_POST['doenca_sarampo']) ? 1 : 0;
     $doenca_verminose   = isset($_POST['doenca_verminose']) ? 1 : 0;
 
+    $transporte_carro       = isset($_POST['transporte_carro']) ? 1 : 0;
+    $transporte_van         = isset($_POST['transporte_van']) ? 1 : 0;
+    $transporte_a_pe        = isset($_POST['transporte_pe']) ? 1 : 0;
+    $transporte_outros_desc = isset($_POST['transporte_outros_desc']) ? 1 : 0;
+    
 
     $estruturaFamiliar = new EstruturaFamiliar();
     $estrutura_familiar_id = $estruturaFamiliar->cadastrarEstruturaFamiliar(
@@ -68,8 +76,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $recebe_bolsa_familia,
         $valor,
         $possui_alergia,
+        $especifique_alergia,
         $possui_convenio,
+        $qual_convenio,
         $portador_necessidade_especial,
+        $qual_necessidade_especial,
         $problemas_visao,
         $ja_fez_cirurgia,
         $vacina_catapora_varicela,
@@ -88,7 +99,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $doenca_refluxo,
         $doenca_rubeola,
         $doenca_sarampo,
-        $doenca_verminose
+        $doenca_verminose,
+        $transporte_carro,
+        $transporte_van,
+        $transporte_a_pe,
+        $transporte_outros_desc
     );
 
     $responsavel = new Responsavel();
@@ -108,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $renda_extra_1          = isset($_POST['toggleRendaExtra_1']) ? 1 : 0;
 
 
-     $responsavel_1_id = $responsavel->cadastrarResponsavel(
+    $responsavel_1_id = $responsavel->cadastrarResponsavel(
         $tipo_responsavel_1,
         $nome_responsavel_1,
         $data_nascimento_1,
@@ -139,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $salario_2              = !empty($_POST['txtSalario_2']) ? $_POST['txtSalario_2'] : null;
         $renda_extra_2          = isset($_POST['toggleRendaExtra_2']) ? 1 : 0;
 
-       $responsavel_2_id = $responsavel->cadastrarResponsavel(
+        $responsavel_2_id = $responsavel->cadastrarResponsavel(
             $tipo_responsavel_2,
             $nome_responsavel_2,
             $data_nascimento_2,
@@ -207,4 +222,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     header('location: ./cadastrados.php');
 }
-?>

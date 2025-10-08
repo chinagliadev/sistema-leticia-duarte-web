@@ -48,7 +48,7 @@ class Matricula
     public function listarMatricula(): array
     {
         $sqlListar =
-            "SELECT tb_alunos.ra_aluno, tb_alunos.nome as nome_aluno, tb_alunos.data_nascimento,  tb_responsaveis.nome as nome_responsavel
+            "SELECT tb_alunos.ra_aluno, tb_alunos.nome as nome_aluno, tb_alunos.data_nascimento, tb_responsaveis.nome as nome_responsavel
                 FROM
             tb_matricula
                 INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.ra_aluno
@@ -151,7 +151,6 @@ class Matricula
             $sqlEndereco = "SELECT * FROM endereco WHERE id_endereco = :id";
             $dadosEndereco = $this->conn->prepare($sqlEndereco);
             $dadosEndereco->execute([':id' => $endereco_id]);
-            // PDO::FETCH_ASSOC não é necessário, o padrão agora é associativo
             $dadosCompletos['endereco'] = $dadosEndereco->fetch();
         }
         

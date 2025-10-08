@@ -22,7 +22,6 @@ $(document).ready(function () {
         $('#nome-aluno-modal').text(nomeAluno);
 
         $('#modal-excluir').modal('show');
-        console.log("oi")
     });
 
     $('#modal-excluir').modal({

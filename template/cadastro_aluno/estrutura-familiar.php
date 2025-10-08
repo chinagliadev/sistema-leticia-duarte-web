@@ -58,7 +58,7 @@
                 <label></label>
             </div>
         </div>
-        <div class="four wide field" id="qual-necessidade-field">
+        <div class="four wide field" id="qual-necessidade">
             <label>Qual</label>
             <input type="text" placeholder="" name="qual_necessidade">
         </div>
@@ -92,25 +92,25 @@
     <div class="fields">
         <div class="field">
             <div class="ui checkbox">
-                <input type="checkbox" name="transporte[]" value="carro">
+                <input type="checkbox" name="transporte_carro" value="carro">
                 <label>Carro</label>
             </div>
         </div>
         <div class="field">
             <div class="ui checkbox">
-                <input type="checkbox" name="transporte[]" value="van">
+                <input type="checkbox" name="transporte_van" value="van">
                 <label>Van Escolar</label>
             </div>
         </div>
         <div class="field">
             <div class="ui checkbox">
-                <input type="checkbox" name="transporte[]" value="pe">
+                <input type="checkbox" name="transporte_pe" value="pe">
                 <label>A Pé</label>
             </div>
         </div>
         <div class="field">
             <div class="ui checkbox">
-                <input type="checkbox" name="transporte[]" value="outros">
+                <input type="checkbox" name="transporte_outros_desc" value="outros">
                 <label>Outros</label>
             </div>
         </div>
