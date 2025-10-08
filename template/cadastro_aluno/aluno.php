@@ -1,9 +1,10 @@
     <!-- Nome, nascimento e raça -->
     <section class="ui segment blue raised ">
         <div class="fields">
-            <div class="seven wide field">
+            <div class="seven wide field" id="validacao-nome">
                 <label for="txtNomeCrianca">Nome da Criança</label>
-                <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança">
+                <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança"
+                    onblur="validarCadastroAluno()">
             </div>
             <div class="three wide field">
                 <label for="txtTurma">Turma</label>
@@ -110,6 +111,11 @@
                 </div>
             </div>
         </div>
-
+        <div class="ui message" id="mensagem-erro-aluno">
+            <div class="header">
+               Erros do cadastro
+            </div>
+            <p id="mensagem"></p>
+        </div>
 
     </section>
