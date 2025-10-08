@@ -25,7 +25,7 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_1">
                     <div class="ui input">
-                        <input type="text" id="txtDataNascimento_1" name="txtDataNascimento_1" placeholder="dd/mm/aaaa">
+                        <input type="date" id="txtDataNascimento_1" name="txtDataNascimento_1" placeholder="dd/mm/aaaa">
                     </div>
                 </div>
             </div>

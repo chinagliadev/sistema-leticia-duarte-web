@@ -275,21 +275,30 @@ select.ui.dropdown {
     font-size: 20px;
 }
 
-.ui.modal>.content {
+
+#modal-excluir > .content {
     display: block;
     width: 100%;
     font-size: 1.2em;
     line-height: 1.4;
     padding: 1.5rem;
-    background: #fff;
-    text-align: center;
+    text-align: center; 
 }
 
-.ui.basic.modal {
+#modal-excluir.ui.basic.modal {
     background-color: transparent;
     border: none;
     border-radius: 0;
     box-shadow: none !important;
-    color: #fff;
+    color: #fff; 
     text-align: center;
 }
+
+#modal-excluir .mensagem-modal {
+    font-size: 20px;
+}
+
+#btnSalvarEdicao {
+    color: black !important;
+}
+
