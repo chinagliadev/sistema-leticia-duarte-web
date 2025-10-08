@@ -8,8 +8,8 @@
             </div>
             <div class="three wide field">
                 <label for="txtTurma">Turma</label>
-                <div class="ui selection dropdown">
-                    <input type="hidden" name="turma" id="txtTurma">
+                <div class="ui selection dropdown" id="divTurma">
+                    <input type="hidden" name="turma" id="txtTurma" onchange="validarCadastroAluno()">
                     <i class="dropdown icon"></i>
                     <div class="default text">Selecione a turma</div>
                     <div class="menu">
@@ -47,8 +47,6 @@
                 </select>
             </div>
         </div>
-
-        <!-- Endereço -->
         <div class="fields">
             <div class="three wide field">
                 <label for="txtCep">CEP</label>
@@ -65,7 +63,6 @@
             </div>
         </div>
 
-        <!-- Bairro, cidade, complemento -->
         <div class="fields">
             <div class="ten wide field">
                 <label for="txtBairro">Bairro</label>
@@ -81,7 +78,6 @@
             </div>
         </div>
 
-        <!-- Autorização medicação -->
         <div class="fields">
             <div class="ten wide field">
                 <label>Em caso de febre autoriza medicar a criança?</label>
@@ -101,7 +97,6 @@
             </div>
         </div>
 
-        <!-- Autorização imagem -->
         <div class="fields">
             <div class="ten wide field">
                 <label>Autorizo a divulgação de imagem do meu filho(a) para uso de projetos na escola, fotos, filmagem, Facebook, Instagram e site.</label>
@@ -111,11 +106,14 @@
                 </div>
             </div>
         </div>
-        <div class="ui message" id="mensagem-erro-aluno">
+        <div class="ui error message" id="mensagem-erro-aluno">
             <div class="header">
-               Erros do cadastro
+                Erros do cadastro
             </div>
-            <p id="mensagem"></p>
+            <ul id="lista-erros-aluno"></ul>
         </div>
-
+        <div class="ui success message" id="mensagem-sucesso-aluno">
+            <div class="header">Cadastro aluno completado com sucesso</div>
+            <p>You're all signed up for the newsletter.</p>
+        </div>
     </section>
