@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,10 +10,27 @@
     <!-- jQuery + Semantic UI JS -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Login</title>
 </head>
 
 <body>
+    <!-- Mostra pop-up do auth.php, se existir -->
+    <?php
+    if (isset($_SESSION['mensagem'])) {
+        $msg = $_SESSION['mensagem'];
+        echo "<script>
+            Swal.fire({
+                icon: '{$msg['tipo']}',
+                title: '{$msg['titulo']}',
+                text: '{$msg['texto']}'
+            });
+        </script>";
+        unset($_SESSION['mensagem']);
+    }
+    ?>
+
     <section class="container" id="container">
         <!-- FORMULÁRIO DE CADASTRO -->
         <div class="ui form form-container sign-up">
