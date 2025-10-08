@@ -14,7 +14,7 @@
         <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.js"></script>
         
         <script src="./js/semantic_ui.js"></script>
-    
+        <script src="./js/validacao-formulario.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.css">
     
     
@@ -48,6 +48,8 @@
             </section>
         </main>
     </section>
+
+    <script src="jquery-3.7.1.min.js"></script>
 </body>
 
 </html>
