@@ -12,33 +12,47 @@ const isMobile = () => window.innerWidth <= 768;
 const show = (el, display = "block") => (el.style.display = display);
 const hide = (el) => (el.style.display = "none");
 
-// ========= Mensagem de erro =========
-const msgErro = document.createElement("span");
-msgErro.style = "color:red;font-size:14px;display:none;";
+// ========= Criar spans de erro para cada campo =========
+function criarMsgErro(input) {
+  const span = document.createElement("span");
+  span.style = "color:red;font-size:14px;display:none;";
+  input.insertAdjacentElement("afterend", span);
+  return span;
+}
 
+// Inputs
 const senhaCadastro = $("#passwordCad");
-senhaCadastro.insertAdjacentElement("afterend", msgErro);
+const confirmarSenhaCadastro = $("#passwordConfirm");
+const emailCadastro = $("#emailCad");
+const inputCelular = $("#celular");
+const cpfInput = $("#cpf");
+const emailLogin = $("#emailLogin");
+const passwordLogin = $("#passwordLogin");
+
+// Mensagens de erro
+const msgSenha = criarMsgErro(senhaCadastro);
+const msgConfirmarSenha = criarMsgErro(confirmarSenhaCadastro);
+const msgEmail = criarMsgErro(emailCadastro);
+const msgCelular = criarMsgErro(inputCelular);
+const msgCPF = criarMsgErro(cpfInput);
 
 // ========= Limpar campos =========
 function limparCampos() {
-  // limpa todos os inputs de cada formulário
   [formCadastro, formLogin].forEach((form) => {
     form.querySelectorAll("input").forEach((input) => {
-      if (input.type !== "hidden" && input.type !== "checkbox" && input.type !== "radio") {
-        input.value = "";
-      } else if (input.type === "checkbox" || input.type === "radio") {
+      if (input.type === "checkbox" || input.type === "radio") {
         input.checked = false;
+      } else if (input.type !== "hidden") {
+        input.value = "";
       }
     });
   });
-
-  hide(msgErro);
+  [msgSenha, msgConfirmarSenha, msgEmail, msgCelular, msgCPF].forEach(hide);
 }
 
 // ========= Alternância Login / Cadastro =========
 function toggleForms(isRegister) {
   limparCampos();
-
   if (isMobile()) {
     show($(".sign-in"), isRegister ? "none" : "block");
     show($(".sign-up"), isRegister ? "block" : "none");
@@ -52,12 +66,12 @@ registerBtn.addEventListener("click", (e) => {
   e.preventDefault();
   toggleForms(true);
 });
-
 loginBtn.addEventListener("click", (e) => {
   e.preventDefault();
   toggleForms(false);
 });
 
+// Ajuste de layout em resize / load / pageshow
 window.addEventListener("resize", () => toggleForms(container.classList.contains("active")));
 window.addEventListener("load", () => toggleForms(false));
 window.addEventListener("pageshow", (event) => {
@@ -66,8 +80,7 @@ window.addEventListener("pageshow", (event) => {
   }
 });
 
-// ========= Máscara Celular =========
-const inputCelular = $("#celular");
+// ========= Máscaras =========
 inputCelular.addEventListener("input", (e) => {
   let d = e.target.value.replace(/\D/g, "").slice(0, 11);
   e.target.value = d.replace(/(\d{0,2})(\d{0,5})(\d{0,4}).*/, (m, a, b, c) =>
@@ -75,13 +88,12 @@ inputCelular.addEventListener("input", (e) => {
   );
 });
 
-// ========= CPF =========
-const cpfInput = $("#cpf");
 cpfInput.addEventListener("input", (e) => {
   let v = e.target.value.replace(/\D/g, "").slice(0, 11);
   e.target.value = v.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, "$1.$2.$3-$4").replace(/[-.]$/, "");
 });
 
+// ========= Validações =========
 function validarCPF(cpf) {
   cpf = cpf.replace(/\D/g, "");
   if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
@@ -96,17 +108,13 @@ function validarCPF(cpf) {
   return true;
 }
 
-// ========= Validação Senhas =========
-const confirmarSenhaCadastro = $("#passwordConfirm");
-const emailLogin = $("#emailLogin");
-const passwordLogin = $("#passwordLogin");
-
-function removerEspacos(...inputs) {
-  inputs.forEach((input) =>
-    input.addEventListener("input", () => (input.value = input.value.replace(/\s/g, "")))
-  );
+function validarEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
-removerEspacos(senhaCadastro, confirmarSenhaCadastro, emailLogin, passwordLogin);
+
+function validarCelular(celular) {
+  return /^\(\d{2}\) \d{5}-\d{4}$/.test(celular);
+}
 
 function validarSintaxeSenha(senha) {
   return [
@@ -120,54 +128,98 @@ function validarSintaxeSenha(senha) {
     .map(([, m]) => m);
 }
 
-function mostrarErro(msg) {
-  msgErro.innerHTML = msg;
-  msgErro.style.display = "block";
+// ========= Remover espaços =========
+function removerEspacos(...inputs) {
+  inputs.forEach((input) =>
+    input.addEventListener("input", () => (input.value = input.value.replace(/\s/g, "")))
+  );
+}
+removerEspacos(senhaCadastro, confirmarSenhaCadastro, emailCadastro, emailLogin, passwordLogin);
+
+// ========= Funções de erro individual =========
+function mostrarErroCampo(msgSpan, msg) {
+  msgSpan.innerHTML = msg;
+  msgSpan.style.display = "block";
+}
+function esconderErroCampo(msgSpan) {
+  msgSpan.style.display = "none";
 }
 
-function validarSenhas() {
-  if (!senhaCadastro.value && !confirmarSenhaCadastro.value) {
-    hide(msgErro);
-    return true;
-  }
-
+// ========= Validação Senhas Separada =========
+function validarSenhasCampo() {
   const erros = validarSintaxeSenha(senhaCadastro.value);
-  let msg = "";
-
   if (erros.length) {
-    msg += "Senha inválida:<br>• " + erros.join("<br>• ");
+    mostrarErroCampo(msgSenha, "Senha inválida:<br>• " + erros.join("<br>• "));
+  } else {
+    esconderErroCampo(msgSenha);
   }
 
   if (senhaCadastro.value && confirmarSenhaCadastro.value && senhaCadastro.value !== confirmarSenhaCadastro.value) {
-    if (msg) msg += "<br>";
-    msg += "As senhas não coincidem.";
+    mostrarErroCampo(msgConfirmarSenha, "As senhas não coincidem.");
+  } else {
+    esconderErroCampo(msgConfirmarSenha);
   }
 
-  if (msg) {
-    mostrarErro(msg);
+  return erros.length === 0 && senhaCadastro.value === confirmarSenhaCadastro.value;
+}
+
+// ========= Validações por campo =========
+function validarEmailCampo() {
+  if (!validarEmail(emailCadastro.value.trim())) {
+    mostrarErroCampo(msgEmail, "E-mail inválido! Use o formato exemplo@dominio.com");
     return false;
   } else {
-    hide(msgErro);
+    esconderErroCampo(msgEmail);
     return true;
   }
 }
 
-senhaCadastro.addEventListener("input", validarSenhas);
-confirmarSenhaCadastro.addEventListener("input", validarSenhas);
+function validarCelularCampo() {
+  if (!validarCelular(inputCelular.value.trim())) {
+    mostrarErroCampo(msgCelular, "Celular inválido! Use o formato (xx) xxxxx-xxxx");
+    return false;
+  } else {
+    esconderErroCampo(msgCelular);
+    return true;
+  }
+}
 
-formCadastro.addEventListener("submit", (e) => {
-  if (!validarSenhas()) e.preventDefault();
-});
+function validarCPFCampo() {
+  if (!validarCPF(cpfInput.value.trim())) {
+    mostrarErroCampo(msgCPF, "CPF inválido! Certifique-se de que contém 11 números e não é repetido.");
+    return false;
+  } else {
+    esconderErroCampo(msgCPF);
+    return true;
+  }
+}
+
+// ========= Eventos de input =========
+senhaCadastro.addEventListener("input", validarSenhasCampo);
+confirmarSenhaCadastro.addEventListener("input", validarSenhasCampo);
+emailCadastro.addEventListener("input", validarEmailCampo);
+inputCelular.addEventListener("input", validarCelularCampo);
+cpfInput.addEventListener("input", validarCPFCampo);
 
 // ========= Mostrar/Ocultar Senha =========
 document.querySelectorAll(".toggle-password").forEach((icon) => {
   icon.addEventListener("click", () => {
-    const targetSelector = icon.getAttribute("data-target");
-    const input = document.querySelector(targetSelector);
+    const input = document.querySelector(icon.getAttribute("data-target"));
     const isHidden = input.type === "password";
-
     input.type = isHidden ? "text" : "password";
     icon.classList.toggle("bi-eye");
     icon.classList.toggle("bi-eye-slash");
   });
+});
+
+// ========= Submissão do formulário =========
+formCadastro.addEventListener("submit", (e) => {
+  const senhasValidas = validarSenhasCampo();
+  const emailValido = validarEmailCampo();
+  const celularValido = validarCelularCampo();
+  const cpfValido = validarCPFCampo();
+
+  if (!senhasValidas || !emailValido || !celularValido || !cpfValido) {
+    e.preventDefault();
+  }
 });
