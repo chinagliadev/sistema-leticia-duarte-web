@@ -5,32 +5,63 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $acao = $_POST['acao'];
 
+    // ===================== CADASTRO =====================
     if ($acao == "cadastro") {
         $nome = $_POST['nome'];
         $email = $_POST['email'];
-        $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+        $senha = $_POST['senha'];
+        $senha_confirm = $_POST['senha_confirm'];
         $celular = $_POST['celular'];
         $cpf = $_POST['cpf'];
+
+        // Verifica se as senhas conferem
+        if ($senha !== $senha_confirm) {
+            $_SESSION['mensagem'] = [
+                'tipo' => 'error',
+                'titulo' => 'Erro!',
+                'texto' => 'As senhas não conferem.'
+            ];
+            header("Location: login.php");
+            exit;
+        }
+
+        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
         try {
             $sql = "INSERT INTO tb_funcionario (nome, email, senha, celular, cpf) VALUES (:nome, :email, :senha, :celular, :cpf)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":nome", $nome);
             $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":senha", $senha);
+            $stmt->bindParam(":senha", $senha_hash);
             $stmt->bindParam(":celular", $celular);
             $stmt->bindParam(":cpf", $cpf);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Cadastro realizado com sucesso!'); window.location.href='login.php';</script>";
+                $_SESSION['mensagem'] = [
+                    'tipo' => 'success',
+                    'titulo' => 'Sucesso!',
+                    'texto' => 'Cadastro realizado com sucesso!'
+                ];
             } else {
-                echo "<script>alert('Erro ao cadastrar!'); window.location.href='login.php';</script>";
+                $_SESSION['mensagem'] = [
+                    'tipo' => 'error',
+                    'titulo' => 'Erro!',
+                    'texto' => 'Erro ao cadastrar. Tente novamente.'
+                ];
             }
         } catch (PDOException $e) {
-            echo "<script>alert('Erro: " . $e->getMessage() . "'); window.location.href='login.php';</script>";
+            $_SESSION['mensagem'] = [
+                'tipo' => 'error',
+                'titulo' => 'Erro!',
+                'texto' => 'Erro: ' . $e->getMessage()
+            ];
         }
+
+        header("Location: login.php");
+        exit;
     }
 
+    // ===================== LOGIN =====================
     if ($acao == "login") {
         $email = $_POST['email'];
         $senha = $_POST['senha'];
@@ -40,17 +71,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":email", $email);
             $stmt->execute();
-
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if (password_verify($senha, $usuario['senha'])) {
-                $_SESSION['usuario'] = $usuario['nome'];
-                echo "<script>alert('Login realizado com sucesso!'); window.location.href='cadastrados.php';</script>";
+            if ($usuario && password_verify($senha, $usuario['senha'])) {
+                // $_SESSION['usuario'] = $usuario['nome'];
+                // $_SESSION['usuario'] = $usuario['email'];
+
+                $_SESSION['usuario'] = [
+                    'id' => $usuario['id_funcionario'],
+                    'nome' => $usuario['nome'],
+                    'email' => $usuario['email']
+                ];
+
+                header("Location: cadastrados.php");
+                exit;
             } else {
-                echo "<script>alert('Usuário ou Senha incorreta!'); window.location.href='login.php';</script>";
+                $_SESSION['mensagem'] = [
+                    'tipo' => 'error',
+                    'titulo' => 'Erro!',
+                    'texto' => 'Usuário ou Senha incorretos!'
+                ];
+                header("Location: login.php");
+                exit;
             }
         } catch (PDOException $e) {
-            echo "<script>alert('Erro: " . $e->getMessage() . "'); window.location.href='login.php';</script>";
+            $_SESSION['mensagem'] = [
+                'tipo' => 'error',
+                'titulo' => 'Erro!',
+                'texto' => 'Erro: ' . $e->getMessage()
+            ];
+            header("Location: login.php");
+            exit;
         }
     }
 }
