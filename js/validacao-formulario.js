@@ -6,7 +6,7 @@ async function validarCadastroAluno() {
 
     validarCampoNomeAluno(listaDeErro);
 
-   await validarCampoCep(listaDeErro);
+    await validarCampoCep(listaDeErro);
 
     validarEndereco(listaDeErro);
     const listarMensagemErro = document.getElementById("lista-erros-aluno");
@@ -47,22 +47,40 @@ async function validarCadastroAluno() {
 function validarCampoNomeAluno(listaDeErro) {
     const nomeAluno = document.getElementById("txtNomeCrianca").value.trim();
     const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
-    const divMensagem = document.getElementById('mensagem-erro-aluno')
+    const divMensagem = document.getElementById('mensagem-erro-aluno');
+    const mensagemErro = document.getElementById('mensagem-erro-aluno');
+
+    divMensagem.classList.add('hidden');
+    divMensagem.classList.remove('visible', 'error');
 
     if (nomeAluno === "") {
-        divMensagem.classList.add('visible', 'error')
-        divMensagem.classList.remove('hidden')
-
-    } else {
-        if (!regexNome.test(nomeAluno)) {
-            listaDeErro.push("O nome do aluno deve conter apenas letras e espaços.");
-        }
-
-        if (nomeAluno.split(" ").length < 2) {
-            listaDeErro.push("Informe o nome completo (nome e sobrenome).");
-        }
+        divMensagem.classList.add('visible', 'error');
+        divMensagem.classList.remove('hidden');
+        mensagemErro.textContent = 'Informe o nome do aluno';
+        listaDeErro.push("O nome do aluno não pode estar vazio.");
+        return;
     }
+
+    if (!regexNome.test(nomeAluno)) {
+        divMensagem.classList.add('visible', 'error');
+        divMensagem.classList.remove('hidden');
+        mensagemErro.textContent = 'O nome do aluno não deve conter números';
+        listaDeErro.push("O nome do aluno deve conter apenas letras e espaços.");
+        return;
+    }
+
+    if (nomeAluno.split(" ").length < 2) {
+        divMensagem.classList.add('visible', 'error');
+        divMensagem.classList.remove('hidden');
+        mensagemErro.textContent = 'Informe o nome completo (nome e sobrenome)';
+        listaDeErro.push("Informe o nome completo (nome e sobrenome).");
+        return;
+    }
+
+    divMensagem.classList.add('hidden');
+    divMensagem.classList.remove('visible', 'error');
 }
+
 
 // async function validarCampoCep(listaDeErro) {
 //     const cep = document.getElementById('txtCep').value.trim();
