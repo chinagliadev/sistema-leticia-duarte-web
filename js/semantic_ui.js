@@ -41,13 +41,5 @@ $(document).ready(function () {
 
 
     
-    $("#txtCep").blur(function(){
-        let valorCep = this.value
-        
-        $.get('https://viacep.com.br/ws/'+valorCep+'/json/', function(dadaos){
-            $("#txtEndereco").val(dadaos.logradouro)
-            $("#txtBairro").val(dadaos.bairro)
-            $("#txtCidade").val(dadaos.localidade)
-        })
-})
+
 });

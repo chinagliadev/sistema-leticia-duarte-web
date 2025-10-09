@@ -48,29 +48,29 @@
             </div>
         </div>
         <div class="fields">
-            <div class="three wide field">
+            <div class="three wide field" id="validacao-cep">
                 <label for="txtCep">CEP</label>
-                <input type="text" id="txtCep" name="txtCep" placeholder="00000-000">
+                <input type="text" id="txtCep" name="txtCep" placeholder="00000-000" onblur="validarCadastroAluno()">
                 <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank">Não sei o meu cep</a>
             </div>
-            <div class="ten wide field">
+            <div class="ten wide field" id="div-endereco">
                 <label for="txtEndereco">Endereço</label>
-                <input type="text" id="txtEndereco" name="txtEndereco" placeholder="Rua, Avenida...">
+                <input type="text" id="txtEndereco" name="txtEndereco" placeholder="Rua, Avenida..." onblur="validarCadastroAluno()">
             </div>
-            <div class="three wide field">
+            <div class="three wide field validacaoEndereco">
                 <label for="txtNumero">Número</label>
-                <input type="text" id="txtNumero" name="txtNumero" placeholder="Nº">
+                <input type="text" id="txtNumero" name="txtNumero" placeholder="Nº" onblur="validarCadastroAluno()">
             </div>
         </div>
 
         <div class="fields">
-            <div class="ten wide field">
+            <div class="ten wide field validacaoEndereco">
                 <label for="txtBairro">Bairro</label>
-                <input type="text" id="txtBairro" name="txtBairro" placeholder="Bairro...">
+                <input type="text" id="txtBairro" name="txtBairro" placeholder="Bairro..." onblur="validarCadastroAluno()">
             </div>
-            <div class="three wide field">
+            <div class="three wide field validacaoEndereco">
                 <label for="txtCidade">Cidade</label>
-                <input type="text" id="txtCidade" name="txtCidade" placeholder="Americana...">
+                <input type="text" id="txtCidade" name="txtCidade" placeholder="Americana..." onblur="validarCadastroAluno()">
             </div>
             <div class="three wide field">
                 <label for="txtComplemento">Complemento</label>

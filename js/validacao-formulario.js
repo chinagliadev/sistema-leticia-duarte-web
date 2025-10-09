@@ -1,53 +1,120 @@
-function validarCadastroAluno() {
+async function validarCadastroAluno() {
     const sucessoMensagem = document.getElementById("mensagem-sucesso-aluno");
     const erroMensagem = document.getElementById("mensagem-erro-aluno");
-    validarCampoNomeAluno(sucessoMensagem, erroMensagem)
-}
-
-function validarCampoNomeAluno(sucessoMensagem, erroMensagem) {
-    const nomeAluno = document.getElementById("txtNomeCrianca").value.trim();
-    const divAluno = document.getElementById("validacao-nome");
-
-    const listarMensagemErro = document.getElementById("lista-erros-aluno");
-
-    const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
 
     let listaDeErro = [];
 
+    validarCampoNomeAluno(listaDeErro);
+
+    await validarCampoCep(listaDeErro);
+
+    validarEndereco(listaDeErro);
+    const listarMensagemErro = document.getElementById("lista-erros-aluno");
+    const divAluno = document.getElementById("validacao-nome");
+    const divCep = document.getElementById("validacao-cep");
+    const divEndereco = document.getElementById('div-endereco');
+
     listarMensagemErro.innerHTML = "";
-    erroMensagem.style.display = "none";
-    divAluno.classList.remove("ui", "error");
-
-    if (nomeAluno === "") {
-        listaDeErro.push("O nome do aluno não pode estar vazio.");
-    }
-
-    if (!regexNome.test(nomeAluno) && nomeAluno !== "") {
-        listaDeErro.push("O nome do aluno deve conter apenas letras e espaços.");
-    }
-
-    if (nomeAluno.split(" ").length < 2 && nomeAluno !== "") {
-        listaDeErro.push("Informe o nome completo (nome e sobrenome).");
-    }
-
 
     if (listaDeErro.length > 0) {
-        divAluno.classList.add("ui", "error");
         erroMensagem.style.display = "block";
-        sucessoMensagem.style.display = 'none'
+        sucessoMensagem.style.display = "none";
 
-
-        for (let i = 0; i < listaDeErro.length; i++) {
+        listaDeErro.forEach(erro => {
             const li = document.createElement("li");
-            li.textContent = listaDeErro[i];
+            li.textContent = erro;
             listarMensagemErro.appendChild(li);
-        }
+        });
+
+        divAluno.classList.add("ui", "error");
+        divCep.classList.add("ui", "error");
+        divEndereco.classList.add("ui", "error");
+
     } else {
-        sucessoMensagem.style.display = 'block'
-        erroMensagem.style.display = 'none'
+        sucessoMensagem.style.display = "block";
+        erroMensagem.style.display = "none";
+
+        divAluno.classList.remove("ui", "error");
+        divCep.classList.remove("ui", "error");
+        divEndereco.classList.remove("ui", "error");
     }
 }
 
-function validarCampoCep(){
-    
+
+
+function validarCampoNomeAluno(listaDeErro) {
+    const nomeAluno = document.getElementById("txtNomeCrianca").value.trim();
+    const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+
+    if (nomeAluno === "") {
+        listaDeErro.push("O nome do aluno não pode estar vazio.");
+    } else {
+        if (!regexNome.test(nomeAluno)) {
+            listaDeErro.push("O nome do aluno deve conter apenas letras e espaços.");
+        }
+
+        if (nomeAluno.split(" ").length < 2) {
+            listaDeErro.push("Informe o nome completo (nome e sobrenome).");
+        }
+    }
+}
+
+async function validarCampoCep(listaDeErro) {
+    const cep = document.getElementById('txtCep').value.trim();
+    const divCep = document.getElementById("validacao-cep");
+
+    divCep.classList.remove("ui", "error");
+
+    if (cep === "") {
+        listaDeErro.push("O CEP não pode estar vazio.");
+        divCep.classList.add("ui", "error");
+        return;
+    }
+
+    const dadosCep = await buscarCep(cep);
+
+    if (!dadosCep || dadosCep.erro) {
+        listaDeErro.push("CEP inválido ou não encontrado.");
+        divCep.classList.add("ui", "error");
+        return;
+    }
+
+    document.getElementById("txtEndereco").value = dadosCep.logradouro || "";
+    document.getElementById("txtBairro").value = dadosCep.bairro || "";
+    document.getElementById("txtCidade").value = dadosCep.localidade || "";
+    document.getElementById("txtUf").value = dadosCep.uf || "";
+}
+
+async function buscarCep(cep) {
+    try {
+
+        if (cep.length !== 8) {
+            return null;
+        }
+
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+
+        if (!response.ok) {
+            throw new Error("Erro ao buscar o CEP.");
+        }
+
+        const dados = await response.json();
+        return dados;
+
+    } catch (error) {
+        console.error("Erro na função buscarCep:", error);
+        return null;
+    }
+}
+
+function validarEndereco(listaDeErro) {
+    const endereco = document.getElementById('txtEndereco').value.trim();
+    const divEndereco = document.getElementById('div-endereco');
+
+    divEndereco.classList.remove("ui", "error");
+
+    if (endereco === '') {
+        listaDeErro.push('Informe o campo Endereço.');
+        divEndereco.classList.add("ui", "error");
+    }
 }
