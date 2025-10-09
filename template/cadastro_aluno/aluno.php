@@ -5,6 +5,11 @@
                 <label for="txtNomeCrianca">Nome da Criança</label>
                 <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança"
                     onblur="validarCadastroAluno()">
+                    <div class="ui hidden negative message" id="mensagem-erro-aluno">
+                        <div class="content">
+                            <span class="nome-erro"></span>
+                        </div>
+                    </div>
             </div>
             <div class="three wide field">
                 <label for="txtTurma">Turma</label>

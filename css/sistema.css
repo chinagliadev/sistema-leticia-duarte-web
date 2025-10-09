@@ -205,7 +205,7 @@ a {
 
 /** input remedios */
 
-.oculto{
+.oculto {
     display: none;
 }
 
@@ -261,28 +261,31 @@ select.ui.dropdown {
     margin-top: 10px;
 }
 
-.sessao-tab{
+.sessao-tab {
     margin-top: 20px;
 }
 
-.ui.small.image, .ui.small.images .image, .ui.small.images img, .ui.small.images svg {
+.ui.small.image,
+.ui.small.images .image,
+.ui.small.images img,
+.ui.small.images svg {
     width: 130px;
     height: auto;
     font-size: .92857143rem;
 }
 
-.mensagem-modal{
+.mensagem-modal {
     font-size: 20px;
 }
 
 
-#modal-excluir > .content {
+#modal-excluir>.content {
     display: block;
     width: 100%;
     font-size: 1.2em;
     line-height: 1.4;
     padding: 1.5rem;
-    text-align: center; 
+    text-align: center;
 }
 
 #modal-excluir.ui.basic.modal {
@@ -290,7 +293,7 @@ select.ui.dropdown {
     border: none;
     border-radius: 0;
     box-shadow: none !important;
-    color: #fff; 
+    color: #fff;
     text-align: center;
 }
 
@@ -302,3 +305,14 @@ select.ui.dropdown {
     color: black !important;
 }
 
+.ui.message {
+    position: relative;
+    min-height: 1em;
+    margin: 0;
+    background: #f8f8f9;
+    padding: 0.2em 1.5em;
+    line-height: 1.4285em;
+    color: rgba(0, 0, 0, .87);
+    border-radius: .28571429rem;
+    box-shadow: 0 0 0 1px rgba(34, 36, 38, .22) inset, 0 0 0 0 transparent;
+}
