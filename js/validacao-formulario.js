@@ -1,84 +1,80 @@
-let listaDeErro = [];
-async function validarCadastroAluno() {
-    const sucessoMensagem = document.getElementById("mensagem-sucesso-aluno");
-    const erroMensagem = document.getElementById("mensagem-erro-aluno");
+function mensagemErroCampos(div, input, span, mensagem) {
+    div.classList.remove('hidden');
+    div.classList.add('visible', 'error');
 
+    input.classList.add('ui', 'error');
+    span.textContent = mensagem;
+}
 
-    validarCampoNomeAluno(listaDeErro);
-
-    await validarCampoCep(listaDeErro);
-
-    validarEndereco(listaDeErro);
-    const listarMensagemErro = document.getElementById("lista-erros-aluno");
-    const divAluno = document.getElementById("validacao-nome");
-    const divCep = document.getElementById("validacao-cep");
-    const divEndereco = document.getElementById('div-endereco');
-
-    listarMensagemErro.innerHTML = "";
-
-    if (listaDeErro.length > 0) {
-        erroMensagem.style.display = "block";
-        sucessoMensagem.style.display = "none";
-
-        listaDeErro.forEach(erro => {
-            const li = document.createElement("li");
-            li.textContent = erro;
-            listarMensagemErro.appendChild(li);
-        });
-
-        divAluno.classList.add("ui", "error");
-        divCep.classList.add("ui", "error");
-        divEndereco.classList.add("ui", "error");
-
-    } else {
-        sucessoMensagem.style.display = "block";
-        erroMensagem.style.display = "none";
-
-        divAluno.classList.remove("ui", "error");
-        divCep.classList.remove("ui", "error");
-        divEndereco.classList.remove("ui", "error");
-
-        listaDeErro = []
-    }
+function limparErro(div, input, span) {
+    div.classList.remove('visible', 'error');
+    div.classList.add('hidden');
+    input.classList.remove('ui', 'error');
+    span.textContent = "";
 }
 
 
-
-function validarCampoNomeAluno(listaDeErro) {
+function validarCampoNomeAluno() {
     const nomeAluno = document.getElementById("txtNomeCrianca").value.trim();
     const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
-    const divMensagem = document.getElementById('mensagem-erro-aluno');
-    const mensagemErro = document.getElementById('mensagem-erro-aluno');
 
-    divMensagem.classList.add('hidden');
-    divMensagem.classList.remove('visible', 'error');
+    const divMensagem = document.getElementById('mensagem-erro-aluno');
+    const spanMensagem = document.getElementById('nome-erro');
+    const inputNome = document.getElementById("validacao-nome");
+
+    limparErro(divMensagem, inputNome, spanMensagem);
 
     if (nomeAluno === "") {
-        divMensagem.classList.add('visible', 'error');
-        divMensagem.classList.remove('hidden');
-        mensagemErro.textContent = 'Informe o nome do aluno';
-        listaDeErro.push("O nome do aluno não pode estar vazio.");
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome do aluno");
         return;
     }
 
     if (!regexNome.test(nomeAluno)) {
-        divMensagem.classList.add('visible', 'error');
-        divMensagem.classList.remove('hidden');
-        mensagemErro.textContent = 'O nome do aluno não deve conter números';
-        listaDeErro.push("O nome do aluno deve conter apenas letras e espaços.");
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "O nome não deve conter números ou símbolos");
         return;
     }
 
     if (nomeAluno.split(" ").length < 2) {
-        divMensagem.classList.add('visible', 'error');
-        divMensagem.classList.remove('hidden');
-        mensagemErro.textContent = 'Informe o nome completo (nome e sobrenome)';
-        listaDeErro.push("Informe o nome completo (nome e sobrenome).");
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome completo (nome e sobrenome)");
         return;
     }
 
-    divMensagem.classList.add('hidden');
-    divMensagem.classList.remove('visible', 'error');
+    limparErro(divMensagem, inputNome, spanMensagem);
+}
+
+function validarEndereco() {
+    const divEndereco = document.getElementById('validacao-endereco')
+    const mensagemErro = document.getElementById('mensagem-erro-endereco')
+    const endereco = document.getElementById('txtEndereco').value
+    const spanErro = document.getElementById('endereco-erro')
+
+    if (endereco === "") {
+        mensagemErroCampos(mensagemErro, divEndereco, spanErro, 'Informe o endereco (rua)')
+        return
+    }
+}
+
+function validarNumero() {
+    const divNumero = document.getElementById('validacao-numero')
+    const mensagemErro = document.getElementById('mensagem-erro-numero')
+    const numero = document.getElementById('txtNumero').value
+    const spanNumero = document.getElementById('numero-erro')
+
+    if (numero === '') {
+        mensagemErroCampos(mensagemErro, divNumero, spanNumero, 'Informe o numero')
+    }
+
+}
+
+function validarBairro() {
+    const divBairro = document.getElementById('validacao-bairro')
+    const mensagemErro = document.getElementById('mensagem-erro-bairro')
+    const bairro = document.getElementById('txtBairro').value
+    const spanBairro = document.getElementById('bairro-erro')
+
+    if(bairro === ''){
+        mensagemErroCampos(mensagemErro, divBairro, spanBairro, 'Informe o bairro do aluno')
+    }
 }
 
 

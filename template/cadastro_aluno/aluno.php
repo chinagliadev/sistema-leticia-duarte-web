@@ -4,12 +4,12 @@
             <div class="seven wide field" id="validacao-nome">
                 <label for="txtNomeCrianca">Nome da Criança</label>
                 <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança"
-                    onblur="validarCadastroAluno()">
-                    <div class="ui hidden negative message" id="mensagem-erro-aluno">
-                        <div class="content">
-                            <span class="nome-erro"></span>
-                        </div>
+                    onblur="validarCampoNomeAluno()">
+                <div class="ui hidden negative message" id="mensagem-erro-aluno">
+                    <div class="content">
+                        <span id="nome-erro"></span>
                     </div>
+                </div>
             </div>
             <div class="three wide field">
                 <label for="txtTurma">Turma</label>
@@ -58,20 +58,35 @@
                 <input type="text" id="txtCep" name="txtCep" placeholder="00000-000" onblur="validarCadastroAluno()">
                 <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank">Não sei o meu cep</a>
             </div>
-            <div class="ten wide field" id="div-endereco">
+            <div class="ten wide field" id="validacao-endereco">
                 <label for="txtEndereco">Endereço</label>
-                <input type="text" id="txtEndereco" name="txtEndereco" placeholder="Rua, Avenida..." onblur="validarCadastroAluno()">
+                <input type="text" id="txtEndereco" name="txtEndereco" placeholder="Rua, Avenida..." onblur="validarEndereco()">
+                <div class="ui hidden negative message" id="mensagem-erro-endereco">
+                    <div class="content">
+                        <span id="endereco-erro"></span>
+                    </div>
+                </div>
             </div>
-            <div class="three wide field validacaoEndereco">
+            <div class="three wide field" id="validacao-numero">
                 <label for="txtNumero">Número</label>
-                <input type="text" id="txtNumero" name="txtNumero" placeholder="Nº" onblur="validarCadastroAluno()">
+                <input type="text" id="txtNumero" name="txtNumero" placeholder="Nº" onblur="validarNumero()">
+                <div class="ui hidden negative message" id="mensagem-erro-numero">
+                    <div class="content">
+                        <span id="numero-erro"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="fields">
-            <div class="ten wide field validacaoEndereco">
+            <div class="ten wide field" id="validacao-bairro">
                 <label for="txtBairro">Bairro</label>
-                <input type="text" id="txtBairro" name="txtBairro" placeholder="Bairro..." onblur="validarCadastroAluno()">
+                <input type="text" id="txtBairro" name="txtBairro" placeholder="Bairro..." onblur="validarBairro()">
+                <div class="ui hidden negative message" id="mensagem-erro-bairro">
+                    <div class="content">
+                        <span id="bairro-erro"></span>
+                    </div>
+                </div>
             </div>
             <div class="three wide field validacaoEndereco">
                 <label for="txtCidade">Cidade</label>
