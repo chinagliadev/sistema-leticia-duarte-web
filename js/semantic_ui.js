@@ -40,6 +40,6 @@ $(document).ready(function () {
     })
 
 
-    
+    $('#txtCep').mask('00000-000')
 
 });

@@ -52,6 +52,8 @@ function validarEndereco() {
         mensagemErroCampos(mensagemErro, divEndereco, spanErro, 'Informe o endereco (rua)')
         return
     }
+
+    limparErro(mensagemErro, divEndereco, spanErro)
 }
 
 function validarNumero() {
@@ -62,8 +64,9 @@ function validarNumero() {
 
     if (numero === '') {
         mensagemErroCampos(mensagemErro, divNumero, spanNumero, 'Informe o numero')
+        return
     }
-
+    limparErro(mensagemErro, divNumero, spanNumero)
 }
 
 function validarBairro() {
@@ -72,69 +75,96 @@ function validarBairro() {
     const bairro = document.getElementById('txtBairro').value
     const spanBairro = document.getElementById('bairro-erro')
 
-    if(bairro === ''){
+    if (bairro === '') {
         mensagemErroCampos(mensagemErro, divBairro, spanBairro, 'Informe o bairro do aluno')
+        return
     }
+
+    limparErro(mensagemErro, divBairro, spanBairro)
+}
+
+function validarCidade() {
+    const divCidade = document.getElementById('validacao-cidade')
+    const mensagemErro = document.getElementById('mensagem-erro-cidade')
+    const cidade = document.getElementById('txtCidade').value
+    const spanCidade = document.getElementById('cidade-erro')
+
+    if (cidade === '') {
+        mensagemErroCampos(mensagemErro, divCidade, spanCidade, 'Informe a cidade do aluno')
+        return
+    }
+
+    limparErro(mensagemErro, divCidade, spanCidade)
 }
 
 
-// async function validarCampoCep(listaDeErro) {
-//     const cep = document.getElementById('txtCep').value.trim();
-//     const divCep = document.getElementById("validacao-cep");
+async function validarCep() {
+    const divCep = document.getElementById('validacao-cep');
+    const mensagemErro = document.getElementById('mensagem-erro-cep');
+    const spanCep = document.getElementById('cep-erro');
 
-//     divCep.classList.remove("ui", "error");
+    let cep = $('#txtCep').val().replace(/\D/g, ''); 
 
-//     if (cep === "") {
-//         listaDeErro.push("O CEP não pode estar vazio.");
-//         divCep.classList.add("ui", "error");
-//         return;
-//     }
+    if (cep === '') {
+        mensagemErroCampos(mensagemErro, divCep, spanCep, 'Informe o CEP do aluno');
+        return;
+    }
 
-//     const dadosCep = await buscarCep(cep);
+    if (!/^\d{8}$/.test(cep)) {
+        mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP inválido. Digite 8 números.');
+        return;
+    }
 
-//     if (!dadosCep || dadosCep.erro) {
-//         listaDeErro.push("CEP inválido ou não encontrado.");
-//         divCep.classList.add("ui", "error");
-//         return;
-//     }
+    const dadosCep = await buscarCep(cep);
 
-//     document.getElementById("txtEndereco").value = dadosCep.logradouro || "";
-//     document.getElementById("txtBairro").value = dadosCep.bairro || "";
-//     document.getElementById("txtCidade").value = dadosCep.localidade || "";
-//     document.getElementById("txtUf").value = dadosCep.uf || "";
-//     return true
-// }
+    if (!dadosCep || dadosCep.erro) {
+        mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP não encontrado.');
+        return;
+    }
 
-// async function buscarCep(cep) {
-//     try {
+    console.log('Dados do CEP:', dadosCep);
+    document.getElementById('txtEndereco').value = dadosCep.logradouro;
+    document.getElementById('txtBairro').value = dadosCep.bairro; 
+    document.getElementById('txtCidade').value = dadosCep.localidade; 
 
-//         if (cep.length !== 8) {
-//             return null;
-//         }
+    limparErro(mensagemErro, divCep, spanCep)
+}
 
-//         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+async function buscarCep(cep) {
+    try {
 
-//         if (!response.ok) {
-//             throw new Error("Erro ao buscar o CEP.");
-//         }
+        if (cep.length !== 8) {
+            return false;
+        }
 
-//         const dados = await response.json();
-//         return dados;
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
 
-//     } catch (error) {
-//         console.error("Erro na função buscarCep:", error);
-//         return null;
-//     }
-// }
+        if (!response.ok) {
+            throw new Error("Erro ao buscar o CEP.");
+        }
 
-// function validarEndereco(listaDeErro) {
-//     const endereco = document.getElementById('txtEndereco').value.trim();
-//     const divEndereco = document.getElementById('div-endereco');
+        const dados = await response.json();
+        return dados;
 
-//     divEndereco.classList.remove("ui", "error");
+    } catch (error) {
+        console.error("Erro na função buscarCep:", error);
+        return false;
+    }
+}
 
-//     if (endereco === '') {
-//         listaDeErro.push('Informe o campo Endereço.');
-//         divEndereco.classList.add("ui", "error");
-//     }
-// }
+function validarRaca() {
+    const divRaca = document.getElementById('divRaca');
+    const inputRaca = document.getElementById('txtRaca');
+    const mensagemErro = document.getElementById('mensagem-erro-raca');
+    const spanErro = document.getElementById('raca-erro');
+
+    limparErro(mensagemErro, divRaca, spanErro);
+
+    if (inputRaca.value.trim() === '') {
+        mensagemErroCampos(mensagemErro, divRaca, spanErro, 'Selecione a raça do aluno');
+        return false;
+    }
+
+    limparErro(mensagemErro, divRaca, spanErro);
+    return true;
+}
