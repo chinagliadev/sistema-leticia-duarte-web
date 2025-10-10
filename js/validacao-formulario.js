@@ -1,4 +1,5 @@
 function mensagemErroCampos(div, input, span, mensagem) {
+    
     div.classList.remove('hidden');
     div.classList.add('visible', 'error');
 
@@ -26,113 +27,134 @@ function validarCampoNomeAluno() {
 
     if (nomeAluno === "") {
         mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome do aluno");
-        return;
+        return false;
     }
 
     if (!regexNome.test(nomeAluno)) {
         mensagemErroCampos(divMensagem, inputNome, spanMensagem, "O nome não deve conter números ou símbolos");
-        return;
+        return false;
     }
 
     if (nomeAluno.split(" ").length < 2) {
         mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome completo (nome e sobrenome)");
-        return;
+        return false;
     }
 
     limparErro(divMensagem, inputNome, spanMensagem);
+    return true;
 }
 
 function validarEndereco() {
-    const divEndereco = document.getElementById('validacao-endereco')
-    const mensagemErro = document.getElementById('mensagem-erro-endereco')
-    const endereco = document.getElementById('txtEndereco').value
-    const spanErro = document.getElementById('endereco-erro')
+    const divEndereco = document.getElementById('validacao-endereco');
+    const mensagemErro = document.getElementById('mensagem-erro-endereco');
+    const endereco = document.getElementById('txtEndereco').value;
+    const spanErro = document.getElementById('endereco-erro');
 
-    if (endereco === "") {
-        mensagemErroCampos(mensagemErro, divEndereco, spanErro, 'Informe o endereco (rua)')
-        return
+    limparErro(mensagemErro, divEndereco, spanErro);
+    
+    if (endereco.trim() === "") {
+        mensagemErroCampos(mensagemErro, divEndereco, spanErro, 'Informe o endereço (rua)');
+        return false;
     }
 
-    limparErro(mensagemErro, divEndereco, spanErro)
+    limparErro(mensagemErro, divEndereco, spanErro);
+    return true;
 }
 
 function validarNumero() {
-    const divNumero = document.getElementById('validacao-numero')
-    const mensagemErro = document.getElementById('mensagem-erro-numero')
-    const numero = document.getElementById('txtNumero').value
-    const spanNumero = document.getElementById('numero-erro')
+    const divNumero = document.getElementById('validacao-numero');
+    const mensagemErro = document.getElementById('mensagem-erro-numero');
+    const numero = document.getElementById('txtNumero').value;
+    const spanNumero = document.getElementById('numero-erro');
 
-    if (numero === '') {
-        mensagemErroCampos(mensagemErro, divNumero, spanNumero, 'Informe o numero')
-        return
+    limparErro(mensagemErro, divNumero, spanNumero);
+
+    if (numero.trim() === '') {
+        mensagemErroCampos(mensagemErro, divNumero, spanNumero, 'Informe o número');
+        return false;
     }
-    limparErro(mensagemErro, divNumero, spanNumero)
+    
+    if (isNaN(parseInt(numero))) {
+        mensagemErroCampos(mensagemErro, divNumero, spanNumero, 'O número deve ser um valor numérico');
+        return false;
+    }
+
+    limparErro(mensagemErro, divNumero, spanNumero);
+    return true;
 }
 
 function validarBairro() {
-    const divBairro = document.getElementById('validacao-bairro')
-    const mensagemErro = document.getElementById('mensagem-erro-bairro')
-    const bairro = document.getElementById('txtBairro').value
-    const spanBairro = document.getElementById('bairro-erro')
+    const divBairro = document.getElementById('validacao-bairro');
+    const mensagemErro = document.getElementById('mensagem-erro-bairro');
+    const bairro = document.getElementById('txtBairro').value;
+    const spanBairro = document.getElementById('bairro-erro');
 
-    if (bairro === '') {
-        mensagemErroCampos(mensagemErro, divBairro, spanBairro, 'Informe o bairro do aluno')
-        return
+    limparErro(mensagemErro, divBairro, spanBairro);
+
+    if (bairro.trim() === '') {
+        mensagemErroCampos(mensagemErro, divBairro, spanBairro, 'Informe o bairro do aluno');
+        return false;
     }
 
-    limparErro(mensagemErro, divBairro, spanBairro)
+    limparErro(mensagemErro, divBairro, spanBairro);
+    return true;
 }
 
 function validarCidade() {
-    const divCidade = document.getElementById('validacao-cidade')
-    const mensagemErro = document.getElementById('mensagem-erro-cidade')
-    const cidade = document.getElementById('txtCidade').value
-    const spanCidade = document.getElementById('cidade-erro')
+    const divCidade = document.getElementById('validacao-cidade');
+    const mensagemErro = document.getElementById('mensagem-erro-cidade');
+    const cidade = document.getElementById('txtCidade').value;
+    const spanCidade = document.getElementById('cidade-erro');
 
-    if (cidade === '') {
-        mensagemErroCampos(mensagemErro, divCidade, spanCidade, 'Informe a cidade do aluno')
-        return
+    limparErro(mensagemErro, divCidade, spanCidade);
+
+    if (cidade.trim() === '') {
+        mensagemErroCampos(mensagemErro, divCidade, spanCidade, 'Informe a cidade do aluno');
+        return false;
     }
 
-    limparErro(mensagemErro, divCidade, spanCidade)
+    limparErro(mensagemErro, divCidade, spanCidade);
+    return true;
 }
 
+function validarRaca() {
+    const divRaca = document.getElementById('divRaca');
+    const inputRaca = document.getElementById('txtRaca').value; 
+    const mensagemErro = document.getElementById('mensagem-erro-raca');
+    const spanErro = document.getElementById('raca-erro');
 
-async function validarCep() {
-    const divCep = document.getElementById('validacao-cep');
-    const mensagemErro = document.getElementById('mensagem-erro-cep');
-    const spanCep = document.getElementById('cep-erro');
+    limparErro(mensagemErro, divRaca, spanErro);
 
-    let cep = $('#txtCep').val().replace(/\D/g, ''); 
-
-    if (cep === '') {
-        mensagemErroCampos(mensagemErro, divCep, spanCep, 'Informe o CEP do aluno');
-        return;
+    // CORREÇÃO AQUI: 'inputRaca' JÁ É uma string, não precisa do .value
+    if (inputRaca.trim() === '') {
+        mensagemErroCampos(mensagemErro, divRaca, spanErro, 'Selecione a raça do aluno');
+        return false;
     }
 
-    if (!/^\d{8}$/.test(cep)) {
-        mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP inválido. Digite 8 números.');
-        return;
-    }
-
-    const dadosCep = await buscarCep(cep);
-
-    if (!dadosCep || dadosCep.erro) {
-        mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP não encontrado.');
-        return;
-    }
-
-    console.log('Dados do CEP:', dadosCep);
-    document.getElementById('txtEndereco').value = dadosCep.logradouro;
-    document.getElementById('txtBairro').value = dadosCep.bairro; 
-    document.getElementById('txtCidade').value = dadosCep.localidade; 
-
-    limparErro(mensagemErro, divCep, spanCep)
+    limparErro(mensagemErro, divRaca, spanErro);
+    return true;
 }
+
+function validarTurma() {
+    const divValidacaoTurma = document.getElementById('validacao-turma');
+    const inputTurma = document.getElementById('txtTurma').value;
+    const mensagemErro = document.getElementById('mensagem-erro-turma');
+    const spanErro = document.getElementById('turma-erro');
+
+    limparErro(mensagemErro, divValidacaoTurma, spanErro);
+
+    if (inputTurma.trim() === '') {
+        mensagemErroCampos(mensagemErro, divValidacaoTurma, spanErro, 'Selecione a turma do aluno');
+        return false;
+    }
+
+    limparErro(mensagemErro, divValidacaoTurma, spanErro);
+    return true;
+}
+
 
 async function buscarCep(cep) {
     try {
-
         if (cep.length !== 8) {
             return false;
         }
@@ -152,19 +174,85 @@ async function buscarCep(cep) {
     }
 }
 
-function validarRaca() {
-    const divRaca = document.getElementById('divRaca');
-    const inputRaca = document.getElementById('txtRaca');
-    const mensagemErro = document.getElementById('mensagem-erro-raca');
-    const spanErro = document.getElementById('raca-erro');
+async function validarCep() {
+    const divCep = document.getElementById('validacao-cep');
+    const mensagemErro = document.getElementById('mensagem-erro-cep');
+    const spanCep = document.getElementById('cep-erro');
 
-    limparErro(mensagemErro, divRaca, spanErro);
+    let cep = $('#txtCep').val().replace(/\D/g, ''); 
 
-    if (inputRaca.value.trim() === '') {
-        mensagemErroCampos(mensagemErro, divRaca, spanErro, 'Selecione a raça do aluno');
+    limparErro(mensagemErro, divCep, spanCep); // Limpa erro antes de começar
+
+    if (cep === '') {
+        mensagemErroCampos(mensagemErro, divCep, spanCep, 'Informe o CEP do aluno');
         return false;
     }
 
-    limparErro(mensagemErro, divRaca, spanErro);
+    if (!/^\d{8}$/.test(cep)) {
+        mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP inválido. Digite 8 números.');
+        return false;
+    }
+
+
+    const dadosCep = await buscarCep(cep);
+
+    if (!dadosCep || dadosCep.erro) {
+        mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP não encontrado.');
+        return false;
+    }
+
+    document.getElementById('txtEndereco').value = dadosCep.logradouro;
+    document.getElementById('txtBairro').value = dadosCep.bairro;
+    document.getElementById('txtCidade').value = dadosCep.localidade;
+
+    validarEndereco();
+    validarBairro();
+    validarCidade(); 
+
+    limparErro(mensagemErro, divCep, spanCep);
+    return true
+}
+
+function validarDataNascimento() {
+    const divData = document.getElementById('validacao-data-nascimento');
+    const inputData = document.getElementById('txtDataNascimento').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-data-nascimento');
+    const spanErro = document.getElementById('data-nascimento-erro');
+
+    limparErro(mensagemErro, divData, spanErro);
+
+    if (inputData === '') {
+        mensagemErroCampos(mensagemErro, divData, spanErro, 'Informe a data de nascimento');
+        return false;
+    }
+
+    const dataNascimento = new Date(inputData); 
+    const dataAtual = new Date();
+    
+    dataAtual.setHours(0, 0, 0, 0); 
+    
+    if (isNaN(dataNascimento) || dataNascimento > dataAtual) {
+        mensagemErroCampos(mensagemErro, divData, spanErro, 'A data de nascimento não pode ser futura ou inválida');
+        return false;
+    }
+
+    limparErro(mensagemErro, divData, spanErro);
     return true;
+}
+
+async function validarAluno(){ 
+    const validacaoNome = validarCampoNomeAluno();
+    const validacaoEndereco = validarEndereco();
+    const validacaoNumero = validarNumero();
+    const validacaoBairro = validarBairro();
+    const validacaoCidade = validarCidade();
+    const validacaoRaca = validarRaca();
+    const validacaoTurma = validarTurma();
+    const validacaoDataNascimento = validarDataNascimento();
+    
+    const validacaoCep = await validarCep(); 
+
+    const formularioValido = validacaoNome && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoCep && validacaoDataNascimento;
+
+    return formularioValido;
 }

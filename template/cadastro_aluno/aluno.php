@@ -3,8 +3,7 @@
     <div class="fields">
         <div class="seven wide field" id="validacao-nome">
             <label for="txtNomeCrianca">Nome da Criança</label>
-            <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança"
-                onblur="validarCampoNomeAluno()">
+            <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança">
             <div class="ui hidden negative message" id="mensagem-erro-aluno">
                 <div class="content">
                     <i class="user icon"></i><span id="nome-erro"></span>
@@ -15,7 +14,7 @@
         <div class="three wide field" id="validacao-turma">
             <label for="txtTurma">Turma</label>
             <div class="ui selection dropdown" id="divTurma">
-                <input type="hidden" name="turma" id="txtTurma" onchange="validarTurma()">
+                <input type="hidden" name="turma" id="txtTurma">
                 <i class="dropdown icon"></i>
                 <div class="default text">Selecione a turma</div>
                 <div class="menu">
@@ -31,25 +30,31 @@
                     <div class="item" data-value="Multisseriada B.M">Multisseriada B.M</div>
                 </div>
             </div>
-            <div class="ui hidden negative message" id="mensagem-erro-turma">
+            <div class="ui hidden negative message" id="mensagem-erro-turma" style="margin-top:15px">
                 <div class="content">
                     <i class="user icon"></i><span id="turma-erro"></span>
                 </div>
             </div>
         </div>
 
-        <div class="three wide field">
+        <div class="three wide field" id="validacao-data-nascimento">
             <label for="txtDataNascimento">Data Nascimento</label>
             <div class="ui calendar" id="dataNascimentoCalendar">
                 <div class="ui input">
                     <input id="txtDataNascimento" name="txtDataNascimento" type="date" placeholder="dd/mm/aaaa">
                 </div>
             </div>
+            <div class="ui hidden negative message" id="mensagem-erro-data-nascimento">
+                <div class="content">
+                    <i class="calendar icon"></i>
+                    <span id="data-nascimento-erro"></span>
+                </div>
+            </div>
         </div>
 
         <div class="three wide field" id="divRaca">
             <label for="txtRaca">Cor / Raça</label>
-            <select class="ui search dropdown" id="txtRaca" name="corRaca" onblur="validarRaca()">
+            <select class="ui search dropdown" id="txtRaca" name="corRaca">
                 <option value="" disabled selected hidden>Selecione Cor / Raça</option>
                 <option value="branca">Branca</option>
                 <option value="preta">Preta</option>
@@ -58,8 +63,7 @@
                 <option value="indigena">Indígena</option>
                 <option value="outra">Outra</option>
             </select>
-
-            <div class="ui hidden negative message" id="mensagem-erro-raca">
+            <div class="ui hidden negative message" id="mensagem-erro-raca" style="margin-top:15px">
                 <div class="content">
                     <i class="user icon"></i>
                     <span id="raca-erro"></span>
@@ -72,7 +76,7 @@
     <div class="fields">
         <div class="three wide field" id="validacao-cep">
             <label for="txtCep">CEP</label>
-            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000" onblur="validarCep()">
+            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000">
             <div class="ui hidden negative message" id="mensagem-erro-cep">
                 <div class="content">
                     <i class="map marker alternate icon"></i><span id="cep-erro"></span>
@@ -83,7 +87,7 @@
 
         <div class="ten wide field" id="validacao-endereco">
             <label for="txtEndereco">Endereço</label>
-            <input type="text" id="txtEndereco" name="txtEndereco" placeholder="Rua, Avenida..." onblur="validarEndereco()">
+            <input type="text" id="txtEndereco" name="txtEndereco" placeholder="Rua, Avenida...">
             <div class="ui hidden negative message" id="mensagem-erro-endereco">
                 <div class="content">
                     <i class="home icon"></i><span id="endereco-erro"></span>
@@ -93,7 +97,7 @@
 
         <div class="three wide field" id="validacao-numero">
             <label for="txtNumero">Número</label>
-            <input type="number" id="txtNumero" name="txtNumero" placeholder="Nº" onblur="validarNumero()">
+            <input type="number" id="txtNumero" name="txtNumero" placeholder="Nº">
             <div class="ui hidden negative message" id="mensagem-erro-numero">
                 <div class="content">
                     <i class="hashtag icon"></i><span id="numero-erro"></span>
@@ -106,7 +110,7 @@
     <div class="fields">
         <div class="ten wide field" id="validacao-bairro">
             <label for="txtBairro">Bairro</label>
-            <input type="text" id="txtBairro" name="txtBairro" placeholder="Bairro..." onblur="validarBairro()">
+            <input type="text" id="txtBairro" name="txtBairro" placeholder="Bairro...">
             <div class="ui hidden negative message" id="mensagem-erro-bairro">
                 <div class="content">
                     <i class="building outline icon"></i><span id="bairro-erro"></span>
@@ -116,7 +120,7 @@
 
         <div class="three wide field" id="validacao-cidade">
             <label for="txtCidade">Cidade</label>
-            <input type="text" id="txtCidade" name="txtCidade" placeholder="Americana..." onblur="validarCidade()">
+            <input type="text" id="txtCidade" name="txtCidade" placeholder="Americana...">
             <div class="ui hidden negative message" id="mensagem-erro-cidade">
                 <div class="content">
                     <i class="map outline icon"></i><span id="cidade-erro"></span>
