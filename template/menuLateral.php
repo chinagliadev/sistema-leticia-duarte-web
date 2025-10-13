@@ -1,7 +1,9 @@
 <?php
 require_once './config.php';
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
@@ -10,7 +12,6 @@ if (!isset($_SESSION['usuario'])) {
 
 $nome_usuario = $_SESSION['usuario']['nome'];
 $email_usuario = $_SESSION['usuario']['email'];
-
 ?>
 
 <!DOCTYPE html>
