@@ -74,9 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($usuario && password_verify($senha, $usuario['senha'])) {
-                // $_SESSION['usuario'] = $usuario['nome'];
-                // $_SESSION['usuario'] = $usuario['email'];
-
                 $_SESSION['usuario'] = [
                     'id' => $usuario['id_funcionario'],
                     'nome' => $usuario['nome'],
@@ -89,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['mensagem'] = [
                     'tipo' => 'error',
                     'titulo' => 'Erro!',
-                    'texto' => 'Usuário ou Senha incorretos!'
+                    'texto' => 'E-mail ou Senha incorretos!'
                 ];
                 header("Location: login.php");
                 exit;

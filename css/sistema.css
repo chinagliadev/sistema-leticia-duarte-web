@@ -302,3 +302,18 @@ select.ui.dropdown {
     color: black !important;
 }
 
+.sessao_cadastro {
+    padding: 30px !important;
+    border-radius: 15px !important;
+    background-color: #f9f9f9 !important;
+}
+
+.ui.form input[readonly] {
+    background-color: #f3f3f3 !important;
+    color: #555 !important;
+}
+
+.ui.form input:not([readonly]) {
+    background-color: #fff !important;
+    border: 1px solid #2185d0 !important;
+}
