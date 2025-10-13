@@ -76,7 +76,7 @@
     <div class="fields">
         <div class="three wide field" id="validacao-cep">
             <label for="txtCep">CEP</label>
-            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000">
+            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000" onblur="validarCep()">
             <div class="ui hidden negative message" id="mensagem-erro-cep">
                 <div class="content">
                     <i class="map marker alternate icon"></i><span id="cep-erro"></span>
@@ -139,14 +139,19 @@
         <div class="ten wide field">
             <label>Em caso de febre autoriza medicar a criança?</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" id="autorizacaoMed" name="autorizacaoMed">
+                <input type="checkbox" id="autorizacaoMed" name="autorizacaoMed" onchange="validarCampoGotas()">
                 <label></label>
             </div>
         </div>
 
-        <div class="three wide field oculto" id="fieldGotas">
+        <div class="three wide field oculto" id="camposGotas">
             <label for="txtGotas">Quantas gotas</label>
             <input type="number" id="txtGotas" name="txtGotas" placeholder="1, 2, 3...">
+            <div class="ui hidden negative message" id="mensagem-erro-gotas">
+                <div class="content">
+                    <i class=""></i><span id="gotas-erro"></span>
+                </div>
+            </div>
         </div>
 
         <div class="three wide field oculto" id="fieldRemedio">

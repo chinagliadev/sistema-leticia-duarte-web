@@ -316,3 +316,11 @@ select.ui.dropdown {
     border-radius: .28571429rem;
     box-shadow: 0 0 0 1px rgba(34, 36, 38, .22) inset, 0 0 0 0 transparent;
 }
+
+#mensagem-erro-tipo-responsavel-1 {
+    margin-top: 14.8px;
+}
+
+#mensagem-erro-estado-civil-1{
+    margin-top: 14.8px;
+}
