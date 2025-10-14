@@ -125,7 +125,6 @@ function validarRaca() {
 
     limparErro(mensagemErro, divRaca, spanErro);
 
-    // CORREÇÃO AQUI: 'inputRaca' JÁ É uma string, não precisa do .value
     if (inputRaca.trim() === '') {
         mensagemErroCampos(mensagemErro, divRaca, spanErro, 'Selecione a raça do aluno');
         return false;
@@ -224,7 +223,7 @@ function validarDataNascimento() {
     limparErro(mensagemErro, divData, spanErro);
 
     if (inputData === '') {
-        mensagemErroCampos(mensagemErro, divData, spanErro, 'Informe a data de nascimento');
+        mensagemErroCampos(mensagemErro, divData, spanErro, 'Informe a data');
         return false;
     }
 
@@ -439,15 +438,22 @@ function validarSalarioResponsavel1() {
     return true;
 }
 
-function ativarCampoRendaExtra() {
+function validarRendaExtra() {
     const possuiRenda = document.getElementById('toggleRendaExtra_1');
     const campoRendaExtra = document.getElementById('renda_extra_div');
+    const rendaExtra = document.getElementById('txtRendaExtra').value
+    const spanMensagemErro = document.getElementById('renda-extra-erro-1')
+    const divMensagemErro = document.getElementById('mensagem-erro-renda-extra-1')
 
     if (possuiRenda.checked) {
         campoRendaExtra.classList.remove('oculto');
-        
+        if(rendaExtra.trim() === ''){
+            mensagemErroCampos(divMensagemErro, campoRendaExtra, spanMensagemErro, 'Informe a renda extra')
+            console.log('Entrou')
+        }
     } else {
         campoRendaExtra.classList.add('oculto');
+        limparErro(divMensagemErro, campoRendaExtra, spanMensagemErro)
     }
 }
 
@@ -463,3 +469,25 @@ function validarResponsavel1() {
     const formularioValido = tipo && nome && data && estadoCivil && telefone && email && salario;
     return formularioValido;
 }
+
+function adicionarResponsavel(){
+    const responsavel2 = document.getElementById('responsavel_2')
+    const divBotaoResponsavel = document.getElementById('divBotaoResponsavel')
+    const divRemoverResponsavel = document.getElementById('divBotaoRemoverResponsavel')
+    responsavel2.classList.remove('oculto')
+    divBotaoResponsavel.classList.add('oculto')
+    divRemoverResponsavel.classList.remove('oculto')
+}
+
+function removerResponsavel(){
+    const divBotaoRemoverResponsavel = document.getElementById('divBotaoRemoverResponsavel')
+    const divBotaoResponsavel = document.getElementById('divBotaoResponsavel')
+    const responsavel_2 = document.getElementById('responsavel_2')
+
+    divBotaoRemoverResponsavel.classList.add('oculto')
+    divBotaoResponsavel.classList.remove('oculto')
+    responsavel_2.classList.add('oculto')
+
+}
+
+

@@ -121,6 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $horario_trabalho_1     = !empty($_POST['txtHorarioTrabalho_1']) ? $_POST['txtHorarioTrabalho_1'] : null;
     $salario_1              = !empty($_POST['txtSalario_1']) ? $_POST['txtSalario_1'] : null;
     $renda_extra_1          = isset($_POST['toggleRendaExtra_1']) ? 1 : 0;
+    $valor_renda_extra      = !empty($_POST['txtRendaExtra']) ? $_POST['txtRendaExtra'] : null;
 
 
     $responsavel_1_id = $responsavel->cadastrarResponsavel(
@@ -136,7 +137,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $telefone_trabalho_1,
         $horario_trabalho_1,
         $salario_1,
-        $renda_extra_1
+        $renda_extra_1,
+        $valor_renda_extra
     );
 
     if (!empty($_POST['txtNomeResponsavel_2'])) {
