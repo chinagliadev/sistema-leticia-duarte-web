@@ -1152,3 +1152,31 @@ function validarPessoaAutorizada2() {
    
     return true; 
 }
+
+async function validarFormularioCompleto() {
+    const alunoValido = await validarAluno();
+
+    const responsavel1Valido = validarResponsavel1();
+
+    const responsavel2Div = document.getElementById('responsavel_2');
+    let responsavel2Valido = true; // Assume true se estiver oculto
+
+    if (responsavel2Div && !responsavel2Div.classList.contains('oculto')) {
+        responsavel2Valido = validarResponsavel2();
+    }
+    
+    const autorizada1Valida = validarPessoaAutorizada1();
+
+    const autorizada2Valida = validarPessoaAutorizada2(); 
+
+    const formularioValido = alunoValido && 
+                             responsavel1Valido && 
+                             responsavel2Valido && 
+                             autorizada1Valida && 
+                             autorizada2Valida;
+    if(formularioValido){
+        alert('Formulario valido')
+    }else{
+        alert('Formulario invalido')
+    }
+}
