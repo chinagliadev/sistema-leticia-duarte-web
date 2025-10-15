@@ -1,5 +1,5 @@
 function mensagemErroCampos(div, input, span, mensagem) {
-    
+
     div.classList.remove('hidden');
     div.classList.add('visible', 'error');
 
@@ -51,7 +51,7 @@ function validarEndereco() {
     const spanErro = document.getElementById('endereco-erro');
 
     limparErro(mensagemErro, divEndereco, spanErro);
-    
+
     if (endereco.trim() === "") {
         mensagemErroCampos(mensagemErro, divEndereco, spanErro, 'Informe o endereço (rua)');
         return false;
@@ -73,7 +73,7 @@ function validarNumero() {
         mensagemErroCampos(mensagemErro, divNumero, spanNumero, 'Informe o número');
         return false;
     }
-    
+
     if (isNaN(parseInt(numero))) {
         mensagemErroCampos(mensagemErro, divNumero, spanNumero, 'O número deve ser um valor numérico');
         return false;
@@ -119,7 +119,7 @@ function validarCidade() {
 
 function validarRaca() {
     const divRaca = document.getElementById('divRaca');
-    const inputRaca = document.getElementById('txtRaca').value; 
+    const inputRaca = document.getElementById('txtRaca').value;
     const mensagemErro = document.getElementById('mensagem-erro-raca');
     const spanErro = document.getElementById('raca-erro');
 
@@ -180,7 +180,7 @@ async function validarCep() {
 
     console.log('ola')
 
-    let cep = $('#txtCep').val().replace(/\D/g, ''); 
+    let cep = $('#txtCep').val().replace(/\D/g, '');
 
     limparErro(mensagemErro, divCep, spanCep);
 
@@ -208,7 +208,7 @@ async function validarCep() {
 
     validarEndereco();
     validarBairro();
-    validarCidade(); 
+    validarCidade();
 
     limparErro(mensagemErro, divCep, spanCep);
     return true
@@ -227,11 +227,11 @@ function validarDataNascimento() {
         return false;
     }
 
-    const dataNascimento = new Date(inputData); 
+    const dataNascimento = new Date(inputData);
     const dataAtual = new Date();
-    
-    dataAtual.setHours(0, 0, 0, 0); 
-    
+
+    dataAtual.setHours(0, 0, 0, 0);
+
     if (isNaN(dataNascimento) || dataNascimento > dataAtual) {
         mensagemErroCampos(mensagemErro, divData, spanErro, 'A data de nascimento não pode ser futura ou inválida');
         return false;
@@ -241,31 +241,31 @@ function validarDataNascimento() {
     return true;
 }
 
-function validarCampoGotas(){
+function validarCampoGotas() {
     const autorizacaoRemedio = document.getElementById('autorizacaoMed');
     const campoGotas = document.getElementById('camposGotas')
     const mensagemErro = document.getElementById('mensagem-erro-gotas')
     const spanMensagem = document.getElementById('gotas-erro')
 
-    if(autorizacaoRemedio.checked === true){ 
+    if (autorizacaoRemedio.checked === true) {
         campoGotas.classList.remove('oculto')
         const gotas = document.getElementById('txtGotas').value
         const txtGotas = document.getElementById('txtGotas')
-        
-        if(gotas === ''){
-            mensagemErroCampos(mensagemErro, campoGotas, spanMensagem, 'Informe as quantidade de gotas' )
+
+        if (gotas === '') {
+            mensagemErroCampos(mensagemErro, campoGotas, spanMensagem, 'Informe as quantidade de gotas')
             console.log('')
             return false
         }
-            
+
     } else {
         campoGotas.classList.add('oculto')
-        limparErro(campoGotas, txtGotas, spanMensagem)    
-        return true    
+        limparErro(campoGotas, txtGotas, spanMensagem)
+        return true
     }
 }
 
-async function validarAluno(){ 
+async function validarAluno() {
     const validacaoNome = validarCampoNomeAluno();
     const validacaoEndereco = validarEndereco();
     const validacaoNumero = validarNumero();
@@ -275,8 +275,8 @@ async function validarAluno(){
     const validacaoTurma = validarTurma();
     const validacaoDataNascimento = validarDataNascimento();
     const validarGotas = validarCampoGotas();
-    
-    const validacaoCep = await validarCep(); 
+
+    const validacaoCep = await validarCep();
 
     const formularioValido = validacaoNome && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoCep && validacaoDataNascimento && validarGotas;
 
@@ -447,7 +447,7 @@ function validarRendaExtra() {
 
     if (possuiRenda.checked) {
         campoRendaExtra.classList.remove('oculto');
-        if(rendaExtra.trim() === ''){
+        if (rendaExtra.trim() === '') {
             mensagemErroCampos(divMensagemErro, campoRendaExtra, spanMensagemErro, 'Informe a renda extra')
             console.log('Entrou')
         }
@@ -470,7 +470,7 @@ function validarResponsavel1() {
     return formularioValido;
 }
 
-function adicionarResponsavel(){
+function adicionarResponsavel() {
     const responsavel2 = document.getElementById('responsavel_2')
     const divBotaoResponsavel = document.getElementById('divBotaoResponsavel')
     const divRemoverResponsavel = document.getElementById('divBotaoRemoverResponsavel')
@@ -479,7 +479,7 @@ function adicionarResponsavel(){
     divRemoverResponsavel.classList.remove('oculto')
 }
 
-function removerResponsavel(){
+function removerResponsavel() {
     const divBotaoRemoverResponsavel = document.getElementById('divBotaoRemoverResponsavel')
     const divBotaoResponsavel = document.getElementById('divBotaoResponsavel')
     const responsavel_2 = document.getElementById('responsavel_2')
@@ -490,4 +490,221 @@ function removerResponsavel(){
 
 }
 
+function validarRendaExtraResponsavel2() {
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+    const possuiRenda = document.getElementById('toggleRendaExtra_2');
+    const campoRendaExtra = document.getElementById('renda_extra_div_2');
+    const rendaExtra = document.getElementById('txtRendaExtra_2').value
+    const spanMensagemErro = document.getElementById('renda-extra-erro-2')
+    const divMensagemErro = document.getElementById('mensagem-erro-renda-extra-2')
+
+    if (possuiRenda.checked) {
+        campoRendaExtra.classList.remove('oculto');
+        if (rendaExtra.trim() === '') {
+            mensagemErroCampos(divMensagemErro, campoRendaExtra, spanMensagemErro, 'Informe a renda extra')
+        }
+    } else {
+        campoRendaExtra.classList.add('oculto');
+        limparErro(divMensagemErro, campoRendaExtra, spanMensagemErro)
+    }
+}
+
+function validarTipoResponsavel2() {
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+    const div = document.getElementById('tipo_responsavel_2_div');
+    const valor = document.getElementById('txtTipoResponsavel_2').value;
+    const mensagemErro = document.getElementById('mensagem_erro_tipo_responsavel_2');
+    const spanErro = document.getElementById('tipo_responsavel_erro_2');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione o tipo do responsável');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+
+}
+
+
+function validarNomeResponsavel2() {
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+    const div = document.getElementById('nome_responsavel_div_2');
+    const valor = document.getElementById('txtNomeResponsavel_2').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-nome-responsavel-2');
+    const spanErro = document.getElementById('nome-responsavel-erro-2');
+    const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o nome do responsável');
+        return false;
+    }
+
+    if (!regexNome.test(valor)) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'O nome não deve conter números ou símbolos');
+        return false;
+    }
+
+    if (valor.split(' ').length < 2) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o nome completo (nome e sobrenome)');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+
+function validarDataNascimentoResponsavel2() {
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+    const div = document.getElementById('data_nascimento_responsavel_2_div');
+    const valor = document.getElementById('txtDataNascimento_2').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-data-responsavel-2');
+    const spanErro = document.getElementById('data-responsavel-erro-2');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe a data de nascimento');
+        return false;
+    }
+
+    const dataNascimento = new Date(valor);
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    if (isNaN(dataNascimento) || dataNascimento > hoje) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Data de nascimento inválida ou futura');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+
+function validarEstadoCivilResponsavel2() {
+
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+    const div = document.getElementById('estado_civil_responsavel_2_div');
+    const valor = document.getElementById('txtEstadoCivil_2').value;
+    const mensagemErro = document.getElementById('mensagem-erro-estado-civil-2');
+    const spanErro = document.getElementById('estado-civil-erro-2');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione o estado civil');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+
+function validarTelefoneResponsavel2() {
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+    const div = document.getElementById('telefone_responsavel_2_div');
+    const valor = document.getElementById('txtTelefone_2').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-telefone-2');
+    const spanErro = document.getElementById('telefone-erro-2');
+    const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o telefone do responsável');
+        return false;
+    }
+
+    if (!regexTelefone.test(valor)) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Formato de telefone inválido. Ex: (19) 99999-9999');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+
+}
+
+
+function validarEmailResponsavel2() {
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+    const div = document.getElementById('salario_responsavel_2_div');
+    const valor = document.getElementById('txtSalario_2').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-salario-2');
+    const spanErro = document.getElementById('salario-erro-2');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do responsável');
+        return false;
+    }
+
+    if (isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe um valor numérico válido');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+
+function validarSalarioResponsavel2() {
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+    const div = document.getElementById('salario_responsavel_div');
+    const valor = document.getElementById('txtSalario_2').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-salario-2');
+    const spanErro = document.getElementById('salario-erro-2');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do responsável');
+        return false;
+    }
+
+    if (isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe um valor numérico válido');
+        return false;
+    }
+
+    return true;
+}
+
+function validarResponsavel2() {
+    const tipo = validarTipoResponsavel2();
+    const nome = validarNomeResponsavel2();
+    const data = validarDataNascimentoResponsavel2();
+    const estadoCivil = validarEstadoCivilResponsavel2();
+    const telefone = validarTelefoneResponsavel2();
+    const email = validarEmailResponsavel2();
+    const salario = validarSalarioResponsavel2();
+    const rendaExtra = validarRendaExtraResponsavel2();
+
+    return tipo && nome && data && estadoCivil && telefone && email && salario && rendaExtra;
+}
 

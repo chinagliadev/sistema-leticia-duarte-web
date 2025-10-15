@@ -19,7 +19,7 @@
                     <option value="Outro">Outro</option>
                 </select>
                 <div id="mensagem-erro-tipo-responsavel-1" class="ui hidden message error">
-                    <span id="tipo-responsavel-erro-1"></span>
+                    <span id="tipo-responsavel-erro-1" class="mensagem-margin"></span>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                     <option value="Viuvo">Viúvo</option>
                 </select>
                 <div id="mensagem-erro-estado-civil-1" class="ui hidden message error">
-                    <span id="estado-civil-erro-1"></span>
+                    <span id="estado-civil-erro-1" class="mensagem-margin"></span>
                 </div>
             </div>
 
@@ -131,7 +131,7 @@
         <h2>Responsavel 2</h2>
         <div class="fields">
 
-            <div class="four wide field" id="tipo_responsavel_div">
+            <div class="four wide field" id="tipo_responsavel_2_div">
                 <label for="txtTipoResponsavel_2">Tipo do responsável</label>
                 <select class="ui search dropdown" id="txtTipoResponsavel_2" name="txtTipoResponsavel_2">
                     <option value="" disabled selected hidden>Selecione o tipo</option>
@@ -146,11 +146,11 @@
                     <option value="Outro">Outro</option>
                 </select>
                 <div id="mensagem_erro_tipo_responsavel_2" class="ui hidden message error">
-                    <span id="tipo_responsavel_erro-2"></span>
+                    <span id="tipo_responsavel_erro_2"></span>
                 </div>
             </div>
 
-            <div class="eight wide field" id="nome_responsavel_div">
+            <div class="eight wide field" id="nome_responsavel_div_2">
                 <label for="txtNomeResponsavel_2">Nome do Responsável</label>
                 <input type="text" id="txtNomeResponsavel_2" name="txtNomeResponsavel_2" placeholder="">
                 <div id="mensagem-erro-nome-responsavel-2" class="ui hidden message error">
@@ -158,7 +158,7 @@
                 </div>
             </div>
 
-            <div class="four wide field" id="data_nascimento_responsavel_div">
+            <div class="four wide field" id="data_nascimento_responsavel_2_div">
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_2">
                     <div class="ui input">
@@ -173,7 +173,7 @@
 
         <div class="fields">
 
-            <div class="four wide field" id="estado_civil_responsavel_div">
+            <div class="four wide field" id="estado_civil_responsavel_2_div">
                 <label for="txtEstadoCivil_2">Estado Civil</label>
                 <select class="ui search dropdown" id="txtEstadoCivil_2" name="txtEstadoCivil_2">
                     <option value="" disabled selected hidden>Selecione o estado civil</option>
@@ -187,7 +187,7 @@
                 </div>
             </div>
 
-            <div class="four wide field" id="telefone_responsavel_div">
+            <div class="four wide field" id="telefone_responsavel_2_div">
                 <label for="txtTelefone_2">Telefone</label>
                 <input type="text" id="txtTelefone_2" name="txtTelefone_2" placeholder="(19) 99999-9999">
                 <div id="mensagem-erro-telefone-2" class="ui hidden message error">
@@ -195,7 +195,7 @@
                 </div>
             </div>
 
-            <div class="eight wide field" id="email_responsavel_div">
+            <div class="eight wide field" id="email_responsavel_2_div">
                 <label for="txtEmail_2">Email</label>
                 <input type="email" id="txtEmail_2" name="txtEmail_2" placeholder="exemplo@email.com">
                 <div id="mensagem-erro-email-2" class="ui hidden message error">
@@ -227,7 +227,7 @@
                 <input type="text" id="txtHorarioTrabalho_2" name="txtHorarioTrabalho_2" placeholder="8h">
             </div>
 
-            <div class="four wide field" id="salario_responsavel_div">
+            <div class="four wide field" id="salario_responsavel_2_div">
                 <label for="txtSalario_2">Salário do responsável</label>
                 <input type="number" id="txtSalario_2" name="txtSalario_2" placeholder="R$1500,00...">
                 <div id="mensagem-erro-salario-2" class="ui hidden message error">
@@ -238,7 +238,7 @@
             <div class="four wide field" id="renda_extra_responsavel_div">
                 <label for="toggleRendaExtra_2">Possui Renda Extra?</label>
                 <div class="ui toggle checkbox">
-                    <input type="checkbox" id="toggleRendaExtra_2" name="toggleRendaExtra_2" onchange="validarRendaExtra()">
+                    <input type="checkbox" id="toggleRendaExtra_2" name="toggleRendaExtra_2" onchange="validarRendaExtraResponsavel2()">
                     <label></label>
                 </div>
             </div>
