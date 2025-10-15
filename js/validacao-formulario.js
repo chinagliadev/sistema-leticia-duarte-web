@@ -708,3 +708,360 @@ function validarResponsavel2() {
     return tipo && nome && data && estadoCivil && telefone && email && salario && rendaExtra;
 }
 
+function validarBolsaFamilia() {
+    const possuiBolsaFamilia = document.getElementById('toggle-bolsa-familia');
+    const divBolsaFamilia = document.getElementById('valor-bolsa-field');
+    const valorBolsaFamilia = document.getElementById('valor_bolsa_familia').value
+    const spanMensagemErro = document.getElementById('bolsa-familia-erro')
+    const divMensagemErro = document.getElementById('mensagem-erro-bolsa-familia')
+
+    if (possuiBolsaFamilia.checked) {
+        divBolsaFamilia.classList.remove('oculto');
+        if (valorBolsaFamilia.trim() === '') {
+            mensagemErroCampos(divMensagemErro, divBolsaFamilia, spanMensagemErro, 'Informe o valor da bolsa familia')
+            return false
+        }
+    } else {
+        divBolsaFamilia.classList.add('oculto');
+        limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro)
+        return false
+    }
+
+    return true
+}
+
+function validarConvenioMedico() {
+    const possuiConvenio = document.getElementById('toggle-convenio');
+    const divConvenio = document.getElementById('qual-convenio-field');
+    const qualConvenio = document.getElementById('qual_convenio').value
+    const spanMensagemErro = document.getElementById('convenio-erro')
+    const divMensagemErro = document.getElementById('mensagem-erro-convenio')
+
+    if (possuiConvenio.checked) {
+        divConvenio.classList.remove('oculto');
+        if (qualConvenio.trim() === '') {
+            mensagemErroCampos(divMensagemErro, divConvenio, spanMensagemErro, 'Informe qual convenio medico')
+            return false
+        }
+    } else {
+        divConvenio.classList.add('oculto');
+        limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro)
+        return false
+    }
+    return true
+}
+
+function validarNecessidadeEspecial() {
+    const possuiNecessidadeEspecial = document.getElementById('toggle-necessidade-especial');
+    const divNecessidade = document.getElementById('qual-necessidade');
+    const necessidadeEspecial = document.getElementById('necessidade_especial').value
+    const spanMensagemErro = document.getElementById('necessidade-erro')
+    const divMensagemErro = document.getElementById('mensagem-erro-necessidade')
+
+    if (possuiNecessidadeEspecial.checked) {
+        divNecessidade.classList.remove('oculto');
+        if (necessidadeEspecial.trim() === '') {
+            mensagemErroCampos(divMensagemErro, divNecessidade, spanMensagemErro, 'Informe a necessidade especial')
+            return false
+        }
+    } else {
+        divNecessidade.classList.add('oculto');
+        limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro)
+        return false
+    }
+    return true
+}
+
+function validarAlergia() {
+    const possuiAlergia = document.getElementById('toggle-alergia');
+    const divAlergia = document.getElementById('especifique-alergia');
+    const alergia = document.getElementById('qual_alergia').value
+    const spanMensagemErro = document.getElementById('alergia-erro')
+    const divMensagemErro = document.getElementById('mensagem-erro-alergia')
+
+    if (possuiAlergia.checked) {
+        divAlergia.classList.remove('oculto');
+        if (alergia.trim() === '') {
+            mensagemErroCampos(divMensagemErro, divAlergia, spanMensagemErro, 'Informe a necessidade especial')
+            return false
+        }
+    } else {
+        divAlergia.classList.add('oculto');
+        limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro)
+        return false
+    }
+    return true
+}
+
+function validarNomeAutorizada() {
+    const nomeAutorizada = document.getElementById("txtNomePessoaAutorizada").value.trim();
+    const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-nomeAutorizada');
+    const spanMensagem = document.getElementById('nomeAutorizada-erro');
+    const inputNome = document.getElementById("div_nome_autorizada");
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+
+    if (nomeAutorizada === "") {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome do parente");
+        return false;
+    }
+
+    if (!regexNome.test(nomeAutorizada)) {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "O nome não deve conter números ou símbolos");
+        return false;
+    }
+
+    if (nomeAutorizada.split(" ").length < 2) {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome completo (nome e sobrenome)");
+        return false;
+    }
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+    return true;
+}
+
+function validarCpfAutorizada() {
+    const cpfAutorizada = document.getElementById("txtCpfAutorizada").value.trim();
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-cpf');
+    const spanMensagem = document.getElementById('cpf-erro');
+    const inputCpf = document.getElementById("div_cpf_autorizada");
+
+    limparErro(divMensagem, inputCpf, spanMensagem);
+
+    if (cpfAutorizada === '') {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'Informe o CPF');
+        return false;
+    }
+
+    if (!regexCpf.test(cpfAutorizada)) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'Informe um CPF no formato válido (xxx.xxx.xxx-xx)');
+        return false;
+    }
+
+    const cpf = cpfAutorizada.replace(/[^\d]+/g, '');
+
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    let soma = 0;
+    let resto;
+
+    for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    return true;
+}
+
+function validarTelefoneAutorizada() {
+    const div = document.getElementById('div_telefone_autorizada');
+    const telefone = document.getElementById('txtTelefoneAutorizada').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-telefone-autorizada');
+    const spanErro = document.getElementById('telefone-autorizada-erro');
+    const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (telefone === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o telefone do parente autorizado');
+        return false;
+    }
+
+    if (!regexTelefone.test(telefone)) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Formato de telefone inválido. Ex: (19) 99999-9999');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+function validarParentesco() {
+    const div = document.getElementById('div_parentesco');
+    const valor = document.getElementById('txtParentesco').value;
+    const mensagemErro = document.getElementById('mensagem-erro-parentesco-autorizada');
+    const spanErro = document.getElementById('parentesco-autorizada-erro');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione o parentesco do aluno');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+function adicionarPessoaAutorizada() {
+    const autorizada2 = document.getElementById('autorizada-2')
+    const btnAdicionarAutorizada = document.getElementById('div_autorizada')
+    const btnRemoverAutorizada = document.getElementById('btnRemoverAutorizada')
+    autorizada2.classList.remove('oculto')
+    btnAdicionarAutorizada.classList.add('oculto')
+    btnRemoverAutorizada.classList.remove('oculto')
+}
+
+function removerPessoaAutorizada() {
+    const btnRemoverAutorizada = document.getElementById('btnRemoverAutorizada')
+    const btnAdicionarAutorizada = document.getElementById('div_autorizada')
+    const autorizada2 = document.getElementById('autorizada-2')
+
+    btnRemoverAutorizada.classList.add('oculto')
+    btnAdicionarAutorizada.classList.remove('oculto')
+    autorizada2.classList.add('oculto')
+
+}
+
+function validarNomeParentesco2() {
+    const autorizada2 = document.getElementById('autorizada-2');
+    if (autorizada2.classList.contains('oculto')) return true;
+
+    const nomeAutorizada2 = document.getElementById("txtNomePessoaAutorizada2").value.trim();
+    const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-nomeAutorizada2');
+    const spanMensagem = document.getElementById('nomeAutorizada2-erro');
+    const inputNome = document.getElementById("div_nome_autorizada2");
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+
+    if (nomeAutorizada2 === "") {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome do segundo parente");
+        return false;
+    }
+
+    if (!regexNome.test(nomeAutorizada2)) {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "O nome não deve conter números ou símbolos");
+        return false;
+    }
+
+    if (nomeAutorizada2.split(" ").length < 2) {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome completo (nome e sobrenome)");
+        return false;
+    }
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+    return true;
+
+}
+
+function validarCpfAutorizada2() {
+    const autorizada2 = document.getElementById('autorizada-2');
+    if (autorizada2.classList.contains('oculto')) return true;
+
+    const txtCpfAutorizada2 = document.getElementById("txtCpfAutorizada2").value.trim();
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-cpf2');
+    const spanMensagem = document.getElementById('cpf2-erro');
+    const inputCpf = document.getElementById("div_cpf_autorizada2");
+
+    limparErro(divMensagem, inputCpf, spanMensagem);
+
+    if (txtCpfAutorizada2 === '') {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'Informe o CPF');
+        return false;
+    }
+
+    if (!regexCpf.test(txtCpfAutorizada2)) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'Informe um CPF no formato válido (xxx.xxx.xxx-xx)');
+        return false;
+    }
+
+    const cpf = txtCpfAutorizada2.replace(/[^\d]+/g, '');
+
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    let soma = 0;
+    let resto;
+
+    for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    return true;
+}
+
+function validarTelefoneAutorizada2() {
+    const autorizada2 = document.getElementById('autorizada-2');
+    if (autorizada2.classList.contains('oculto')) return true;
+
+
+    const div = document.getElementById('div_telefone_autorizada2');
+    const telefone = document.getElementById('txtTelefoneAutorizada2').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-telefone2-autorizada');
+    const spanErro = document.getElementById('telefone-autorizada2-erro');
+    const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (telefone === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o telefone do parente autorizado');
+        return false;
+    }
+
+    if (!regexTelefone.test(telefone)) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Formato de telefone inválido. Ex: (19) 99999-9999');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+function validarParentesco2() {
+    const div = document.getElementById('div_parentesco2');
+    const valor = document.getElementById('txtParentenco2').value;
+    const mensagemErro = document.getElementById('mensagem-erro-parentesco-autorizada2');
+    const spanErro = document.getElementById('parentesco-autorizada-erro2');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione o parentesco do aluno');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}

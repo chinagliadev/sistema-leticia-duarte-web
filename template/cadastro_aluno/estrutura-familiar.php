@@ -4,7 +4,7 @@
         <div class="four wide field">
             <label>Pais vivem juntos</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" name="pais_vivem_juntos"> 
+                <input type="checkbox" name="pais_vivem_juntos">
                 <label></label>
             </div>
         </div>
@@ -15,13 +15,18 @@
         <div class="four wide field">
             <label>Recebe bolsa família</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" name="recebe_bolsa_familia" id="toggle-bolsa-familia"> 
+                <input type="checkbox" name="recebe_bolsa_familia" id="toggle-bolsa-familia" onchange="validarBolsaFamilia()">
                 <label></label>
             </div>
         </div>
-        <div class="four wide field" id="valor-bolsa-field">
+        <div class="four wide field oculto" id="valor-bolsa-field">
             <label>Valor</label>
-            <input type="number" placeholder="R$" name="valor"> 
+            <input type="number" placeholder="R$" name="valor" id="valor_bolsa_familia">
+            <div class="ui hidden negative message" id="mensagem-erro-bolsa-familia">
+                <div class="content">
+                    <i class="user icon"></i><span id="bolsa-familia-erro"></span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -29,24 +34,34 @@
         <div class="four wide field">
             <label>Possui alergia</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" name="possui_alergia" id="toggle-alergia">
+                <input type="checkbox" name="possui_alergia" id="toggle-alergia" onchange="validarAlergia()">
                 <label></label>
             </div>
         </div>
-        <div class="four wide field" id="especifique-alergia-field">
+        <div class="four wide field oculto" id="especifique-alergia">
             <label>Especifique</label>
-            <input type="text" placeholder="" name="especifique_alergia"> 
+            <input type="text" placeholder="" name="especifique_alergia" id="qual_alergia">
+            <div class="ui hidden negative message" id="mensagem-erro-alergia">
+                <div class="content">
+                    <i class="heartbeat icon"></i><span id="alergia-erro"></span>
+                </div>
+            </div>
         </div>
         <div class="four wide field">
             <label>Possui convênio</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" name="possui_convenio" id="toggle-convenio">
+                <input type="checkbox" name="possui_convenio" id="toggle-convenio" onchange="validarConvenioMedico()">
                 <label></label>
             </div>
         </div>
-        <div class="four wide field" id="qual-convenio-field">
+        <div class="four wide field oculto" id="qual-convenio-field">
             <label>Qual convênio</label>
-            <input type="text" placeholder="" name="qual_convenio">
+            <input type="text" placeholder="" name="qual_convenio" id="qual_convenio">
+            <div class="ui hidden negative message" id="mensagem-erro-convenio">
+                <div class="content">
+                    <i class="heartbeat icon"></i><span id="convenio-erro"></span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -54,13 +69,18 @@
         <div class="four wide field">
             <label>Portador de alguma necessidade especial</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" name="portador_necessidade_especial" id="toggle-necessidade-especial">
+                <input type="checkbox" name="portador_necessidade_especial" id="toggle-necessidade-especial" onchange="validarNecessidadeEspecial()">
                 <label></label>
             </div>
         </div>
-        <div class="four wide field" id="qual-necessidade">
+        <div class="four wide field oculto" id="qual-necessidade">
             <label>Qual</label>
-            <input type="text" placeholder="" name="qual_necessidade">
+            <input type="text" placeholder="" name="qual_necessidade" id="necessidade_especial">
+            <div class="ui hidden negative message" id="mensagem-erro-necessidade">
+                <div class="content">
+                    <i class="heartbeat icon"></i><span id="necessidade-erro"></span>
+                </div>
+            </div>
         </div>
         <div class="four wide field">
             <label>Problemas de visão</label>
