@@ -142,7 +142,7 @@
                 </button>
             </div>
             <div class="right floated column">
-                <button type="button" onclick="validarFormulario()" id="btn-salvar-dados" class="ui green icon button right floated">
+                <button type="button" onclick="validarAluno();validarResponsavel1();validarResponsavel2();validarPessoaAutorizada1();validarPessoaAutorizada2()" id="btn-salvar-dados" class="ui green icon button right floated">
                     <i class="save icon"></i> Salvar Cadastro
                 </button>
             </div>
