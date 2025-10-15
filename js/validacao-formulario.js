@@ -1168,14 +1168,14 @@ function validarEstruturaFamiliar() {
         alergiaValida;
 
     if (!estruturaFamiliarValida) {
-        console.warn('⚠️ Estrutura familiar inválida. Verifique os seguintes campos:', {
+        console.warn('Estrutura familiar inválida. Verifique os seguintes campos:', {
             bolsaFamilia: bolsaFamiliaValida,
             convenioMedico: convenioValido,
             necessidadeEspecial: necessidadeEspecialValida,
             alergia: alergiaValida
         });
     } else {
-        console.log('✅ Estrutura familiar válida.');
+        console.log('Estrutura familiar válida.');
     }
 
     return estruturaFamiliarValida;
@@ -1192,7 +1192,7 @@ async function validarFormularioCompleto() {
     if (!responsavel1Valido) erros.push('Responsável 1');
 
     const responsavel2Div = document.getElementById('responsavel_2');
-    let responsavel2Valido = true; // Assume válido se oculto
+    let responsavel2Valido = true;
     if (responsavel2Div && !responsavel2Div.classList.contains('oculto')) {
         responsavel2Valido = validarResponsavel2();
         if (!responsavel2Valido) erros.push('Responsável 2');
@@ -1216,11 +1216,11 @@ async function validarFormularioCompleto() {
         estruturaFamiliarValida;
 
     if (formularioValido) {
-        console.log('✅ Formulário válido!');
+        console.log('Formulário válido!');
         $('#modal-salvar-dados').modal('show');
         alert('Formulário válido');
     } else {
-        console.warn('⚠️ Formulário inválido. Seções com erro:', erros);
+        console.warn('Formulário inválido. Seções com erro:', erros);
         $('#modal_formulario_invalido').modal('show');
     }
 }
