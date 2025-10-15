@@ -25,7 +25,7 @@
 
             <div class="eight wide field" id="nome_responsavel_div">
                 <label for="txtNomeResponsavel_1">Nome do Responsável</label>
-                <input type="text" id="txtNomeResponsavel_1" name="txtNomeResponsavel_1" placeholder="">
+                <input type="text" id="txtNomeResponsavel_1" name="txtNomeResponsavel_1" placeholder="" onblur="validarNomeResponsavel1()">
                 <div id="mensagem-erro-nome-responsavel-1" class="ui hidden message error">
                     <span id="nome-responsavel-erro-1"></span>
                 </div>
@@ -35,7 +35,7 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_1">
                     <div class="ui input">
-                        <input type="date" id="txtDataNascimento_1" name="txtDataNascimento_1" placeholder="dd/mm/aaaa">
+                        <input type="date" id="txtDataNascimento_1" name="txtDataNascimento_1" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
                     </div>
                 </div>
                 <div id="mensagem-erro-data-responsavel-1" class="ui hidden message error">
@@ -62,7 +62,7 @@
 
             <div class="four wide field" id="telefone_responsavel_div">
                 <label for="txtTelefone_1">Telefone</label>
-                <input type="text" id="txtTelefone_1" name="txtTelefone_1" placeholder="(19) 99999-9999">
+                <input type="text" id="txtTelefone_1" name="txtTelefone_1" placeholder="(19) 99999-9999" onblur=" validarTelefoneResponsavel1()">
                 <div id="mensagem-erro-telefone-1" class="ui hidden message error">
                     <span id="telefone-erro-1"></span>
                 </div>
@@ -70,7 +70,7 @@
 
             <div class="eight wide field" id="email_responsavel_div">
                 <label for="txtEmail_1">Email</label>
-                <input type="email" id="txtEmail_1" name="txtEmail_1" placeholder="exemplo@email.com">
+                <input type="email" id="txtEmail_1" name="txtEmail_1" placeholder="exemplo@email.com" onblur="validarEmailResponsavel1()">
                 <div id="mensagem-erro-email-1" class="ui hidden message error">
                     <span id="email-erro-1"></span>
                 </div>
@@ -102,7 +102,7 @@
 
             <div class="four wide field" id="salario_responsavel_div">
                 <label for="txtSalario_1">Salário do responsável</label>
-                <input type="number" id="txtSalario_1" name="txtSalario_1" placeholder="R$1500,00...">
+                <input type="number" id="txtSalario_1" name="txtSalario_1" placeholder="R$1500,00..." onblur="validarSalarioResponsavel1()">
                 <div id="mensagem-erro-salario-1" class="ui hidden message error">
                     <span id="salario-erro-1"></span>
                 </div>
@@ -117,7 +117,7 @@
             </div>
             <div class="four wide field oculto" id="renda_extra_div">
                 <label for="txtRendaEnxtra">Valor da renda extra</label>
-                <input type="number" id="txtRendaExtra" name="txtRendaExtra">
+                <input type="number" id="txtRendaExtra" name="txtRendaExtra" onblur="validarRendaExtra()">
                 <div id="mensagem-erro-renda-extra-1" class="ui hidden message error">
                     <span id="renda-extra-erro-1"></span>
                 </div>
@@ -152,7 +152,7 @@
 
             <div class="eight wide field" id="nome_responsavel_div_2">
                 <label for="txtNomeResponsavel_2">Nome do Responsável</label>
-                <input type="text" id="txtNomeResponsavel_2" name="txtNomeResponsavel_2" placeholder="">
+                <input type="text" id="txtNomeResponsavel_2" name="txtNomeResponsavel_2" placeholder="" onblur="validarNomeResponsavel2()">
                 <div id="mensagem-erro-nome-responsavel-2" class="ui hidden message error">
                     <span id="nome-responsavel-erro-2"></span>
                 </div>
@@ -162,7 +162,7 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_2">
                     <div class="ui input">
-                        <input type="date" id="txtDataNascimento_2" name="txtDataNascimento_2" placeholder="dd/mm/aaaa">
+                        <input type="date" id="txtDataNascimento_2" name="txtDataNascimento_2" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel2()">
                     </div>
                 </div>
                 <div id="mensagem-erro-data-responsavel-2" class="ui hidden message error">
@@ -189,7 +189,7 @@
 
             <div class="four wide field" id="telefone_responsavel_2_div">
                 <label for="txtTelefone_2">Telefone</label>
-                <input type="text" id="txtTelefone_2" name="txtTelefone_2" placeholder="(19) 99999-9999">
+                <input type="text" id="txtTelefone_2" name="txtTelefone_2" placeholder="(19) 99999-9999" onblur="validarTelefoneResponsavel2()">
                 <div id="mensagem-erro-telefone-2" class="ui hidden message error">
                     <span id="telefone-erro-2"></span>
                 </div>
@@ -197,7 +197,7 @@
 
             <div class="eight wide field" id="email_responsavel_2_div">
                 <label for="txtEmail_2">Email</label>
-                <input type="email" id="txtEmail_2" name="txtEmail_2" placeholder="exemplo@email.com">
+                <input type="email" id="txtEmail_2" name="txtEmail_2" placeholder="exemplo@email.com" onblur="validarEmailResponsavel2()">
                 <div id="mensagem-erro-email-2" class="ui hidden message error">
                     <span id="email-erro-2"></span>
                 </div>
@@ -227,7 +227,7 @@
                 <input type="text" id="txtHorarioTrabalho_2" name="txtHorarioTrabalho_2" placeholder="8h">
             </div>
 
-            <div class="four wide field" id="salario_responsavel_2_div">
+            <div class="four wide field" id="salario_responsavel_2_div" onblur="validarSalarioResponsavel2()">
                 <label for="txtSalario_2">Salário do responsável</label>
                 <input type="number" id="txtSalario_2" name="txtSalario_2" placeholder="R$1500,00...">
                 <div id="mensagem-erro-salario-2" class="ui hidden message error">
@@ -244,7 +244,7 @@
             </div>
             <div class="four wide field oculto" id="renda_extra_div_2">
                 <label for="txtRendaExtra_2">Valor da renda extra</label>
-                <input type="number" id="txtRendaExtra_2" name="txtRendaExtra_2">
+                <input type="number" id="txtRendaExtra_2" name="txtRendaExtra_2" onblur="validarRendaExtraResponsavel2()">
                 <div id="mensagem-erro-renda-extra-2" class="ui hidden message error">
                     <span id="renda-extra-erro-2"></span>
                 </div>

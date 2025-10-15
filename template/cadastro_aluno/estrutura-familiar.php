@@ -21,7 +21,7 @@
         </div>
         <div class="four wide field oculto" id="valor-bolsa-field">
             <label>Valor</label>
-            <input type="number" placeholder="R$" name="valor" id="valor_bolsa_familia">
+            <input type="number" placeholder="R$" name="valor" id="valor_bolsa_familia" onblur="validarBolsaFamilia()">
             <div class="ui hidden negative message" id="mensagem-erro-bolsa-familia">
                 <div class="content">
                     <i class="user icon"></i><span id="bolsa-familia-erro"></span>
@@ -40,7 +40,7 @@
         </div>
         <div class="four wide field oculto" id="especifique-alergia">
             <label>Especifique</label>
-            <input type="text" placeholder="" name="especifique_alergia" id="qual_alergia">
+            <input type="text" placeholder="" name="especifique_alergia" id="qual_alergia" onblur="validarAlergia()">
             <div class="ui hidden negative message" id="mensagem-erro-alergia">
                 <div class="content">
                     <i class="heartbeat icon"></i><span id="alergia-erro"></span>
@@ -75,7 +75,7 @@
         </div>
         <div class="four wide field oculto" id="qual-necessidade">
             <label>Qual</label>
-            <input type="text" placeholder="" name="qual_necessidade" id="necessidade_especial">
+            <input type="text" placeholder="" name="qual_necessidade" id="necessidade_especial" onblur="validarNecessidadeEspecial()">
             <div class="ui hidden negative message" id="mensagem-erro-necessidade">
                 <div class="content">
                     <i class="heartbeat icon"></i><span id="necessidade-erro"></span>
