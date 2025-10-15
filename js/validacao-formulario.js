@@ -173,8 +173,8 @@ function validarRemedio() {
     } else {
         campoRemedio.classList.add('oculto')
         limparErro(campoRemedio, txtGotas, spanMensagem)
-        return true
     }
+    return true
 }
 
 async function buscarCep(cep) {
@@ -289,8 +289,8 @@ function validarCampoGotas() {
     } else {
         campoGotas.classList.add('oculto')
         limparErro(campoGotas, txtGotas, spanMensagem)
-        return true
     }
+    return true
 }
 
 
@@ -515,6 +515,7 @@ function validarRendaExtraResponsavel2() {
         campoRendaExtra.classList.add('oculto');
         limparErro(divMensagemErro, campoRendaExtra, spanMensagemErro)
     }
+    return true
 }
 
 function validarTipoResponsavel2() {
@@ -717,92 +718,93 @@ function validarResponsavel2() {
 function validarBolsaFamilia() {
     const possuiBolsaFamilia = document.getElementById('toggle-bolsa-familia');
     const divBolsaFamilia = document.getElementById('valor-bolsa-field');
-    const valorBolsaFamilia = document.getElementById('valor_bolsa_familia').value
-    const spanMensagemErro = document.getElementById('bolsa-familia-erro')
-    const divMensagemErro = document.getElementById('mensagem-erro-bolsa-familia')
+    const valorBolsaFamilia = document.getElementById('valor_bolsa_familia').value;
+    const spanMensagemErro = document.getElementById('bolsa-familia-erro');
+    const divMensagemErro = document.getElementById('mensagem-erro-bolsa-familia');
 
     if (possuiBolsaFamilia.checked) {
         divBolsaFamilia.classList.remove('oculto');
         if (valorBolsaFamilia.trim() === '') {
-            mensagemErroCampos(divMensagemErro, divBolsaFamilia, spanMensagemErro, 'Informe o valor da bolsa familia')
-            return false
+            mensagemErroCampos(divMensagemErro, divBolsaFamilia, spanMensagemErro, 'Informe o valor da bolsa familia');
+            return false;
         } else {
-            limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro)
+            limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro);
+            return true;
         }
     } else {
         divBolsaFamilia.classList.add('oculto');
-        limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro)
-        return false
+        limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro);
+        return true; // não marcado => válido
     }
-
-    return true
 }
 
 function validarConvenioMedico() {
     const possuiConvenio = document.getElementById('toggle-convenio');
     const divConvenio = document.getElementById('qual-convenio-field');
-    const qualConvenio = document.getElementById('qual_convenio').value
-    const spanMensagemErro = document.getElementById('convenio-erro')
-    const divMensagemErro = document.getElementById('mensagem-erro-convenio')
+    const qualConvenio = document.getElementById('qual_convenio').value;
+    const spanMensagemErro = document.getElementById('convenio-erro');
+    const divMensagemErro = document.getElementById('mensagem-erro-convenio');
 
     if (possuiConvenio.checked) {
         divConvenio.classList.remove('oculto');
         if (qualConvenio.trim() === '') {
-            mensagemErroCampos(divMensagemErro, divConvenio, spanMensagemErro, 'Informe qual convenio medico')
-            return false
+            mensagemErroCampos(divMensagemErro, divConvenio, spanMensagemErro, 'Informe qual convenio medico');
+            return false;
+        } else {
+            limparErro(divMensagemErro, divConvenio, spanMensagemErro);
+            return true;
         }
     } else {
         divConvenio.classList.add('oculto');
-        limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro)
-        return false
+        limparErro(divMensagemErro, divConvenio, spanMensagemErro);
+        return true; // não marcado => válido
     }
-    return true
 }
 
 function validarNecessidadeEspecial() {
     const possuiNecessidadeEspecial = document.getElementById('toggle-necessidade-especial');
     const divNecessidade = document.getElementById('qual-necessidade');
-    const necessidadeEspecial = document.getElementById('necessidade_especial').value
-    const spanMensagemErro = document.getElementById('necessidade-erro')
-    const divMensagemErro = document.getElementById('mensagem-erro-necessidade')
+    const necessidadeEspecial = document.getElementById('necessidade_especial').value;
+    const spanMensagemErro = document.getElementById('necessidade-erro');
+    const divMensagemErro = document.getElementById('mensagem-erro-necessidade');
 
     if (possuiNecessidadeEspecial.checked) {
         divNecessidade.classList.remove('oculto');
         if (necessidadeEspecial.trim() === '') {
-            mensagemErroCampos(divMensagemErro, divNecessidade, spanMensagemErro, 'Informe a necessidade especial')
-            return false
+            mensagemErroCampos(divMensagemErro, divNecessidade, spanMensagemErro, 'Informe a necessidade especial');
+            return false;
         } else {
-            limparErro(divMensagemErro, divNecessidade, spanMensagemErro)
+            limparErro(divMensagemErro, divNecessidade, spanMensagemErro);
+            return true;
         }
     } else {
         divNecessidade.classList.add('oculto');
-        limparErro(divMensagemErro, divNecessidade, spanMensagemErro)
-        return false
+        limparErro(divMensagemErro, divNecessidade, spanMensagemErro);
+        return true; // não marcado => válido
     }
-    return true
 }
 
 function validarAlergia() {
     const possuiAlergia = document.getElementById('toggle-alergia');
     const divAlergia = document.getElementById('especifique-alergia');
-    const alergia = document.getElementById('qual_alergia').value
-    const spanMensagemErro = document.getElementById('alergia-erro')
-    const divMensagemErro = document.getElementById('mensagem-erro-alergia')
+    const alergia = document.getElementById('qual_alergia').value;
+    const spanMensagemErro = document.getElementById('alergia-erro');
+    const divMensagemErro = document.getElementById('mensagem-erro-alergia');
 
     if (possuiAlergia.checked) {
         divAlergia.classList.remove('oculto');
         if (alergia.trim() === '') {
-            mensagemErroCampos(divMensagemErro, divAlergia, spanMensagemErro, 'Informe a alergia')
-            return false
+            mensagemErroCampos(divMensagemErro, divAlergia, spanMensagemErro, 'Informe a alergia');
+            return false;
         } else {
-            limparErro(divMensagemErro, divAlergia, spanMensagemErro)
+            limparErro(divMensagemErro, divAlergia, spanMensagemErro);
+            return true;
         }
     } else {
         divAlergia.classList.add('oculto');
-        limparErro(divMensagemErro, divAlergia, spanMensagemErro)
-        return false
+        limparErro(divMensagemErro, divAlergia, spanMensagemErro);
+        return true; // não marcado => válido
     }
-    return true
 }
 
 function validarNomeAutorizada() {
@@ -1153,30 +1155,73 @@ function validarPessoaAutorizada2() {
     return true;
 }
 
+function validarEstruturaFamiliar() {
+    const bolsaFamiliaValida = validarBolsaFamilia();
+    const convenioValido = validarConvenioMedico();
+    const necessidadeEspecialValida = validarNecessidadeEspecial();
+    const alergiaValida = validarAlergia();
+
+    const estruturaFamiliarValida =
+        bolsaFamiliaValida &&
+        convenioValido &&
+        necessidadeEspecialValida &&
+        alergiaValida;
+
+    if (!estruturaFamiliarValida) {
+        console.warn('⚠️ Estrutura familiar inválida. Verifique os seguintes campos:', {
+            bolsaFamilia: bolsaFamiliaValida,
+            convenioMedico: convenioValido,
+            necessidadeEspecial: necessidadeEspecialValida,
+            alergia: alergiaValida
+        });
+    } else {
+        console.log('✅ Estrutura familiar válida.');
+    }
+
+    return estruturaFamiliarValida;
+}
+
+
 async function validarFormularioCompleto() {
+    const erros = []; 
+
     const alunoValido = await validarAluno();
+    if (!alunoValido) erros.push('Aluno');
 
     const responsavel1Valido = validarResponsavel1();
+    if (!responsavel1Valido) erros.push('Responsável 1');
 
     const responsavel2Div = document.getElementById('responsavel_2');
-    let responsavel2Valido = true; // Assume true se estiver oculto
-
+    let responsavel2Valido = true; // Assume válido se oculto
     if (responsavel2Div && !responsavel2Div.classList.contains('oculto')) {
         responsavel2Valido = validarResponsavel2();
+        if (!responsavel2Valido) erros.push('Responsável 2');
     }
 
     const autorizada1Valida = validarPessoaAutorizada1();
+    if (!autorizada1Valida) erros.push('Pessoa Autorizada 1');
 
     const autorizada2Valida = validarPessoaAutorizada2();
+    if (!autorizada2Valida) erros.push('Pessoa Autorizada 2');
 
-    const formularioValido = alunoValido &&
+    const estruturaFamiliarValida = validarEstruturaFamiliar();
+    if (!estruturaFamiliarValida) erros.push('Estrutura Familiar');
+
+    const formularioValido =
+        alunoValido &&
         responsavel1Valido &&
         responsavel2Valido &&
         autorizada1Valida &&
-        autorizada2Valida;
+        autorizada2Valida &&
+        estruturaFamiliarValida;
+
     if (formularioValido) {
+        console.log('✅ Formulário válido!');
         $('#modal-salvar-dados').modal('show');
+        alert('Formulário válido');
     } else {
+        console.warn('⚠️ Formulário inválido. Seções com erro:', erros);
         $('#modal_formulario_invalido').modal('show');
     }
 }
+

@@ -56,7 +56,7 @@
         </div>
         <div class="four wide field oculto" id="qual-convenio-field">
             <label>Qual convênio</label>
-            <input type="text" placeholder="" name="qual_convenio" id="qual_convenio">
+            <input type="text" placeholder="" name="qual_convenio" id="qual_convenio" onblur="validarConvenioMedico()">
             <div class="ui hidden negative message" id="mensagem-erro-convenio">
                 <div class="content">
                     <i class="heartbeat icon"></i><span id="convenio-erro"></span>

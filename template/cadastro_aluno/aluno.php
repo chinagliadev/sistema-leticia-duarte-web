@@ -14,7 +14,7 @@
         <div class="three wide field" id="validacao-turma">
             <label for="txtTurma">Turma</label>
             <div class="ui selection dropdown" id="divTurma">
-                <input type="hidden" name="turma" id="txtTurma">
+                <input type="hidden" name="turma" id="txtTurma" onchange="validarTurma()">
                 <i class="dropdown icon"></i>
                 <div class="default text">Selecione a turma</div>
                 <div class="menu">
