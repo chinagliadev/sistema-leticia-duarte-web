@@ -1,12 +1,8 @@
 $(document).ready(function () {
     $('.ui.dropdown').dropdown();
 
-    $("#btn-salvar-dados").on("click", function (e) {
-        e.preventDefault();
-        $('#modal-salvar-dados').modal('show');
-    });
 
-    $('.ui.basic.modal .ok.button').on("click", function () {
+    $('#modal-salvar-dados .ok.button').on("click", function () {
         $('#formulario-aluno').submit();
     });
 

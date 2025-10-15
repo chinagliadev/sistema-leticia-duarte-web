@@ -12,6 +12,8 @@
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.js"></script>
+
+
         
         <script src="./js/semantic_ui.js"></script>
         <script src="./js/validacao-formulario.js"></script>
@@ -45,6 +47,7 @@
                 </form>
 
                 <?php include './template/modal/modal-salvar-dados.php'?>
+                <?php include './template/modal/modal-formulario-invalido.php'?>
                 
             </section>
         </main>

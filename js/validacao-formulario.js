@@ -1138,19 +1138,19 @@ function validarPessoaAutorizada2() {
     if (autorizada2 && autorizada2.classList.contains('oculto')) {
         return true;
     }
-    
-  
+
+
     if (autorizada2) {
-        const nome = validarNomeParentesco2(); 
+        const nome = validarNomeParentesco2();
         const cpf = validarCpfAutorizada2();
         const telefone = validarTelefoneAutorizada2();
         const parentesco = validarParentesco2();
-        
+
         return nome && cpf && telefone && parentesco;
     }
-    
-   
-    return true; 
+
+
+    return true;
 }
 
 async function validarFormularioCompleto() {
@@ -1164,19 +1164,19 @@ async function validarFormularioCompleto() {
     if (responsavel2Div && !responsavel2Div.classList.contains('oculto')) {
         responsavel2Valido = validarResponsavel2();
     }
-    
+
     const autorizada1Valida = validarPessoaAutorizada1();
 
-    const autorizada2Valida = validarPessoaAutorizada2(); 
+    const autorizada2Valida = validarPessoaAutorizada2();
 
-    const formularioValido = alunoValido && 
-                             responsavel1Valido && 
-                             responsavel2Valido && 
-                             autorizada1Valida && 
-                             autorizada2Valida;
-    if(formularioValido){
-        alert('Formulario valido')
-    }else{
-        alert('Formulario invalido')
+    const formularioValido = alunoValido &&
+        responsavel1Valido &&
+        responsavel2Valido &&
+        autorizada1Valida &&
+        autorizada2Valida;
+    if (formularioValido) {
+        $('#modal-salvar-dados').modal('show');
+    } else {
+        $('#modal_formulario_invalido').modal('show');
     }
 }
