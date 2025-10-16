@@ -9,6 +9,24 @@ $sql = "SELECT * FROM tb_funcionario WHERE id_funcionario = ?";
 $stmt = $conn->prepare($sql);
 $stmt->execute([$id]);
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$sqlHist = "
+    SELECT 
+        m.id_matricula,
+        a.nome AS nome_aluno,
+        r1.nome AS responsavel_1,
+        r2.nome AS responsavel_2,
+        m.data
+    FROM tb_matricula m
+    LEFT JOIN tb_alunos a ON m.aluno_id = a.ra_aluno
+    LEFT JOIN tb_responsaveis r1 ON m.responsavel_1_id = r1.id_responsavel
+    LEFT JOIN tb_responsaveis r2 ON m.responsavel_2_id = r2.id_responsavel
+    WHERE m.funcionario_id = ?
+    ORDER BY m.data DESC
+";
+$stmtHist = $conn->prepare($sqlHist);
+$stmtHist->execute([$id]);
+$historico = $stmtHist->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -45,37 +63,72 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             <section class="sessao_cadastro ui segment blue">
                 <?php if ($usuario): ?>
                     <div class="ui two column stackable grid">
-                        <div class="column">
+                        <div class="ten wide column">
                             <div class="ui card fluid">
                                 <div class="content">
-                                    <a class="header"><?= htmlspecialchars($usuario['nome']) ?></a>
+                                    <a class="header"><?= ($usuario['nome']) ?></a>
                                     <div class="meta">
-                                        <span>ID: <?= htmlspecialchars($usuario['id_funcionario']) ?></span>
+                                        <span>ID: <?= ($usuario['id_funcionario']) ?></span>
                                     </div>
                                 </div>
                             </div>
+                            <div class="ui segment">
+                                <h4 class="ui dividing header">
+                                    <i class="history icon"></i>
+                                    Histórico de Matrículas
+                                </h4>
+                                <div class="ui very basic segment" style="max-height: 280px; overflow-y: auto;">
+                                    <?php if (count($historico) > 0): ?>
+                                        <table class="ui celled striped compact small table">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID Matrícula</th>
+                                                    <th>Aluno</th>
+                                                    <th>Responsável 1</th>
+                                                    <th>Responsável 2</th>
+                                                    <th>Data</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($historico as $row): ?>
+                                                    <tr>
+                                                        <td><?= ($row['id_matricula']) ?></td>
+                                                        <td><?= ($row['nome_aluno'] ?? '---') ?></td>
+                                                        <td><?= ($row['responsavel_1'] ?? 'Nenhum cadastrado') ?></td>
+                                                        <td><?= ($row['responsavel_2'] ?? 'Nenhum cadastrado') ?></td>
+                                                        <td><?= $row['data'] ? date('d/m/Y H:i', strtotime($row['data'])) : '---' ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    <?php else: ?>
+                                        <div class="ui message">
+                                            <div class="header">Nenhum histórico encontrado</div>
+                                            <p>Este usuário ainda não cadastrou nenhuma matrícula.</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="column">
+                        <div class="six wide column">
                             <form class="ui form" method="POST" action="salvarPerfil.php" id="formPerfil">
                                 <div class="field">
                                     <label>Nome</label>
-                                    <input type="text" name="nome" value="<?= htmlspecialchars($usuario['nome']) ?>" readonly required>
+                                    <input type="text" name="nome" value="<?= ($usuario['nome']) ?>" readonly required>
                                 </div>
                                 <div class="field">
                                     <label>Email</label>
-                                    <input type="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>" readonly required>
+                                    <input type="email" name="email" value="<?= ($usuario['email']) ?>" readonly required>
                                 </div>
                                 <div class="field">
                                     <label>Celular</label>
-                                    <input type="text" id="celular" name="celular" value="<?= htmlspecialchars($usuario['celular']) ?>" readonly required>
+                                    <input type="text" id="celular" name="celular" value="<?= ($usuario['celular']) ?>" readonly required>
                                 </div>
                                 <div class="field">
                                     <label>CPF</label>
-                                    <input type="text" id="cpf" name="cpf" value="<?= htmlspecialchars($usuario['cpf']) ?>" readonly required>
+                                    <input type="text" id="cpf" name="cpf" value="<?= ($usuario['cpf']) ?>" readonly required>
                                 </div>
 
-                                <!-- Mensagem de erro do Semantic -->
                                 <div class="ui error message"></div>
 
                                 <input type="hidden" name="id_funcionario" value="<?= $usuario['id_funcionario'] ?>">
@@ -96,92 +149,7 @@ $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             </section>
         </main>
     </section>
-
-    <script>
-        // Máscaras
-        $('#celular').mask('(00) 00000-0000');
-        $('#cpf').mask('000.000.000-00');
-
-        // Função de validação do CPF
-        function validarCPF(cpf) {
-            cpf = cpf.replace(/\D/g, "");
-            if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
-            for (let j = 9; j < 11; j++) {
-                let soma = cpf
-                    .slice(0, j)
-                    .split("")
-                    .reduce((acc, n, i) => acc + n * (j + 1 - i), 0);
-                let resto = (soma * 10) % 11 % 10;
-                if (resto != cpf[j]) return false;
-            }
-            return true;
-        }
-
-        // Validação do formulário Semantic UI
-        $('#formPerfil').form({
-            fields: {
-                nome: {
-                    identifier: 'nome',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'O nome não pode ficar em branco.'
-                    }]
-                },
-                email: {
-                    identifier: 'email',
-                    rules: [{
-                        type: 'regExp[/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$/]',
-                        prompt: 'Insira um e-mail válido (ex: usuario@dominio.com).'
-                    }]
-                },
-                celular: {
-                    identifier: 'celular',
-                    rules: [{
-                        type: 'regExp[/^\\(\\d{2}\\) \\d{5}-\\d{4}$/]',
-                        prompt: 'Digite o celular completo no formato (99) 99999-9999.'
-                    }]
-                },
-                cpf: {
-                    identifier: 'cpf',
-                    rules: [
-                        {
-                            type: 'regExp[/^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$/]',
-                            prompt: 'Digite um CPF no formato correto 000.000.000-00.'
-                        },
-                        {
-                            type: 'callback',
-                            callback: function(value) {
-                                return validarCPF(value);
-                            },
-                            prompt: 'CPF inválido!'
-                        }
-                    ]
-                }
-            },
-            inline: true,
-            on: 'blur'
-        });
-
-        // Botão editar/salvar
-        $('#editarPerfil').on('click', function() {
-            const inputs = $('input[name]:not([type="hidden"])');
-            const isEditing = !inputs.prop('readonly');
-
-            if (isEditing) {
-                if ($('#formPerfil').form('is valid')) {
-                    $('#formPerfil').submit();
-                } else {
-                    $('#formPerfil').form('validate form');
-                }
-            } else {
-                inputs.prop('readonly', false);
-                $(this)
-                    .removeClass('primary')
-                    .addClass('green')
-                    .html('<i class="save icon"></i> Salvar');
-            }
-        });
-    </script>
+    <script src="./js/perfil.js"></script>
 </body>
 
 </html>
