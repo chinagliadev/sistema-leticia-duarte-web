@@ -298,7 +298,7 @@ select.ui.dropdown {
     color: black !important;
 }
 
-.ui .message {
+.ui.message {
     position: relative;
     min-height: 1em;
     margin: 0;
