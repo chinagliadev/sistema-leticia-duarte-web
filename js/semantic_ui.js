@@ -38,5 +38,13 @@ $(document).ready(function () {
     $('#txtCpfAutorizada').mask('000.000.000-00');
     $('#txtTelefoneAutorizada').mask('(00) 00000-0000');
     $('#txtTelefoneAutorizada2').mask('(00) 00000-0000');
+    $('#txtTelefoneTrabalho_2').mask('(00) 00000-0000');
+    $('#txtDataNascimento').mask('00/00/0000');
+    $('#txtDataNascimento_1').mask('00/00/0000');
+    $('#txtDataNascimento_2').mask('00/00/0000');
+   $('#txtSalario_1').mask('000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
+   $('#txtSalario_2').mask('R$ 000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
+   $('#txtRendaExtra').mask('R$ 000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
+   $('#txtRendaExtra_2').mask('R$ 000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
 
 });

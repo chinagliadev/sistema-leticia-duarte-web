@@ -159,7 +159,7 @@ function validarRemedio() {
 
     if (autorizacaoRemedio.checked === true) {
         campoRemedio.classList.remove('oculto')
-        const txtRemedio = document.getElementById('txtGotas').value
+        const txtRemedio = document.getElementById('txtRemedio').value
 
         if (txtRemedio === '') {
             mensagemErroCampos(mensagemErro, campoRemedio, spanMensagem, 'Informe as quantidade de gotas')
@@ -173,6 +173,33 @@ function validarRemedio() {
     } else {
         campoRemedio.classList.add('oculto')
         limparErro(campoRemedio, txtGotas, spanMensagem)
+    }
+    return true
+}
+
+function validarCampoGotas() {
+    const autorizacaoRemedio = document.getElementById('autorizacaoMed');
+    const campoGotas = document.getElementById('camposGotas')
+    const mensagemErro = document.getElementById('mensagem-erro-gotas')
+    const spanMensagem = document.getElementById('gotas-erro')
+
+    if (autorizacaoRemedio.checked === true) {
+        campoGotas.classList.remove('oculto')
+        const gotas = document.getElementById('txtGotas').value
+        const txtGotas = document.getElementById('txtGotas')
+
+        if (gotas === '') {
+            mensagemErroCampos(mensagemErro, campoGotas, spanMensagem, 'Informe as quantidade de gotas')
+            console.log('')
+            return false
+        } else {
+            limparErro(campoGotas, txtGotas, spanMensagem)
+            mensagemErro.classList.remove('visible')
+        }
+
+    } else {
+        campoGotas.classList.add('oculto')
+        limparErro(campoGotas, txtGotas, spanMensagem)
     }
     return true
 }
@@ -265,34 +292,6 @@ function validarDataNascimento() {
     limparErro(mensagemErro, divData, spanErro);
     return true;
 }
-
-function validarCampoGotas() {
-    const autorizacaoRemedio = document.getElementById('autorizacaoMed');
-    const campoGotas = document.getElementById('camposGotas')
-    const mensagemErro = document.getElementById('mensagem-erro-gotas')
-    const spanMensagem = document.getElementById('gotas-erro')
-
-    if (autorizacaoRemedio.checked === true) {
-        campoGotas.classList.remove('oculto')
-        const gotas = document.getElementById('txtGotas').value
-        const txtGotas = document.getElementById('txtGotas')
-
-        if (gotas === '') {
-            mensagemErroCampos(mensagemErro, campoGotas, spanMensagem, 'Informe as quantidade de gotas')
-            console.log('')
-            return false
-        } else {
-            limparErro(campoGotas, txtGotas, spanMensagem)
-            mensagemErro.classList.remove('visible')
-        }
-
-    } else {
-        campoGotas.classList.add('oculto')
-        limparErro(campoGotas, txtGotas, spanMensagem)
-    }
-    return true
-}
-
 
 
 
@@ -682,7 +681,7 @@ function validarSalarioResponsavel2() {
     const responsavel2 = document.getElementById('responsavel_2');
     if (responsavel2.classList.contains('oculto')) return true;
 
-    const div = document.getElementById('salario_responsavel_div');
+    const div = document.getElementById('salario_responsavel_2_div');
     const valor = document.getElementById('txtSalario_2').value.trim();
     const mensagemErro = document.getElementById('mensagem-erro-salario-2');
     const spanErro = document.getElementById('salario-erro-2');
@@ -690,7 +689,7 @@ function validarSalarioResponsavel2() {
     limparErro(mensagemErro, div, spanErro);
 
     if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do responsável');
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do segundo responsavel');
         return false;
     }
 

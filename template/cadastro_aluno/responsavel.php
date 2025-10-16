@@ -102,7 +102,7 @@
 
             <div class="four wide field" id="salario_responsavel_div">
                 <label for="txtSalario_1">Salário do responsável</label>
-                <input type="number" id="txtSalario_1" name="txtSalario_1" placeholder="R$1500,00..." onblur="validarSalarioResponsavel1()">
+                <input type="text" id="txtSalario_1" name="txtSalario_1" placeholder="R$1500,00..." onblur="validarSalarioResponsavel1()">
                 <div id="mensagem-erro-salario-1" class="ui hidden message error">
                     <span id="salario-erro-1"></span>
                 </div>
@@ -117,7 +117,7 @@
             </div>
             <div class="four wide field oculto" id="renda_extra_div">
                 <label for="txtRendaEnxtra">Valor da renda extra</label>
-                <input type="number" id="txtRendaExtra" name="txtRendaExtra" onblur="validarRendaExtra()">
+                <input type="text" id="txtRendaExtra" name="txtRendaExtra" onblur="validarRendaExtra()">
                 <div id="mensagem-erro-renda-extra-1" class="ui hidden message error">
                     <span id="renda-extra-erro-1"></span>
                 </div>
@@ -227,9 +227,9 @@
                 <input type="text" id="txtHorarioTrabalho_2" name="txtHorarioTrabalho_2" placeholder="8h">
             </div>
 
-            <div class="four wide field" id="salario_responsavel_2_div" onblur="validarSalarioResponsavel2()">
+            <div class="four wide field" id="salario_responsavel_2_div">
                 <label for="txtSalario_2">Salário do responsável</label>
-                <input type="number" id="txtSalario_2" name="txtSalario_2" placeholder="R$1500,00...">
+                <input type="text" id="txtSalario_2" name="txtSalario_2" placeholder="R$1500,00..." onblur="validarSalarioResponsavel2()">
                 <div id="mensagem-erro-salario-2" class="ui hidden message error">
                     <span id="salario-erro-2"></span>
                 </div>
@@ -244,7 +244,7 @@
             </div>
             <div class="four wide field oculto" id="renda_extra_div_2">
                 <label for="txtRendaExtra_2">Valor da renda extra</label>
-                <input type="number" id="txtRendaExtra_2" name="txtRendaExtra_2" onblur="validarRendaExtraResponsavel2()">
+                <input type="text" id="txtRendaExtra_2" name="txtRendaExtra_2" onblur="validarRendaExtraResponsavel2()">
                 <div id="mensagem-erro-renda-extra-2" class="ui hidden message error">
                     <span id="renda-extra-erro-2"></span>
                 </div>
