@@ -21,7 +21,7 @@
         </div>
         <div class="four wide field oculto" id="valor-bolsa-field">
             <label>Valor</label>
-            <input type="number" placeholder="R$" name="valor" id="valor_bolsa_familia" onblur="validarBolsaFamilia()">
+            <input type="text" placeholder="R$" name="valor" id="valor_bolsa_familia" onblur="validarBolsaFamilia()">
             <div class="ui hidden negative message" id="mensagem-erro-bolsa-familia">
                 <div class="content">
                     <i class="user icon"></i><span id="bolsa-familia-erro"></span>
