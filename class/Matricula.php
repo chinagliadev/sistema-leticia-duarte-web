@@ -16,13 +16,8 @@ class Matricula
         $usuario = $_ENV['USUARIO'];
         $senha = $_ENV['SENHA'];
 
-        // ALTERAÇÃO CRUCIAL: Configura o PDO para retornar sempre arrays associativos
-        $this->conn = new PDO($dsn, $usuario, $senha, [
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC 
-        ]);
+        $this->conn = new PDO($dsn, $usuario, $senha);
         
-        // Configuração de erro (opcional, mas recomendado)
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public function cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id, $responsavel_2_id = null)

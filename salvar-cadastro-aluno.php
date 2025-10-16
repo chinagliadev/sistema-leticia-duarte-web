@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $qual_necessidade_especial     = $_POST['qual_necessidade'] ?? null;
     $problemas_visao               = isset($_POST['problema_visao']) ? 1 : 0;
     $ja_fez_cirurgia               = isset($_POST['cirurgia']) ? 1 : 0;
+    $qual_cirurgia                 = $_POST['qual_cirurgia'] ?? null;
     $vacina_catapora_varicela      = isset($_POST['vacina_catapora']) ? 1 : 0;
 
     $numero_filhos               = $_POST['numero_filhos'] ?? null;
@@ -83,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $qual_necessidade_especial,
         $problemas_visao,
         $ja_fez_cirurgia,
+        $qual_cirurgia,
         $vacina_catapora_varicela,
         $doenca_anemia,
         $doenca_bronquite,
@@ -121,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $horario_trabalho_1     = !empty($_POST['txtHorarioTrabalho_1']) ? $_POST['txtHorarioTrabalho_1'] : null;
     $salario_1              = !empty($_POST['txtSalario_1']) ? $_POST['txtSalario_1'] : null;
     $renda_extra_1          = isset($_POST['toggleRendaExtra_1']) ? 1 : 0;
+    $valor_renda_extra      = !empty($_POST['txtRendaExtra']) ? $_POST['txtRendaExtra'] : null;
 
 
     $responsavel_1_id = $responsavel->cadastrarResponsavel(
@@ -136,7 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $telefone_trabalho_1,
         $horario_trabalho_1,
         $salario_1,
-        $renda_extra_1
+        $renda_extra_1,
+        $valor_renda_extra
     );
 
     if (!empty($_POST['txtNomeResponsavel_2'])) {
@@ -153,6 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $horario_trabalho_2     = !empty($_POST['txtHorarioTrabalho_2']) ? $_POST['txtHorarioTrabalho_2'] : null;
         $salario_2              = !empty($_POST['txtSalario_2']) ? $_POST['txtSalario_2'] : null;
         $renda_extra_2          = isset($_POST['toggleRendaExtra_2']) ? 1 : 0;
+        $valor_renda_extra_2    = !empty($_POST['txtRendaExtra_2']) ? $_POST['txtRendaExtra_2'] : null;
 
         $responsavel_2_id = $responsavel->cadastrarResponsavel(
             $tipo_responsavel_2,
@@ -167,7 +172,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $telefone_trabalho_2,
             $horario_trabalho_2,
             $salario_2,
-            $renda_extra_2
+            $renda_extra_2,
+            $valor_renda_extra_2 
         );
     }
 
