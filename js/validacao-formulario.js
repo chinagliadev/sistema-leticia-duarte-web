@@ -204,70 +204,70 @@ function validarCampoGotas() {
     return true
 }
 
-async function buscarCep(cep) {
-    try {
-        if (cep.length !== 8) {
-            return false;
-        }
+// async function buscarCep(cep) {
+//     try {
+//         if (cep.length !== 8) {
+//             return false;
+//         }
 
-        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+//         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
 
-        if (!response.ok) {
-            throw new Error("Erro ao buscar o CEP.");
-        }
+//         if (!response.ok) {
+//             throw new Error("Erro ao buscar o CEP.");
+//         }
 
-        const dados = await response.json();
-        return dados;
+//         const dados = await response.json();
+//         return dados;
 
-    } catch (error) {
-        console.error("Erro na função buscarCep:", error);
-        return false;
-    }
-}
+//     } catch (error) {
+//         console.error("Erro na função buscarCep:", error);
+//         return false;
+//     }
+// }
 
-async function validarCep() {
-    const divCep = document.getElementById('validacao-cep');
-    const mensagemErro = document.getElementById('mensagem-erro-cep');
-    const spanCep = document.getElementById('cep-erro');
+// async function validarCep() {
+//     const divCep = document.getElementById('validacao-cep');
+//     const mensagemErro = document.getElementById('mensagem-erro-cep');
+//     const spanCep = document.getElementById('cep-erro');
 
-    console.log('ola')
+//     console.log('ola')
 
-    let cep = $('#txtCep').val().replace(/\D/g, '');
+//     let cep = $('#txtCep').val().replace(/\D/g, '');
 
-    limparErro(mensagemErro, divCep, spanCep);
+//     limparErro(mensagemErro, divCep, spanCep);
 
-    if (cep === '') {
-        mensagemErroCampos(mensagemErro, divCep, spanCep, 'Informe o CEP do aluno');
-        return false;
-    }
+//     if (cep === '') {
+//         mensagemErroCampos(mensagemErro, divCep, spanCep, 'Informe o CEP do aluno');
+//         return false;
+//     }
 
-    if (!/^\d{8}$/.test(cep)) {
-        mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP inválido. Digite 8 números.');
-        return false;
-    }
+//     if (!/^\d{8}$/.test(cep)) {
+//         mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP inválido. Digite 8 números.');
+//         return false;
+//     }
 
 
-    const dadosCep = await buscarCep(cep);
+//     const dadosCep = await buscarCep(cep);
 
-    if (!dadosCep || dadosCep.erro) {
-        mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP não encontrado.');
-        return false;
-    }
+//     if (!dadosCep || dadosCep.erro) {
+//         mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP não encontrado.');
+//         return false;
+//     }
 
-    document.getElementById('txtEndereco').value = dadosCep.logradouro;
-    document.getElementById('txtBairro').value = dadosCep.bairro;
-    document.getElementById('txtCidade').value = dadosCep.localidade;
+//     document.getElementById('txtEndereco').value = dadosCep.logradouro;
+//     document.getElementById('txtBairro').value = dadosCep.bairro;
+//     document.getElementById('txtCidade').value = dadosCep.localidade;
 
-    validarEndereco();
-    validarBairro();
-    validarCidade();
+//     validarEndereco();
+//     validarBairro();
+//     validarCidade();
 
-    limparErro(mensagemErro, divCep, spanCep);
-    return true
-}
+//     limparErro(mensagemErro, divCep, spanCep);
+//     return true
+// }
 
 function validarDataNascimento() {
-    const divData = document.getElementById('validacao-data-nascimento');
+const divData = document.getElementById('validacao-data-nascimento');
     const inputData = document.getElementById('txtDataNascimento').value.trim();
     const mensagemErro = document.getElementById('mensagem-erro-data-nascimento');
     const spanErro = document.getElementById('data-nascimento-erro');
@@ -279,12 +279,22 @@ function validarDataNascimento() {
         return false;
     }
 
-    const dataNascimento = new Date(inputData);
+    const partes = inputData.split('/');
+
+    const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
+    
+
     const dataAtual = new Date();
 
     dataAtual.setHours(0, 0, 0, 0);
 
-    if (isNaN(dataNascimento) || dataNascimento > dataAtual) {
+
+    const dataInvalida = isNaN(dataNascimento.getTime()) || 
+                         dataNascimento.getDate() != partes[0] ||
+                         dataNascimento.getMonth() + 1 != partes[1];
+
+
+    if (dataInvalida || dataNascimento > dataAtual) {
         mensagemErroCampos(mensagemErro, divData, spanErro, 'A data de nascimento não pode ser futura ou inválida');
         return false;
     }
@@ -353,11 +363,20 @@ function validarDataNascimentoResponsavel1() {
         return false;
     }
 
-    const dataNascimento = new Date(valor);
+    const partes = valor.split('/');
+    
+    const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
+    
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
-    if (isNaN(dataNascimento) || dataNascimento > hoje) {
+
+    const dataInvalida = isNaN(dataNascimento.getTime()) || 
+                         dataNascimento.getDate() != partes[0] ||
+                         dataNascimento.getMonth() + 1 != partes[1];
+
+
+    if (dataInvalida || dataNascimento > hoje) {
         mensagemErroCampos(mensagemErro, div, spanErro, 'Data de nascimento inválida ou futura');
         return false;
     }
@@ -573,7 +592,9 @@ function validarNomeResponsavel2() {
 
 function validarDataNascimentoResponsavel2() {
     const responsavel2 = document.getElementById('responsavel_2');
-    if (responsavel2.classList.contains('oculto')) return true;
+    if (responsavel2.classList.contains('oculto')) {
+        return true;
+    }
 
     const div = document.getElementById('data_nascimento_responsavel_2_div');
     const valor = document.getElementById('txtDataNascimento_2').value.trim();
@@ -587,11 +608,22 @@ function validarDataNascimentoResponsavel2() {
         return false;
     }
 
-    const dataNascimento = new Date(valor);
+    const partes = valor.split('/');
+
+    const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
+    
+    // ---------------------------------------------------------------
+
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
-    if (isNaN(dataNascimento) || dataNascimento > hoje) {
+
+    const dataInvalida = isNaN(dataNascimento.getTime()) || 
+                         dataNascimento.getDate() != partes[0] ||
+                         dataNascimento.getMonth() + 1 != partes[1];
+
+
+    if (dataInvalida || dataNascimento > hoje) {
         mensagemErroCampos(mensagemErro, div, spanErro, 'Data de nascimento inválida ou futura');
         return false;
     }
@@ -733,7 +765,7 @@ function validarBolsaFamilia() {
     } else {
         divBolsaFamilia.classList.add('oculto');
         limparErro(divMensagemErro, divBolsaFamilia, spanMensagemErro);
-        return true; // não marcado => válido
+        return true;
     }
 }
 
@@ -802,7 +834,30 @@ function validarAlergia() {
     } else {
         divAlergia.classList.add('oculto');
         limparErro(divMensagemErro, divAlergia, spanMensagemErro);
-        return true; // não marcado => válido
+        return true;
+    }
+}
+
+function validarCirurgia() {
+    const jaFezCirurgia = document.getElementById('toggle_cirurgia');
+    const divCirurgia = document.getElementById('divCirurgia');
+    const cirurgia = document.getElementById('cirurgia').value;
+    const spanMensagemErro = document.getElementById('cirurgia-erro');
+    const divMensagemErro = document.getElementById('mensagem-erro-cirurgia');
+
+    if (jaFezCirurgia.checked) {
+        divCirurgia.classList.remove('oculto');
+        if (cirurgia.trim() === '') {
+            mensagemErroCampos(divMensagemErro, divCirurgia, spanMensagemErro, 'Informe a cirurgia');
+            return false;
+        } else {
+            limparErro(divMensagemErro, divCirurgia, spanMensagemErro);
+            return true;
+        }
+    } else {
+        divCirurgia.classList.add('oculto');
+        limparErro(divMensagemErro, divCirurgia, spanMensagemErro);
+        return true;
     }
 }
 
@@ -1089,9 +1144,9 @@ async function validarAluno() {
     const validacaoDataNascimento = validarDataNascimento();
     const validarGotas = validarCampoGotas();
 
-    const validacaoCep = await validarCep();
+    // const validacaoCep = await validarCep();
 
-    const formularioValido = validacaoNome && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoCep && validacaoDataNascimento && validarGotas;
+    const formularioValido = validacaoNome && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoDataNascimento && validarGotas;
 
     return formularioValido;
 }
@@ -1182,7 +1237,7 @@ function validarEstruturaFamiliar() {
 
 
 async function validarFormularioCompleto() {
-    const erros = []; 
+    const erros = [];
 
     const alunoValido = await validarAluno();
     if (!alunoValido) erros.push('Aluno');

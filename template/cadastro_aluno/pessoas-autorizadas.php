@@ -34,7 +34,7 @@
         <div class="fields">
             <div class="four wide field" id="div_parentesco">
                 <label for="txtParentenco">Parentesco</label>
-                <select class="ui search dropdown" id="txtParentesco" name="txtParentenco">
+                <select class="ui search dropdown" id="txtParentesco" name="txtParentenco" onchange="validarParentesco()">
                     <option value="" disabled selected hidden>Selecione o parentesco</option>
                     <option value="Pai">Pai</option>
                     <option value="Mãe">Mãe</option>

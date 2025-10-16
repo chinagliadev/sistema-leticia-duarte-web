@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $qual_necessidade_especial     = $_POST['qual_necessidade'] ?? null;
     $problemas_visao               = isset($_POST['problema_visao']) ? 1 : 0;
     $ja_fez_cirurgia               = isset($_POST['cirurgia']) ? 1 : 0;
+    $qual_cirurgia                 = $_POST['qual_cirurgia'] ?? null;
     $vacina_catapora_varicela      = isset($_POST['vacina_catapora']) ? 1 : 0;
 
     $numero_filhos               = $_POST['numero_filhos'] ?? null;
@@ -83,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $qual_necessidade_especial,
         $problemas_visao,
         $ja_fez_cirurgia,
+        $qual_cirurgia,
         $vacina_catapora_varicela,
         $doenca_anemia,
         $doenca_bronquite,

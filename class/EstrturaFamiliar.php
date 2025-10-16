@@ -27,6 +27,7 @@ class EstruturaFamiliar
     $qual_necessidade_especial, 
     $problemas_visao,
     $ja_fez_cirurgia,
+    $qual_cirurgia,
     $vacina_catapora_varicela,
     $doenca_anemia,
     $doenca_bronquite,
@@ -52,7 +53,7 @@ class EstruturaFamiliar
 
     $sqlInserir = "INSERT INTO tb_estrutura_familiar (
         pais_vivem_juntos, numero_filhos, recebe_bolsa_familia, valor, possui_alergia, especifique_alergia,
-        possui_convenio, qual_convenio, portador_necessidade_especial, qual_necessidade_especial, problemas_visao, ja_fez_cirurgia, 
+        possui_convenio, qual_convenio, portador_necessidade_especial, qual_necessidade_especial, problemas_visao, ja_fez_cirurgia, qual_cirurgia,
         vacina_catapora_varicela, doenca_anemia, doenca_bronquite, doenca_cardiaca, 
         doenca_catapora, doenca_diabetes, doenca_hepatite, doenca_meningite, 
         doenca_pneumonia, doenca_caxumba, doenca_convulsao, doenca_dengue, 
@@ -61,7 +62,7 @@ class EstruturaFamiliar
     ) 
     VALUES (
         :pais_vivem_juntos, :numero_filhos, :recebe_bolsa_familia, :valor, :possui_alergia, :especifique_alergia,
-        :possui_convenio, :qual_convenio, :portador_necessidade_especial, :qual_necessidade_especial, :problemas_visao, :ja_fez_cirurgia, 
+        :possui_convenio, :qual_convenio, :portador_necessidade_especial, :qual_necessidade_especial, :problemas_visao, :ja_fez_cirurgia, :qual_cirurgia, 
         :vacina_catapora_varicela, :doenca_anemia, :doenca_bronquite, :doenca_cardiaca, 
         :doenca_catapora, :doenca_diabetes, :doenca_hepatite, :doenca_meningite, 
         :doenca_pneumonia, :doenca_caxumba, :doenca_convulsao, :doenca_dengue, 
@@ -84,6 +85,7 @@ class EstruturaFamiliar
         'qual_necessidade_especial' => $qual_necessidade_especial, 
         'problemas_visao' => $problemas_visao,
         'ja_fez_cirurgia' => $ja_fez_cirurgia,
+        'qual_cirurgia' => $qual_cirurgia,
         'vacina_catapora_varicela' => $vacina_catapora_varicela,
         'doenca_anemia' => $doenca_anemia,
         'doenca_bronquite' => $doenca_bronquite,

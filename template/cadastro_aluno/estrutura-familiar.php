@@ -73,15 +73,18 @@
                 <label></label>
             </div>
         </div>
+
         <div class="four wide field oculto" id="qual-necessidade">
             <label>Qual</label>
-            <input type="text" placeholder="" name="qual_necessidade" id="necessidade_especial" onblur="validarNecessidadeEspecial()">
+            <input type="text" name="qual_necessidade" id="necessidade_especial" placeholder="" onblur="validarNecessidadeEspecial()">
             <div class="ui hidden negative message" id="mensagem-erro-necessidade">
                 <div class="content">
-                    <i class="heartbeat icon"></i><span id="necessidade-erro"></span>
+                    <i class="heartbeat icon"></i>
+                    <span id="necessidade-erro"></span>
                 </div>
             </div>
         </div>
+
         <div class="four wide field">
             <label>Problemas de visão</label>
             <div class="ui toggle checkbox">
@@ -89,11 +92,27 @@
                 <label></label>
             </div>
         </div>
+
+
+    </div>
+
+    <div class="fields">
         <div class="four wide field">
             <label>Já fez cirurgia</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" name="ja_fez_cirurgia">
+                <input type="checkbox" id="toggle_cirurgia" name="ja_fez_cirurgia" onchange="validarCirurgia()">
                 <label></label>
+            </div>
+        </div>
+
+        <div class="four wide field oculto" id="divCirurgia">
+            <label>Qual</label>
+            <input type="text" name="qual_cirurgia" id="cirurgia" placeholder="" onblur="validarCirurgia()">
+            <div class="ui hidden negative message" id="mensagem-erro-cirurgia">
+                <div class="content">
+                    <i class="heartbeat icon"></i>
+                    <span id="cirurgia-erro"></span>
+                </div>
             </div>
         </div>
     </div>

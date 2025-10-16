@@ -41,7 +41,7 @@
             <label for="txtDataNascimento">Data Nascimento</label>
             <div class="ui calendar" id="dataNascimentoCalendar">
                 <div class="ui input">
-                    <input id="txtDataNascimento" name="txtDataNascimento" type="date" placeholder="dd/mm/aaaa" onblur="validarDataNascimento()">
+                    <input id="txtDataNascimento" name="txtDataNascimento" type="text" placeholder="dd/mm/aaaa" onblur="validarDataNascimento()">
                 </div>
             </div>
             <div class="ui hidden negative message" id="mensagem-erro-data-nascimento">
@@ -54,7 +54,7 @@
 
         <div class="three wide field" id="divRaca">
             <label for="txtRaca">Cor / Raça</label>
-            <select class="ui search dropdown" id="txtRaca" name="corRaca">
+            <select class="ui search dropdown" id="txtRaca" name="corRaca" onchange="validarRaca()">
                 <option value="" disabled selected hidden>Selecione Cor / Raça</option>
                 <option value="branca">Branca</option>
                 <option value="preta">Preta</option>
@@ -76,7 +76,7 @@
     <div class="fields">
         <div class="three wide field" id="validacao-cep">
             <label for="txtCep">CEP</label>
-            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000" onblur="validarCep()">
+            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000">
             <div class="ui hidden negative message" id="mensagem-erro-cep">
                 <div class="content">
                     <i class="map marker alternate icon"></i><span id="cep-erro"></span>

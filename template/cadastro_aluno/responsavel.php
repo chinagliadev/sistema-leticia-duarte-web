@@ -6,7 +6,7 @@
 
             <div class="four wide field" id="tipo_responsavel_div">
                 <label for="txtTipoResponsavel_1">Tipo do responsável</label>
-                <select class="ui search dropdown" id="txtTipoResponsavel_1" name="txtTipoResponsavel_1">
+                <select class="ui search dropdown" id="txtTipoResponsavel_1" name="txtTipoResponsavel_1" onchange="validarTipoResponsavel1()">
                     <option value="" disabled selected hidden>Selecione o tipo</option>
                     <option value="Pai">Pai</option>
                     <option value="Mãe">Mãe</option>
@@ -35,7 +35,7 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_1">
                     <div class="ui input">
-                        <input type="date" id="txtDataNascimento_1" name="txtDataNascimento_1" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
+                        <input type="text" id="txtDataNascimento_1" name="txtDataNascimento_1" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
                     </div>
                 </div>
                 <div id="mensagem-erro-data-responsavel-1" class="ui hidden message error">
@@ -48,7 +48,7 @@
 
             <div class="four wide field" id="estado_civil_responsavel_div">
                 <label for="txtEstadoCivil_1">Estado Civil</label>
-                <select class="ui search dropdown" id="txtEstadoCivil_1" name="txtEstadoCivil_1">
+                <select class="ui search dropdown" id="txtEstadoCivil_1" name="txtEstadoCivil_1" onchange="validarEstadoCivilResponsavel1()">
                     <option value="" disabled selected hidden>Selecione o estado civil</option>
                     <option value="Solteiro">Solteiro</option>
                     <option value="Casado">Casado</option>
@@ -133,7 +133,7 @@
 
             <div class="four wide field" id="tipo_responsavel_2_div">
                 <label for="txtTipoResponsavel_2">Tipo do responsável</label>
-                <select class="ui search dropdown" id="txtTipoResponsavel_2" name="txtTipoResponsavel_2">
+                <select class="ui search dropdown" id="txtTipoResponsavel_2" name="txtTipoResponsavel_2" onchange="validarTipoResponsavel2()">
                     <option value="" disabled selected hidden>Selecione o tipo</option>
                     <option value="Pai">Pai</option>
                     <option value="Mãe">Mãe</option>
@@ -162,7 +162,7 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_2">
                     <div class="ui input">
-                        <input type="date" id="txtDataNascimento_2" name="txtDataNascimento_2" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel2()">
+                        <input type="text" id="txtDataNascimento_2" name="txtDataNascimento_2" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel2()">
                     </div>
                 </div>
                 <div id="mensagem-erro-data-responsavel-2" class="ui hidden message error">
@@ -175,7 +175,7 @@
 
             <div class="four wide field" id="estado_civil_responsavel_2_div">
                 <label for="txtEstadoCivil_2">Estado Civil</label>
-                <select class="ui search dropdown" id="txtEstadoCivil_2" name="txtEstadoCivil_2">
+                <select class="ui search dropdown" id="txtEstadoCivil_2" name="txtEstadoCivil_2" onchange="validarEstadoCivilResponsavel2()">
                     <option value="" disabled selected hidden>Selecione o estado civil</option>
                     <option value="Solteiro">Solteiro</option>
                     <option value="Casado">Casado</option>
