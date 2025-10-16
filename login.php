@@ -87,8 +87,6 @@
             <div class="toggle"></div>
         </div>
     </section>
-
-    <!-- JS de Login -->
     <script src="./js/login.js"></script>
 </body>
 
