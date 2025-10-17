@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/10/2025 às 16:56
+-- Tempo de geração: 17/10/2025 às 13:43
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -65,7 +65,16 @@ INSERT INTO `endereco` (`id_endereco`, `cep`, `endereco`, `numero`, `bairro`, `c
 (21, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
 (22, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
 (23, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
-(24, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd');
+(24, '13470070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(25, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd'),
+(26, '13470-070', 'Rua Florindo Cibin', 234, 'Parque das Nações', 'Americana', 'dasdasd'),
+(27, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd'),
+(28, '13470-070', 'Rua Florindo Cibin', 12, 'Parque das Nações', 'Americana', ''),
+(29, '', 'dasdasd asdasd', 12, 'asdasd asdasd', 'asadsdasd', ''),
+(30, '13470-070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(31, '13470-070', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', 'dasdasd'),
+(32, '13465-230', 'Rua Florindo Cibin', 2, 'asdasda', 'Americana', ''),
+(33, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd');
 
 -- --------------------------------------------------------
 
@@ -97,7 +106,7 @@ INSERT INTO `tb_alunos` (`ra_aluno`, `nome`, `data_nascimento`, `etnia`, `turma`
 (2, 'dsfsdfsdfsd', '0000-00-00', NULL, 'Bercario 2 C', 0, NULL, NULL, 0, '2025-10-01 11:52:59', 2, 3),
 (3, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'parda', 'Bercario 2 C', 0, NULL, NULL, 0, '2025-10-01 11:57:57', 3, 3),
 (4, 'VICTOR CHINAGLIA NETO', '0000-00-00', 'parda', 'Bercario 2 C', 1, '', 0, 1, '2025-10-01 12:41:42', 4, 1),
-(24, 'VICTOR CHINAGLIA NETO', '2025-10-14', 'parda', 'Bercario 2 C', 1, '', 0, 1, '2025-10-08 13:44:53', 24, 3);
+(33, 'VICTOR CHINAGLIA NETO', '2004-02-20', 'preta', 'Bercario 2 B', 1, 'asdasda', 12, 0, '2025-10-17 11:31:59', 33, 5);
 
 -- --------------------------------------------------------
 
@@ -153,7 +162,13 @@ INSERT INTO `tb_estrutura_familiar` (`id`, `pais_vivem_juntos`, `numero_filhos`,
 (8, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL),
 (9, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL),
 (10, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL),
-(25, 0, 4, 1, 1000.00, 0, 'DASDA', 1, 'Cartão de Todos', 0, 'DASDASDAS', 0, 0, NULL, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, '0');
+(27, 0, 0, 1, 0.00, 0, '', 1, '', 0, '', 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0'),
+(28, 0, 0, 1, 0.00, 0, '', 1, '', 0, '', 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0'),
+(29, 0, 0, 1, 0.00, 0, '', 1, '', 0, '', 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0'),
+(30, 0, 0, 1, 0.00, 0, '', 1, '', 0, '', 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0'),
+(32, 0, 2, 1, 80000.00, 0, '', 1, 'unimed', 0, '', 0, 0, NULL, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, '0'),
+(35, 0, 0, 1, 0.00, 0, '', 1, '', 0, '', 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0'),
+(40, 0, 0, 1, 0.00, 0, '', 1, '', 0, '', 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0');
 
 -- --------------------------------------------------------
 
@@ -178,7 +193,8 @@ INSERT INTO `tb_funcionario` (`id_funcionario`, `nome`, `email`, `senha`, `celul
 (1, 'victor chinaglia', 'neto@neto', '$2y$10$Tz1QRAkbDkW4YLB6zk0mR.CSGF3qH/S3FSsOBXzy/IsPoGiF.FphK', '(21) 31231-2313', '231.231.231-23'),
 (2, 'VICTOR CHINAGLIA NETO', 'victor@sistema.com', '$2y$10$28FI7QcRf2iv0AdTkqfLG.o7cQInhCZNn47eie9RWmTTrg1ZHqKZu', '(12) 31231-2312', '312.312.312-31'),
 (3, 'dasda', 'teste@testepedro.com', '$2y$10$bFY.7R/rnZP1RwmQlgyEeO.TNrBWoWOIHPFCyEI8Mdu4xVBBj33Su', '(12) 31231-2312', '123.123.123-12'),
-(4, 'dasdasd', 'victor@sistemas.com', '$2y$10$PFJwrIpOE622MXA94Tdjs.JrijXu.yh0kV8Fhc.LqIAWQQeOq2VUu', '(12) 31231-2313', '123.123.123-12');
+(4, 'dasdasd', 'victor@sistemas.com', '$2y$10$PFJwrIpOE622MXA94Tdjs.JrijXu.yh0kV8Fhc.LqIAWQQeOq2VUu', '(12) 31231-2313', '123.123.123-12'),
+(5, 'Victor Neto 2', 'chinagliavictor@neto.com', '$2y$10$R79ZzKoBsUXeybRSph5lyuC322hLCIOwGVA7uRkSVs2DX1HUZpNOG', '(19) 99239-8492', '473.016.388-50');
 
 -- --------------------------------------------------------
 
@@ -193,15 +209,16 @@ CREATE TABLE `tb_matricula` (
   `funcionario_id` int(11) DEFAULT NULL,
   `data` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Data e hora de criação do registro',
   `responsavel_1_id` int(11) DEFAULT NULL,
-  `responsavel_2_id` int(11) DEFAULT NULL
+  `responsavel_2_id` int(11) DEFAULT NULL,
+  `observacao` longtext DEFAULT NULL COMMENT 'Observação do aluno'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tb_matricula`
 --
 
-INSERT INTO `tb_matricula` (`id_matricula`, `aluno_id`, `estrutura_familiar_id`, `funcionario_id`, `data`, `responsavel_1_id`, `responsavel_2_id`) VALUES
-(20, 24, 25, 3, '2025-10-08 10:44:53', 24, NULL);
+INSERT INTO `tb_matricula` (`id_matricula`, `aluno_id`, `estrutura_familiar_id`, `funcionario_id`, `data`, `responsavel_1_id`, `responsavel_2_id`, `observacao`) VALUES
+(29, 33, 40, 5, '2025-10-17 08:31:59', 36, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -219,7 +236,7 @@ CREATE TABLE `tb_matricula_pessoas_autorizadas` (
 --
 
 INSERT INTO `tb_matricula_pessoas_autorizadas` (`matricula_id`, `pessoa_autorizada_id`) VALUES
-(20, 24);
+(29, 33);
 
 -- --------------------------------------------------------
 
@@ -263,7 +280,16 @@ INSERT INTO `tb_pessoas_autorizadas` (`id`, `nome`, `cpf`, `celular`, `parentesc
 (21, 'VICTOR CHINAGLIA NETO', '12312323123', '19983541308', 'Irmão'),
 (22, 'VICTOR CHINAGLIA NETO', '12312323123', '19983541308', 'Irmão'),
 (23, 'VICTOR CHINAGLIA NETO', '12312323123', '19983541308', 'Avô'),
-(24, 'VICTOR CHINAGLIA NETO', '23423423423423', '19983541308', 'Avó');
+(24, 'VICTOR CHINAGLIA NETO', '23423423423423', '19983541308', 'Avó'),
+(25, 'VICTOR CHINAGLIA NETO', '12312323123', '19983541308', 'Irmã'),
+(26, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmão'),
+(27, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Tio'),
+(28, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Mãe'),
+(29, 'asdasda asdasda', '473.016.388-50', '(12) 31231-2312', 'Mãe'),
+(30, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmão'),
+(31, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmã'),
+(32, 'Chico do Chikco', '473.016.388-50', '(19) 98354-1308', 'Irmão'),
+(33, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmã');
 
 -- --------------------------------------------------------
 
@@ -283,21 +309,26 @@ CREATE TABLE `tb_responsaveis` (
   `nome_empresa` varchar(100) DEFAULT NULL,
   `profissao` varchar(100) DEFAULT NULL,
   `telefone_trabalho` varchar(20) DEFAULT NULL,
-  `horario_trabalho` time DEFAULT NULL,
+  `horario_trabalho` varchar(100) DEFAULT NULL,
   `salario` decimal(10,2) DEFAULT NULL,
-  `renda_extra` tinyint(1) DEFAULT NULL
+  `renda_extra` tinyint(1) DEFAULT NULL,
+  `valor_renda_extra` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `tb_responsaveis`
 --
 
-INSERT INTO `tb_responsaveis` (`id_responsavel`, `tipo_responsavel`, `nome`, `data_nascimento`, `estado_civil`, `escolaridade`, `celular`, `email`, `nome_empresa`, `profissao`, `telefone_trabalho`, `horario_trabalho`, `salario`, `renda_extra`) VALUES
-(1, 'Avô', 'dasdasdas', '2020-02-02', 'Divorciado', '', '123123123123', 'asdadsasdasd@asdasdasd', 'sadasdasdasda', 'sdasdasdasd', '12312312312', '838:59:59', 99999999.99, 0),
-(2, 'Avô', 'asdasdas', '0000-00-00', 'Divorciado', '', '3213123123123', '', '', '', '', '00:00:00', 0.00, 0),
-(3, 'Avô', 'asdasdasdasd', '0000-00-00', 'Casado', '', '19983541308', NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(4, 'Avô', 'VICTOR CHINAGLIA NETO', '0000-00-00', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', 'sadasdasdasda', 'sdasdasdasd', NULL, NULL, NULL, 0),
-(24, 'Irmã', 'VICTOR CHINAGLIA NETO', '2025-10-06', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', 'Microsof', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `tb_responsaveis` (`id_responsavel`, `tipo_responsavel`, `nome`, `data_nascimento`, `estado_civil`, `escolaridade`, `celular`, `email`, `nome_empresa`, `profissao`, `telefone_trabalho`, `horario_trabalho`, `salario`, `renda_extra`, `valor_renda_extra`) VALUES
+(1, 'Avô', 'dasdasdas', '2020-02-02', 'Divorciado', '', '123123123123', 'asdadsasdasd@asdasdasd', 'sadasdasdasda', 'sdasdasdasd', '12312312312', '8385959', 99999999.99, 0, NULL),
+(2, 'Avô', 'asdasdas', '0000-00-00', 'Divorciado', '', '3213123123123', '', '', '', '', '0', 0.00, 0, NULL),
+(3, 'Avô', 'asdasdasdasd', '0000-00-00', 'Casado', '', '19983541308', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(4, 'Avô', 'VICTOR CHINAGLIA NETO', '0000-00-00', 'Solteiro', '', '19983541308', 'asdadsasdasd@asdasdasd', 'sadasdasdasda', 'sdasdasdasd', NULL, NULL, NULL, 0, NULL),
+(27, 'Pai', 'Vagner Lourenço', '1980-12-31', 'Solteiro', '', '(19) 99212-4943', 'vagnerinfo@yahoo.com.br', 'Senac', 'Docente', NULL, '8h as 17h', 12800.00, 1, 280000.00),
+(29, 'Mãe', 'Daniela Taranto Carosi', '1978-09-25', 'Casado', '', '19992124943', 'dani@yahoo.com.br', 'Escola', 'Professora', '19983541308', '8h as 17h', 18000.00, 1, 10.00),
+(35, 'Mãe', 'VICTORIA CHINAGLIA NETO', '2025-10-17', 'Casado', '', '(19) 98354-1308', 'dani@yahoo.com.br', 'Escola', 'Professora', '(19) 98354-1308', '8h as 17h', 70.00, 1, 10.00),
+(36, 'Avô', 'asdasdad asdasdasd', '2018-02-20', 'Casado', '', '(12) 31231-2312', 'asdasdasd@asdasdasd.com', NULL, NULL, NULL, NULL, 1.00, 1, 1.00),
+(37, 'Avô', 'adadasd sdasdasd', '2025-10-13', 'Casado', '', '(12) 31231-2312', 'asdadsasd@asdasdasdasd.com', NULL, NULL, NULL, NULL, 10.00, 0, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -367,43 +398,43 @@ ALTER TABLE `tb_responsaveis`
 -- AUTO_INCREMENT de tabela `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `tb_alunos`
 --
 ALTER TABLE `tb_alunos`
-  MODIFY `ra_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ra_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `tb_estrutura_familiar`
 --
 ALTER TABLE `tb_estrutura_familiar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de tabela `tb_funcionario`
 --
 ALTER TABLE `tb_funcionario`
-  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tb_matricula`
 --
 ALTER TABLE `tb_matricula`
-  MODIFY `id_matricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_matricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `tb_pessoas_autorizadas`
 --
 ALTER TABLE `tb_pessoas_autorizadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `tb_responsaveis`
 --
 ALTER TABLE `tb_responsaveis`
-  MODIFY `id_responsavel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_responsavel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Restrições para tabelas despejadas

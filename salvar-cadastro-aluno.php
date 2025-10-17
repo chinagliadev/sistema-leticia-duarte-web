@@ -32,11 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $complemento = $_POST['txtComplemento'] ?? null;
 
     $pais_vivem_juntos             = isset($_POST['pais_vivem']) ? 1 : 0;
-    $recebe_bolsa_familia          = isset($_POST['bolsa_familia']) ? 0 : 1;
+    
+    $recebe_bolsa_familia          = isset($_POST['bolsa_familia']) ? 1 : 0;
+    
     $possui_alergia                = isset($_POST['alergia']) ? 1 : 0;
-    $especifique_alergia =          $_POST['especifique_alergia'] ?? null;
-    $possui_convenio               = isset($_POST['convenio']) ? 0 : 1;
-    $qual_convenio                 = $possui_convenio ? ($_POST['qual_convenio']) : null;
+    $especifique_alergia           = $_POST['especifique_alergia'] ?? null;
+    
+    $possui_convenio               = isset($_POST['convenio']) ? 1 : 0;
+    
+    $qual_convenio                 = $possui_convenio ? ($_POST['qual_convenio'] ?? null) : null;
+    
     $portador_necessidade_especial = isset($_POST['necessidade_especial']) ? 1 : 0;
     $qual_necessidade_especial     = $_POST['qual_necessidade'] ?? null;
     $problemas_visao               = isset($_POST['problema_visao']) ? 1 : 0;
@@ -45,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $vacina_catapora_varicela      = isset($_POST['vacina_catapora']) ? 1 : 0;
 
     $numero_filhos               = $_POST['numero_filhos'] ?? null;
-    $valor                       = $recebe_bolsa_familia ? ($_POST['valor']) : null;
+    
+    $valor                       = $recebe_bolsa_familia ? ($_POST['valor'] ?? null) : null;
 
     $doenca_anemia      = isset($_POST['doenca_anemia']) ? 1 : 0;
     $doenca_bronquite   = isset($_POST['doenca_bronquite']) ? 1 : 0;
@@ -110,20 +116,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $responsavel = new Responsavel();
 
-    $tipo_responsavel_1     = !empty($_POST['txtTipoResponsavel_1']) ? $_POST['txtTipoResponsavel_1'] : null;
-    $nome_responsavel_1     = !empty($_POST['txtNomeResponsavel_1']) ? $_POST['txtNomeResponsavel_1'] : null;
-    $data_nascimento_1      = !empty($_POST['data_nascimento_1']) ? $_POST['data_nascimento_1'] : null;
-    $estado_civil_1         = !empty($_POST['txtEstadoCivil_1']) ? $_POST['txtEstadoCivil_1'] : null;
-    $escolaridade_1         = !empty($_POST['txtEscolaridade_1']) ? $_POST['txtEscolaridade_1'] : 'Não informado';
-    $celular_1              = !empty($_POST['txtTelefone_1']) ? $_POST['txtTelefone_1'] : null;
-    $email_1                = !empty($_POST['txtEmail_1']) ? $_POST['txtEmail_1'] : null;
-    $nome_empresa_1         = !empty($_POST['txtNomeEmpresa_1']) ? $_POST['txtNomeEmpresa_1'] : null;
-    $profissao_1            = !empty($_POST['txtProfissao_1']) ? $_POST['txtProfissao_1'] : null;
-    $telefone_trabalho_1    = !empty($_POST['txtTelefoneTrabalho_1']) ? $_POST['txtTelefoneTrabalho_1'] : null;
-    $horario_trabalho_1     = !empty($_POST['txtHorarioTrabalho_1']) ? $_POST['txtHorarioTrabalho_1'] : null;
-    $salario_1              = !empty($_POST['txtSalario_1']) ? $_POST['txtSalario_1'] : null;
+    $tipo_responsavel_1     = $_POST['txtTipoResponsavel_1'] ?? null;
+    $nome_responsavel_1     = $_POST['txtNomeResponsavel_1'] ?? null;
+    $data_nascimento_1      = $_POST['data_nascimento_1'] ?? null;
+    $estado_civil_1         = $_POST['txtEstadoCivil_1'] ?? null;
+    $escolaridade_1         = $_POST['txtEscolaridade_1'] ?? 'Não informado';
+    $celular_1              = $_POST['txtTelefone_1'] ?? null;
+    $email_1                = $_POST['txtEmail_1'] ?? null;
+    $nome_empresa_1         = $_POST['txtNomeEmpresa_1'] ?? null;
+    $profissao_1            = $_POST['txtProfissao_1'] ?? null;
+    $telefone_trabalho_1    = $_POST['txtTelefoneTrabalho_1'] ?? null;
+    $horario_trabalho_1     = $_POST['txtHorarioTrabalho_1'] ?? null;
+    $salario_1              = $_POST['txtSalario_1'] ?? null;
     $renda_extra_1          = isset($_POST['toggleRendaExtra_1']) ? 1 : 0;
-    $valor_renda_extra      = !empty($_POST['txtRendaExtra']) ? $_POST['txtRendaExtra'] : null;
+    $valor_renda_extra      = $_POST['txtRendaExtra'] ?? null;
 
 
     $responsavel_1_id = $responsavel->cadastrarResponsavel(
@@ -144,20 +150,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
     if (!empty($_POST['txtNomeResponsavel_2'])) {
-        $tipo_responsavel_2     = !empty($_POST['txtTipoResponsavel_2']) ? $_POST['txtTipoResponsavel_2'] : null;
-        $nome_responsavel_2     = !empty($_POST['txtNomeResponsavel_2']) ? $_POST['txtNomeResponsavel_2'] : null;
-        $data_nascimento_2      = !empty($_POST['data_nascimento_2']) ? $_POST['data_nascimento_2'] : null;
-        $estado_civil_2         = !empty($_POST['txtEstadoCivil_2']) ? $_POST['txtEstadoCivil_2'] : 'Não informado';
-        $escolaridade_2         = !empty($_POST['txtEscolaridade_2']) ? $_POST['txtEscolaridade_2'] : 'Não informado';
-        $celular_2              = !empty($_POST['txtTelefone_2']) ? $_POST['txtTelefone_2'] : null;
-        $email_2                = !empty($_POST['txtEmail_2']) ? $_POST['txtEmail_2'] : null;
-        $nome_empresa_2         = !empty($_POST['txtNomeEmpresa_2']) ? $_POST['txtNomeEmpresa_2'] : null;
-        $profissao_2            = !empty($_POST['txtProfissao_2']) ? $_POST['txtProfissao_2'] : null;
-        $telefone_trabalho_2    = !empty($_POST['txtTelefoneTrabalho_2']) ? $_POST['txtTelefoneTrabalho_2'] : null;
-        $horario_trabalho_2     = !empty($_POST['txtHorarioTrabalho_2']) ? $_POST['txtHorarioTrabalho_2'] : null;
-        $salario_2              = !empty($_POST['txtSalario_2']) ? $_POST['txtSalario_2'] : null;
+        $tipo_responsavel_2     = $_POST['txtTipoResponsavel_2'] ?? null;
+        $nome_responsavel_2     = $_POST['txtNomeResponsavel_2'] ?? null;
+        $data_nascimento_2      = $_POST['data_nascimento_2'] ?? null;
+        $estado_civil_2         = $_POST['txtEstadoCivil_2'] ?? 'Não informado';
+        $escolaridade_2         = $_POST['txtEscolaridade_2'] ?? 'Não informado';
+        $celular_2              = $_POST['txtTelefone_2'] ?? null;
+        $email_2                = $_POST['txtEmail_2'] ?? null;
+        $nome_empresa_2         = $_POST['txtNomeEmpresa_2'] ?? null;
+        $profissao_2            = $_POST['txtProfissao_2'] ?? null;
+        $telefone_trabalho_2    = $_POST['txtTelefoneTrabalho_2'] ?? null;
+        $horario_trabalho_2     = $_POST['txtHorarioTrabalho_2'] ?? null;
+        $salario_2              = $_POST['txtSalario_2'] ?? null;
         $renda_extra_2          = isset($_POST['toggleRendaExtra_2']) ? 1 : 0;
-        $valor_renda_extra_2    = !empty($_POST['txtRendaExtra_2']) ? $_POST['txtRendaExtra_2'] : null;
+        $valor_renda_extra_2    = $_POST['txtRendaExtra_2'] ?? null;
 
         $responsavel_2_id = $responsavel->cadastrarResponsavel(
             $tipo_responsavel_2,
@@ -205,10 +211,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     var_dump($aluno_id);
 
-    $txtNomePessoaAutorizada = $_POST['txtNomePessoaAutorizada'];
-    $txtCpfAutorizada = $_POST['txtCpfAutorizada'];
-    $txtTelefoneAutorizada = $_POST['txtTelefoneAutorizada'];
-    $txtParentenco = $_POST['txtParentenco'];
+    $txtNomePessoaAutorizada = $_POST['txtNomePessoaAutorizada'] ?? null;
+    $txtCpfAutorizada = $_POST['txtCpfAutorizada'] ?? null;
+    $txtTelefoneAutorizada = $_POST['txtTelefoneAutorizada'] ?? null;
+    $txtParentenco = $_POST['txtParentenco'] ?? null;
 
     $pessoa_autorizada = new PessoaAutorizada();
 
@@ -220,6 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
 
+    // Matrícula
     $matricula = new Matricula();
     $matricula_id = $matricula->cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id);
 
@@ -228,3 +235,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     header('location: ./cadastrados.php');
 }
+?>
