@@ -44,6 +44,9 @@
                     <input id="txtDataNascimento" name="txtDataNascimento" type="text" placeholder="dd/mm/aaaa" onblur="validarDataNascimento()">
                 </div>
             </div>
+
+            <input type="hidden" name="data_nascimento" id="data_nascimento">
+
             <div class="ui hidden negative message" id="mensagem-erro-data-nascimento">
                 <div class="content">
                     <i class="calendar icon"></i>
@@ -76,7 +79,7 @@
     <div class="fields">
         <div class="three wide field" id="validacao-cep">
             <label for="txtCep">CEP</label>
-            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000">
+            <input type="text" id="txtCep" name="txtCep" placeholder="00000-000" onblur="validarCep()">
             <div class="ui hidden negative message" id="mensagem-erro-cep">
                 <div class="content">
                     <i class="map marker alternate icon"></i><span id="cep-erro"></span>
