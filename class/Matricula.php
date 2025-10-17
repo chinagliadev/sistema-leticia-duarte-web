@@ -62,7 +62,6 @@ class Matricula
         $dadosChaves = $this->conn->prepare($sqlBuscaChaves);
         $dadosChaves->execute([":id" => $aluno_id]);
         
-        // Não precisa de PDO::FETCH_ASSOC aqui, pois foi configurado no construtor
         $matricula = $dadosChaves->fetch(); 
 
         if (!$matricula) {

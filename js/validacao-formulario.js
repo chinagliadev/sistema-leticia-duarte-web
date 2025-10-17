@@ -282,16 +282,16 @@ function validarDataNascimento() {
     const partes = inputData.split('/');
 
     const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
-    
+
 
     const dataAtual = new Date();
 
     dataAtual.setHours(0, 0, 0, 0);
 
 
-    const dataInvalida = isNaN(dataNascimento.getTime()) || 
-                         dataNascimento.getDate() != partes[0] ||
-                         dataNascimento.getMonth() + 1 != partes[1];
+    const dataInvalida = isNaN(dataNascimento.getTime()) ||
+        dataNascimento.getDate() != partes[0] ||
+        dataNascimento.getMonth() + 1 != partes[1];
 
 
     if (dataInvalida || dataNascimento > dataAtual) {
@@ -364,16 +364,16 @@ function validarDataNascimentoResponsavel1() {
     }
 
     const partes = valor.split('/');
-    
+
     const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
-    
+
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
 
-    const dataInvalida = isNaN(dataNascimento.getTime()) || 
-                         dataNascimento.getDate() != partes[0] ||
-                         dataNascimento.getMonth() + 1 != partes[1];
+    const dataInvalida = isNaN(dataNascimento.getTime()) ||
+        dataNascimento.getDate() != partes[0] ||
+        dataNascimento.getMonth() + 1 != partes[1];
 
 
     if (dataInvalida || dataNascimento > hoje) {
@@ -472,25 +472,30 @@ function validarSalarioResponsavel1() {
 
 function validarRendaExtra() {
     const possuiRenda = document.getElementById('toggleRendaExtra_1');
-    const campoRendaExtra = document.getElementById('renda_extra_div');
-    const rendaExtra = document.getElementById('txtRendaExtra').value
-    const spanMensagemErro = document.getElementById('renda-extra-erro-1')
-    const divMensagemErro = document.getElementById('mensagem-erro-renda-extra-1')
+    const campoRendaExtraDiv = document.getElementById('renda_extra_div');
+    const campoRendaExtraInput = document.getElementById('txtRendaExtra');
+    const rendaExtra = campoRendaExtraInput.value;
+    const spanMensagemErro = document.getElementById('renda-extra-erro-1');
+    const divMensagemErro = document.getElementById('mensagem-erro-renda-extra-1');
 
     if (possuiRenda.checked) {
-        campoRendaExtra.classList.remove('oculto');
+        campoRendaExtraDiv.classList.remove('oculto');
+
         if (rendaExtra.trim() === '') {
-            mensagemErroCampos(divMensagemErro, campoRendaExtra, spanMensagemErro, 'Informe a renda extra')
-            return false
+            mensagemErroCampos(divMensagemErro, campoRendaExtraInput, spanMensagemErro, 'Informe a renda extra');
+            return false;
         } else {
-            limparErro(divMensagemErro, campoRendaExtra, spanMensagemErro)
+            limparErro(divMensagemErro, campoRendaExtraInput, spanMensagemErro);
         }
     } else {
-        campoRendaExtra.classList.add('oculto');
-        limparErro(divMensagemErro, campoRendaExtra, spanMensagemErro)
-        return true
+        campoRendaExtraDiv.classList.add('oculto');
+        limparErro(divMensagemErro, campoRendaExtraInput, spanMensagemErro);
+        campoRendaExtraInput.value = "";
+        return true;
     }
 }
+
+
 
 
 function adicionarResponsavel() {
@@ -611,16 +616,16 @@ function validarDataNascimentoResponsavel2() {
     const partes = valor.split('/');
 
     const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
-    
+
     // ---------------------------------------------------------------
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
 
 
-    const dataInvalida = isNaN(dataNascimento.getTime()) || 
-                         dataNascimento.getDate() != partes[0] ||
-                         dataNascimento.getMonth() + 1 != partes[1];
+    const dataInvalida = isNaN(dataNascimento.getTime()) ||
+        dataNascimento.getDate() != partes[0] ||
+        dataNascimento.getMonth() + 1 != partes[1];
 
 
     if (dataInvalida || dataNascimento > hoje) {
@@ -816,14 +821,14 @@ function validarNecessidadeEspecial() {
 }
 
 function validarAlergia() {
-    const possuiAlergia = document.getElementById('toggle-alergia'); 
-    const divAlergia = document.getElementById('especifique-alergia'); 
-    const inputAlergia = document.getElementById('qual_alergia'); 
-    const spanMensagemErro = document.getElementById('alergia-erro'); 
-    const divMensagemErro = document.getElementById('mensagem-erro-alergia'); 
+    const possuiAlergia = document.getElementById('toggle-alergia');
+    const divAlergia = document.getElementById('especifique-alergia');
+    const inputAlergia = document.getElementById('qual_alergia');
+    const spanMensagemErro = document.getElementById('alergia-erro');
+    const divMensagemErro = document.getElementById('mensagem-erro-alergia');
 
     if (possuiAlergia.checked) {
-        divAlergia.classList.remove('oculto'); 
+        divAlergia.classList.remove('oculto');
         if (inputAlergia.value.trim() === '') {
             mensagemErroCampos(divMensagemErro, divAlergia, spanMensagemErro, 'Informe a alergia');
             return false;

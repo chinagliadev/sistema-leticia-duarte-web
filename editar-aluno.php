@@ -18,6 +18,8 @@ $resp1 = $dadosCompletos['responsavel_1'];
 $resp2 = $dadosCompletos['responsavel_2'];
 $estrutura = $dadosCompletos['estrutura_familiar'];
 $autorizados = $dadosCompletos['autorizados'];
+
+var_dump($resp2)
 ?>
 
 <!DOCTYPE html>
@@ -240,16 +242,16 @@ $autorizados = $dadosCompletos['autorizados'];
                                 <div class="four wide field" id="tipo_responsavel_div">
                                     <label for="txtTipoResponsavel_1">Tipo do responsável</label>
                                     <select class="ui search dropdown" id="txtTipoResponsavel_1" name="txtTipoResponsavel_1" onchange="validarTipoResponsavel1()">
-                                        <option value="" disabled selected hidden>Selecione o tipo</option>
-                                        <option value="Pai">Pai</option>
-                                        <option value="Mãe">Mãe</option>
-                                        <option value="Avô">Avô</option>
-                                        <option value="Avó">Avó</option>
-                                        <option value="Irmão">Irmão</option>
-                                        <option value="Irmã">Irmã</option>
-                                        <option value="Tio">Tio</option>
-                                        <option value="Tia">Tia</option>
-                                        <option value="Outro">Outro</option>
+                                        <option value="" disabled hidden <?= empty($resp1['tipo_responsavel']) ? 'selected' : '' ?>>Selecione o tipo</option>
+                                        <option value="Pai" <?= ($resp1['tipo_responsavel'] ?? '') === 'Pai' ? 'selected' : '' ?>>Pai</option>
+                                        <option value="Mãe" <?= ($resp1['tipo_responsavel'] ?? '') === 'Mãe' ? 'selected' : '' ?>>Mãe</option>
+                                        <option value="Avô" <?= ($resp1['tipo_responsavel'] ?? '') === 'Avô' ? 'selected' : '' ?>>Avô</option>
+                                        <option value="Avó" <?= ($resp1['tipo_responsavel'] ?? '') === 'Avó' ? 'selected' : '' ?>>Avó</option>
+                                        <option value="Irmão" <?= ($resp1['tipo_responsavel'] ?? '') === 'Irmão' ? 'selected' : '' ?>>Irmão</option>
+                                        <option value="Irmã" <?= ($resp1['tipo_responsavel'] ?? '') === 'Irmã' ? 'selected' : '' ?>>Irmã</option>
+                                        <option value="Tio" <?= ($resp1['tipo_responsavel'] ?? '') === 'Tio' ? 'selected' : '' ?>>Tio</option>
+                                        <option value="Tia" <?= ($resp1['tipo_responsavel'] ?? '') === 'Tia' ? 'selected' : '' ?>>Tia</option>
+                                        <option value="Outro" <?= ($resp1['tipo_responsavel'] ?? '') === 'Outro' ? 'selected' : '' ?>>Outro</option>
                                     </select>
                                     <div id="mensagem-erro-tipo-responsavel-1" class="ui hidden message error">
                                         <span id="tipo-responsavel-erro-1" class="mensagem-margin"></span>
@@ -258,7 +260,7 @@ $autorizados = $dadosCompletos['autorizados'];
 
                                 <div class="eight wide field" id="nome_responsavel_div">
                                     <label for="txtNomeResponsavel_1">Nome do Responsável</label>
-                                    <input type="text" id="txtNomeResponsavel_1" name="txtNomeResponsavel_1" placeholder="" onblur="validarNomeResponsavel1()">
+                                    <input type="text" id="txtNomeResponsavel_1" name="txtNomeResponsavel_1" placeholder="" onblur="validarNomeResponsavel1()" value="<?= $resp1['nome'] ?? '' ?>">
                                     <div id="mensagem-erro-nome-responsavel-1" class="ui hidden message error">
                                         <span id="nome-responsavel-erro-1"></span>
                                     </div>
@@ -283,11 +285,11 @@ $autorizados = $dadosCompletos['autorizados'];
                                 <div class="four wide field" id="estado_civil_responsavel_div">
                                     <label for="txtEstadoCivil_1">Estado Civil</label>
                                     <select class="ui search dropdown" id="txtEstadoCivil_1" name="txtEstadoCivil_1" onchange="validarEstadoCivilResponsavel1()">
-                                        <option value="" disabled selected hidden>Selecione o estado civil</option>
-                                        <option value="Solteiro">Solteiro</option>
-                                        <option value="Casado">Casado</option>
-                                        <option value="Divorciado">Divorciado</option>
-                                        <option value="Viuvo">Viúvo</option>
+                                        <option value="" disabled hidden <?= empty($resp1['estado_civil']) ? 'selected' : '' ?>>Selecione o estado civil</option>
+                                        <option value="Solteiro" <?= ($resp1['estado_civil'] ?? '') === 'Solteiro' ? 'selected' : '' ?>>Solteiro</option>
+                                        <option value="Casado" <?= ($resp1['estado_civil'] ?? '') === 'Casado' ? 'selected' : '' ?>>Casado</option>
+                                        <option value="Divorciado" <?= ($resp1['estado_civil'] ?? '') === 'Divorciado' ? 'selected' : '' ?>>Divorciado</option>
+                                        <option value="Viuvo" <?= ($resp1['estado_civil'] ?? '') === 'Viuvo' ? 'selected' : '' ?>>Viúvo</option>
                                     </select>
                                     <div id="mensagem-erro-estado-civil-1" class="ui hidden message error">
                                         <span id="estado-civil-erro-1" class="mensagem-margin"></span>
@@ -296,7 +298,7 @@ $autorizados = $dadosCompletos['autorizados'];
 
                                 <div class="four wide field" id="telefone_responsavel_div">
                                     <label for="txtTelefone_1">Telefone</label>
-                                    <input type="text" id="txtTelefone_1" name="txtTelefone_1" placeholder="(19) 99999-9999" onblur=" validarTelefoneResponsavel1()">
+                                    <input type="text" id="txtTelefone_1" name="txtTelefone_1" placeholder="(19) 99999-9999" onblur=" validarTelefoneResponsavel1()" value="<?= $resp1['celular'] ?? '' ?>">
                                     <div id="mensagem-erro-telefone-1" class="ui hidden message error">
                                         <span id="telefone-erro-1"></span>
                                     </div>
@@ -304,7 +306,7 @@ $autorizados = $dadosCompletos['autorizados'];
 
                                 <div class="eight wide field" id="email_responsavel_div">
                                     <label for="txtEmail_1">Email</label>
-                                    <input type="email" id="txtEmail_1" name="txtEmail_1" placeholder="exemplo@email.com" onblur="validarEmailResponsavel1()">
+                                    <input value="<?= $resp1['email'] ?? '' ?>" type="email" id="txtEmail_1" name="txtEmail_1" placeholder="exemplo@email.com" onblur="validarEmailResponsavel1()">
                                     <div id="mensagem-erro-email-1" class="ui hidden message error">
                                         <span id="email-erro-1"></span>
                                     </div>
@@ -314,29 +316,33 @@ $autorizados = $dadosCompletos['autorizados'];
                             <div class="fields">
                                 <div class="eight wide field" id="empresa_responsavel_div">
                                     <label for="txtNomeEmpresa_1">Nome da Empresa</label>
-                                    <input type="text" id="txtNomeEmpresa_1" name="txtNomeEmpresa_1" placeholder="Empresa...">
+                                    <input type="text" id="txtNomeEmpresa_1" name="txtNomeEmpresa_1" placeholder="Empresa..." value="<?= $resp1['nome_empresa'] ?? '' ?>">
                                 </div>
 
                                 <div class="four wide field" id="profissao_responsavel_div">
                                     <label for="txtProfissao_1">Profissão</label>
-                                    <input type="text" id="txtProfissao_1" name="txtProfissao_1" placeholder="Arquiteto, Advogado...">
+                                    <input type="text" id="txtProfissao_1" name="txtProfissao_1" placeholder="Arquiteto, Advogado..."
+                                        value="<?= $resp1['profissao'] ?? '' ?>">
                                 </div>
 
                                 <div class="four wide field" id="telefone_trabalho_responsavel_div">
                                     <label for="txtTelefoneTrabalho_1">Telefone do Trabalho</label>
-                                    <input type="text" id="txtTelefoneTrabalho_1" name="txtTelefoneTrabalho_1" placeholder="(19) 99999-9999">
+                                    <input type="text" id="txtTelefoneTrabalho_1" name="txtTelefoneTrabalho_1" placeholder="(19) 99999-9999"
+                                        value="<?= $resp1['telefone_trabalho'] ?>">
                                 </div>
                             </div>
 
                             <div class="fields">
                                 <div class="four wide field" id="horario_trabalho_responsavel_div">
                                     <label for="txtHorarioTrabalho_1">Horário de Trabalho</label>
-                                    <input type="text" id="txtHorarioTrabalho_1" name="txtHorarioTrabalho_1" placeholder="8h">
+                                    <input type="text" id="txtHorarioTrabalho_1" name="txtHorarioTrabalho_1" placeholder="8h"
+                                        value="<?= $resp1['horario_trabalho'] ?? '' ?>">
                                 </div>
 
                                 <div class="four wide field" id="salario_responsavel_div">
                                     <label for="txtSalario_1">Salário do responsável</label>
-                                    <input type="text" id="txtSalario_1" name="txtSalario_1" placeholder="R$1500,00..." onblur="validarSalarioResponsavel1()">
+                                    <input type="text" id="txtSalario_1" name="txtSalario_1" placeholder="R$1500,00..." onblur="validarSalarioResponsavel1()"
+                                        value="<?= $resp1['salario'] ?? '' ?>">
                                     <div id="mensagem-erro-salario-1" class="ui hidden message error">
                                         <span id="salario-erro-1"></span>
                                     </div>
@@ -345,13 +351,25 @@ $autorizados = $dadosCompletos['autorizados'];
                                 <div class="four wide field" id="renda_extra_responsavel_div">
                                     <label for="toggleRendaExtra_1">Possui Renda Extra?</label>
                                     <div class="ui toggle checkbox">
-                                        <input type="checkbox" id="toggleRendaExtra_1" name="toggleRendaExtra_1" onchange="validarRendaExtra()">
+                                        <input
+                                            type="checkbox"
+                                            id="toggleRendaExtra_1"
+                                            name="toggleRendaExtra_1"
+                                            onchange="validarRendaExtra()"
+                                            <?= !empty($resp1['renda_extra']) && $resp1['renda_extra'] == 1 ? 'checked' : '' ?>>
                                         <label></label>
                                     </div>
                                 </div>
+
                                 <div class="four wide field oculto" id="renda_extra_div">
-                                    <label for="txtRendaEnxtra">Valor da renda extra</label>
-                                    <input type="text" id="txtRendaExtra" name="txtRendaExtra" onblur="validarRendaExtra()">
+                                    <label for="txtRendaExtra">Valor da renda extra</label>
+                                    <input
+                                        type="text"
+                                        id="txtRendaExtra"
+                                        name="txtRendaExtra"
+                                        placeholder="R$ 500,00..."
+                                        value="<?= $resp1['valor_renda_extra'] ?? '' ?>"
+                                        onblur="validarRendaExtra()">
                                     <div id="mensagem-erro-renda-extra-1" class="ui hidden message error">
                                         <span id="renda-extra-erro-1"></span>
                                     </div>
@@ -498,11 +516,12 @@ $autorizados = $dadosCompletos['autorizados'];
                                 </div>
                             </div>
                         </div>
+
                         <div class="fields">
-                            <div class="sixteen wide field oculto" id="divBotaoRemoverResponsavel">
+                            <div class="sixteen wide field <?= !empty($resp2['nome']) ? '' : 'oculto' ?>" id="divBotaoRemoverResponsavel">
                                 <div class="right floated column">
                                     <button class="ui red button right floated" id="btnRemoverResponsavel" type="button" onclick="removerResponsavel()">
-                                        <i class="trash alternate outline icon"></i> Remover Responsavel
+                                        <i class="trash alternate outline icon"></i> Remover Responsável
                                     </button>
                                 </div>
                             </div>
@@ -537,5 +556,23 @@ $autorizados = $dadosCompletos['autorizados'];
                                 }
                             });
                         });
-                        
+
+                            window.addEventListener("DOMContentLoaded", () => {
+                                $('.ui.checkbox').checkbox();
+                                validarRendaExtra();
+
+                                const divRemover = document.getElementById("divBotaoRemoverResponsavel");
+                                const divAdicionar = document.getElementById("divBotaoResponsavel");
+
+                                // PHP funciona aqui porque está dentro de um arquivo .php
+                                const responsavel2Existe = <?= !empty($resp2['nome']) ? 'true' : 'false' ?>;
+
+                                if (responsavel2Existe) {
+                                    divRemover.classList.remove("oculto");
+                                    divAdicionar.classList.add("oculto");
+                                } else {
+                                    divRemover.classList.add("oculto");
+                                    divAdicionar.classList.remove("oculto");
+                                }
+                            });
                     </script>
