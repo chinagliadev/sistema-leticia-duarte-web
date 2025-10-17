@@ -35,11 +35,9 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_1">
                     <div class="ui input">
-                        <!-- CAMPO VISÍVEL: SEM o atributo 'name'. Apenas exibe a data formatada. -->
                         <input type="text" id="txtDataNascimento_1" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
                     </div>
                 </div>
-                <!-- NOVO CAMPO OCULTO: ESTE CAMPO SERÁ ENVIADO COM O FORMATO YYYY-MM-DD PELO JAVASCRIPT -->
                 <input type="hidden" name="data_nascimento_1" id="hiddenDataNascimento_1">
                 <div id="mensagem-erro-data-responsavel-1" class="ui hidden message error">
                     <span id="data-responsavel-erro-1"></span>
@@ -165,11 +163,10 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_2">
                     <div class="ui input">
-                        <!-- CAMPO VISÍVEL: SEM o atributo 'name'. Apenas exibe a data formatada. -->
                         <input type="text" id="txtDataNascimento_2" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel2()">
                     </div>
                 </div>
-                <!-- NOVO CAMPO OCULTO: ESTE CAMPO SERÁ ENVIADO COM O FORMATO YYYY-MM-DD PELO JAVASCRIPT -->
+
                 <input type="hidden" name="data_nascimento_2" id="hiddenDataNascimento_2">
                 <div id="mensagem-erro-data-responsavel-2" class="ui hidden message error">
                     <span id="data-responsavel-erro-2"></span>

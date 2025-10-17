@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nome = $_POST['txtNomeCrianca'] ?? null;
     $turma = $_POST['turma'] ?? null;
-    $dataNascimento = $_POST['txtDataNascimento'] ?? null;
+    $dataNascimento = $_POST['data_nascimento'] ?? null;
     $corRaca = $_POST['corRaca'] ?? null;
 
     $autorizacaoMed = isset($_POST['autorizacaoMed']) ? 1 : 0;
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $tipo_responsavel_1     = !empty($_POST['txtTipoResponsavel_1']) ? $_POST['txtTipoResponsavel_1'] : null;
     $nome_responsavel_1     = !empty($_POST['txtNomeResponsavel_1']) ? $_POST['txtNomeResponsavel_1'] : null;
-    $data_nascimento_1      = !empty($_POST['txtDataNascimento_1']) ? $_POST['txtDataNascimento_1'] : null;
+    $data_nascimento_1      = !empty($_POST['data_nascimento_1']) ? $_POST['data_nascimento_1'] : null;
     $estado_civil_1         = !empty($_POST['txtEstadoCivil_1']) ? $_POST['txtEstadoCivil_1'] : null;
     $escolaridade_1         = !empty($_POST['txtEscolaridade_1']) ? $_POST['txtEscolaridade_1'] : 'Não informado';
     $celular_1              = !empty($_POST['txtTelefone_1']) ? $_POST['txtTelefone_1'] : null;
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['txtNomeResponsavel_2'])) {
         $tipo_responsavel_2     = !empty($_POST['txtTipoResponsavel_2']) ? $_POST['txtTipoResponsavel_2'] : null;
         $nome_responsavel_2     = !empty($_POST['txtNomeResponsavel_2']) ? $_POST['txtNomeResponsavel_2'] : null;
-        $data_nascimento_2      = !empty($_POST['txtDataNascimento_2']) ? $_POST['txtDataNascimento_2'] : null;
+        $data_nascimento_2      = !empty($_POST['data_nascimento_2']) ? $_POST['data_nascimento_2'] : null;
         $estado_civil_2         = !empty($_POST['txtEstadoCivil_2']) ? $_POST['txtEstadoCivil_2'] : 'Não informado';
         $escolaridade_2         = !empty($_POST['txtEscolaridade_2']) ? $_POST['txtEscolaridade_2'] : 'Não informado';
         $celular_2              = !empty($_POST['txtTelefone_2']) ? $_POST['txtTelefone_2'] : null;
