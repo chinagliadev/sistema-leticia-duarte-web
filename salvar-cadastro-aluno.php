@@ -225,10 +225,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $txtParentenco
     );
 
-
-    // Matrícula
     $matricula = new Matricula();
-    $matricula_id = $matricula->cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id);
+    $matricula_id = $matricula->cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id, $responsavel_2_id ?? null);
 
     $matriculaPessoaAutorizada = new matriculaPessoaAutorizada();
     $matriculaPessoaAutorizada->cadastrarMatriculaPessoaAutorizada($matricula_id, $pessoa_autorizada_id);

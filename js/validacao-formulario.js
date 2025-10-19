@@ -448,27 +448,27 @@ function validarEmailResponsavel1() {
     return true;
 }
 
-function validarSalarioResponsavel1() {
-    const div = document.getElementById('salario_responsavel_div');
-    const valor = document.getElementById('txtSalario_1').value.trim();
-    const mensagemErro = document.getElementById('mensagem-erro-salario-1');
-    const spanErro = document.getElementById('salario-erro-1');
+// function validarSalarioResponsavel1() {
+//     const div = document.getElementById('salario_responsavel_div');
+//     const valor = document.getElementById('txtSalario_1').value.trim();
+//     const mensagemErro = document.getElementById('mensagem-erro-salario-1');
+//     const spanErro = document.getElementById('salario-erro-1');
 
-    limparErro(mensagemErro, div, spanErro);
+//     limparErro(mensagemErro, div, spanErro);
 
-    if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do responsável');
-        return false;
-    }
+//     if (valor === '') {
+//         mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do responsável');
+//         return false;
+//     }
 
-    if (isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe um valor numérico válido');
-        return false;
-    }
+//     if (isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
+//         mensagemErroCampos(mensagemErro, div, spanErro, 'Informe um valor numérico válido');
+//         return false;
+//     }
 
-    limparErro(mensagemErro, div, spanErro);
-    return true;
-}
+//     limparErro(mensagemErro, div, spanErro);
+//     return true;
+// }
 
 function validarRendaExtra() {
     const possuiRenda = document.getElementById('toggleRendaExtra_1');
@@ -494,9 +494,6 @@ function validarRendaExtra() {
         return true;
     }
 }
-
-
-
 
 function adicionarResponsavel() {
     const responsavel2 = document.getElementById('responsavel_2')
@@ -714,29 +711,29 @@ function validarEmailResponsavel2() {
 }
 
 
-function validarSalarioResponsavel2() {
-    const responsavel2 = document.getElementById('responsavel_2');
-    if (responsavel2.classList.contains('oculto')) return true;
+// function validarSalarioResponsavel2() {
+//     const responsavel2 = document.getElementById('responsavel_2');
+//     if (responsavel2.classList.contains('oculto')) return true;
 
-    const div = document.getElementById('salario_responsavel_2_div');
-    const valor = document.getElementById('txtSalario_2').value.trim();
-    const mensagemErro = document.getElementById('mensagem-erro-salario-2');
-    const spanErro = document.getElementById('salario-erro-2');
+//     const div = document.getElementById('salario_responsavel_2_div');
+//     const valor = document.getElementById('txtSalario_2').value.trim();
+//     const mensagemErro = document.getElementById('mensagem-erro-salario-2');
+//     const spanErro = document.getElementById('salario-erro-2');
 
-    limparErro(mensagemErro, div, spanErro);
+//     limparErro(mensagemErro, div, spanErro);
 
-    if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do segundo responsavel');
-        return false;
-    }
+//     if (valor === '') {
+//         mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do segundo responsavel');
+//         return false;
+//     }
 
-    if (isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe um valor numérico válido');
-        return false;
-    }
+//     if (isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
+//         mensagemErroCampos(mensagemErro, div, spanErro, 'Informe um valor numérico válido');
+//         return false;
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
 function validarResponsavel2() {
     const tipo = validarTipoResponsavel2();

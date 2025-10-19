@@ -27,6 +27,7 @@ $sqlHist = "
 $stmtHist = $conn->prepare($sqlHist);
 $stmtHist->execute([$id]);
 $historico = $stmtHist->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>

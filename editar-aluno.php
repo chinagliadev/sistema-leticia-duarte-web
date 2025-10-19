@@ -19,7 +19,7 @@ $resp2 = $dadosCompletos['responsavel_2'];
 $estrutura = $dadosCompletos['estrutura_familiar'];
 $autorizados = $dadosCompletos['autorizados'];
 
-var_dump($resp2)
+var_dump($resp1)
 ?>
 
 <!DOCTYPE html>
@@ -386,16 +386,16 @@ var_dump($resp2)
                                 <div class="four wide field" id="tipo_responsavel_2_div">
                                     <label for="txtTipoResponsavel_2">Tipo do responsável</label>
                                     <select class="ui search dropdown" id="txtTipoResponsavel_2" name="txtTipoResponsavel_2" onchange="validarTipoResponsavel2()">
-                                        <option value="" disabled selected hidden>Selecione o tipo</option>
-                                        <option value="Pai">Pai</option>
-                                        <option value="Mãe">Mãe</option>
-                                        <option value="Avô">Avô</option>
-                                        <option value="Avó">Avó</option>
-                                        <option value="Irmão">Irmão</option>
-                                        <option value="Irmã">Irmã</option>
-                                        <option value="Tio">Tio</option>
-                                        <option value="Tia">Tia</option>
-                                        <option value="Outro">Outro</option>
+                                        <option value="" disabled hidden <?= empty($resp2['tipo_responsavel']) ? 'selected' : '' ?>>Selecione o tipo</option>
+                                        <option value="Pai" <?= ($resp2['tipo_responsavel'] ?? '') === 'Pai' ? 'selected' : '' ?>>Pai</option>
+                                        <option value="Mãe" <?= ($resp2['tipo_responsavel'] ?? '') === 'Mãe' ? 'selected' : '' ?>>Mãe</option>
+                                        <option value="Avô" <?= ($resp2['tipo_responsavel'] ?? '') === 'Avô' ? 'selected' : '' ?>>Avô</option>
+                                        <option value="Avó" <?= ($resp2['tipo_responsavel'] ?? '') === 'Avó' ? 'selected' : '' ?>>Avó</option>
+                                        <option value="Irmão" <?= ($resp2['tipo_responsavel'] ?? '') === 'Irmão' ? 'selected' : '' ?>>Irmão</option>
+                                        <option value="Irmã" <?= ($resp2['tipo_responsavel'] ?? '') === 'Irmã' ? 'selected' : '' ?>>Irmã</option>
+                                        <option value="Tio" <?= ($resp2['tipo_responsavel'] ?? '') === 'Tio' ? 'selected' : '' ?>>Tio</option>
+                                        <option value="Tia" <?= ($resp2['tipo_responsavel'] ?? '') === 'Tia' ? 'selected' : '' ?>>Tia</option>
+                                        <option value="Outro" <?= ($resp2['tipo_responsavel'] ?? '') === 'Outro' ? 'selected' : '' ?>>Outro</option>
                                     </select>
                                     <div id="mensagem_erro_tipo_responsavel_2" class="ui hidden message error">
                                         <span id="tipo_responsavel_erro_2"></span>
@@ -404,7 +404,7 @@ var_dump($resp2)
 
                                 <div class="eight wide field" id="nome_responsavel_div_2">
                                     <label for="txtNomeResponsavel_2">Nome do Responsável</label>
-                                    <input type="text" id="txtNomeResponsavel_2" name="txtNomeResponsavel_2" placeholder="" onblur="validarNomeResponsavel2()">
+                                    <input type="text" id="txtNomeResponsavel_2" name="txtNomeResponsavel_2" placeholder="" onblur="validarNomeResponsavel1()" value="<?= $resp2['nome'] ?? '' ?>">
                                     <div id="mensagem-erro-nome-responsavel-2" class="ui hidden message error">
                                         <span id="nome-responsavel-erro-2"></span>
                                     </div>
@@ -557,22 +557,22 @@ var_dump($resp2)
                             });
                         });
 
-                            window.addEventListener("DOMContentLoaded", () => {
-                                $('.ui.checkbox').checkbox();
-                                validarRendaExtra();
+                        window.addEventListener("DOMContentLoaded", () => {
+                            $('.ui.checkbox').checkbox();
+                            validarRendaExtra();
 
-                                const divRemover = document.getElementById("divBotaoRemoverResponsavel");
-                                const divAdicionar = document.getElementById("divBotaoResponsavel");
+                            const divRemover = document.getElementById("divBotaoRemoverResponsavel");
+                            const divAdicionar = document.getElementById("divBotaoResponsavel");
 
-                                // PHP funciona aqui porque está dentro de um arquivo .php
-                                const responsavel2Existe = <?= !empty($resp2['nome']) ? 'true' : 'false' ?>;
+                            // PHP funciona aqui porque está dentro de um arquivo .php
+                            const responsavel2Existe = <?= !empty($resp2['nome']) ? 'true' : 'false' ?>;
 
-                                if (responsavel2Existe) {
-                                    divRemover.classList.remove("oculto");
-                                    divAdicionar.classList.add("oculto");
-                                } else {
-                                    divRemover.classList.add("oculto");
-                                    divAdicionar.classList.remove("oculto");
-                                }
-                            });
+                            if (responsavel2Existe) {
+                                divRemover.classList.remove("oculto");
+                                divAdicionar.classList.add("oculto");
+                            } else {
+                                divRemover.classList.add("oculto");
+                                divAdicionar.classList.remove("oculto");
+                            }
+                        });
                     </script>
