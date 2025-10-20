@@ -295,6 +295,28 @@ select.ui.dropdown {
     font-size: 20px;
 }
 
+#modal-editar>.content {
+    display: block;
+    width: 100%;
+    font-size: 1.2em;
+    line-height: 1.4;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+#modal-editar.ui.basic.modal {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none !important;
+    color: #fff;
+    text-align: center;
+}
+
+#modal-editar .mensagem-modal {
+    font-size: 20px;
+}
+
 #btnSalvarEdicao {
     color: black !important;
 }

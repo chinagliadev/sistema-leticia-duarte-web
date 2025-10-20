@@ -31,29 +31,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cidade = $_POST['txtCidade'] ?? null;
     $complemento = $_POST['txtComplemento'] ?? null;
 
-    $pais_vivem_juntos = isset($_POST['pais_vivem_juntos']) ? 1 : 0; 
-    
+    $pais_vivem_juntos = isset($_POST['pais_vivem_juntos']) ? 1 : 0;
+
     $recebe_bolsa_familia = isset($_POST['recebe_bolsa_familia']) ? 1 : 0;
-    
+
     $possui_alergia = isset($_POST['possui_alergia']) ? 1 : 0;
     $especifique_alergia = $possui_alergia ? ($_POST['especifique_alergia'] ?? null) : null;
-    
+
     $possui_convenio = isset($_POST['possui_convenio']) ? 1 : 0;
-    
+
     $qual_convenio = $possui_convenio ? ($_POST['qual_convenio'] ?? null) : null;
-    
+
     $portador_necessidade_especial = isset($_POST['portador_necessidade_especial']) ? 1 : 0;
-    $qual_necessidade_especial = $portador_necessidade_especial ? ($_POST['qual_necessidade'] ?? null) : null; 
-    
+    $qual_necessidade_especial = $portador_necessidade_especial ? ($_POST['qual_necessidade'] ?? null) : null;
+
     $problemas_visao = isset($_POST['problemas_visao']) ? 1 : 0;
-    
+
     $ja_fez_cirurgia = isset($_POST['ja_fez_cirurgia']) ? 1 : 0;
-    $qual_cirurgia = $ja_fez_cirurgia ? ($_POST['qual_cirurgia'] ?? null) : null; 
-    
+    $qual_cirurgia = $ja_fez_cirurgia ? ($_POST['qual_cirurgia'] ?? null) : null;
+
     $vacina_catapora_varicela = isset($_POST['vacina_catapora_varicela']) ? 1 : 0;
 
     $numero_filhos               = $_POST['numero_filhos'] ?? null;
-    
+
     $valor                       = $recebe_bolsa_familia ? ($_POST['valor'] ?? null) : null;
 
     $doenca_anemia      = isset($_POST['doenca_anemia']) ? 1 : 0;
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $transporte_van         = isset($_POST['transporte_van']) ? 1 : 0;
     $transporte_a_pe        = isset($_POST['transporte_pe']) ? 1 : 0;
     $transporte_outros_desc = isset($_POST['transporte_outros_desc']) ? 1 : 0;
-    
+
 
     $estruturaFamiliar = new EstruturaFamiliar();
     $estrutura_familiar_id = $estruturaFamiliar->cadastrarEstruturaFamiliar(
@@ -182,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $horario_trabalho_2,
             $salario_2,
             $renda_extra_2,
-            $valor_renda_extra_2 
+            $valor_renda_extra_2
         );
     }
 
@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $txtNomePessoaAutorizada = $_POST['txtNomePessoaAutorizada'] ?? null;
     $txtCpfAutorizada = $_POST['txtCpfAutorizada'] ?? null;
     $txtTelefoneAutorizada = $_POST['txtTelefoneAutorizada'] ?? null;
-    $txtParentenco = $_POST['txtParentenco'] ?? null;
+    $txtParentesnco = $_POST['txtParentenco'] ?? null;
 
     $pessoa_autorizada = new PessoaAutorizada();
 
@@ -225,15 +225,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $txtNomePessoaAutorizada,
         $txtCpfAutorizada,
         $txtTelefoneAutorizada,
-        $txtParentenco
+        $txtParentesnco
     );
+    if (!empty($_POST['txtNomePessoaAutorizada2'])) {
+        $txtNomePessoaAutorizada2 = $_POST['txtNomePessoaAutorizada2'] ?? null;
+        $txtCpfAutorizada2 = $_POST['txtCpfAutorizada2'] ?? null;
+        $txtTelefoneAutorizada2 = $_POST['txtTelefoneAutorizada2'] ?? null;
+        $txtParentesco2 = $_POST['txtParentenco2'] ?? null;
+
+        $pessoa_autorizada2 = new PessoaAutorizada();
+
+        $pessoa_autorizada_id_2 = $pessoa_autorizada2->cadastrarPessoaAutorizada(
+            $txtNomePessoaAutorizada2,
+            $txtCpfAutorizada2,
+            $txtTelefoneAutorizada2,
+            $txtParentesco2
+        );
+
+        var_dump($pessoa_autorizada_id_2);
+    }
 
     $matricula = new Matricula();
-    $matricula_id = $matricula->cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id, $responsavel_2_id ?? null);
+    $matricula_id = $matricula->cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id, $responsavel_2_id, $pessoa_autorizada_id, $pessoa_autorizada_id_2 ?? null);
 
     $matriculaPessoaAutorizada = new matriculaPessoaAutorizada();
     $matriculaPessoaAutorizada->cadastrarMatriculaPessoaAutorizada($matricula_id, $pessoa_autorizada_id);
 
     header('location: ./cadastrados.php');
 }
-?>

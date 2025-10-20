@@ -1,5 +1,5 @@
 <section class="ui segment red raised sessao-tab">
-    <h2>Responsável</h2>
+    <h2>Identificação do responsavel 1</h2>
 
     <div class="responsavel" id="responsavel-1">
         <div class="fields">
@@ -129,7 +129,7 @@
     <div class="ui divider"></div>
 
     <div class="responsavel_2 oculto" id="responsavel_2">
-        <h2>Responsavel 2</h2>
+        <h2>Identificação do responsavel 2</h2>
         <div class="fields">
 
             <div class="four wide field" id="tipo_responsavel_2_div">

@@ -1,4 +1,3 @@
-<!-- Nome, nascimento e raça -->
 <section class="ui segment blue raised">
     <div class="fields">
         <div class="seven wide field" id="validacao-nome">

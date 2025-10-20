@@ -17,9 +17,8 @@ $endereco = $dadosCompletos['endereco'];
 $resp1 = $dadosCompletos['responsavel_1'];
 $resp2 = $dadosCompletos['responsavel_2'];
 $estrutura = $dadosCompletos['estrutura_familiar'];
-$autorizados = $dadosCompletos['autorizados'];
-
-print_r($estrutura)
+$pessoa_autorizada1 = $dadosCompletos['pessoa_autorizada_1'];
+$pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +31,8 @@ print_r($estrutura)
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
-    <link rel="stylesheet" href="./css/sistema.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.css">
+    <link rel="stylesheet" href="./css/sistema.css" />
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
@@ -61,7 +60,18 @@ print_r($estrutura)
                     <img class="tamanho-img ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
                         alt="logo da leticia duarte na tela de cadastros de alunos">
                 </section>
-                <form method="post" action="./editar-aluno.php" class="ui form form-cadastro-aluno" id="formulario-aluno">
+                <form method="post" action="./editar-cadastro-aluno.php" class="ui form form-cadastro-aluno" id="formulario-aluno">
+
+                    <input type="hidden" name="ra_aluno" value="<?= $aluno['ra_aluno'] ?? '' ?>">
+                    <input type="hidden" name="id_matricula" value="<?= $dadosCompletos['matricula']['id_matricula'] ?? '' ?>">
+                    <input type="hidden" name="id_endereco" value="<?= $endereco['id_endereco'] ?? '' ?>">
+                    <input type="hidden" name="id_resp1" value="<?= $resp1['id_responsavel'] ?? '' ?>">
+                    <input type="hidden" name="id_resp2" value="<?= $resp2['id_responsavel'] ?? '' ?>">
+                    <input type="hidden" name="id_estrutura_familiar" value="<?= $estrutura['id'] ?? '' ?>">
+                    <input type="hidden" name="id_pessoa_autorizada1" value="<?= $pessoa_autorizada1['id'] ?? '' ?>">
+                    <input type="hidden" name="id_pessoa_autorizada2" value="<?= $pessoa_autorizada2['id'] ?? '' ?>">
+
+
                     <section class="ui segment blue raised ">
                         <div class="fields">
                             <div class="seven wide field" id="validacao-nome">
@@ -137,7 +147,6 @@ print_r($estrutura)
                             </div>
                         </div>
 
-                        <!-- Endereço -->
                         <div class="fields">
                             <div class="three wide field" id="validacao-cep">
                                 <label for="txtCep">CEP</label>
@@ -198,7 +207,6 @@ print_r($estrutura)
                             </div>
                         </div>
 
-                        <!-- Autorização medicação -->
                         <div class="fields">
                             <div class="ten wide field">
                                 <label>Em caso de febre autoriza medicar a criança?</label>
@@ -218,7 +226,6 @@ print_r($estrutura)
                             </div>
                         </div>
 
-                        <!-- Autorização de imagem -->
                         <div class="fields">
                             <div class="ten wide field">
                                 <label>Autorizo a divulgação de imagem do meu filho(a) para uso de projetos na escola, fotos, filmagem, Facebook, Instagram e site.</label>
@@ -400,7 +407,7 @@ print_r($estrutura)
 
                                 <div class="eight wide field" id="nome_responsavel_div_2">
                                     <label for="txtNomeResponsavel_2">Nome do Responsável</label>
-                                    <input type="text" id="txtNomeResponsavel_2" name="txtNomeResponsavel_2" placeholder="" onblur="validarNomeResponsavel1()" value="<?= $resp2['nome'] ?? '' ?>">
+                                    <input type="text" id="txtNomeResponsavel_2" name="txtNomeResponsavel_2" placeholder="" onblur="validarNomeResponsavel2()" value="<?= $resp2['nome'] ?? '' ?>">
                                     <div id="mensagem-erro-nome-responsavel-2" class="ui hidden message error">
                                         <span id="nome-responsavel-erro-2"></span>
                                     </div>
@@ -499,6 +506,8 @@ print_r($estrutura)
                                     </div>
                                 </div>
                             </div>
+
+                            <input type="hidden" id="apagarResp2" name="apagarResp2" value="0">
                         </div>
                         <div class="fields">
                             <div class="sixteen wide field <?= !empty($resp2['nome']) ? 'oculto' : '' ?>" id="divBotaoResponsavel">
@@ -513,7 +522,7 @@ print_r($estrutura)
                         <div class="fields">
                             <div class="sixteen wide field <?= !empty($resp2['nome']) ? '' : 'oculto' ?>" id="divBotaoRemoverResponsavel">
                                 <div class="right floated column">
-                                    <button class="ui red button right floated" id="btnRemoverResponsavel" type="button" onclick="removerResponsavel()">
+                                    <button class="ui red button right floated" id="btnRemoverResponsavel" type="button" onclick="removerResponsavel2()">
                                         <i class="trash alternate outline icon"></i> Remover Responsável
                                     </button>
                                 </div>
@@ -543,7 +552,7 @@ print_r($estrutura)
                                 </div>
                             </div>
                             <?php
-                            // Lógica Bolsa Família (mantida)
+
                             $bolsa_familia_oculto = isset($estrutura['recebe_bolsa_familia']) && $estrutura['recebe_bolsa_familia'] ? '' : 'oculto';
                             ?>
                             <div class="four wide field <?= $bolsa_familia_oculto ?>" id="valor-bolsa-field">
@@ -586,7 +595,7 @@ print_r($estrutura)
                                 <label>Possui convênio</label>
                                 <div class="ui toggle checkbox">
                                     <?php
-                                   
+
                                     $convenio_ativo = (isset($estrutura['possui_convenio']) && $estrutura['possui_convenio']) || (isset($estrutura['qual_convenio']) && !empty($estrutura['qual_convenio']));
                                     ?>
                                     <input type="checkbox" name="possui_convenio" id="toggle-convenio" onchange="validarConvenioMedico()"
@@ -595,7 +604,7 @@ print_r($estrutura)
                                 </div>
                             </div>
                             <?php
-                          
+
                             $convenio_oculto = $convenio_ativo ? '' : 'oculto';
                             ?>
                             <div class="four wide field <?= $convenio_oculto ?>" id="qual-convenio-field">
@@ -650,7 +659,7 @@ print_r($estrutura)
                                 <label>Já fez cirurgia</label>
                                 <div class="ui toggle checkbox">
                                     <?php
-                                    
+
                                     $cirurgia_ativa = (isset($estrutura['ja_fez_cirurgia']) && $estrutura['ja_fez_cirurgia']) || (isset($estrutura['qual_cirurgia']) && !empty($estrutura['qual_cirurgia']));
                                     ?>
                                     <input type="checkbox" id="toggle_cirurgia" name="ja_fez_cirurgia" onchange="validarCirurgia()"
@@ -660,7 +669,7 @@ print_r($estrutura)
                             </div>
 
                             <?php
-                         
+
                             $cirurgia_oculto = $cirurgia_ativa ? '' : 'oculto';
                             ?>
                             <div class="four wide field <?= $cirurgia_oculto ?>" id="divCirurgia">
@@ -767,6 +776,154 @@ print_r($estrutura)
                                 </div>
                                 <div class="field">
                                     <div class="ui checkbox"><input type="checkbox" name="doenca_verminose" <?= isset($estrutura['doenca_verminose']) && $estrutura['doenca_verminose'] ? 'checked' : '' ?>><label>Verminoses</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="ui segment green raised">
+                        <h2>Parentesco</h2>
+                        <div class="pessoaAutorizada" id="autorizada-1">
+                            <div class="fields">
+                                <div class="eight wide field" id="div_nome_autorizada">
+                                    <label for="txtNomePessoaAutorizada">Nome</label>
+                                    <input type="text" id="txtNomePessoaAutorizada" name="txtNomePessoaAutorizada" placeholder="" onblur="validarNomeAutorizada()" value="<?= $pessoa_autorizada1['nome'] ?>">
+                                    <div class="ui hidden negative message" id="mensagem-erro-nomeAutorizada">
+                                        <div class="content">
+                                            <i class="user icon"></i><span id="nomeAutorizada-erro"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="four wide field" id="div_cpf_autorizada">
+                                    <label for="txtCpfAutorizada">CPF</label>
+                                    <input type="text" id="txtCpfAutorizada" name="txtCpfAutorizada" placeholder="" onblur="validarCpfAutorizada()" value="<?= $pessoa_autorizada1['cpf'] ?>">
+                                    <div class="ui hidden negative message" id="mensagem-erro-cpf">
+                                        <div class="content">
+                                            <i class="user icon"></i><span id="cpf-erro"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="four wide field" id="div_telefone_autorizada">
+                                    <label for="txtTelefoneAutorizada">Telefone</label>
+                                    <input type="text" id="txtTelefoneAutorizada" name="txtTelefoneAutorizada" placeholder="" onblur="validarTelefoneAutorizada()" value="<?= $pessoa_autorizada1['celular'] ?>">
+                                    <div class="ui hidden negative message" id="mensagem-erro-telefone-autorizada">
+                                        <div class="content">
+                                            <i class="user icon"></i><span id="telefone-autorizada-erro"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fields">
+                                <div class="four wide field" id="div_parentesco">
+                                    <label for="txtParentesco">Parentesco</label>
+                                    <select class="ui search dropdown" id="txtParentesco" name="txtParentesco" onchange="validarParentesco()">
+                                        <option value="" disabled hidden <?= empty($pessoa_autorizada1['parentesco']) ? 'selected' : '' ?>>Selecione o parentesco</option>
+                                        <option value="Pai" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Pai' ? 'selected' : '' ?>>Pai</option>
+                                        <option value="Mãe" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Mãe' ? 'selected' : '' ?>>Mãe</option>
+                                        <option value="Avô" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Avô' ? 'selected' : '' ?>>Avô</option>
+                                        <option value="Avó" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Avó' ? 'selected' : '' ?>>Avó</option>
+                                        <option value="Irmão" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Irmão' ? 'selected' : '' ?>>Irmão</option>
+                                        <option value="Irmã" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Irmã' ? 'selected' : '' ?>>Irmã</option>
+                                        <option value="Tio" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Tio' ? 'selected' : '' ?>>Tio</option>
+                                        <option value="Tia" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Tia' ? 'selected' : '' ?>>Tia</option>
+                                        <option value="Outro" <?= ($pessoa_autorizada1['parentesco'] ?? '') === 'Outro' ? 'selected' : '' ?>>Outro</option>
+                                    </select>
+                                    <div class="ui hidden negative message" id="mensagem-erro-parentesco-autorizada">
+                                        <div class="content">
+                                            <i class="user icon"></i><span id="parentesco-autorizada-erro"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui divider"></div>
+
+                        <div class="pessoaAutorizada <?= !empty($pessoa_autorizada2['nome']) ? '' : 'oculto' ?>" id="autorizada-2">
+                            <h2>Parentesco 2</h2>
+                            <div class="fields">
+                                <div class="eight wide field" id="div_nome_autorizada2">
+                                    <label for="txtNomePessoaAutorizada2">Nome</label>
+                                    <input type="text" id="txtNomePessoaAutorizada2" placeholder="" onblur="validarNomeParentesco2()" value="<?= $pessoa_autorizada2['nome'] ?>">
+                                    <div class="ui hidden negative message" id="mensagem-erro-nomeAutorizada2">
+                                        <div class="content">
+                                            <i class="user icon"></i><span id="nomeAutorizada2-erro"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="four wide field" id="div_cpf_autorizada2">
+                                    <label for="txtCpfAutorizada2">CPF</label>
+                                    <input type="text" id="txtCpfAutorizada2" placeholder="" onblur="validarCpfAutorizada2()" value="<?= $pessoa_autorizada2['cpf'] ?>">
+                                    <div class="ui hidden negative message" id="mensagem-erro-cpf2">
+                                        <div class="content">
+                                            <i class="user icon"></i><span id="cpf2-erro"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="four wide field" id="div_telefone_autorizada2">
+                                    <label for="txtTelefoneAutorizada">Telefone</label>
+                                    <input type="text" id="txtTelefoneAutorizada2" placeholder="" onblur="validarTelefoneAutorizada2()" value="<?= $pessoa_autorizada2['celular'] ?>">
+                                    <div class="ui hidden negative message" id="mensagem-erro-telefone2-autorizada">
+                                        <div class="content">
+                                            <i class="user icon"></i><span id="telefone-autorizada2-erro"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fields">
+                                <div class="four wide field" id="div_parentesco2">
+                                    <label for="txtParentenco">Parentesco</label>
+                                    <select class="ui search dropdown" id="txtParentenco2" name="txtParentenco2">
+                                        <option value="" disabled hidden <?= empty($pessoa_autorizada2['parentesco']) ? 'selected' : '' ?>>Selecione o parentesco</option>
+                                        <option value="Pai" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Pai' ? 'selected' : '' ?>>Pai</option>
+                                        <option value="Mãe" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Mãe' ? 'selected' : '' ?>>Mãe</option>
+                                        <option value="Avô" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Avô' ? 'selected' : '' ?>>Avô</option>
+                                        <option value="Avó" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Avó' ? 'selected' : '' ?>>Avó</option>
+                                        <option value="Irmão" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Irmão' ? 'selected' : '' ?>>Irmão</option>
+                                        <option value="Irmã" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Irmã' ? 'selected' : '' ?>>Irmã</option>
+                                        <option value="Tio" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Tio' ? 'selected' : '' ?>>Tio</option>
+                                        <option value="Tia" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Tia' ? 'selected' : '' ?>>Tia</option>
+                                        <option value="Outro" <?= ($pessoa_autorizada2['parentesco'] ?? '') === 'Outro' ? 'selected' : '' ?>>Outro</option>
+                                    </select>
+                                    <div class="ui hidden negative message" id="mensagem-erro-parentesco-autorizada2">
+                                        <div class="content">
+                                            <i class="user icon"></i><span id="parentesco-autorizada-erro2"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fields" style="margin-top: 10px;">
+                                <div class="sixteen wide field">
+                                    <div class="right floated column">
+                                        <button type="button" id="btnRemoverAutorizada" class="ui red button right floated" onclick="removerPessoaAutorizada()">
+                                            <i class="trash icon"></i> Remover Pessoa Autorizada
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="fields">
+                            <div class="sixteen wide field ">
+                                <div class="right floated column <?= !empty($pessoa_autorizada2['nome']) ? 'oculto' : '' ?>" id="div_autorizada">
+                                    <button type="button" class="ui blue button right floated" onclick="adicionarPessoaAutorizada()" id="btnAdicionarAutorizada">
+                                        <i class="plus circle icon"></i>
+                                        Adicionar Pessoa Autorizada
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui grid">
+                            <div class="four column row">
+                                <div class="right floated column <?= !empty($pessoa_autorizada2['nome']) ? '' : 'oculto' ?>">
+                                    <button
+                                        type="submit"
+                                        class="ui yellow icon button right floated">
+                                        <i class="save icon"></i> Editar Cadastro
+                                    </button>
                                 </div>
                             </div>
                         </div>

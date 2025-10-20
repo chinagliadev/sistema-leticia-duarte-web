@@ -504,17 +504,6 @@ function adicionarResponsavel() {
     divRemoverResponsavel.classList.remove('oculto')
 }
 
-function removerResponsavel() {
-    const divBotaoRemoverResponsavel = document.getElementById('divBotaoRemoverResponsavel')
-    const divBotaoResponsavel = document.getElementById('divBotaoResponsavel')
-    const responsavel_2 = document.getElementById('responsavel_2')
-
-    divBotaoRemoverResponsavel.classList.add('oculto')
-    divBotaoResponsavel.classList.remove('oculto')
-    responsavel_2.classList.add('oculto')
-
-}
-
 function validarRendaExtraResponsavel2() {
     const responsavel2 = document.getElementById('responsavel_2');
     if (responsavel2.classList.contains('oculto')) return true;
@@ -1282,3 +1271,28 @@ async function validarFormularioCompleto() {
     }
 }
 
+function removerResponsavel2() {
+    document.getElementById('responsavel_2').classList.add('oculto');
+    document.getElementById('divBotaoRemoverResponsavel').classList.add('oculto');
+    document.getElementById('divBotaoResponsavel').classList.remove('oculto');
+
+    document.getElementById('apagarResp2').value = '1';
+
+    const inputs = document.querySelectorAll('#responsavel_2 input, #responsavel_2 select');
+    inputs.forEach(input => {
+        if(input.type !== 'hidden') input.value = '';
+        if(input.tagName === 'SELECT') input.selectedIndex = 0; 
+    });
+}
+
+
+function removerResponsavel() {
+    const divBotaoRemoverResponsavel = document.getElementById('divBotaoRemoverResponsavel')
+    const divBotaoResponsavel = document.getElementById('divBotaoResponsavel')
+    const responsavel_2 = document.getElementById('responsavel_2')
+
+    divBotaoRemoverResponsavel.classList.add('oculto')
+    divBotaoResponsavel.classList.remove('oculto')
+    responsavel_2.classList.add('oculto')
+
+}

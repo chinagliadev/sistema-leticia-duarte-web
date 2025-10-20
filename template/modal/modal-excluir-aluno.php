@@ -1,4 +1,4 @@
-<div class="ui basic modal modal-editar" id="modal-excluir">
+<div class="ui basic modal modal-excluir" id="modal-excluir">
     <div class="header">
         Excluir Aluno
     </div>
