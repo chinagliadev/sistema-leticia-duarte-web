@@ -35,56 +35,95 @@ $dadosMatricula = $matricula->listarMatricula();
         <?php include './template/menuLateral.php' ?>
 
         <main class="conteudo_cadastrados">
-            <section class="cabecalho_cadastrados">
+            <section class="cabecalho_cadastrados ui segment blue">
                 <h2>Alunos<br>Cadastrados</h2>
                 <img class="ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
                     alt="logo da leticia duarte na tela de cadastros de alunos">
             </section>
 
-            <section class="pesquisa_alunos">
-                <div class="container_pesquisar ui action input">
-                    <input id="txtPesquisar" type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
-                    <button class="ui button primary"><i class="search icon"></i></button>
-                </div>
-            </section>
 
-            <section class="sessao_tabela">
+            <section class="sessao_tabela ui segment yellow">
+                <section class="pesquisar_alunos">
+                    <div class="ui action fluid input">
+                        <input id="txtPesquisar" type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
+                        <button class="ui icon primary button ">
+                            <i class="search icon"></i>
+                        </button>
+                    </div>
+                </section>
                 <table class="ui single line table center aligned">
-                    <thead>
+                    <thead class="background-thead">
                         <tr>
-                            <th>Registro do Aluno (RA)</th>
-                            <th>Nome</th>
-                            <th>Data de Nascimento</th>
-                            <th>Responsável</th>
-                            <th>Ações</th>
+                            <th><i class="id badge icon"></i> Registro do Aluno (RA)</th>
+                            <th><i class="user icon"></i> Nome</th>
+                            <th><i class="calendar alternate outline icon"></i> Data de Nascimento</th>
+                            <th><i class="users icon"></i> Responsável</th>
+                            <th><i class="cog icon"></i> Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($dadosMatricula as $matricula) { ?>
+                        <?php if (empty($dadosMatricula)) { ?>
                             <tr>
-                                <td><?= $matricula['ra_aluno'] ?></td>
-                                <td><?= $matricula['nome_aluno'] ?></td>
-                                <td><?= $matricula['data_nascimento'] ?></td>
-                                <td><?= $matricula['nome_responsavel'] ?></td>
-                                <td>
-                                    <button class="ui small icon button blue" title="Detalhes">
-                                        <i class="eye icon"></i>
-                                    </button>
-                                    <button
-                                        id="btn-deletar-aluno"
-                                        type="button"
-                                        class="btn-deletar-aluno ui small red icon button"
-                                        data-id="<?= $matricula['ra_aluno'] ?>"
-                                        data-nome="<?= $matricula['nome_aluno'] ?>"
-                                        title="Excluir">
-                                        <i class="trash icon"></i>
-                                    </button>
-                                    <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>" class="ui small yellow icon button">
-                                        <i class="edit icon"></i>
-                                    </a>
+                                <td colspan="5">
+                                    <div class="ui center aligned">
+                                        <div class="ui message mensagem_cadastrados">
+                                            <div class="content">
+
+                                                <div class="ui header">Nenhum Aluno Encontrado</div>
+
+                                                <p>Sua lista de matrículas está vazia. Você pode adicionar o primeiro aluno agora.</p>
+
+                                                <a href="./formulario-cadastro.php" class="ui small primary button">
+                                                    <i class="plus icon"></i> Cadastrar Novo Aluno
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
-                        <?php } ?>
+
+                            <?php } else {
+                            foreach ($dadosMatricula as $matricula) { ?>
+
+                                <tr>
+                                    <td><?= $matricula['ra_aluno'] ?></td>
+                                    <td><?= $matricula['nome_aluno'] ?></td>
+                                    <td><?= $matricula['data_nascimento'] ?></td>
+                                    <td><?= $matricula['nome_responsavel'] ?></td>
+                                    <td>
+                                        <button
+                                            data-inverted=""
+                                            data-tooltip="Detalhes Aluno"
+                                            class="ui small icon button blue"
+                                            title="Detalhes">
+                                            <i class="eye icon"></i>
+                                        </button>
+                                        <button
+                                            data-tooltip="Deletar Aluno"
+                                            data-inverted=""
+                                            id="btn-deletar-aluno"
+                                            type="button"
+                                            class="btn-deletar-aluno ui small red icon button"
+                                            data-id="<?= $matricula['ra_aluno'] ?>"
+                                            data-nome="<?= $matricula['nome_aluno'] ?>"
+                                            title="Excluir">
+                                            <i class="trash icon"></i>
+                                        </button>
+                                        <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
+                                            data-tooltip="Editar Aluno"
+                                            data-inverted=""
+                                            class="ui small yellow icon button">
+                                            <i class="edit icon"></i>
+                                        </a>
+                                        <a href="#" class="ui small icon button" data-tooltip="Baixar PDF" data-inverted="">
+                                            <i class="file pdf outline red icon"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                        <?php }
+                        } ?>
                     </tbody>
                 </table>
             </section>
