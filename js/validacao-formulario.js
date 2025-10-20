@@ -689,20 +689,21 @@ function validarEmailResponsavel2() {
     const responsavel2 = document.getElementById('responsavel_2');
     if (responsavel2.classList.contains('oculto')) return true;
 
-    const div = document.getElementById('salario_responsavel_2_div');
-    const valor = document.getElementById('txtSalario_2').value.trim();
-    const mensagemErro = document.getElementById('mensagem-erro-salario-2');
-    const spanErro = document.getElementById('salario-erro-2');
+    const div = document.getElementById('email_responsavel_2_div');
+    const valor = document.getElementById('txtEmail_2').value.trim();
+    const mensagemErro = document.getElementById('mensagem-erro-email-2');
+    const spanErro = document.getElementById('email-erro-2');
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     limparErro(mensagemErro, div, spanErro);
 
     if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do responsável');
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o email do responsável');
         return false;
     }
 
-    if (isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe um valor numérico válido');
+    if (!regexEmail.test(valor)) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Email inválido');
         return false;
     }
 
@@ -742,10 +743,9 @@ function validarResponsavel2() {
     const estadoCivil = validarEstadoCivilResponsavel2();
     const telefone = validarTelefoneResponsavel2();
     const email = validarEmailResponsavel2();
-    const salario = validarSalarioResponsavel2();
     const rendaExtra = validarRendaExtraResponsavel2();
 
-    return tipo && nome && data && estadoCivil && telefone && email && salario && rendaExtra;
+    return tipo && nome && data && estadoCivil && telefone && email && rendaExtra;
 }
 
 function validarBolsaFamilia() {
@@ -1162,10 +1162,10 @@ function validarResponsavel1() {
     const estadoCivil = validarEstadoCivilResponsavel1();
     const telefone = validarTelefoneResponsavel1();
     const email = validarEmailResponsavel1();
-    const salario = validarSalarioResponsavel1();
+    // const salario = validarSalarioResponsavel1();
 
 
-    const formularioValidoResponsavel = tipo && nome && data && estadoCivil && telefone && email && salario;
+    const formularioValidoResponsavel = tipo && nome && data && estadoCivil && telefone && email;
     return formularioValidoResponsavel;
 }
 
@@ -1176,9 +1176,9 @@ function validarResponsavel2() {
     const estadoCivil = validarEstadoCivilResponsavel2();
     const telefone = validarTelefoneResponsavel2();
     const email = validarEmailResponsavel2();
-    const salario = validarSalarioResponsavel2();
+    // const salario = validarSalarioResponsavel2();
 
-    const formularioValidoResponsavel2 = tipo && nome && data && estadoCivil && telefone && email && salario;
+    const formularioValidoResponsavel2 = tipo && nome && data && estadoCivil && telefone && email;
     return formularioValidoResponsavel2;
 }
 

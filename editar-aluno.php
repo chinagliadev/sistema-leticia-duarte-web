@@ -19,7 +19,7 @@ $resp2 = $dadosCompletos['responsavel_2'];
 $estrutura = $dadosCompletos['estrutura_familiar'];
 $autorizados = $dadosCompletos['autorizados'];
 
-var_dump($resp1)
+print_r($estrutura)
 ?>
 
 <!DOCTYPE html>
@@ -171,7 +171,6 @@ var_dump($resp1)
                             </div>
                         </div>
 
-                        <!-- Bairro, cidade, complemento -->
                         <div class="fields">
                             <div class="ten wide field" id="validacao-bairro">
                                 <label for="txtBairro">Bairro</label>
@@ -238,7 +237,6 @@ var_dump($resp1)
 
                         <div class="responsavel" id="responsavel-1">
                             <div class="fields">
-
                                 <div class="four wide field" id="tipo_responsavel_div">
                                     <label for="txtTipoResponsavel_1">Tipo do responsável</label>
                                     <select class="ui search dropdown" id="txtTipoResponsavel_1" name="txtTipoResponsavel_1" onchange="validarTipoResponsavel1()">
@@ -281,7 +279,6 @@ var_dump($resp1)
                             </div>
 
                             <div class="fields">
-
                                 <div class="four wide field" id="estado_civil_responsavel_div">
                                     <label for="txtEstadoCivil_1">Estado Civil</label>
                                     <select class="ui search dropdown" id="txtEstadoCivil_1" name="txtEstadoCivil_1" onchange="validarEstadoCivilResponsavel1()">
@@ -379,10 +376,9 @@ var_dump($resp1)
 
                         <div class="ui divider"></div>
 
-                        <div class="responsavel_2 oculto" id="responsavel_2">
+                        <div class="responsavel_2 <?= !empty($resp2['nome']) ? '' : 'oculto' ?>" id="responsavel_2">
                             <h2>Responsavel 2</h2>
                             <div class="fields">
-
                                 <div class="four wide field" id="tipo_responsavel_2_div">
                                     <label for="txtTipoResponsavel_2">Tipo do responsável</label>
                                     <select class="ui search dropdown" id="txtTipoResponsavel_2" name="txtTipoResponsavel_2" onchange="validarTipoResponsavel2()">
@@ -426,15 +422,14 @@ var_dump($resp1)
                             </div>
 
                             <div class="fields">
-
                                 <div class="four wide field" id="estado_civil_responsavel_2_div">
                                     <label for="txtEstadoCivil_2">Estado Civil</label>
                                     <select class="ui search dropdown" id="txtEstadoCivil_2" name="txtEstadoCivil_2" onchange="validarEstadoCivilResponsavel2()">
-                                        <option value="" disabled selected hidden>Selecione o estado civil</option>
-                                        <option value="Solteiro">Solteiro</option>
-                                        <option value="Casado">Casado</option>
-                                        <option value="Divorciado">Divorciado</option>
-                                        <option value="Viuvo">Viúvo</option>
+                                        <option value="" disabled hidden <?= empty($resp2['estado_civil']) ? 'selected' : '' ?>>Selecione o estado civil</option>
+                                        <option value="Solteiro" <?= ($resp2['estado_civil'] ?? '') === 'Solteiro' ? 'selected' : '' ?>>Solteiro</option>
+                                        <option value="Casado" <?= ($resp2['estado_civil'] ?? '') === 'Casado' ? 'selected' : '' ?>>Casado</option>
+                                        <option value="Divorciado" <?= ($resp2['estado_civil'] ?? '') === 'Divorciado' ? 'selected' : '' ?>>Divorciado</option>
+                                        <option value="Viuvo" <?= ($resp2['estado_civil'] ?? '') === 'Viuvo' ? 'selected' : '' ?>>Viúvo</option>
                                     </select>
                                     <div id="mensagem-erro-estado-civil-2" class="ui hidden message error">
                                         <span id="estado-civil-erro-2"></span>
@@ -443,7 +438,7 @@ var_dump($resp1)
 
                                 <div class="four wide field" id="telefone_responsavel_2_div">
                                     <label for="txtTelefone_2">Telefone</label>
-                                    <input type="text" id="txtTelefone_2" name="txtTelefone_2" placeholder="(19) 99999-9999" onblur="validarTelefoneResponsavel2()">
+                                    <input type="text" id="txtTelefone_2" name="txtTelefone_2" placeholder="(19) 99999-9999" onblur="validarTelefoneResponsavel2()" value="<?= $resp2['celular'] ?? '' ?>">
                                     <div id="mensagem-erro-telefone-2" class="ui hidden message error">
                                         <span id="telefone-erro-2"></span>
                                     </div>
@@ -451,7 +446,7 @@ var_dump($resp1)
 
                                 <div class="eight wide field" id="email_responsavel_2_div">
                                     <label for="txtEmail_2">Email</label>
-                                    <input type="email" id="txtEmail_2" name="txtEmail_2" placeholder="exemplo@email.com" onblur="validarEmailResponsavel2()">
+                                    <input type="email" id="txtEmail_2" name="txtEmail_2" placeholder="exemplo@email.com" onblur="validarEmailResponsavel2()" value="<?= $resp2['email'] ?? '' ?>">
                                     <div id="mensagem-erro-email-2" class="ui hidden message error">
                                         <span id="email-erro-2"></span>
                                     </div>
@@ -461,29 +456,29 @@ var_dump($resp1)
                             <div class="fields">
                                 <div class="eight wide field" id="empresa_responsavel_div">
                                     <label for="txtNomeEmpresa_2">Nome da Empresa</label>
-                                    <input type="text" id="txtNomeEmpresa_2" name="txtNomeEmpresa_2" placeholder="Empresa...">
+                                    <input type="text" id="txtNomeEmpresa_2" name="txtNomeEmpresa_2" placeholder="Empresa..." value="<?= $resp2['nome_empresa'] ?? '' ?>">
                                 </div>
 
                                 <div class="four wide field" id="profissao_responsavel_div">
                                     <label for="txtProfissao_2">Profissão</label>
-                                    <input type="text" id="txtProfissao_2" name="txtProfissao_2" placeholder="Arquiteto, Advogado...">
+                                    <input type="text" id="txtProfissao_2" name="txtProfissao_2" placeholder="Arquiteto, Advogado..." value="<?= $resp2['profissao'] ?? '' ?>">
                                 </div>
 
                                 <div class="four wide field" id="telefone_trabalho_responsavel_div">
                                     <label for="txtTelefoneTrabalho_2">Telefone do Trabalho</label>
-                                    <input type="text" id="txtTelefoneTrabalho_2" name="txtTelefoneTrabalho_2" placeholder="(19) 99999-9999">
+                                    <input type="text" id="txtTelefoneTrabalho_2" name="txtTelefoneTrabalho_2" placeholder="(19) 99999-9999" value="<?= $resp2['telefone_trabalho'] ?? '' ?>">
                                 </div>
                             </div>
 
                             <div class="fields">
                                 <div class="four wide field" id="horario_trabalho_responsavel_div">
                                     <label for="txtHorarioTrabalho_2">Horário de Trabalho</label>
-                                    <input type="text" id="txtHorarioTrabalho_2" name="txtHorarioTrabalho_2" placeholder="8h">
+                                    <input type="text" id="txtHorarioTrabalho_2" name="txtHorarioTrabalho_2" placeholder="8h" value="<?= $resp2['horario_trabalho'] ?? '' ?>">
                                 </div>
 
                                 <div class="four wide field" id="salario_responsavel_2_div">
                                     <label for="txtSalario_2">Salário do responsável</label>
-                                    <input type="text" id="txtSalario_2" name="txtSalario_2" placeholder="R$1500,00..." onblur="validarSalarioResponsavel2()">
+                                    <input type="text" id="txtSalario_2" name="txtSalario_2" placeholder="R$1500,00..." onblur="validarSalarioResponsavel2()" value="<?= $resp2['salario'] ?? '' ?>">
                                     <div id="mensagem-erro-salario-2" class="ui hidden message error">
                                         <span id="salario-erro-2"></span>
                                     </div>
@@ -492,23 +487,21 @@ var_dump($resp1)
                                 <div class="four wide field" id="renda_extra_responsavel_div">
                                     <label for="toggleRendaExtra_2">Possui Renda Extra?</label>
                                     <div class="ui toggle checkbox">
-                                        <input type="checkbox" id="toggleRendaExtra_2" name="toggleRendaExtra_2" onchange="validarRendaExtraResponsavel2()">
+                                        <input type="checkbox" id="toggleRendaExtra_2" name="toggleRendaExtra_2" onchange="validarRendaExtraResponsavel2()" <?= !empty($resp2['renda_extra']) && $resp2['renda_extra'] == 1 ? 'checked' : '' ?>>
                                         <label></label>
                                     </div>
                                 </div>
-                                <div class="four wide field oculto" id="renda_extra_div_2">
+                                <div class="four wide field <?= !empty($resp2['renda_extra']) && $resp2['renda_extra'] == 1 ? '' : 'oculto' ?>" id="renda_extra_div_2">
                                     <label for="txtRendaExtra_2">Valor da renda extra</label>
-                                    <input type="text" id="txtRendaExtra_2" name="txtRendaExtra_2" onblur="validarRendaExtraResponsavel2()">
+                                    <input type="text" id="txtRendaExtra_2" name="txtRendaExtra_2" onblur="validarRendaExtraResponsavel2()" value="<?= $resp2['valor_renda_extra'] ?? '' ?>">
                                     <div id="mensagem-erro-renda-extra-2" class="ui hidden message error">
                                         <span id="renda-extra-erro-2"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="fields">
-                            <div class="sixteen wide field" id="divBotaoResponsavel">
+                            <div class="sixteen wide field <?= !empty($resp2['nome']) ? 'oculto' : '' ?>" id="divBotaoResponsavel">
                                 <div class="right floated column">
                                     <button class="ui blue button right floated" id="btnAdicionarResponsavel" type="button" onclick="adicionarResponsavel()">
                                         <i class="plus circle icon"></i> Adicionar Responsável
@@ -523,6 +516,257 @@ var_dump($resp1)
                                     <button class="ui red button right floated" id="btnRemoverResponsavel" type="button" onclick="removerResponsavel()">
                                         <i class="trash alternate outline icon"></i> Remover Responsável
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="ui segment yellow raised">
+                        <h2>Estrutura Familiar</h2>
+                        <div class="fields">
+                            <div class="four wide field">
+                                <label>Pais vivem juntos</label>
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="pais_vivem_juntos" <?= isset($estrutura['pais_vivem_juntos']) && $estrutura['pais_vivem_juntos'] ? 'checked' : '' ?>>
+                                    <label></label>
+                                </div>
+                            </div>
+                            <div class="four wide field">
+                                <label>Nº de filhos</label>
+                                <input type="number" placeholder="0" name="numero_filhos" value="<?= $estrutura['numero_filhos'] ?? '' ?>">
+                            </div>
+                            <div class="four wide field">
+                                <label>Recebe bolsa família</label>
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="recebe_bolsa_familia" id="toggle-bolsa-familia" onchange="validarBolsaFamilia()" <?= isset($estrutura['recebe_bolsa_familia']) && $estrutura['recebe_bolsa_familia'] ? 'checked' : '' ?>>
+                                    <label></label>
+                                </div>
+                            </div>
+                            <?php
+                            // Lógica Bolsa Família (mantida)
+                            $bolsa_familia_oculto = isset($estrutura['recebe_bolsa_familia']) && $estrutura['recebe_bolsa_familia'] ? '' : 'oculto';
+                            ?>
+                            <div class="four wide field <?= $bolsa_familia_oculto ?>" id="valor-bolsa-field">
+                                <label>Valor</label>
+                                <input type="text" placeholder="R$" name="valor" id="valor_bolsa_familia" onblur="validarBolsaFamilia()" value="<?= $estrutura['valor'] ?? '' ?>">
+                                <div class="ui hidden negative message" id="mensagem-erro-bolsa-familia">
+                                    <div class="content">
+                                        <i class="user icon"></i><span id="bolsa-familia-erro"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="four wide field">
+                                <label>Possui alergia</label>
+                                <div class="ui toggle checkbox">
+                                    <?php
+                                    $alergia_ativa = (isset($estrutura['possui_alergia']) && $estrutura['possui_alergia']) || (isset($estrutura['especifique_alergia']) && !empty($estrutura['especifique_alergia']));
+                                    ?>
+                                    <input type="checkbox" name="possui_alergia" id="toggle-alergia" onchange="validarAlergia()"
+                                        <?= $alergia_ativa ? 'checked' : '' ?>>
+                                    <label></label>
+                                </div>
+                            </div>
+                            <?php
+                            $alergia_oculto = $alergia_ativa ? '' : 'oculto';
+                            ?>
+                            <div class="four wide field <?= $alergia_oculto ?>" id="especifique-alergia">
+                                <label>Especifique</label>
+                                <input type="text" placeholder="" name="especifique_alergia" id="qual_alergia" onblur="validarAlergia()" value="<?= $estrutura['especifique_alergia'] ?? '' ?>">
+                                <div class="ui hidden negative message" id="mensagem-erro-alergia">
+                                    <div class="content">
+                                        <i class="heartbeat icon"></i><span id="alergia-erro"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="four wide field">
+                                <label>Possui convênio</label>
+                                <div class="ui toggle checkbox">
+                                    <?php
+                                   
+                                    $convenio_ativo = (isset($estrutura['possui_convenio']) && $estrutura['possui_convenio']) || (isset($estrutura['qual_convenio']) && !empty($estrutura['qual_convenio']));
+                                    ?>
+                                    <input type="checkbox" name="possui_convenio" id="toggle-convenio" onchange="validarConvenioMedico()"
+                                        <?= $convenio_ativo ? 'checked' : '' ?>>
+                                    <label></label>
+                                </div>
+                            </div>
+                            <?php
+                          
+                            $convenio_oculto = $convenio_ativo ? '' : 'oculto';
+                            ?>
+                            <div class="four wide field <?= $convenio_oculto ?>" id="qual-convenio-field">
+                                <label>Qual convênio</label>
+                                <input type="text" placeholder="" name="qual_convenio" id="qual_convenio" onblur="validarConvenioMedico()" value="<?= $estrutura['qual_convenio'] ?? '' ?>">
+                                <div class="ui hidden negative message" id="mensagem-erro-convenio">
+                                    <div class="content">
+                                        <i class="heartbeat icon"></i><span id="convenio-erro"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="four wide field">
+                                <label>Portador de alguma necessidade especial</label>
+                                <div class="ui toggle checkbox">
+                                    <?php
+                                    $necessidade_ativa = (isset($estrutura['portador_necessidade_especial']) && $estrutura['portador_necessidade_especial']) || (isset($estrutura['qual_necessidade']) && !empty($estrutura['qual_necessidade']));
+                                    ?>
+                                    <input type="checkbox" name="portador_necessidade_especial" id="toggle-necessidade-especial" onchange="validarNecessidadeEspecial()"
+                                        <?= $necessidade_ativa ? 'checked' : '' ?>>
+                                    <label></label>
+                                </div>
+                            </div>
+
+                            <?php
+                            $necessidade_oculto = $necessidade_ativa ? '' : 'oculto';
+                            ?>
+                            <div class="four wide field <?= $necessidade_oculto ?>" id="qual-necessidade">
+                                <label>Qual</label>
+                                <input type="text" name="qual_necessidade" id="necessidade_especial" placeholder="" onblur="validarNecessidadeEspecial()" value="<?= $estrutura['qual_necessidade_especial'] ?? '' ?>">
+                                <div class="ui hidden negative message" id="mensagem-erro-necessidade">
+                                    <div class="content">
+                                        <i class="heartbeat icon"></i>
+                                        <span id="necessidade-erro"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="four wide field">
+                                <label>Problemas de visão</label>
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="problemas_visao" <?= isset($estrutura['problemas_visao']) && $estrutura['problemas_visao'] ? 'checked' : '' ?>>
+                                    <label></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="four wide field">
+                                <label>Já fez cirurgia</label>
+                                <div class="ui toggle checkbox">
+                                    <?php
+                                    
+                                    $cirurgia_ativa = (isset($estrutura['ja_fez_cirurgia']) && $estrutura['ja_fez_cirurgia']) || (isset($estrutura['qual_cirurgia']) && !empty($estrutura['qual_cirurgia']));
+                                    ?>
+                                    <input type="checkbox" id="toggle_cirurgia" name="ja_fez_cirurgia" onchange="validarCirurgia()"
+                                        <?= $cirurgia_ativa ? 'checked' : '' ?>>
+                                    <label></label>
+                                </div>
+                            </div>
+
+                            <?php
+                         
+                            $cirurgia_oculto = $cirurgia_ativa ? '' : 'oculto';
+                            ?>
+                            <div class="four wide field <?= $cirurgia_oculto ?>" id="divCirurgia">
+                                <label>Qual</label>
+                                <input type="text" name="qual_cirurgia" id="cirurgia" placeholder="" onblur="validarCirurgia()" value="<?= $estrutura['qual_cirurgia'] ?? '' ?>">
+                                <div class="ui hidden negative message" id="mensagem-erro-cirurgia">
+                                    <div class="content">
+                                        <i class="heartbeat icon"></i>
+                                        <span id="cirurgia-erro"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="four wide field">
+                                <label>Tomou vacina contra catapora ou varicela</label>
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="vacina_catapora_varicela" <?= isset($estrutura['vacina_catapora_varicela']) && $estrutura['vacina_catapora_varicela'] ? 'checked' : '' ?>>
+                                    <label></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="ui dividing header">Transporte para a escola</h4>
+                        <div class="fields">
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="transporte_carro" value="carro" <?= isset($estrutura['transporte_carro']) && $estrutura['transporte_carro'] ? 'checked' : '' ?>>
+                                    <label>Carro</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="transporte_van" value="van" <?= isset($estrutura['transporte_van']) && $estrutura['transporte_van'] ? 'checked' : '' ?>>
+                                    <label>Van Escolar</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="transporte_pe" value="pe" <?= isset($estrutura['transporte_a_pe']) && $estrutura['transporte_a_pe'] ? 'checked' : '' ?>>
+                                    <label>A Pé</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="transporte_outros_desc" value="outros" <?= isset($estrutura['transporte_outros_desc']) && $estrutura['transporte_outros_desc'] ? 'checked' : '' ?>>
+                                    <label>Outros</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="ui dividing header">Doenças que a criança já teve</h4>
+                        <div class="ui grid">
+                            <div class="five wide column">
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_anemia" <?= isset($estrutura['doenca_anemia']) && $estrutura['doenca_anemia'] ? 'checked' : '' ?>><label>Anemia</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_bronquite" <?= isset($estrutura['doenca_bronquite']) && $estrutura['doenca_bronquite'] ? 'checked' : '' ?>><label>Bronquite</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_cardiaca" <?= isset($estrutura['doenca_cardiaca']) && $estrutura['doenca_cardiaca'] ? 'checked' : '' ?>><label>Doença Cardíaca</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_catapora" <?= isset($estrutura['doenca_catapora']) && $estrutura['doenca_catapora'] ? 'checked' : '' ?>><label>Catapora</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_diabetes" <?= isset($estrutura['doenca_diabetes']) && $estrutura['doenca_diabetes'] ? 'checked' : '' ?>><label>Diabetes</label></div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_hepatite" <?= isset($estrutura['doenca_hepatite']) && $estrutura['doenca_hepatite'] ? 'checked' : '' ?>><label>Hepatite</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_meningite" <?= isset($estrutura['doenca_meningite']) && $estrutura['doenca_meningite'] ? 'checked' : '' ?>><label>Meningite</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_pneumonia" <?= isset($estrutura['doenca_pneumonia']) && $estrutura['doenca_pneumonia'] ? 'checked' : '' ?>><label>Pneumonia</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_caxumba" <?= isset($estrutura['doenca_caxumba']) && $estrutura['doenca_caxumba'] ? 'checked' : '' ?>><label>Caxumba</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_convulsao" <?= isset($estrutura['doenca_convulsao']) && $estrutura['doenca_convulsao'] ? 'checked' : '' ?>><label>Convulsão</label></div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_dengue" <?= isset($estrutura['doenca_dengue']) && $estrutura['doenca_dengue'] ? 'checked' : '' ?>><label>Dengue</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_desidratacao" <?= isset($estrutura['doenca_desidratacao']) && $estrutura['doenca_desidratacao'] ? 'checked' : '' ?>><label>Desidratação</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_refluxo" <?= isset($estrutura['doenca_refluxo']) && $estrutura['doenca_refluxo'] ? 'checked' : '' ?>><label>Refluxo</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_rubeola" <?= isset($estrutura['doenca_rubeola']) && $estrutura['doenca_rubeola'] ? 'checked' : '' ?>><label>Rubéola</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_sarampo" <?= isset($estrutura['doenca_sarampo']) && $estrutura['doenca_sarampo'] ? 'checked' : '' ?>><label>Sarampo</label></div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox"><input type="checkbox" name="doenca_verminose" <?= isset($estrutura['doenca_verminose']) && $estrutura['doenca_verminose'] ? 'checked' : '' ?>><label>Verminoses</label></div>
                                 </div>
                             </div>
                         </div>
@@ -564,7 +808,6 @@ var_dump($resp1)
                             const divRemover = document.getElementById("divBotaoRemoverResponsavel");
                             const divAdicionar = document.getElementById("divBotaoResponsavel");
 
-                            // PHP funciona aqui porque está dentro de um arquivo .php
                             const responsavel2Existe = <?= !empty($resp2['nome']) ? 'true' : 'false' ?>;
 
                             if (responsavel2Existe) {

@@ -31,23 +31,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cidade = $_POST['txtCidade'] ?? null;
     $complemento = $_POST['txtComplemento'] ?? null;
 
-    $pais_vivem_juntos             = isset($_POST['pais_vivem']) ? 1 : 0;
+    $pais_vivem_juntos = isset($_POST['pais_vivem_juntos']) ? 1 : 0; 
     
-    $recebe_bolsa_familia          = isset($_POST['bolsa_familia']) ? 1 : 0;
+    $recebe_bolsa_familia = isset($_POST['recebe_bolsa_familia']) ? 1 : 0;
     
-    $possui_alergia                = isset($_POST['alergia']) ? 1 : 0;
-    $especifique_alergia           = $_POST['especifique_alergia'] ?? null;
+    $possui_alergia = isset($_POST['possui_alergia']) ? 1 : 0;
+    $especifique_alergia = $possui_alergia ? ($_POST['especifique_alergia'] ?? null) : null;
     
-    $possui_convenio               = isset($_POST['convenio']) ? 1 : 0;
+    $possui_convenio = isset($_POST['possui_convenio']) ? 1 : 0;
     
-    $qual_convenio                 = $possui_convenio ? ($_POST['qual_convenio'] ?? null) : null;
+    $qual_convenio = $possui_convenio ? ($_POST['qual_convenio'] ?? null) : null;
     
-    $portador_necessidade_especial = isset($_POST['necessidade_especial']) ? 1 : 0;
-    $qual_necessidade_especial     = $_POST['qual_necessidade'] ?? null;
-    $problemas_visao               = isset($_POST['problema_visao']) ? 1 : 0;
-    $ja_fez_cirurgia               = isset($_POST['cirurgia']) ? 1 : 0;
-    $qual_cirurgia                 = $_POST['qual_cirurgia'] ?? null;
-    $vacina_catapora_varicela      = isset($_POST['vacina_catapora']) ? 1 : 0;
+    $portador_necessidade_especial = isset($_POST['portador_necessidade_especial']) ? 1 : 0;
+    $qual_necessidade_especial = $portador_necessidade_especial ? ($_POST['qual_necessidade'] ?? null) : null; 
+    
+    $problemas_visao = isset($_POST['problemas_visao']) ? 1 : 0;
+    
+    $ja_fez_cirurgia = isset($_POST['ja_fez_cirurgia']) ? 1 : 0;
+    $qual_cirurgia = $ja_fez_cirurgia ? ($_POST['qual_cirurgia'] ?? null) : null; 
+    
+    $vacina_catapora_varicela = isset($_POST['vacina_catapora_varicela']) ? 1 : 0;
 
     $numero_filhos               = $_POST['numero_filhos'] ?? null;
     
