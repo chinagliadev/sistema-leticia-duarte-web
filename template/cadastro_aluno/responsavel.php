@@ -1,5 +1,5 @@
 <section class="ui segment red raised sessao-tab">
-    <h2>Responsável</h2>
+    <h2>Identificação do responsavel 1</h2>
 
     <div class="responsavel" id="responsavel-1">
         <div class="fields">
@@ -103,7 +103,7 @@
 
             <div class="four wide field" id="salario_responsavel_div">
                 <label for="txtSalario_1">Salário do responsável</label>
-                <input type="text" id="txtSalario_1" name="txtSalario_1" placeholder="R$1500,00..." onblur="validarSalarioResponsavel1()">
+                <input type="text" id="txtSalario_1" name="txtSalario_1" placeholder="R$1500,00...">
                 <div id="mensagem-erro-salario-1" class="ui hidden message error">
                     <span id="salario-erro-1"></span>
                 </div>
@@ -129,7 +129,7 @@
     <div class="ui divider"></div>
 
     <div class="responsavel_2 oculto" id="responsavel_2">
-        <h2>Responsavel 2</h2>
+        <h2>Identificação do responsavel 2</h2>
         <div class="fields">
 
             <div class="four wide field" id="tipo_responsavel_2_div">
@@ -232,7 +232,7 @@
 
             <div class="four wide field" id="salario_responsavel_2_div">
                 <label for="txtSalario_2">Salário do responsável</label>
-                <input type="text" id="txtSalario_2" name="txtSalario_2" placeholder="R$1500,00..." onblur="validarSalarioResponsavel2()">
+                <input type="text" id="txtSalario_2" name="txtSalario_2" placeholder="R$1500,00...">
                 <div id="mensagem-erro-salario-2" class="ui hidden message error">
                     <span id="salario-erro-2"></span>
                 </div>

@@ -9,6 +9,14 @@ const formatToDbDate = (date) => {
 
 $(document).ready(function () {
 
+    $('#modal-editar').modal({
+        closable: true,
+        onApprove: function () {
+            $('#form-editar-aluno').submit();
+            return true; 
+        }
+    });
+
     $('.ui.dropdown').dropdown();
 
     $('#txtTurma').on('change', function () {
@@ -37,7 +45,15 @@ $(document).ready(function () {
         $('#form-excluir-cadastro').submit();
     });
 
-    $('#btn-editar-aluno').on("click", function () {
+    $('#btn-editar-dados').on("click", function () {
+        let raAluno = $(this).data('id');
+        let nomeAluno = $(this).data('nome');
+
+        $('#input-ra-editar').val(raAluno);
+        $('#ra-aluno-no-modal-editar').text(raAluno);
+        $('#nome-aluno-modal-editar').text(nomeAluno);
+
+
         $('#modal-editar').modal('show');
     });
 
@@ -49,12 +65,12 @@ $(document).ready(function () {
     $('#txtTelefoneAutorizada').mask('(00) 00000-0000');
     $('#txtTelefoneAutorizada2').mask('(00) 00000-0000');
     $('#txtTelefoneTrabalho_2').mask('(00) 00000-0000');
-    $('#txtSalario_1').mask('000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
-    $('#txtSalario_2').mask('R$ 000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
-    $('#txtRendaExtra').mask('R$ 000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
-    $('#txtRendaExtra_2').mask('R$ 000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
-    $('#valor_bolsa_familia').mask('R$ 000.000.000.000.000,00', {reverse: true, selectOnFocus: true});
-    
+    $('#txtSalario_1').mask('000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
+    $('#txtSalario_2').mask('R$ 000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
+    $('#txtRendaExtra').mask('R$ 000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
+    $('#txtRendaExtra_2').mask('R$ 000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
+    $('#valor_bolsa_familia').mask('R$ 000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
+
 
 
     $('#dataNascimentoCalendar').find('input[type="text"]').mask('00/00/0000');
@@ -82,27 +98,27 @@ $(document).ready(function () {
         now: 'Agora',
         am: 'AM',
         pm: 'PM',
-        
-        firstDayOfWeek: 0, 
-        
-        dateFormat: 'dd/mm/yyyy', 
+
+        firstDayOfWeek: 0,
+
+        dateFormat: 'dd/mm/yyyy',
     };
 
     $('#dataNascimentoCalendar').calendar({
-        type: 'date', 
-        maxDate: dataDeHoje, 
-        text: settingsPtBr, 
+        type: 'date',
+        maxDate: dataDeHoje,
+        text: settingsPtBr,
         startMode: 'day',
-        
-        onChange: function(date, text) {
+
+        onChange: function (date, text) {
             if (date) {
                 const dbFormattedDate = formatToDbDate(date);
-                $('input[name="data_nascimento"]').val(dbFormattedDate); 
+                $('input[name="data_nascimento"]').val(dbFormattedDate);
             } else {
                 $('input[name="data_nascimento"]').val('');
             }
         },
-        
+
         formatter: {
             date: function (date, settings) {
                 if (!date) return '';
@@ -112,24 +128,24 @@ $(document).ready(function () {
                 return dia + '/' + mes + '/' + ano;
             }
         },
-        
+
     });
 
     $('#dataNascimentoCalendar_1').calendar({
-        type: 'date', 
-        maxDate: dataDeHoje, 
-        text: settingsPtBr, 
+        type: 'date',
+        maxDate: dataDeHoje,
+        text: settingsPtBr,
         startMode: 'day',
-        
-        onChange: function(date, text) {
+
+        onChange: function (date, text) {
             if (date) {
                 const dbFormattedDate = formatToDbDate(date);
-                $('input[name="data_nascimento_1"]').val(dbFormattedDate); 
+                $('input[name="data_nascimento_1"]').val(dbFormattedDate);
             } else {
                 $('input[name="data_nascimento_1"]').val('');
             }
         },
-        
+
         formatter: {
             date: function (date, settings) {
                 if (!date) return '';
@@ -139,26 +155,26 @@ $(document).ready(function () {
                 return dia + '/' + mes + '/' + ano;
             }
         },
-        
+
     });
 
     $('#dataNascimentoCalendar_2').calendar({
-        type: 'date', 
-        maxDate: dataDeHoje, 
-        text: settingsPtBr, 
+        type: 'date',
+        maxDate: dataDeHoje,
+        text: settingsPtBr,
         startMode: 'day',
         disableManual: false,
-        
+
         // **Assumindo que você tem um <input type="hidden" name="data_nascimento_2"> no seu HTML.**
-        onChange: function(date, text) {
+        onChange: function (date, text) {
             if (date) {
                 const dbFormattedDate = formatToDbDate(date);
-                $('input[name="data_nascimento_2"]').val(dbFormattedDate); 
+                $('input[name="data_nascimento_2"]').val(dbFormattedDate);
             } else {
                 $('input[name="data_nascimento_2"]').val('');
             }
         },
-        
+
         formatter: {
             date: function (date, settings) {
                 if (!date) return '';
@@ -173,12 +189,12 @@ $(document).ready(function () {
 
 });
 
- $(document).on('keypress', function(event) {
-        if (event.which === 13) {
-            const focusedElement = $(document.activeElement);
-            if (focusedElement.is('input') || focusedElement.is('select')) {
-                event.preventDefault();
-                return false; 
-            }
+$(document).on('keypress', function (event) {
+    if (event.which === 13) {
+        const focusedElement = $(document.activeElement);
+        if (focusedElement.is('input') || focusedElement.is('select')) {
+            event.preventDefault();
+            return false;
         }
-    });
+    }
+});

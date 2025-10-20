@@ -16,7 +16,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $sucesso = $matricula->deletarAlunoCompleto($ra_aluno); 
         
         if ($sucesso) {
-            echo "deu bom";
             header('location: ./cadastrados.php');
         }
     }

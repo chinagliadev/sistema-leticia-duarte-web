@@ -1,5 +1,5 @@
 <section class="ui segment green raised">
-    <h2>Parentesco</h2>
+    <h2>Pessoa autorizada a buscar meu filho(a) na cheche leticia duarte</h2>
     <div class="pessoaAutorizada" id="autorizada-1">
         <div class="fields">
             <div class="eight wide field" id="div_nome_autorizada">
@@ -62,7 +62,7 @@
         <div class="fields">
             <div class="eight wide field" id="div_nome_autorizada2">
                 <label for="txtNomePessoaAutorizada2">Nome</label>
-                <input type="text" id="txtNomePessoaAutorizada2" placeholder="" onblur="validarNomeParentesco2()">
+                <input type="text" name="txtNomePessoaAutorizada2" id="txtNomePessoaAutorizada2" placeholder="" onblur="validarNomeParentesco2()">
                 <div class="ui hidden negative message" id="mensagem-erro-nomeAutorizada2">
                     <div class="content">
                         <i class="user icon"></i><span id="nomeAutorizada2-erro"></span>
@@ -71,7 +71,7 @@
             </div>
             <div class="four wide field" id="div_cpf_autorizada2">
                 <label for="txtCpfAutorizada2">CPF</label>
-                <input type="text" id="txtCpfAutorizada2" placeholder="" onblur="validarCpfAutorizada2()">
+                <input type="text" name="txtCpfAutorizada2" id="txtCpfAutorizada2" placeholder="" onblur="validarCpfAutorizada2()">
                 <div class="ui hidden negative message" id="mensagem-erro-cpf2">
                     <div class="content">
                         <i class="user icon"></i><span id="cpf2-erro"></span>
@@ -80,7 +80,7 @@
             </div>
             <div class="four wide field" id="div_telefone_autorizada2">
                 <label for="txtTelefoneAutorizada">Telefone</label>
-                <input type="text" id="txtTelefoneAutorizada2" placeholder="" onblur="validarTelefoneAutorizada2()">
+                <input type="text" name="txtTelefoneAutorizada2" id="txtTelefoneAutorizada2" placeholder="" onblur="validarTelefoneAutorizada2()">
                 <div class="ui hidden negative message" id="mensagem-erro-telefone2-autorizada">
                     <div class="content">
                         <i class="user icon"></i><span id="telefone-autorizada2-erro"></span>
@@ -91,7 +91,7 @@
 
         <div class="fields">
             <div class="four wide field" id="div_parentesco2">
-                <label for="txtParentenco">Parentesco</label>
+                <label for="txtParentenco2">Parentesco</label>
                 <select class="ui search dropdown" id="txtParentenco2" name="txtParentenco2">
                     <option value="" disabled selected hidden>Selecione o parentesco</option>
                     <option value="Pai">Pai</option>
@@ -133,7 +133,7 @@
             </div>
         </div>
     </div>
-    <!-- BOTÕES -->
+   
     <div class="ui grid">
         <div class="four column row">
             <div class="left floated column">
