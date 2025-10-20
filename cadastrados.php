@@ -116,7 +116,7 @@ $dadosMatricula = $matricula->listarMatricula();
                                             class="ui small yellow icon button">
                                             <i class="edit icon"></i>
                                         </a>
-                                        <a href="#" class="ui small icon button" data-tooltip="Baixar PDF" data-inverted="">
+                                        <a href="./gerar-arquivo-pdf.php?idAluno=<?= $matricula['ra_aluno']?>" class="ui small icon button" data-tooltip="Baixar PDF" data-inverted="">
                                             <i class="file pdf outline red icon"></i>
                                         </a>
                                     </td>
