@@ -20,8 +20,6 @@ $resp2 = $dadosCompletos['responsavel_2'];
 $estrutura = $dadosCompletos['estrutura_familiar'];
 $pessoa_autorizada1 = $dadosCompletos['pessoa_autorizada_1'];
 $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
-
-
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +79,6 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
                             </div>
                         </div>
 
-                        <!-- Coluna da imagem -->
                         <div class="eight wide column">
                             <img width="600px" src="./img/pdf_img/gerar_pdf.png" alt="Nenhum cadastrado" class="ui centered image">
                         </div>
@@ -404,7 +401,6 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
             doc.text("4 - PESSOAS AUTORIZADAS A BUSCAR MEU FILHO(A) NA CRECHE", 10, posY);
-            posY += 10;
 
             doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
@@ -429,10 +425,8 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
                 doc.text(`CPF: ${pessoa_autorizada2.cpf} `, 10, posY);
                 doc.text(`Telefone: ${pessoa_autorizada2.celular} `, 130, posY);
-                posY += 8;
             }
 
-            posY += 8
             doc.text('Horário de entrada: das 7h ás 7:30 saída: das 15:45h as 16:30h sem tolerancia de atrasos.', 10, posY)
             posY += 8
             doc.text('O uso de uniforme é obrigatório na entrada e saida da criança.', 10, posY)
