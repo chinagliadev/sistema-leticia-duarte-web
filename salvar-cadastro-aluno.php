@@ -56,28 +56,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $valor                       = $recebe_bolsa_familia ? ($_POST['valor'] ?? null) : null;
 
-    $doenca_anemia      = isset($_POST['doenca_anemia']) ? 1 : 0;
-    $doenca_bronquite   = isset($_POST['doenca_bronquite']) ? 1 : 0;
-    $doenca_cardiaca    = isset($_POST['doenca_cardiaca']) ? 1 : 0;
-    $doenca_catapora    = isset($_POST['doenca_catapora']) ? 1 : 0;
-    $doenca_diabetes    = isset($_POST['doenca_diabetes']) ? 1 : 0;
-    $doenca_hepatite    = isset($_POST['doenca_hepatite']) ? 1 : 0;
-    $doenca_meningite   = isset($_POST['doenca_meningite']) ? 1 : 0;
-    $doenca_pneumonia   = isset($_POST['doenca_pneumonia']) ? 1 : 0;
-    $doenca_caxumba     = isset($_POST['doenca_caxumba']) ? 1 : 0;
-    $doenca_convulsao   = isset($_POST['doenca_convulsao']) ? 1 : 0;
-    $doenca_dengue      = isset($_POST['doenca_dengue']) ? 1 : 0;
-    $doenca_desidratacao = isset($_POST['doenca_desidratacao']) ? 1 : 0;
-    $doenca_refluxo     = isset($_POST['doenca_refluxo']) ? 1 : 0;
-    $doenca_rubeola     = isset($_POST['doenca_rubeola']) ? 1 : 0;
-    $doenca_sarampo     = isset($_POST['doenca_sarampo']) ? 1 : 0;
-    $doenca_verminose   = isset($_POST['doenca_verminose']) ? 1 : 0;
+    $doenca_anemia     = isset($_POST['doenca_anemia']) ? 1 : 0;
+    $doenca_bronquite  = isset($_POST['doenca_bronquite']) ? 1 : 0;
+    $doenca_catapora   = isset($_POST['doenca_catapora']) ? 1 : 0;
+    $doenca_covid      = isset($_POST['doenca_covid']) ? 1 : 0;
+    $doenca_cardiaca   = isset($_POST['doenca_cardiaca']) ? 1 : 0;
+    $doenca_meningite  = isset($_POST['doenca_meningite']) ? 1 : 0;
+    $doenca_pneumonia  = isset($_POST['doenca_pneumonia']) ? 1 : 0;
+    $doenca_convulsao  = isset($_POST['doenca_convulsao']) ? 1 : 0;
+    $doenca_diabete    = isset($_POST['doenca_diabete']) ? 1 : 0;
+    $doenca_refluxo    = isset($_POST['doenca_refluxo']) ? 1 : 0;
+    $outras_doencas    = $_POST['outras_doencas'] ?? null;
 
     $transporte_carro       = isset($_POST['transporte_carro']) ? 1 : 0;
     $transporte_van         = isset($_POST['transporte_van']) ? 1 : 0;
     $transporte_a_pe        = isset($_POST['transporte_pe']) ? 1 : 0;
     $transporte_outros_desc = isset($_POST['transporte_outros_desc']) ? 1 : 0;
-
 
     $estruturaFamiliar = new EstruturaFamiliar();
     $estrutura_familiar_id = $estruturaFamiliar->cadastrarEstruturaFamiliar(
@@ -97,26 +91,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $vacina_catapora_varicela,
         $doenca_anemia,
         $doenca_bronquite,
-        $doenca_cardiaca,
         $doenca_catapora,
-        $doenca_diabetes,
-        $doenca_hepatite,
+        $doenca_covid,
+        $doenca_cardiaca,
         $doenca_meningite,
         $doenca_pneumonia,
-        $doenca_caxumba,
         $doenca_convulsao,
-        $doenca_dengue,
-        $doenca_desidratacao,
+        $doenca_diabete,
         $doenca_refluxo,
-        $doenca_rubeola,
-        $doenca_sarampo,
-        $doenca_verminose,
+        $outras_doencas,
         $transporte_carro,
         $transporte_van,
         $transporte_a_pe,
         $transporte_outros_desc
     );
-
+    
     $responsavel = new Responsavel();
 
     $tipo_responsavel_1     = $_POST['txtTipoResponsavel_1'] ?? null;

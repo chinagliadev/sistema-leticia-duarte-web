@@ -155,6 +155,7 @@
         </div>
     </div>
 
+
     <h4 class="ui dividing header">Doenças que a criança já teve</h4>
     <div class="ui grid">
         <div class="five wide column">
@@ -165,19 +166,17 @@
                 <div class="ui checkbox"><input type="checkbox" name="doenca_bronquite"><label>Bronquite</label></div>
             </div>
             <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_cardiaca"><label>Doença Cardíaca</label></div>
-            </div>
-            <div class="field">
                 <div class="ui checkbox"><input type="checkbox" name="doenca_catapora"><label>Catapora</label></div>
             </div>
             <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_diabetes"><label>Diabetes</label></div>
+                <div class="ui checkbox"><input type="checkbox" name="doenca_covid"><label>COVID-19</label></div>
+            </div>
+            <div class="field">
+                <div class="ui checkbox"><input type="checkbox" name="doenca_cardiaca"><label>Doença Cardíaca</label></div>
             </div>
         </div>
+
         <div class="five wide column">
-            <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_hepatite"><label>Hepatite</label></div>
-            </div>
             <div class="field">
                 <div class="ui checkbox"><input type="checkbox" name="doenca_meningite"><label>Meningite</label></div>
             </div>
@@ -185,30 +184,20 @@
                 <div class="ui checkbox"><input type="checkbox" name="doenca_pneumonia"><label>Pneumonia</label></div>
             </div>
             <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_caxumba"><label>Caxumba</label></div>
-            </div>
-            <div class="field">
                 <div class="ui checkbox"><input type="checkbox" name="doenca_convulsao"><label>Convulsão</label></div>
             </div>
-        </div>
-        <div class="five wide column">
             <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_dengue"><label>Dengue</label></div>
-            </div>
-            <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_desidratacao"><label>Desidratação</label></div>
+                <div class="ui checkbox"><input type="checkbox" name="doenca_diabete"><label>Diabetes</label></div>
             </div>
             <div class="field">
                 <div class="ui checkbox"><input type="checkbox" name="doenca_refluxo"><label>Refluxo</label></div>
             </div>
+        </div>
+
+        <div class="five wide column">
             <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_rubeola"><label>Rubéola</label></div>
-            </div>
-            <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_sarampo"><label>Sarampo</label></div>
-            </div>
-            <div class="field">
-                <div class="ui checkbox"><input type="checkbox" name="doenca_verminose"><label>Verminoses</label></div>
+                <label>Outras doenças</label>
+                <input type="text" name="outras_doencas" placeholder="Especifique outras doenças">
             </div>
         </div>
     </div>
