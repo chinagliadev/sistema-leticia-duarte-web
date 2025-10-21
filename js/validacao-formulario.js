@@ -656,6 +656,23 @@ function validarDataNascimentoResponsavel2() {
     return true;
 }
 
+function validarEscolaridade2() {
+    const div = document.getElementById('escolaridade_responsavel_2_div');
+    const valor = document.getElementById('txtEscolaridade_2').value;
+    const mensagemErro = document.getElementById('mensagem-erro-escolaridade-2');
+    const spanErro = document.getElementById('escolaridade-erro-2');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione a escolaridade');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
 
 function validarEstadoCivilResponsavel2() {
     
