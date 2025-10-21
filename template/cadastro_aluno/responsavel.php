@@ -61,6 +61,22 @@
                 </div>
             </div>
 
+            <div class="four wide field" id="escolariadade_responsavel_div">
+                <label for="txtEscolaridade">Escolaridade</label>
+                <select class="ui search dropdown" id="txtEscolaridade" name="txtEscolaridade" onchange="validarEscolaridade()">
+                    <option value="" disabled selected hidden>Selecione a escolaridade</option>
+                    <option value="Fundamental">Fundamental</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Técnico">Técnico</option>
+                    <option value="Superior">Superior</option>
+                    <option value="Pós-graduação">Pós-graduação</option>
+                    <option value="Outro">Outro</option>
+                </select>
+                <div id="mensagem-erro-escolaridade-1" style="margin-top: 14.6px;" class="ui hidden message error">
+                    <span id="escolaridade-erro-1"></span>
+                </div>
+            </div>
+
             <div class="four wide field" id="telefone_responsavel_div">
                 <label for="txtTelefone_1">Telefone</label>
                 <input type="text" id="txtTelefone_1" name="txtTelefone_1" placeholder="(19) 99999-9999" onblur=" validarTelefoneResponsavel1()">
@@ -69,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="eight wide field" id="email_responsavel_div">
+            <div class="six wide field" id="email_responsavel_div">
                 <label for="txtEmail_1">Email</label>
                 <input type="email" id="txtEmail_1" name="txtEmail_1" placeholder="exemplo@email.com" onblur="validarEmailResponsavel1()">
                 <div id="mensagem-erro-email-1" class="ui hidden message error">
@@ -190,6 +206,8 @@
                 </div>
             </div>
 
+            
+
             <div class="four wide field" id="telefone_responsavel_2_div">
                 <label for="txtTelefone_2">Telefone</label>
                 <input type="text" id="txtTelefone_2" name="txtTelefone_2" placeholder="(19) 99999-9999" onblur="validarTelefoneResponsavel2()">
@@ -198,7 +216,7 @@
                 </div>
             </div>
 
-            <div class="eight wide field" id="email_responsavel_2_div">
+            <div class="six wide field" id="email_responsavel_2_div">
                 <label for="txtEmail_2">Email</label>
                 <input type="email" id="txtEmail_2" name="txtEmail_2" placeholder="exemplo@email.com" onblur="validarEmailResponsavel2()">
                 <div id="mensagem-erro-email-2" class="ui hidden message error">

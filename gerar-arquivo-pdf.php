@@ -20,6 +20,8 @@ $resp2 = $dadosCompletos['responsavel_2'];
 $estrutura = $dadosCompletos['estrutura_familiar'];
 $pessoa_autorizada1 = $dadosCompletos['pessoa_autorizada_1'];
 $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
+
+var_dump($resp1)
 ?>
 
 <!DOCTYPE html>
@@ -143,6 +145,9 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             posY += 15;
 
+            doc.setFillColor(230, 230, 230);
+            doc.rect(8, posY - 6, 190, 7, 'F');
+
             doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
             doc.text(`1 - IDENTIFICAÇÃO DA CRIANÇA RA: ${aluno.ra_aluno}`, 10, posY); // alinha à esquerda
@@ -151,7 +156,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
             doc.text(`Nome: ${aluno.nome}`, 10, posY);
-            posY += 10;
+            posY += 8;
 
             function formatarDataBR(data) {
                 if (!data) return '';
@@ -172,7 +177,9 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             posY += 8;
 
             const febreAutorizada = aluno.autorizacao_febre == 1 ? "Sim (X)  Não ()" : "Sim ()  Não (X)";
-            doc.text(`Em caso de febre autoriza medicar a criança: ${febreAutorizada}`, 10, posY);
+            doc.text(`Em caso de febre autoriza medicar a criança:`, 10, posY);
+            doc.text(`${febreAutorizada}`, 120, posY);
+
             posY += 8;
 
             const nomeRemedio = aluno.autorizacao_febre == 1 ? aluno.remedio : "Nenhum";
@@ -202,6 +209,10 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             posY += textoQuebrado.length * 6;
 
             posY += 8;
+
+            doc.setFillColor(230, 230, 230);
+            doc.rect(8, posY - 6, 190, 7, 'F');
+
             doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
             doc.text("2 - IDENTIFICAÇÃO DOS RESPONSAVEIS:", 10, posY);
@@ -217,6 +228,8 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.text(`Data de nascimento: ${formatarDataBR(resp1.data_nascimento || '')}`, 10, posY);
             doc.text(`Estado civil: ${resp1.estado_civil}`, 130, posY);
             posY += 8;
+
+            alert(resp1.escolaridade)
 
             doc.text(`Escolaridade: ${resp1.escolaridade}`, 10, posY);
             doc.text(`Telefone: ${resp1.celular}`, 130, posY);
@@ -239,9 +252,9 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             posY += 8;
 
             const salario = resp1.salario ? resp1.salario : 'Não informado';
-            doc.text(`Salário: ${salario}`, 10, posY);
+            doc.text(`Salário: R$ ${salario}`, 10, posY);
 
-            const possuiOutraRenda = resp1.renda_extra == 1 ? "(X) sim" : "() não";
+            const possuiOutraRenda = resp1.renda_extra == 1 ? "(X) Sim" : "() não";
             const valorRendaExtra = resp1.valor_renda_extra ? resp1.valor_renda_extra : '0,00';
 
             doc.text(`Possui outra renda? ${possuiOutraRenda}  Valor: R$ ${valorRendaExtra}`, 90, posY);
@@ -281,9 +294,9 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
                 posY += 8;
 
                 const salario = resp2.salario ? resp2.salario : 'Não informado';
-                doc.text(`Salário: ${salario}`, 10, posY);
+                doc.text(`Salário: R$${salario}`, 10, posY);
 
-                const possuiOutraRenda = resp2.renda_extra == 1 ? "(X) sim" : "() não";
+                const possuiOutraRenda = resp2.renda_extra == 1 ? "(X) Sim" : "() Não";
                 const valorRendaExtra = resp2.valor_renda_extra ? resp2.valor_renda_extra : '0,00';
                 doc.text(`Possui outra renda? ${possuiOutraRenda}  Valor: R$ ${valorRendaExtra}`, 90, posY);
 
@@ -294,6 +307,10 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             doc.addPage();
             posY = 20;
+
+            doc.setFillColor(230, 230, 230);
+            doc.rect(8, posY - 6, 190, 7, 'F');
+
             doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
             doc.text("3 - ESTRUTURA FAMILIAR:", 10, posY);
@@ -306,10 +323,10 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.text(`N de filhos: ${numeroFilhos}`, 10, posY);
 
             const paisVivemJuntosTexto = estrutura.pais_vivem_juntos == 1 ?
-                '(X) Sim   ( ) Não' :
-                '( ) Sim   (X) Não';
+                'Sim' :
+                'Não';
 
-            doc.text(`Pais vivem juntos: ${paisVivemJuntosTexto}`, 110, posY);
+            doc.text(`Pais vivem juntos: ${paisVivemJuntosTexto}`, 130, posY);
 
             posY += 8;
             doc.text(`Tipo de moradia: `, 10, posY);
@@ -323,20 +340,20 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             const transporte_outros_desc = estrutura.transporte_outros_desc == 1 ? `(X) Outros:` : '( ) Outros';
 
             doc.text(
-                `Transporte para a escola: ${transporte_carro}   ${transporte_van}   ${transporte_a_pe} ${transporte_outros_desc}`,
+                `Transporte para a escola: ${transporte_carro}   ${transporte_van}   ${transporte_a_pe} ${transporte_outros_desc}`,
                 10,
                 posY
             );
             posY += 8;
 
-            const recebeBolsa = estrutura.recebe_bolsa_familia ? 'sim(x) não()' : 'sim() não(x)'
+            const recebeBolsa = estrutura.recebe_bolsa_familia ? 'Sim' : 'Não'
             doc.text(`Recebe bolsa familia: ${recebeBolsa}`, 10, posY)
 
             posY += 8;
 
             const possuiConvenio = estrutura.qual_convenio ?
-                '(X) sim ( ) não' :
-                '( ) sim (X) não';
+                'Sim' :
+                'Não';
 
             doc.text(`Possui convênio: ${possuiConvenio}`, 10, posY);
 
@@ -345,8 +362,8 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             }
             posY += 8;
 
-            const portadorNecessidade = estrutura.portador_necessidade_especial ? '(x) sim () não' : '() sim () não'
-            doc.text(`Portador de alguma necessidade especial?: ${possuiConvenio}`, 10, posY);
+            const portadorNecessidade = estrutura.portador_necessidade_especial ? 'Sim' : 'Não'
+            doc.text(`Portador de alguma necessidade especial?: ${portadorNecessidade}`, 10, posY);
 
             if (estrutura.qual_necessidade_especial) {
                 const qualNecessidade = estrutura.qual_necessidade_especial
@@ -354,7 +371,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             }
 
             posY += 8;
-            const alergia = estrutura.possui_alergia ? '(x) sim () não' : '() sim (x) não'
+            const alergia = estrutura.possui_alergia ? 'Sim' : 'Não'
             doc.text(`Possui alergia: ${alergia}`, 10, posY);
 
             if (estrutura.especifique_alergia) {
@@ -363,20 +380,21 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             posY += 8;
 
-            const problemaVisao = estrutura.problemas_visao ? '(x) sim () não' : '() sim (x) não'
-            doc.text(`Problema de visão ${problemaVisao}`, 10, posY)
+            const problemaVisao = estrutura.problemas_visao ? 'Sim' : 'Não'
+            doc.text(`Problema de visão: ${problemaVisao}`, 10, posY)
             posY += 8;
 
-            const ja_fez_cirurgia = estrutura.ja_fez_cirurgia ? '(x) sim () não' : '() sim (x) não'
-            doc.text(`Já fez cirurgia ${ja_fez_cirurgia}`, 10, posY)
+            const ja_fez_cirurgia = estrutura.ja_fez_cirurgia ? 'Sim' : 'Não'
+            doc.text(`Já fez cirurgia: ${ja_fez_cirurgia}`, 10, posY)
 
             const qualCirurgia = estrutura.qual_cirurgia ?? 'sem cirurgia'
             doc.text(`Qual: ${qualCirurgia}`, 130, posY)
 
             posY += 8;
 
-            const tomou_vacina = estrutura.vacina_catapora_varicela ? '(x) sim () não' : '() sim (x) não'
-            doc.text(`Tomou vacina contra catapora ou varicela ${tomou_vacina}`, 10, posY)
+
+            const tomou_vacina = estrutura.vacina_catapora_varicela ? 'Sim' : 'Não'
+            doc.text(`Tomou vacina contra catapora ou varicela: ${tomou_vacina}`, 10, posY)
             posY += 8;
 
             const doenca_anemia = estrutura.doenca_anemia == 1 ? '(x) Anemia' : '() Anemia';
@@ -398,13 +416,16 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.text(linhasDoencas, 10, posY);
             posY += linhasDoencas.length * 6 + 7;
 
+            doc.setFillColor(230, 230, 230);
+            doc.rect(8, posY - 6, 190, 7, 'F');
+
             doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
             doc.text("4 - PESSOAS AUTORIZADAS A BUSCAR MEU FILHO(A) NA CRECHE", 10, posY);
 
             doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
-            
+
             posY += 8;
             if (pessoa_autorizada1 && pessoa_autorizada1.nome) {
                 doc.text(`Nome: ${pessoa_autorizada1.nome} `, 10, posY);
@@ -416,7 +437,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
                 posY += 8;
 
             }
-            posY += 8;
+            posY += 3;
 
             if (pessoa_autorizada2 && pessoa_autorizada2.nome) {
                 doc.text(`Nome: ${pessoa_autorizada2.nome} `, 10, posY);
@@ -426,6 +447,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
                 doc.text(`CPF: ${pessoa_autorizada2.cpf} `, 10, posY);
                 doc.text(`Telefone: ${pessoa_autorizada2.celular} `, 130, posY);
             }
+            posY += 12;
 
             doc.text('Horário de entrada: das 7h ás 7:30 saída: das 15:45h as 16:30h sem tolerancia de atrasos.', 10, posY)
             posY += 8
@@ -438,7 +460,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.text('Declaro ter conhecimento das normas e regras estabelecidas pela instituição e estou ciente em\ncumprilas para evitar o cancelamento da vaga, caso aja derespeito das mesmas .', 10, posY)
             posY += 14
             posY += 14
-            
+
             doc.text('_________________________________________________', 10, posY)
             posY += 8
             doc.text('ASSINATURA DO RESPONSAVEL', 10, posY)
