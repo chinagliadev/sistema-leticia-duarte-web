@@ -189,7 +189,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             posY += 8;
             doc.setFont("helvetica", "normal");
-            doc.setFontSize(14);
+            doc.setFontSize(12);
 
             const imagemAutorizada = aluno.autorizacao_imagem == 1 ?
                 "Autorizo a divulgação de imagem do meu filho (a): (X)Sim  ()Não" :
@@ -404,7 +404,8 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
-
+            
+            posY += 8;
             if (pessoa_autorizada1 && pessoa_autorizada1.nome) {
                 doc.text(`Nome: ${pessoa_autorizada1.nome} `, 10, posY);
                 doc.text(`Parentesco: ${pessoa_autorizada1.parentesco} `, 130, posY);
@@ -415,7 +416,6 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
                 posY += 8;
 
             }
-
             posY += 8;
 
             if (pessoa_autorizada2 && pessoa_autorizada2.nome) {
@@ -438,9 +438,13 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.text('Declaro ter conhecimento das normas e regras estabelecidas pela instituição e estou ciente em\ncumprilas para evitar o cancelamento da vaga, caso aja derespeito das mesmas .', 10, posY)
             posY += 14
             posY += 14
-
+            
+            doc.text('_________________________________________________', 10, posY)
+            posY += 8
             doc.text('ASSINATURA DO RESPONSAVEL', 10, posY)
-            posY += 14
+            posY += 20
+            doc.text('_________________________________________________', 10, posY)
+            posY += 8
             doc.text('ASSINATURA DO DIRETOR PRESIDENTE', 10, posY)
 
 

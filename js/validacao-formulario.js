@@ -1296,3 +1296,25 @@ function removerResponsavel() {
     responsavel_2.classList.add('oculto')
 
 }
+
+
+function validarPesquisar() {
+    const inputPesquisar = document.getElementById("txtPesquisar");
+    const divInput = document.getElementById("div-pesquisar");
+    const divMensagem = document.getElementById("mensagem-erro-pesquisar");
+    const spanMensagem = document.getElementById("pesquisar-erro");
+
+    const valor = inputPesquisar.value.trim();
+
+    divMensagem.classList.add("hidden");
+    spanMensagem.textContent = "";
+    divInput.classList.remove("error", "success");
+
+    if (valor === "") {
+        divInput.classList.add("error");
+        divMensagem.classList.remove("hidden");
+        spanMensagem.textContent = "Informe o RA ou nome do aluno";
+    } else {
+        divInput.classList.add("success");
+    }
+}

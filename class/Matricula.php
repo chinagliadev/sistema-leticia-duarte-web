@@ -585,4 +585,18 @@ class Matricula
             throw new Exception("Erro ao editar dados completos: " . $e->getMessage());
         }
     }
+
+    function pesquisarAluno($idAluno){
+    
+        $sqlPesquisar = "SELECT tb_alunos.ra_aluno, tb_alunos.nome as nome_aluno, tb_alunos.data_nascimento, tb_responsaveis.nome as nome_responsavel
+                    FROM
+                tb_matricula
+                    INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.ra_aluno
+                    INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+                    WHERE ra_aluno = $idAluno";
+    
+        return $this->conn->query($sqlPesquisar)->fetchAll();
+        
+    }
 }
+
