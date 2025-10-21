@@ -6,19 +6,7 @@ $matricula = new Matricula();
 
 $ra_aluno = $_GET['idAluno'] ?? '';
 
-$dadosCompletos = $matricula->buscarDadosCompletosAluno($ra_aluno);
 
-if (!$dadosCompletos) {
-    die("Erro: Aluno não encontrado ou ID inválido.");
-}
-
-$aluno = $dadosCompletos['aluno'];
-$endereco = $dadosCompletos['endereco'];
-$resp1 = $dadosCompletos['responsavel_1'];
-$resp2 = $dadosCompletos['responsavel_2'];
-$estrutura = $dadosCompletos['estrutura_familiar'];
-$pessoa_autorizada1 = $dadosCompletos['pessoa_autorizada_1'];
-$pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 ?>
 
 <!DOCTYPE html>

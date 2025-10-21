@@ -44,6 +44,22 @@ function validarCampoNomeAluno() {
     return true;
 }
 
+function validarRa() {
+    const raAluno = document.getElementById("txtRaAluno").value
+
+    const divMensagem = document.getElementById('mensagem-erro-ra');
+    const spanMensagem = document.getElementById('ra-erro');
+    const inputNome = document.getElementById("validacao-ra");
+
+    if (raAluno === "") {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o ra do aluno");
+        return false;
+    }
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+    return true
+}
+
 function validarEndereco() {
     const divEndereco = document.getElementById('validacao-endereco');
     const mensagemErro = document.getElementById('mensagem-erro-endereco');
@@ -1127,6 +1143,7 @@ function validarParentesco2() {
 }
 async function validarAluno() {
     const validacaoNome = validarCampoNomeAluno();
+    const validarRA = validarRa()
     const validacaoEndereco = validarEndereco();
     const validacaoNumero = validarNumero();
     const validacaoBairro = validarBairro();
@@ -1138,7 +1155,7 @@ async function validarAluno() {
 
     const validacaoCep = await validarCep();
 
-    const formularioValido = validacaoNome && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoDataNascimento && validarGotas && validacaoCep;
+    const formularioValido = validacaoNome && validarRA && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoDataNascimento && validarGotas && validacaoCep;
 
     return formularioValido;
 }
@@ -1264,7 +1281,6 @@ async function validarFormularioCompleto() {
     if (formularioValido) {
         console.log('Formulário válido!');
         $('#modal-salvar-dados').modal('show');
-        alert('Formulário válido');
     } else {
         console.warn('Formulário inválido. Seções com erro:', erros);
         $('#modal_formulario_invalido').modal('show');
@@ -1280,8 +1296,8 @@ function removerResponsavel2() {
 
     const inputs = document.querySelectorAll('#responsavel_2 input, #responsavel_2 select');
     inputs.forEach(input => {
-        if(input.type !== 'hidden') input.value = '';
-        if(input.tagName === 'SELECT') input.selectedIndex = 0; 
+        if (input.type !== 'hidden') input.value = '';
+        if (input.tagName === 'SELECT') input.selectedIndex = 0;
     });
 }
 
@@ -1295,4 +1311,36 @@ function removerResponsavel() {
     divBotaoResponsavel.classList.remove('oculto')
     responsavel_2.classList.add('oculto')
 
+}
+
+
+function validarPesquisar(event) {
+    const inputPesquisar = document.getElementById("txtPesquisar");
+    const divInput = document.getElementById("div-pesquisar");
+    const divMensagem = document.getElementById("mensagem-erro-pesquisar");
+    const spanMensagem = document.getElementById("pesquisar-erro");
+
+    const valor = inputPesquisar.value.trim();
+
+    divMensagem.classList.add("hidden");
+    spanMensagem.textContent = "";
+    divInput.classList.remove("error", "success");
+
+    if (valor === "") {
+        divInput.classList.add("error");
+        divMensagem.classList.remove("hidden");
+        spanMensagem.textContent = "Informe o RA ou nome do aluno";
+        return false;
+    }
+
+    if (!isNaN(valor) && Number(valor) < 0) {
+        divInput.classList.add("error");
+        divMensagem.classList.remove("hidden");
+        spanMensagem.textContent = "RA inválido";
+        return false;
+    }
+
+    divInput.classList.add("success");
+
+    return true;
 }

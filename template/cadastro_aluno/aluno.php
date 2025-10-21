@@ -1,6 +1,15 @@
 <section class="ui segment blue raised">
     <div class="fields">
-        <div class="seven wide field" id="validacao-nome">
+        <div class="three wide field" id="validacao-ra">
+            <label for="txtRaAluno">RA da Criança</label>
+            <input type="text" id="txtRaAluno" name="txtRaAluno" placeholder="Digite o RA da criança" onblur="validarRa()">
+            <div class="ui hidden negative message" id="mensagem-erro-ra">
+                <div class="content">
+                    <i class="user icon"></i><span id="ra-erro"></span>
+                </div>
+            </div>
+        </div>
+        <div class="five wide field" id="validacao-nome">
             <label for="txtNomeCrianca">Nome da Criança</label>
             <input type="text" id="txtNomeCrianca" name="txtNomeCrianca" placeholder="Digite o nome da criança" onblur="validarCampoNomeAluno()">
             <div class="ui hidden negative message" id="mensagem-erro-aluno">

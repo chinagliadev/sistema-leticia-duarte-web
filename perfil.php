@@ -18,12 +18,13 @@ $sqlHist = "
         r2.nome AS responsavel_2,
         m.data
     FROM tb_matricula m
-    LEFT JOIN tb_alunos a ON m.aluno_id = a.ra_aluno
+    LEFT JOIN tb_alunos a ON m.aluno_id = a.id
     LEFT JOIN tb_responsaveis r1 ON m.responsavel_1_id = r1.id_responsavel
     LEFT JOIN tb_responsaveis r2 ON m.responsavel_2_id = r2.id_responsavel
     WHERE m.funcionario_id = ?
     ORDER BY m.data DESC
 ";
+
 $stmtHist = $conn->prepare($sqlHist);
 $stmtHist->execute([$id]);
 $historico = $stmtHist->fetchAll(PDO::FETCH_ASSOC);

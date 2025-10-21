@@ -15,6 +15,9 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nome = $_POST['txtNomeCrianca'] ?? null;
+    $raAluno = $_POST['txtRaAluno'] ?? null;
+
+    var_dump($raAluno);
     $turma = $_POST['turma'] ?? null;
     $dataNascimento = $_POST['data_nascimento'] ?? null;
     $corRaca = $_POST['corRaca'] ?? null;
@@ -189,6 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
     $aluno_id = $aluno->cadastrarAluno(
+        $raAluno,
         $nome,
         $dataNascimento,
         $corRaca,

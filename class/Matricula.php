@@ -52,11 +52,16 @@ class Matricula
     public function listarMatricula(): array
     {
         $sqlListar =
-            "SELECT tb_alunos.ra_aluno, tb_alunos.nome as nome_aluno, tb_alunos.data_nascimento, tb_responsaveis.nome as nome_responsavel
-                FROM
-            tb_matricula
-                INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.ra_aluno
-                INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel";
+            "SELECT 
+        tb_alunos.id, 
+        tb_alunos.ra_aluno, 
+        tb_alunos.nome AS nome_aluno, 
+        tb_alunos.data_nascimento, 
+        tb_responsaveis.nome AS nome_responsavel
+            FROM tb_matricula
+        INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+        INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel;
+";
 
         $dados = $this->conn->query($sqlListar)->fetchAll(PDO::FETCH_ASSOC);
         return $dados;
@@ -65,7 +70,6 @@ class Matricula
     public function deletarAlunoCompleto($aluno_id)
     {
         try {
-            // 1. Inicia a transação e desativa as verificações de FK para evitar o erro 1451
             $this->conn->beginTransaction();
             $this->conn->exec("SET foreign_key_checks = 0");
 
@@ -167,75 +171,58 @@ class Matricula
             'pessoa_autorizada_2' => null
         ];
 
-        $sqlMatricula = "SELECT * FROM tb_matricula WHERE aluno_id = :ra_aluno";
+        // 1️⃣ Buscar o ID do aluno pelo RA
+        $sqlIdAluno = "SELECT id FROM tb_alunos WHERE ra_aluno = :ra_aluno";
+        $stmtId = $this->conn->prepare($sqlIdAluno);
+        $stmtId->execute([':ra_aluno' => $ra_aluno]);
+        $idAluno = $stmtId->fetchColumn();
+
+        if (!$idAluno) {
+            return false; // aluno não encontrado
+        }
+
+        $sqlMatricula = "SELECT * FROM tb_matricula WHERE aluno_id = :aluno_id";
         $stmtMatricula = $this->conn->prepare($sqlMatricula);
-        $stmtMatricula->execute([':ra_aluno' => $ra_aluno]);
+        $stmtMatricula->execute([':aluno_id' => $idAluno]);
         $dadosCompletos['matricula'] = $stmtMatricula->fetch(PDO::FETCH_ASSOC);
 
         if (!$dadosCompletos['matricula']) {
-            return false;
+            return false; // matrícula não encontrada
         }
 
         $matricula = $dadosCompletos['matricula'];
+
         $resp1_id = $matricula['responsavel_1_id'];
         $resp2_id = $matricula['responsavel_2_id'];
         $estrutura_id = $matricula['estrutura_familiar_id'];
         $pessoa_autorizada_1_id = $matricula['pessoa_autorizada_1_id'];
         $pessoa_autorizada_2_id = $matricula['pessoa_autorizada_2_id'];
 
-
-        $sqlAluno = "SELECT * FROM tb_alunos WHERE ra_aluno = :ra_aluno";
-        $dadosAluno = $this->conn->prepare($sqlAluno);
-        $dadosAluno->execute([':ra_aluno' => $ra_aluno]);
-        $dadosCompletos['aluno'] = $dadosAluno->fetch(PDO::FETCH_ASSOC);
+        $sqlAluno = "SELECT * FROM tb_alunos WHERE id = :id";
+        $stmtAluno = $this->conn->prepare($sqlAluno);
+        $stmtAluno->execute([':id' => $idAluno]);
+        $dadosCompletos['aluno'] = $stmtAluno->fetch(PDO::FETCH_ASSOC);
 
         $endereco_id = $dadosCompletos['aluno']['endereco_id'] ?? null;
 
-        if ($endereco_id) {
-            $sqlEndereco = "SELECT * FROM endereco WHERE id_endereco = :id";
-            $dadosEndereco = $this->conn->prepare($sqlEndereco);
-            $dadosEndereco->execute([':id' => $endereco_id]);
-            $dadosCompletos['endereco'] = $dadosEndereco->fetch(PDO::FETCH_ASSOC);
-        }
+        $buscarPorId = function ($tabela, $colunaId, $id) {
+            if (!$id) return null;
+            $sql = "SELECT * FROM $tabela WHERE $colunaId = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        };
 
-        if ($resp1_id) {
-            $sqlResp1 = "SELECT * FROM tb_responsaveis WHERE id_responsavel = :id";
-            $dadosResp1 = $this->conn->prepare($sqlResp1);
-            $dadosResp1->execute([':id' => $resp1_id]);
-            $dadosCompletos['responsavel_1'] = $dadosResp1->fetch(PDO::FETCH_ASSOC);
-        }
-
-        if ($resp2_id) {
-            $sqlResp2 = "SELECT * FROM tb_responsaveis WHERE id_responsavel = :id";
-            $dadosResp2 = $this->conn->prepare($sqlResp2);
-            $dadosResp2->execute([':id' => $resp2_id]);
-            $dadosCompletos['responsavel_2'] = $dadosResp2->fetch(PDO::FETCH_ASSOC);
-        }
-
-        if ($estrutura_id) {
-            $sqlEstrutura = "SELECT * FROM tb_estrutura_familiar WHERE id = :id";
-            $dadosEstruturaFamiliar = $this->conn->prepare($sqlEstrutura);
-            $dadosEstruturaFamiliar->execute([':id' => $estrutura_id]);
-            $dadosCompletos['estrutura_familiar'] = $dadosEstruturaFamiliar->fetch(PDO::FETCH_ASSOC);
-        }
-
-        if ($pessoa_autorizada_1_id) {
-            $sqlPa = "SELECT * FROM tb_pessoas_autorizadas WHERE id = :id";
-            $dadosPessoaAutorizada = $this->conn->prepare($sqlPa);
-            $dadosPessoaAutorizada->execute([':id' => $pessoa_autorizada_1_id]);
-            $dadosCompletos['pessoa_autorizada_1'] = $dadosPessoaAutorizada->fetch(PDO::FETCH_ASSOC);
-        }
-
-        if ($pessoa_autorizada_2_id) {
-            $sqlPa2 = "SELECT * FROM tb_pessoas_autorizadas WHERE id = :id";
-            $dadosPessoaAutorizada2 = $this->conn->prepare($sqlPa2);
-            $dadosPessoaAutorizada2->execute([':id' => $pessoa_autorizada_2_id]);
-            $dadosCompletos['pessoa_autorizada_2'] = $dadosPessoaAutorizada2->fetch(PDO::FETCH_ASSOC);
-        }
-
+        $dadosCompletos['endereco'] = $buscarPorId('endereco', 'id_endereco', $endereco_id);
+        $dadosCompletos['responsavel_1'] = $buscarPorId('tb_responsaveis', 'id_responsavel', $resp1_id);
+        $dadosCompletos['responsavel_2'] = $buscarPorId('tb_responsaveis', 'id_responsavel', $resp2_id);
+        $dadosCompletos['estrutura_familiar'] = $buscarPorId('tb_estrutura_familiar', 'id', $estrutura_id);
+        $dadosCompletos['pessoa_autorizada_1'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_1_id);
+        $dadosCompletos['pessoa_autorizada_2'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_2_id);
 
         return $dadosCompletos;
     }
+
 
     public function editarAluno(array $dados)
     {
@@ -584,5 +571,33 @@ class Matricula
         } catch (Exception $e) {
             throw new Exception("Erro ao editar dados completos: " . $e->getMessage());
         }
+    }
+
+    function pesquisarAluno($termoPesquisa)
+    {
+        $termoLike = '%' . $termoPesquisa . '%';
+
+        $sqlPesquisar = "SELECT 
+                        tb_alunos.ra_aluno, 
+                        tb_alunos.nome AS nome_aluno, 
+                        tb_alunos.data_nascimento, 
+                        tb_responsaveis.nome AS nome_responsavel
+                     FROM tb_matricula
+                     INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+                     INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+                     WHERE 
+                        tb_alunos.ra_aluno = :termoPesquisa  
+                        OR tb_alunos.nome LIKE :termoLike    
+                        OR tb_responsaveis.nome LIKE :termoLike 
+                    ";
+
+        $stmt = $this->conn->prepare($sqlPesquisar);
+
+        $stmt->execute([
+            ':termoPesquisa' => $termoPesquisa,
+            ':termoLike' => $termoLike
+        ]);
+
+        return $stmt->fetchAll();
     }
 }

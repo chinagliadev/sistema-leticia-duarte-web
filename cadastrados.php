@@ -4,10 +4,17 @@ include './class/Matricula.php';
 
 $matricula = new Matricula();
 
-$dadosMatricula = $matricula->listarMatricula();
+$pesquisa = $_GET['txtPesquisar'] ?? '';
 
+if (empty($pesquisa)) {
+    $dadosMatricula = $matricula->listarMatricula();
+} else {
+    $dadosMatricula = $matricula->pesquisarAluno($pesquisa);
+}
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -22,7 +29,7 @@ $dadosMatricula = $matricula->listarMatricula();
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
     <script src="./js/semantic_ui.js"></script>
-
+    <script src="./js/validacao-formulario.js"></script>
 </head>
 
 <body>
@@ -41,15 +48,35 @@ $dadosMatricula = $matricula->listarMatricula();
                     alt="logo da leticia duarte na tela de cadastros de alunos">
             </section>
 
-
             <section class="sessao_tabela ui segment yellow">
                 <section class="pesquisar_alunos">
-                    <div class="ui action fluid input">
-                        <input id="txtPesquisar" type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
-                        <button class="ui icon primary button ">
-                            <i class="search icon"></i>
-                        </button>
+                    <div class="ui two column stackable grid">
+                        <div class="eight wide column">
+                            <form action="./cadastrados.php" method="GET" onsubmit="return validarPesquisar(event)">
+                                <div class="ui action fluid input" id="div-pesquisar">
+                                    <input name="txtPesquisar" id="txtPesquisar" type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
+                                    <button onclick="validarPesquisar()" class="ui icon primary button">
+                                        <i class="search icon"></i>
+                                    </button>
+                                </div>
+                                <div class="ui hidden negative message" id="mensagem-erro-pesquisar" style="margin-top:13px">
+                                    <div class="content">
+                                        <i class="user icon"></i><span id="pesquisar-erro"></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="eight wide column">
+                            <a href="./cadastrados.php" class="ui yellow button right floated"><i class="th list icon"></i> Listar alunos</a>
+                        </div>
                     </div>
+                    <!-- <?php if(!empty($dadosMatricula)){?>
+                        <div class="ui success message" id="mensagem-sucesso" style="margin-top:13px; display:flex; justify-content:center; align-items:center; text-align:center; height:50px; font-size:15px">
+                            <div class="content">
+                                <span>Aluno encontrado com sucesso <?=$dadosMatricula[0]['nome_aluno']?></span>
+                            </div>
+                        </div>
+                    <?php } ?> -->
                 </section>
                 <table class="ui single line table center aligned">
                     <thead class="background-thead">
@@ -66,19 +93,18 @@ $dadosMatricula = $matricula->listarMatricula();
                             <tr>
                                 <td colspan="5">
                                     <div class="ui center aligned">
-                                        <div class="ui message mensagem_cadastrados">
+                                        <img src="img/cadastrados/nenhum_aluno_cadastrado.png" class="ui image medium centered fluid" alt="">
                                             <div class="content">
 
                                                 <div class="ui header">Nenhum Aluno Encontrado</div>
 
-                                                <p>Sua lista de matrículas está vazia. Você pode adicionar o primeiro aluno agora.</p>
+                                                <p>Nenhum aluno encontrado, para cadastrar um aluno clique no botão abaixo</p>
 
                                                 <a href="./formulario-cadastro.php" class="ui small primary button">
                                                     <i class="plus icon"></i> Cadastrar Novo Aluno
                                                 </a>
 
                                             </div>
-                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -116,7 +142,7 @@ $dadosMatricula = $matricula->listarMatricula();
                                             class="ui small yellow icon button">
                                             <i class="edit icon"></i>
                                         </a>
-                                        <a href="./gerar-arquivo-pdf.php?idAluno=<?= $matricula['ra_aluno']?>" class="ui small icon button" data-tooltip="Baixar PDF" data-inverted="">
+                                        <a href="./gerar-arquivo-pdf.php?idAluno=<?= $matricula['ra_aluno'] ?>" class="ui small icon button" data-tooltip="Baixar PDF" data-inverted="">
                                             <i class="file pdf outline red icon"></i>
                                         </a>
                                     </td>
