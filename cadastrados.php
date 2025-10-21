@@ -52,10 +52,10 @@ if (empty($pesquisa)) {
                 <section class="pesquisar_alunos">
                     <div class="ui two column stackable grid">
                         <div class="eight wide column">
-                            <form action="./cadastrados.php" method="GET">
+                            <form action="./cadastrados.php" method="GET" onsubmit="return validarPesquisar(event)">
                                 <div class="ui action fluid input" id="div-pesquisar">
-                                    <input name="txtPesquisar" id="txtPesquisar" type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)" onblur="validarPesquisar()">
-                                    <button class="ui icon primary button">
+                                    <input name="txtPesquisar" id="txtPesquisar" type="text" placeholder="Pesquisar aluno (Nome/RA/Responsavel)">
+                                    <button onclick="validarPesquisar()" class="ui icon primary button">
                                         <i class="search icon"></i>
                                     </button>
                                 </div>
@@ -93,7 +93,7 @@ if (empty($pesquisa)) {
                             <tr>
                                 <td colspan="5">
                                     <div class="ui center aligned">
-                                        <div class="ui message mensagem_cadastrados">
+                                        <img src="img/cadastrados/nenhum_aluno_cadastrado.png" class="ui image medium centered fluid" alt="">
                                             <div class="content">
 
                                                 <div class="ui header">Nenhum Aluno Encontrado</div>
@@ -105,7 +105,6 @@ if (empty($pesquisa)) {
                                                 </a>
 
                                             </div>
-                                        </div>
                                     </div>
                                 </td>
                             </tr>
