@@ -1,17 +1,20 @@
-function mensagemErroCampos(div, input, span, mensagem) {
+function mensagemErroCampos(divMensagemErro, divDoCampo, spanTextoErro, mensagem) {
 
-    div.classList.remove('hidden');
-    div.classList.add('visible', 'error');
+    divMensagemErro.classList.remove('hidden');
+    divMensagemErro.classList.add('visible', 'error');
 
-    input.classList.add('ui', 'error');
-    span.textContent = mensagem;
+    divDoCampo.classList.add('error'); 
+    
+    spanTextoErro.textContent = mensagem;
 }
 
-function limparErro(div, input, span) {
-    div.classList.remove('visible', 'error');
-    div.classList.add('hidden');
-    input.classList.remove('ui', 'error');
-    span.textContent = "";
+function limparErro(divMensagemErro, divDoCampo, spanTextoErro) {
+    divMensagemErro.classList.remove('visible', 'error');
+    divMensagemErro.classList.add('hidden');
+    
+    divDoCampo.classList.remove('error');
+
+    spanTextoErro.textContent = "";
 }
 
 
@@ -613,6 +616,26 @@ function validarNomeResponsavel2() {
     return true;
 }
 
+function validarEscolaridade2() {
+    const responsavel2 = document.getElementById('responsavel_2');
+    if (responsavel2.classList.contains('oculto')) return true;
+
+        const div = document.getElementById('escolaridade_responsavel_2_div');
+        const valor = document.getElementById('txtEscolaridade_2').value;
+        const mensagemErro = document.getElementById('mensagem-erro-escolaridade-2');
+        const spanErro = document.getElementById('escolaridade-erro-2');
+
+        limparErro(mensagemErro, div, spanErro);
+
+        if (valor === '') {
+            mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione a escolaridade');
+            return false;
+        }
+
+        limparErro(mensagemErro, div, spanErro);
+        return true;
+}
+
 
 function validarDataNascimentoResponsavel2() {
     const responsavel2 = document.getElementById('responsavel_2');
@@ -633,39 +656,21 @@ function validarDataNascimentoResponsavel2() {
     }
 
     const partes = valor.split('/');
-    
+
     const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
-    
-    // ---------------------------------------------------------------
-    
+
+
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
-    
-    
+
+
     const dataInvalida = isNaN(dataNascimento.getTime()) ||
-    dataNascimento.getDate() != partes[0] ||
-    dataNascimento.getMonth() + 1 != partes[1];
-    
-    
+        dataNascimento.getDate() != partes[0] ||
+        dataNascimento.getMonth() + 1 != partes[1];
+
+
     if (dataInvalida || dataNascimento > hoje) {
         mensagemErroCampos(mensagemErro, div, spanErro, 'Data de nascimento inválida ou futura');
-        return false;
-    }
-    
-    limparErro(mensagemErro, div, spanErro);
-    return true;
-}
-
-function validarEscolaridade2() {
-    const div = document.getElementById('escolaridade_responsavel_2_div');
-    const valor = document.getElementById('txtEscolaridade_2').value;
-    const mensagemErro = document.getElementById('mensagem-erro-escolaridade-2');
-    const spanErro = document.getElementById('escolaridade-erro-2');
-
-    limparErro(mensagemErro, div, spanErro);
-
-    if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione a escolaridade');
         return false;
     }
 
@@ -675,10 +680,10 @@ function validarEscolaridade2() {
 
 
 function validarEstadoCivilResponsavel2() {
-    
+
     const responsavel2 = document.getElementById('responsavel_2');
     if (responsavel2.classList.contains('oculto')) return true;
-    
+
     const div = document.getElementById('estado_civil_responsavel_2_div');
     const valor = document.getElementById('txtEstadoCivil_2').value;
     const mensagemErro = document.getElementById('mensagem-erro-estado-civil-2');
@@ -760,6 +765,7 @@ function validarResponsavel2() {
     const telefone = validarTelefoneResponsavel2();
     const email = validarEmailResponsavel2();
     const rendaExtra = validarRendaExtraResponsavel2();
+    const escolaridade = validarEscolaridade2()
 
     return tipo && nome && data && estadoCivil && telefone && email && rendaExtra;
 }
@@ -1181,7 +1187,6 @@ function validarResponsavel1() {
     const email = validarEmailResponsavel1();
     const escolaridade = validarEscolaridade()
 
-
     const formularioValidoResponsavel = tipo && nome && data && estadoCivil && telefone && email && escolaridade;
     return formularioValidoResponsavel;
 }
@@ -1193,9 +1198,9 @@ function validarResponsavel2() {
     const estadoCivil = validarEstadoCivilResponsavel2();
     const telefone = validarTelefoneResponsavel2();
     const email = validarEmailResponsavel2();
-    // const salario = validarSalarioResponsavel2();
+    const escolaridade2 = validarEscolaridade2()
 
-    const formularioValidoResponsavel2 = tipo && nome && data && estadoCivil && telefone && email;
+    const formularioValidoResponsavel2 = tipo && nome && data && estadoCivil && telefone && email && escolaridade2;
     return formularioValidoResponsavel2;
 }
 

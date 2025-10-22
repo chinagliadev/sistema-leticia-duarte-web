@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome_responsavel_1     = $_POST['txtNomeResponsavel_1'] ?? null;
     $data_nascimento_1      = $_POST['data_nascimento_1'] ?? null;
     $estado_civil_1         = $_POST['txtEstadoCivil_1'] ?? null;
-    $escolaridade_1         = $_POST['txtEscolaridade_1'] ?? 'Não informado';
+    $escolaridade_1         = $_POST['txtEscolaridade'] ?? 'Não informado';
     $celular_1              = $_POST['txtTelefone_1'] ?? null;
     $email_1                = $_POST['txtEmail_1'] ?? null;
     $nome_empresa_1         = $_POST['txtNomeEmpresa_1'] ?? null;

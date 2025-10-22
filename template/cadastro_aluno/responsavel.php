@@ -209,6 +209,7 @@
             <div class="four wide field" id="escolaridade_responsavel_2_div">
                 <label for="txtEscolaridade_2">Escolaridade</label>
                 <select class="ui search dropdown" id="txtEscolaridade_2" name="txtEscolaridade_2" onchange="validarEscolaridade2()">
+                    <option value="" disabled selected hidden>Selecione o tipo</option>
                     <option value="" disabled selected hidden>Selecione a escolaridade</option>
                     <option value="Fundamental">Fundamental</option>
                     <option value="Médio">Médio</option>
@@ -217,8 +218,8 @@
                     <option value="Pós-graduação">Pós-graduação</option>
                     <option value="Outro">Outro</option>
                 </select>
-                <div id="mensagem-erro-escolaridade-2" style="margin-top: 14.6px;" class="ui hidden message error">
-                    <span id="escolaridade-erro-2"></span>
+                <div class="ui hidden message error" id="mensagem-erro-escolaridade-2" style="margin-top: 14.6px;">
+                    <span id="escolaridade-erro-2" class="mensagem-margin"></span>
                 </div>
             </div>
 

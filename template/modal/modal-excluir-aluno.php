@@ -9,7 +9,7 @@
     <div class="actions">
         <form method="POST" action="./excluir-cadastro-aluno.php" id="form-excluir-aluno">
             
-            <input type="hidden" name="ra_aluno" id="input-ra-excluir" value="">
+            <input type="hidden" name="id_aluno" id="input-id-excluir" value="">
             
             <div class="ui inverted cancel button">
                 Cancelar

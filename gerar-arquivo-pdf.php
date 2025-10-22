@@ -21,7 +21,6 @@ $estrutura = $dadosCompletos['estrutura_familiar'];
 $pessoa_autorizada1 = $dadosCompletos['pessoa_autorizada_1'];
 $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
-var_dump($resp1)
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +107,6 @@ var_dump($resp1)
         function gerarPdf() {
             const doc = criarPdf();
             doc.save(`Ficha_${aluno.nome}.pdf`);
-            alert('oi')
         }
 
         function visualizarPdf() {
@@ -228,8 +226,6 @@ var_dump($resp1)
             doc.text(`Data de nascimento: ${formatarDataBR(resp1.data_nascimento || '')}`, 10, posY);
             doc.text(`Estado civil: ${resp1.estado_civil}`, 130, posY);
             posY += 8;
-
-            alert(resp1.escolaridade)
 
             doc.text(`Escolaridade: ${resp1.escolaridade}`, 10, posY);
             doc.text(`Telefone: ${resp1.celular}`, 130, posY);
