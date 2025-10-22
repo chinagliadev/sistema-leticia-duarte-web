@@ -27,13 +27,13 @@ $(document).ready(function () {
         $('#formulario-aluno').submit();
     });
 
-    $('.btn-deletar-aluno').on("click", function () {
-
-        let raAluno = $(this).data('id');
+     $(document).on("click", ".btn-deletar-aluno", function () {
+        let id = $(this).data('id');
+        let ra_aluno = $(this).data('ra');
         let nomeAluno = $(this).data('nome');
 
-        $('#input-ra-excluir').val(raAluno);
-        $('#ra-aluno-no-modal').text(raAluno);
+        $('#input-id-excluir').val(id);
+        $('#ra-aluno-no-modal').text(ra_aluno);
         $('#nome-aluno-modal').text(nomeAluno);
 
         $('#modal-excluir').modal('show');

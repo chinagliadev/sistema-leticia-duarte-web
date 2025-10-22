@@ -8,15 +8,15 @@ echo "<h1>excluir-cadastro-aluno.php</h1>";
 var_dump($_POST);
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-     $ra_aluno = $_POST['ra_aluno'] ?? null;
+     $id_aluno = $_POST['id_aluno'] ?? null;
 
-    if($ra_aluno !== null){
+    if($id_aluno !== null){
         $matricula = new Matricula();
-
-        $sucesso = $matricula->deletarAlunoCompleto($ra_aluno); 
         
+        $sucesso = $matricula->deletarAlunoCompleto($id_aluno); 
         if ($sucesso) {
             header('location: ./cadastrados.php');
         }
+
     }
 }

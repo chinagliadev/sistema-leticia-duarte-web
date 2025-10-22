@@ -144,12 +144,12 @@ class Matricula
 
     private function deletarAlunoPrincipal($aluno_id)
     {
-        $sqlBuscaEndereco = "SELECT endereco_id FROM tb_alunos WHERE ra_aluno = :id";
+        $sqlBuscaEndereco = "SELECT endereco_id FROM tb_alunos WHERE id = :id";
         $stmtBuscaEndereco = $this->conn->prepare($sqlBuscaEndereco);
         $stmtBuscaEndereco->execute([":id" => $aluno_id]);
         $endereco_id = $stmtBuscaEndereco->fetchColumn();
 
-        $sqlDeletarAluno = "DELETE FROM tb_alunos WHERE ra_aluno = :id";
+        $sqlDeletarAluno = "DELETE FROM tb_alunos WHERE id = :id";
         $this->conn->prepare($sqlDeletarAluno)->execute([":id" => $aluno_id]);
 
         if ($endereco_id) {
@@ -577,7 +577,8 @@ class Matricula
     {
         $termoLike = '%' . $termoPesquisa . '%';
 
-        $sqlPesquisar = "SELECT 
+        $sqlPesquisar = "SELECT
+                        tb_alunos.id,
                         tb_alunos.ra_aluno, 
                         tb_alunos.nome AS nome_aluno, 
                         tb_alunos.data_nascimento, 

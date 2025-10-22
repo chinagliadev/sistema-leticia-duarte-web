@@ -70,13 +70,6 @@ if (empty($pesquisa)) {
                             <a href="./cadastrados.php" class="ui yellow button right floated"><i class="th list icon"></i> Listar alunos</a>
                         </div>
                     </div>
-                    <!-- <?php if(!empty($dadosMatricula)){?>
-                        <div class="ui success message" id="mensagem-sucesso" style="margin-top:13px; display:flex; justify-content:center; align-items:center; text-align:center; height:50px; font-size:15px">
-                            <div class="content">
-                                <span>Aluno encontrado com sucesso <?=$dadosMatricula[0]['nome_aluno']?></span>
-                            </div>
-                        </div>
-                    <?php } ?> -->
                 </section>
                 <table class="ui single line table center aligned">
                     <thead class="background-thead">
@@ -119,22 +112,23 @@ if (empty($pesquisa)) {
                                     <td><?= $matricula['nome_responsavel'] ?></td>
                                     <td>
                                         <button
-                                            data-inverted=""
-                                            data-tooltip="Detalhes Aluno"
-                                            class="ui small icon button blue"
-                                            title="Detalhes">
-                                            <i class="eye icon"></i>
-                                        </button>
-                                        <button
                                             data-tooltip="Deletar Aluno"
                                             data-inverted=""
                                             id="btn-deletar-aluno"
                                             type="button"
                                             class="btn-deletar-aluno ui small red icon button"
-                                            data-id="<?= $matricula['ra_aluno'] ?>"
+                                            data-id="<?= $matricula['id'] ?>"
+                                            data-ra="<?= $matricula['ra_aluno']?>"
                                             data-nome="<?= $matricula['nome_aluno'] ?>"
                                             title="Excluir">
                                             <i class="trash icon"></i>
+                                        </button>
+                                        <button
+                                            data-inverted=""
+                                            data-tooltip="Detalhes Aluno"
+                                            class="ui small icon button blue"
+                                            title="Detalhes">
+                                            <i class="eye icon"></i>
                                         </button>
                                         <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
                                             data-tooltip="Editar Aluno"
