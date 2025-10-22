@@ -27,8 +27,7 @@ $(document).ready(function () {
         $('#formulario-aluno').submit();
     });
 
-    $('.btn-deletar-aluno').on("click", function () {
-
+     $(document).on("click", ".btn-deletar-aluno", function () {
         let id = $(this).data('id');
         let ra_aluno = $(this).data('ra');
         let nomeAluno = $(this).data('nome');

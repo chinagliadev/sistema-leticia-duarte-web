@@ -112,13 +112,6 @@ if (empty($pesquisa)) {
                                     <td><?= $matricula['nome_responsavel'] ?></td>
                                     <td>
                                         <button
-                                            data-inverted=""
-                                            data-tooltip="Detalhes Aluno"
-                                            class="ui small icon button blue"
-                                            title="Detalhes">
-                                            <i class="eye icon"></i>
-                                        </button>
-                                        <button
                                             data-tooltip="Deletar Aluno"
                                             data-inverted=""
                                             id="btn-deletar-aluno"
@@ -129,6 +122,13 @@ if (empty($pesquisa)) {
                                             data-nome="<?= $matricula['nome_aluno'] ?>"
                                             title="Excluir">
                                             <i class="trash icon"></i>
+                                        </button>
+                                        <button
+                                            data-inverted=""
+                                            data-tooltip="Detalhes Aluno"
+                                            class="ui small icon button blue"
+                                            title="Detalhes">
+                                            <i class="eye icon"></i>
                                         </button>
                                         <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
                                             data-tooltip="Editar Aluno"

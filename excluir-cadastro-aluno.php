@@ -14,11 +14,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $matricula = new Matricula();
         
         $sucesso = $matricula->deletarAlunoCompleto($id_aluno); 
-        
         if ($sucesso) {
             header('location: ./cadastrados.php');
         }
 
-        echo 'deu ruim';
     }
 }

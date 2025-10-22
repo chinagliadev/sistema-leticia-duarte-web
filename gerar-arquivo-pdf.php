@@ -148,7 +148,8 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             doc.setFont("helvetica", "bold");
             doc.setFontSize(14);
-            doc.text(`1 - IDENTIFICAÇÃO DA CRIANÇA RA: ${aluno.ra_aluno}`, 10, posY); // alinha à esquerda
+            doc.text(`1 - IDENTIFICAÇÃO DA CRIANÇA`, 10, posY);
+            doc.text(`RA: ${aluno.ra_aluno}`, 155, posY);
             posY += 10;
 
             doc.setFont("helvetica", "normal");
@@ -324,9 +325,9 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             doc.text(`Pais vivem juntos: ${paisVivemJuntosTexto}`, 130, posY);
 
-            posY += 8;
-            doc.text(`Tipo de moradia: `, 10, posY);
-            doc.text(`Valor do aluguel: `, 130, posY);
+            // posY += 8;
+            // doc.text(`Tipo de moradia: `, 10, posY);
+            // doc.text(`Valor do aluguel: `, 130, posY);
             posY += 8;
 
 
@@ -344,9 +345,22 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             const recebeBolsa = estrutura.recebe_bolsa_familia ? 'Sim' : 'Não'
             doc.text(`Recebe bolsa familia: ${recebeBolsa}`, 10, posY)
-
+            
+            if(estrutura.recebe_bolsa_familia){
+                doc.text(`valor:R$ ${estrutura.valor}`, 130, posY)
+            }
             posY += 8;
 
+            doc.setFillColor(230, 230, 230);
+            doc.rect(8, posY - 6, 190, 7, 'F');
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(14);
+            doc.text("3.1 - INFORMAÇÕES IMPORTANTES SOBRE A CRIANÇA:", 10, posY);
+            posY += 8;
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
             const possuiConvenio = estrutura.qual_convenio ?
                 'Sim' :
                 'Não';

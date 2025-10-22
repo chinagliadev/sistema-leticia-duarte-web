@@ -8,6 +8,15 @@ require './class/Matricula.php';
 require './class/MatriculaPessoaAutorizada.php';
 require './config.php';
 
+function limparValorMonetario($valor) {
+    if (is_null($valor) || $valor === '') {
+        return null; 
+    }
+    $valor = str_replace(['R$', ' ', '.'], '', $valor);
+    $valor = str_replace(',', '.', $valor);
+    return (float) $valor;
+}
+
 var_dump($_POST);
 
 session_start();
@@ -37,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pais_vivem_juntos = isset($_POST['pais_vivem_juntos']) ? 1 : 0;
 
     $recebe_bolsa_familia = isset($_POST['recebe_bolsa_familia']) ? 1 : 0;
-
+    $recebe_bolsa_familia = limparValorMonetario($recebe_bolsa_familia);
+    
     $possui_alergia = isset($_POST['possui_alergia']) ? 1 : 0;
     $especifique_alergia = $possui_alergia ? ($_POST['especifique_alergia'] ?? null) : null;
 
@@ -126,6 +136,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $renda_extra_1          = isset($_POST['toggleRendaExtra_1']) ? 1 : 0;
     $valor_renda_extra      = $_POST['txtRendaExtra'] ?? null;
 
+    $salario_1 = limparValorMonetario($salario_1);
+    $valor_renda_extra = limparValorMonetario($valor_renda_extra);
 
     $responsavel_1_id = $responsavel->cadastrarResponsavel(
         $tipo_responsavel_1,
@@ -159,6 +171,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $salario_2              = $_POST['txtSalario_2'] ?? null;
         $renda_extra_2          = isset($_POST['toggleRendaExtra_2']) ? 1 : 0;
         $valor_renda_extra_2    = $_POST['txtRendaExtra_2'] ?? null;
+
+        $salario_2 = limparValorMonetario($salario_2);
+        $valor_renda_extra_2 = limparValorMonetario($valor_renda_extra_2);
 
         $responsavel_2_id = $responsavel->cadastrarResponsavel(
             $tipo_responsavel_2,

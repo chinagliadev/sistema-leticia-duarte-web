@@ -577,7 +577,8 @@ class Matricula
     {
         $termoLike = '%' . $termoPesquisa . '%';
 
-        $sqlPesquisar = "SELECT 
+        $sqlPesquisar = "SELECT
+                        tb_alunos.id,
                         tb_alunos.ra_aluno, 
                         tb_alunos.nome AS nome_aluno, 
                         tb_alunos.data_nascimento, 
