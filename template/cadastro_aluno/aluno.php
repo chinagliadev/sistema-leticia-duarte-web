@@ -18,6 +18,21 @@
                 </div>
             </div>
         </div>
+        <div class="three wide field" id="div_cpf_aluno">
+            <label for="txtCpfAluno">CPF</label>
+            <input
+                type="text"
+                id="txtCpfAluno"
+                name="txtCpfAluno"
+                placeholder="xxx.xxx.xxx-xx"
+                onblur="validarCpfAluno()"
+            >
+            <div class="ui hidden negative message" id="mensagem-erro-cpf-aluno">
+                <div class="content">
+                    <i class="exclamation triangle icon"></i><span id="cpf-aluno-erro"></span>
+                </div>
+            </div>
+        </div>
 
         <div class="three wide field" id="validacao-turma">
             <label for="txtTurma">Turma</label>
@@ -63,6 +78,9 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="fields">
         <div class="three wide field" id="divRaca">
             <label for="txtRaca">Cor / Raça</label>
             <select class="ui search dropdown" id="txtRaca" name="corRaca" onchange="validarRaca()">
@@ -72,6 +90,7 @@
                 <option value="parda">Parda</option>
                 <option value="amarela">Amarela</option>
                 <option value="indigena">Indígena</option>
+                <option value="não declarada">Não Declarada</option>
                 <option value="outra">Outra</option>
             </select>
             <div class="ui hidden negative message" id="mensagem-erro-raca" style="margin-top:15px">
@@ -81,10 +100,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- CEP e endereço -->
-    <div class="fields">
         <div class="three wide field" id="validacao-cep">
             <label for="txtCep">CEP</label>
             <input type="text" id="txtCep" name="txtCep" placeholder="00000-000" onblur="validarCep()">
@@ -96,7 +111,7 @@
             <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank">Não sei o meu cep</a>
         </div>
 
-        <div class="ten wide field" id="validacao-endereco">
+        <div class="seven wide field" id="validacao-endereco">
             <label for="txtEndereco">Endereço</label>
             <input type="text" id="txtEndereco" name="txtEndereco" placeholder="Rua, Avenida..." onblur="validarEndereco()">
             <div class="ui hidden negative message" id="mensagem-erro-endereco">

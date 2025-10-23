@@ -915,6 +915,48 @@ function validarNomeAutorizada() {
     return true;
 }
 
+function validarCPF(cpfString) {
+    const cpf = cpfString.replace(/[^\d]+/g, '');
+
+    if (cpf.length !== 11) {
+        return false;
+    }
+
+    if (/^(\d)\1+$/.test(cpf)) {
+        return false;
+    }
+
+    let soma = 0;
+    let resto;
+
+    for (let i = 1; i <= 9; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    }
+
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) {
+        resto = 0;
+    }
+    if (resto !== parseInt(cpf.substring(9, 10))) {
+        return false;
+    }
+
+    soma = 0;
+    for (let i = 1; i <= 10; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
+
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) {
+        resto = 0;
+    }
+    if (resto !== parseInt(cpf.substring(10, 11))) {
+        return false;
+    }
+
+    return true;
+}
+
 function validarCpfAutorizada() {
     const cpfAutorizada = document.getElementById("txtCpfAutorizada").value.trim();
     const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
@@ -935,32 +977,36 @@ function validarCpfAutorizada() {
         return false;
     }
 
-    const cpf = cpfAutorizada.replace(/[^\d]+/g, '');
-
-    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+    if (!validarCPF(cpfAutorizada)) {
         mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
         return false;
     }
+    
+    return true;
+}
 
-    let soma = 0;
-    let resto;
+function validarCpfAluno() {
+    const cpfAluno = document.getElementById("txtCpfAluno").value.trim();
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/; 
 
-    for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
-    resto = (soma * 10) % 11;
+    const divMensagem = document.getElementById('mensagem-erro-cpf-aluno');
+    const spanMensagem = document.getElementById('cpf-aluno-erro');
+    const inputCpfDiv = document.getElementById("div_cpf_aluno"); // Div principal para aplicar classes de erro
 
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.substring(9, 10))) {
-        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+    limparErro(divMensagem, inputCpfDiv, spanMensagem);
+
+    if (cpfAluno === '') {
+        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'Informe o CPF do aluno');
+        return false;
+    }
+    
+    if (!regexCpf.test(cpfAluno)) {
+        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'Informe um CPF no formato válido (xxx.xxx.xxx-xx)');
         return false;
     }
 
-    soma = 0;
-    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
-    resto = (soma * 10) % 11;
-
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.substring(10, 11))) {
-        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+    if (!validarCPF(cpfAluno)) {
+        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'CPF inválido');
         return false;
     }
 
