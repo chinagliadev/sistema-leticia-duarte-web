@@ -201,6 +201,7 @@
                     <option value="Casado">Casado</option>
                     <option value="Divorciado">Divorciado</option>
                     <option value="Viuvo">Viúvo</option>
+                    <option value="União Estável">União Estável</option>
                 </select>
                 <div id="mensagem-erro-estado-civil-2" class="ui hidden message error">
                     <span id="estado-civil-erro-2"></span>

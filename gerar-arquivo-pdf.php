@@ -164,6 +164,9 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
                 return `${dia}/${mes}/${ano}`;
             }
 
+            doc.text(`RG: ${aluno.rg}`, 10, posY);
+            posY += 8;
+
             doc.text(`Data de Nascimento: ${formatarDataBR(aluno.data_nascimento)}`, 10, posY);
             doc.text(`Cor/Raça: ${aluno.etnia}`, 130, posY);
             posY += 8;
@@ -250,7 +253,15 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             posY += 8;
 
             const salario = resp1.salario ? resp1.salario : 'Não informado';
-            doc.text(`Salário: R$ ${salario}`, 10, posY);
+            let textoSalario;
+
+            if (salario === 'Não informado') {
+                textoSalario = `Salário: ${salario}`;
+            } else {
+                textoSalario = `Salário: R$ ${salario}`;
+            }
+
+            doc.text(textoSalario, 10, posY);
 
             const possuiOutraRenda = resp1.renda_extra == 1 ? "(X) Sim" : "() não";
             const valorRendaExtra = resp1.valor_renda_extra ? resp1.valor_renda_extra : '0,00';
@@ -292,7 +303,16 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
                 posY += 8;
 
                 const salario = resp2.salario ? resp2.salario : 'Não informado';
-                doc.text(`Salário: R$${salario}`, 10, posY);
+                let texto;
+
+                if (salario === 'Não informado') {
+                    texto = `Salário: ${salario}`;
+                } else {
+                    texto = `Salário: R$${salario}`;
+                }
+
+                doc.text(texto, 10, posY);
+
 
                 const possuiOutraRenda = resp2.renda_extra == 1 ? "(X) Sim" : "() Não";
                 const valorRendaExtra = resp2.valor_renda_extra ? resp2.valor_renda_extra : '0,00';
@@ -346,8 +366,8 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             const recebeBolsa = estrutura.recebe_bolsa_familia ? 'Sim' : 'Não'
             doc.text(`Recebe bolsa familia: ${recebeBolsa}`, 10, posY)
-            
-            if(estrutura.recebe_bolsa_familia){
+
+            if (estrutura.recebe_bolsa_familia) {
                 doc.text(`valor:R$ ${estrutura.valor}`, 130, posY)
             }
             posY += 8;
@@ -391,15 +411,16 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             posY += 8;
 
-            const problemaVisao = estrutura.problemas_visao ? 'Sim' : 'Não'
-            doc.text(`Problema de visão: ${problemaVisao}`, 10, posY)
-            posY += 8;
+            const fezCirurgia = String(estrutura.ja_fez_cirurgia);
 
-            const ja_fez_cirurgia = estrutura.ja_fez_cirurgia ? 'Sim' : 'Não'
-            doc.text(`Já fez cirurgia: ${ja_fez_cirurgia}`, 10, posY)
+            const ja_fez_cirurgia = (fezCirurgia === '1' || fezCirurgia === 'Sim') ? 'Sim' : 'Não';
 
-            const qualCirurgia = estrutura.qual_cirurgia ?? 'sem cirurgia'
-            doc.text(`Qual: ${qualCirurgia}`, 130, posY)
+            doc.text(`Já fez cirurgia: ${ja_fez_cirurgia}`, 10, posY);
+
+            if (ja_fez_cirurgia === 'Sim') {
+                const qualCirurgia = estrutura.qual_cirurgia || 'Não informado';
+                doc.text(`Qual: ${qualCirurgia}`, 130, posY);
+            }
 
             posY += 8;
 
