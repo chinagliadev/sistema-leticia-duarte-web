@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nome = $_POST['txtNomeCrianca'] ?? null;
     $cpfAluno = $_POST['txtCpfAluno'] ?? null;
+    $rg = $_POST['txtRgAluno'] ?? null;
     $raAluno = $_POST['txtRaAluno'] ?? null;
 
     var_dump($raAluno);
@@ -211,6 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $raAluno,
         $nome,
         $cpfAluno,
+        $rg,
         $dataNascimento,
         $corRaca,
         $turma,
