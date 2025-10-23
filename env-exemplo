@@ -1,4 +1,4 @@
-HOST='127.0.0.1'
-BANCO='leticia_duarte'
-USUARIO='root'
+HOST=''
+BANCO=''
+USUARIO=''
 SENHA=

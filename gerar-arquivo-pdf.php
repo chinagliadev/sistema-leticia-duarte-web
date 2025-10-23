@@ -155,6 +155,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
             doc.text(`Nome: ${aluno.nome}`, 10, posY);
+            doc.text(`CPF: ${aluno.cpf}`, 130, posY);
             posY += 8;
 
             function formatarDataBR(data) {
@@ -164,20 +165,20 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             }
 
             doc.text(`Data de Nascimento: ${formatarDataBR(aluno.data_nascimento)}`, 10, posY);
-            doc.text(`Cor/Raça: ${aluno.etnia}`, 120, posY);
+            doc.text(`Cor/Raça: ${aluno.etnia}`, 130, posY);
             posY += 8;
 
             doc.text(`Endereço: ${endereco.endereco}`, 10, posY);
-            doc.text(`Numero: ${endereco.numero}`, 120, posY);
+            doc.text(`Numero: ${endereco.numero}`, 130, posY);
             posY += 8;
 
             doc.text(`Bairro: ${endereco.bairro}`, 10, posY);
-            doc.text(`Cidade: ${endereco.cidade}`, 120, posY);
+            doc.text(`Cidade: ${endereco.cidade}`, 130, posY);
             posY += 8;
 
             const febreAutorizada = aluno.autorizacao_febre == 1 ? "Sim (X)  Não ()" : "Sim ()  Não (X)";
             doc.text(`Em caso de febre autoriza medicar a criança:`, 10, posY);
-            doc.text(`${febreAutorizada}`, 120, posY);
+            doc.text(`${febreAutorizada}`, 130, posY);
 
             posY += 8;
 
@@ -185,7 +186,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             const qtdGotas = aluno.autorizacao_febre == 1 ? aluno.gotas : "0";
 
             doc.text(`Qual remédio: ${nomeRemedio}`, 10, posY);
-            doc.text(`Quantas gotas: ${qtdGotas}`, 120, posY);
+            doc.text(`Quantas gotas: ${qtdGotas}`, 130, posY);
             posY += 8;
 
             doc.setFont("helvetica", "bold");

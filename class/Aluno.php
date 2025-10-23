@@ -5,6 +5,7 @@ class Aluno{
     private $conn;
 
     public $nome;
+    public $cpf;
     public $raAluno;
     public $data_nascimento;
     public $etnia;
@@ -26,12 +27,12 @@ class Aluno{
     }
 
 
-    public function cadastrarAluno($raAluno, $nome ,$data_nascimento, $etnia, $turma, $autorizacao_febre, $remedio, $gotas, $permissao_foto, $endereco_id, $funcionario_id){
+    public function cadastrarAluno($raAluno, $nome,$cpf ,$data_nascimento, $etnia, $turma, $autorizacao_febre, $remedio, $gotas, $permissao_foto, $endereco_id, $funcionario_id){
 
         $sqlInserir = "INSERT INTO tb_alunos 
-        (ra_aluno, nome, data_nascimento, etnia, turma, autorizacao_febre, remedio, gotas, permissao_foto, endereco_id, funcionario_id)
+        (ra_aluno, nome, cpf, data_nascimento, etnia, turma, autorizacao_febre, remedio, gotas, permissao_foto, endereco_id, funcionario_id)
         VALUES
-        (:ra_aluno, :nome, :data_nascimento, :etnia, :turma, :autorizacao_febre, :remedio, :gotas, :permissao_foto, :endereco_id, :funcionario_id)
+        (:ra_aluno, :nome, :cpf, :data_nascimento, :etnia, :turma, :autorizacao_febre, :remedio, :gotas, :permissao_foto, :endereco_id, :funcionario_id)
         ";
 
         $dados = $this->conn->prepare($sqlInserir);
@@ -39,6 +40,7 @@ class Aluno{
         $dados->execute([
             ':ra_aluno' => $raAluno,
             ':nome' => $nome,
+            ':cpf' => $cpf,
             ':data_nascimento' => $data_nascimento,
             ':etnia' => $etnia,
             ':turma' => $turma,
