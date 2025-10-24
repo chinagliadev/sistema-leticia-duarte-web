@@ -88,6 +88,7 @@
         </div>
     </section>
     <script src="./js/login.js"></script>
+    <?php include './template/modal/modal-esqueceu-senha.php'; ?>
 </body>
 
 </html>
