@@ -63,6 +63,7 @@ $(document).ready(function () {
     $('#txtTelefone_2').mask('(00) 00000-0000');
     $('#txtTelefoneTrabalho_1').mask('(00) 00000-0000');
     $('#txtCpfAutorizada').mask('000.000.000-00');
+    $('#txtCpfAutorizada2').mask('000.000.000-00');
     $('#txtCpfAluno').mask('000.000.000-00');
     $('#txtRgAluno').mask('00.000.000-0');
     $('#txtTelefoneAutorizada').mask('(00) 00000-0000');
