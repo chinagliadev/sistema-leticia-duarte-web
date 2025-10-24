@@ -78,6 +78,7 @@ if (empty($pesquisa)) {
                             <th><i class="user icon"></i> Nome</th>
                             <th><i class="calendar alternate outline icon"></i> Data de Nascimento</th>
                             <th><i class="users icon"></i> Responsável</th>
+                            <th><i class="users icon"></i> Matricula</th>
                             <th><i class="cog icon"></i> Ações</th>
                         </tr>
                     </thead>
@@ -87,38 +88,53 @@ if (empty($pesquisa)) {
                                 <td colspan="5">
                                     <div class="ui center aligned">
                                         <img src="img/cadastrados/nenhum_aluno_cadastrado.png" class="ui image medium centered fluid" alt="">
-                                            <div class="content">
+                                        <div class="content">
 
-                                                <div class="ui header">Nenhum Aluno Encontrado</div>
+                                            <div class="ui header">Nenhum Aluno Encontrado</div>
 
-                                                <p>Nenhum aluno encontrado, para cadastrar um aluno clique no botão abaixo</p>
+                                            <p>Nenhum aluno encontrado, para cadastrar um aluno clique no botão abaixo</p>
 
-                                                <a href="./formulario-cadastro.php" class="ui small primary button">
-                                                    <i class="plus icon"></i> Cadastrar Novo Aluno
-                                                </a>
+                                            <a href="./formulario-cadastro.php" class="ui small primary button">
+                                                <i class="plus icon"></i> Cadastrar Novo Aluno
+                                            </a>
 
-                                            </div>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
 
                             <?php } else {
-                            foreach ($dadosMatricula as $matricula) { ?>
+                            foreach ($dadosMatricula as $matricula) {
+                                $status_matricula = '';
+                                $cor_label = '';
 
+                                $status_db = $matricula['matricula'];
+
+                                if ($status_db == 1) {
+                                    $status_matricula = 'Ativada';
+                                    $cor_label = 'green';
+                                } else {
+                                    $status_matricula = 'Desativada';
+                                    $cor_label = 'red';
+                                }
+                            ?>
                                 <tr>
                                     <td><?= $matricula['ra_aluno'] ?></td>
                                     <td><?= $matricula['nome_aluno'] ?></td>
                                     <td><?= $matricula['data_nascimento'] ?></td>
                                     <td><?= $matricula['nome_responsavel'] ?></td>
                                     <td>
+                                        <div class="ui <?= $cor_label ?> label"><?= $status_matricula ?></div>
+                                    </td>
+                                    <td>
                                         <button
-                                            data-tooltip="Deletar Aluno"
+                                            data-tooltip="Desativar Matricula"
                                             data-inverted=""
                                             id="btn-deletar-aluno"
                                             type="button"
                                             class="btn-deletar-aluno ui small red icon button"
                                             data-id="<?= $matricula['id'] ?>"
-                                            data-ra="<?= $matricula['ra_aluno']?>"
+                                            data-ra="<?= $matricula['ra_aluno'] ?>"
                                             data-nome="<?= $matricula['nome_aluno'] ?>"
                                             title="Excluir">
                                             <i class="trash icon"></i>

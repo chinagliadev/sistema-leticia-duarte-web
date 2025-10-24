@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pais_vivem_juntos = isset($_POST['pais_vivem_juntos']) ? 1 : 0;
 
     $recebe_bolsa_familia = isset($_POST['recebe_bolsa_familia']) ? 1 : 0;
-    $recebe_bolsa_familia = limparValorMonetario($recebe_bolsa_familia);
 
     $possui_alergia = isset($_POST['possui_alergia']) ? 1 : 0;
     $especifique_alergia = $possui_alergia ? ($_POST['especifique_alergia'] ?? null) : null;
@@ -76,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $numero_filhos               = $_POST['numero_filhos'] ?? null;
 
     $valor                       = $recebe_bolsa_familia ? ($_POST['valor'] ?? null) : null;
-
+    $valor = limparValorMonetario($valor);
+    
     $doenca_anemia     = isset($_POST['doenca_anemia']) ? 1 : 0;
     $doenca_bronquite  = isset($_POST['doenca_bronquite']) ? 1 : 0;
     $doenca_catapora   = isset($_POST['doenca_catapora']) ? 1 : 0;
