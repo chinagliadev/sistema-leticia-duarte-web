@@ -127,6 +127,42 @@
         </div>
     </div>
 
+    <h4 class="ui dividing header">Tipo de moradia</h4>
+    <div class="fields">
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" id="moradia_propria" name="tipo_moradia" value="propria" id="moradia_propria" onclick="ativarCampoAluguel()">
+                <label for="moradia_propria">Própria</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input name="tipo_moradia" type="radio" name="moradia_cedida" value="cedida" id="moradia_cedida" onclick="ativarCampoAluguel()">
+                <label for="moradia_cedida">Cedida</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="tipo_moradia" value="alugada" id="moradia_alugada" onclick="ativarCampoAluguel()">
+                <label for="moradia_alugada">Alugada</label>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="four wide field oculto" id="divAluguel">
+            <label for="txtValorAluguel">Valor do aluguel</label>
+            <div class="ui small input">
+                <input name="txtValorAluguel" id="txtValorAluguel" type="text" placeholder="Valor do aluguel" onblur="validarCampoAluguel()">
+            </div>
+            <div class="ui hidden negative message" id="mensagem-erro-aluguel">
+                <div class="content">
+                    <i class="heartbeat icon"></i>
+                    <span id="aluguel-erro"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h4 class="ui dividing header">Transporte para a escola</h4>
     <div class="fields">
         <div class="field">
