@@ -11,6 +11,8 @@ class Matricula
     public $responsavel_2_id;
     public $pessoa_autorizada_1_id;
     public $pessoa_autorizada_2_id;
+    public $pessoa_autorizada_3_id;
+    public $pessoa_autorizada_4_id;
 
     public function __construct()
     {
@@ -26,12 +28,12 @@ class Matricula
         }
     }
 
-    public function cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id, $responsavel_2_id, $pessoa_autorizada_1_id, $pessoa_autorizada_2_id)
+    public function cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id, $responsavel_2_id, $pessoa_autorizada_1_id, $pessoa_autorizada_2_id, $pessoa_autorizada_3_id, $pessoa_autorizada_4_id)
     {
         $sqlInserir = "INSERT INTO tb_matricula 
-                         (aluno_id, estrutura_familiar_id, funcionario_id, responsavel_1_id, responsavel_2_id, pessoa_autorizada_1_id, pessoa_autorizada_2_id) 
+                         (aluno_id, estrutura_familiar_id, funcionario_id, responsavel_1_id, responsavel_2_id, pessoa_autorizada_1_id, pessoa_autorizada_2_id, pessoa_autorizada_3_id, pessoa_autorizada_4_id) 
                          VALUES 
-                         (:aluno_id, :estrutura_familiar_id, :funcionario_id, :responsavel_1_id, :responsavel_2_id, :pessoa_autorizada_1_id, :pessoa_autorizada_2_id)";
+                         (:aluno_id, :estrutura_familiar_id, :funcionario_id, :responsavel_1_id, :responsavel_2_id, :pessoa_autorizada_1_id, :pessoa_autorizada_2_id, :pessoa_autorizada_3_id, :pessoa_autorizada_4_id)";
 
         $dados = $this->conn->prepare($sqlInserir);
 
@@ -42,7 +44,9 @@ class Matricula
             ":responsavel_1_id" => $responsavel_1_id,
             ":responsavel_2_id" => $responsavel_2_id,
             ":pessoa_autorizada_1_id" => $pessoa_autorizada_1_id,
-            ":pessoa_autorizada_2_id" => $pessoa_autorizada_2_id
+            ":pessoa_autorizada_2_id" => $pessoa_autorizada_2_id,
+            ":pessoa_autorizada_3_id" => $pessoa_autorizada_3_id,
+            ":pessoa_autorizada_4_id" => $pessoa_autorizada_4_id
         ]);
 
         return $this->conn->lastInsertId();

@@ -63,6 +63,35 @@ function validarRa() {
     return true
 }
 
+function validarCpfAluno() {
+    const cpfAluno = document.getElementById("txtCpfAluno").value.trim();
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-cpf-aluno');
+    const spanMensagem = document.getElementById('cpf-aluno-erro');
+    const inputCpfDiv = document.getElementById("div_cpf_aluno"); // Div principal para aplicar classes de erro
+
+    limparErro(divMensagem, inputCpfDiv, spanMensagem);
+
+    if (cpfAluno === '') {
+        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'Informe o CPF do aluno');
+        return false;
+    }
+
+    if (!regexCpf.test(cpfAluno)) {
+        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'Informe um CPF no formato válido (xxx.xxx.xxx-xx)');
+        return false;
+    }
+
+    if (!validarCPF(cpfAluno)) {
+        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    return true;
+}
+
+
 function validarEndereco() {
     const divEndereco = document.getElementById('validacao-endereco');
     const mensagemErro = document.getElementById('mensagem-erro-endereco');
@@ -919,7 +948,6 @@ function validarCirurgia() {
         return true;
     }
 }
-
 function validarNomeAutorizada() {
     const nomeAutorizada = document.getElementById("txtNomePessoaAutorizada").value.trim();
     const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
@@ -931,8 +959,7 @@ function validarNomeAutorizada() {
     limparErro(divMensagem, inputNome, spanMensagem);
 
     if (nomeAutorizada === "") {
-        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome do parente");
-        return false;
+        return true;
     }
 
     if (!regexNome.test(nomeAutorizada)) {
@@ -945,7 +972,6 @@ function validarNomeAutorizada() {
         return false;
     }
 
-    limparErro(divMensagem, inputNome, spanMensagem);
     return true;
 }
 
@@ -1002,8 +1028,7 @@ function validarCpfAutorizada() {
     limparErro(divMensagem, inputCpf, spanMensagem);
 
     if (cpfAutorizada === '') {
-        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'Informe o CPF');
-        return false;
+        return true;
     }
 
     if (!regexCpf.test(cpfAutorizada)) {
@@ -1018,35 +1043,6 @@ function validarCpfAutorizada() {
 
     return true;
 }
-
-function validarCpfAluno() {
-    const cpfAluno = document.getElementById("txtCpfAluno").value.trim();
-    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-
-    const divMensagem = document.getElementById('mensagem-erro-cpf-aluno');
-    const spanMensagem = document.getElementById('cpf-aluno-erro');
-    const inputCpfDiv = document.getElementById("div_cpf_aluno"); // Div principal para aplicar classes de erro
-
-    limparErro(divMensagem, inputCpfDiv, spanMensagem);
-
-    if (cpfAluno === '') {
-        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'Informe o CPF do aluno');
-        return false;
-    }
-
-    if (!regexCpf.test(cpfAluno)) {
-        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'Informe um CPF no formato válido (xxx.xxx.xxx-xx)');
-        return false;
-    }
-
-    if (!validarCPF(cpfAluno)) {
-        mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'CPF inválido');
-        return false;
-    }
-
-    return true;
-}
-
 function validarTelefoneAutorizada() {
     const div = document.getElementById('div_telefone_autorizada');
     const telefone = document.getElementById('txtTelefoneAutorizada').value.trim();
@@ -1057,8 +1053,7 @@ function validarTelefoneAutorizada() {
     limparErro(mensagemErro, div, spanErro);
 
     if (telefone === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o telefone do parente autorizado');
-        return false;
+        return true;
     }
 
     if (!regexTelefone.test(telefone)) {
@@ -1079,33 +1074,14 @@ function validarParentesco() {
     limparErro(mensagemErro, div, spanErro);
 
     if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione o parentesco do aluno');
-        return false;
+        return true;
     }
 
     limparErro(mensagemErro, div, spanErro);
     return true;
 }
 
-function adicionarPessoaAutorizada() {
-    const autorizada2 = document.getElementById('autorizada-2')
-    const btnAdicionarAutorizada = document.getElementById('div_autorizada')
-    const btnRemoverAutorizada = document.getElementById('btnRemoverAutorizada')
-    autorizada2.classList.remove('oculto')
-    btnAdicionarAutorizada.classList.add('oculto')
-    btnRemoverAutorizada.classList.remove('oculto')
-}
 
-function removerPessoaAutorizada() {
-    const btnRemoverAutorizada = document.getElementById('btnRemoverAutorizada')
-    const btnAdicionarAutorizada = document.getElementById('div_autorizada')
-    const autorizada2 = document.getElementById('autorizada-2')
-
-    btnRemoverAutorizada.classList.add('oculto')
-    btnAdicionarAutorizada.classList.remove('oculto')
-    autorizada2.classList.add('oculto')
-
-}
 
 function validarNomeParentesco2() {
     const autorizada2 = document.getElementById('autorizada-2');
@@ -1121,8 +1097,7 @@ function validarNomeParentesco2() {
     limparErro(divMensagem, inputNome, spanMensagem);
 
     if (nomeAutorizada2 === "") {
-        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome do segundo parente");
-        return false;
+        return true;
     }
 
     if (!regexNome.test(nomeAutorizada2)) {
@@ -1154,8 +1129,7 @@ function validarCpfAutorizada2() {
     limparErro(divMensagem, inputCpf, spanMensagem);
 
     if (txtCpfAutorizada2 === '') {
-        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'Informe o CPF');
-        return false;
+        return true;
     }
 
     if (!regexCpf.test(txtCpfAutorizada2)) {
@@ -1209,8 +1183,7 @@ function validarTelefoneAutorizada2() {
     limparErro(mensagemErro, div, spanErro);
 
     if (telefone === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o telefone do parente autorizado');
-        return false;
+        return true;
     }
 
     if (!regexTelefone.test(telefone)) {
@@ -1231,13 +1204,273 @@ function validarParentesco2() {
     limparErro(mensagemErro, div, spanErro);
 
     if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione o parentesco do aluno');
+        return true;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+function validarNomeAutorizada3() {
+    const autorizada3 = document.getElementById('autorizada-3');
+    if (autorizada3.classList.contains('oculto')) return true;
+
+    const nome = document.getElementById("txtNomePessoaAutorizada3").value.trim();
+    const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-nomeAutorizada3');
+    const spanMensagem = document.getElementById('nomeAutorizada3-erro');
+    const inputNome = document.getElementById("div_nome_autorizada3");
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+
+    if (nome === "") {
+        return true;
+    }
+
+    if (!regexNome.test(nome)) {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "O nome não deve conter números ou símbolos");
+        return false;
+    }
+
+    if (nome.split(" ").length < 2) {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome completo (nome e sobrenome)");
+        return false;
+    }
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+    return true;
+}
+
+function validarCpfAutorizada3() {
+    const autorizada3 = document.getElementById('autorizada-3');
+    if (autorizada3.classList.contains('oculto')) return true;
+
+    const cpfInput = document.getElementById("txtCpfAutorizada3").value.trim();
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-cpf3');
+    const spanMensagem = document.getElementById('cpf3-erro');
+    const inputCpf = document.getElementById("div_cpf_autorizada3");
+
+    limparErro(divMensagem, inputCpf, spanMensagem);
+
+    if (cpfInput === '') {
+        return true;
+    }
+
+    if (!regexCpf.test(cpfInput)) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'Informe um CPF no formato válido (xxx.xxx.xxx-xx)');
+        return false;
+    }
+
+    const cpf = cpfInput.replace(/[^\d]+/g, '');
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    let soma = 0, resto;
+    for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    resto = (soma * 10) % 11; if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) { mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido'); return false; }
+
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    resto = (soma * 10) % 11; if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) { mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido'); return false; }
+
+    return true;
+}
+
+function validarTelefoneAutorizada3() {
+    const autorizada3 = document.getElementById('autorizada-3');
+    if (autorizada3.classList.contains('oculto')) return true;
+
+    const telefone = document.getElementById('txtTelefoneAutorizada3').value.trim();
+    const div = document.getElementById('div_telefone_autorizada3');
+    const mensagemErro = document.getElementById('mensagem-erro-telefone3-autorizada');
+    const spanErro = document.getElementById('telefone-autorizada3-erro');
+    const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (telefone === '') {
+        return true;
+    }
+
+    if (!regexTelefone.test(telefone)) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Formato de telefone inválido. Ex: (19) 99999-9999');
         return false;
     }
 
     limparErro(mensagemErro, div, spanErro);
     return true;
 }
+
+function validarParentesco3() {
+    const div = document.getElementById('div_parentesco3');
+    const valor = document.getElementById('txtParentesco3').value;
+    const mensagemErro = document.getElementById('mensagem-erro-parentesco-autorizada3');
+    const spanErro = document.getElementById('parentesco-autorizada-erro3');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') {
+        return true;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+function validarNomeAutorizada4() {
+    const autorizada4 = document.getElementById('autorizada-4');
+    if (autorizada4.classList.contains('oculto')) return true;
+
+    const nome = document.getElementById("txtNomePessoaAutorizada4").value.trim();
+    const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-nomeAutorizada4');
+    const spanMensagem = document.getElementById('nomeAutorizada4-erro');
+    const inputNome = document.getElementById("div_nome_autorizada4");
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+
+    if (nome === "") return true;
+
+    if (!regexNome.test(nome)) {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "O nome não deve conter números ou símbolos");
+        return false;
+    }
+
+    if (nome.split(" ").length < 2) {
+        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o nome completo (nome e sobrenome)");
+        return false;
+    }
+
+    limparErro(divMensagem, inputNome, spanMensagem);
+    return true;
+}
+
+function validarCpfAutorizada4() {
+    const autorizada4 = document.getElementById('autorizada-4');
+    if (autorizada4.classList.contains('oculto')) return true;
+
+    const cpfInput = document.getElementById("txtCpfAutorizada4").value.trim();
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+
+    const divMensagem = document.getElementById('mensagem-erro-cpf4');
+    const spanMensagem = document.getElementById('cpf4-erro');
+    const inputCpf = document.getElementById("div_cpf_autorizada4");
+
+    limparErro(divMensagem, inputCpf, spanMensagem);
+
+    if (cpfInput === '') return true;
+
+    if (!regexCpf.test(cpfInput)) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'Informe um CPF no formato válido (xxx.xxx.xxx-xx)');
+        return false;
+    }
+
+    const cpf = cpfInput.replace(/[^\d]+/g, '');
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+        mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
+        return false;
+    }
+
+    let soma = 0, resto;
+    for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    resto = (soma * 10) % 11; if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) { mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido'); return false; }
+
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    resto = (soma * 10) % 11; if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) { mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido'); return false; }
+
+    return true;
+}
+
+function validarTelefoneAutorizada4() {
+    const autorizada4 = document.getElementById('autorizada-4');
+    if (autorizada4.classList.contains('oculto')) return true;
+
+    const telefone = document.getElementById('txtTelefoneAutorizada4').value.trim();
+    const div = document.getElementById('div_telefone_autorizada4');
+    const mensagemErro = document.getElementById('mensagem-erro-telefone4-autorizada');
+    const spanErro = document.getElementById('telefone-autorizada4-erro');
+    const regexTelefone = /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (telefone === '') return true;
+
+    if (!regexTelefone.test(telefone)) {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Formato de telefone inválido. Ex: (19) 99999-9999');
+        return false;
+    }
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+function validarParentesco4() {
+    const div = document.getElementById('div_parentesco4');
+    const valor = document.getElementById('txtParentesco4').value;
+    const mensagemErro = document.getElementById('mensagem-erro-parentesco-autorizada4');
+    const spanErro = document.getElementById('parentesco-autorizada-erro4');
+
+    limparErro(mensagemErro, div, spanErro);
+
+    if (valor === '') return true;
+
+    limparErro(mensagemErro, div, spanErro);
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const campoNome1 = document.getElementById("txtNomePessoaAutorizada");
+    const campoCpf1 = document.getElementById('txtCpfAutorizada');
+    const campoTelefone1 = document.getElementById('txtTelefoneAutorizada');
+    const campoParentesco1 = document.getElementById('txtParentesco');
+
+    if (campoNome1) campoNome1.addEventListener("input", validarNomeAutorizada);
+    if (campoCpf1) campoCpf1.addEventListener("input", validarCpfAutorizada);
+    if (campoTelefone1) campoTelefone1.addEventListener("input", validarTelefoneAutorizada);
+    if (campoParentesco1) campoParentesco1.addEventListener("change", validarParentesco);
+
+    const campoNome2 = document.getElementById("txtNomePessoaAutorizada2");
+    const campoCpf2 = document.getElementById('txtCpfAutorizada2');
+    const campoTelefone2 = document.getElementById('txtTelefoneAutorizada2');
+    const campoParentesco2 = document.getElementById('txtParentenco2');
+
+    if (campoNome2) campoNome2.addEventListener("input", validarNomeParentesco2);
+    if (campoCpf2) campoCpf2.addEventListener("input", validarCpfAutorizada2);
+    if (campoTelefone2) campoTelefone2.addEventListener("input", validarTelefoneAutorizada2);
+    if (campoParentesco2) campoParentesco2.addEventListener("change", validarParentesco2);
+
+    const campoNome3 = document.getElementById("txtNomePessoaAutorizada3");
+    const campoCpf3 = document.getElementById('txtCpfAutorizada3');
+    const campoTelefone3 = document.getElementById('txtTelefoneAutorizada3');
+    const campoParentesco3 = document.getElementById('txtParentesco3');
+
+    if (campoNome3) campoNome3.addEventListener("input", validarNomeAutorizada3);
+    if (campoCpf3) campoCpf3.addEventListener("input", validarCpfAutorizada3);
+    if (campoTelefone3) campoTelefone3.addEventListener("input", validarTelefoneAutorizada3);
+    if (campoParentesco3) campoParentesco3.addEventListener("change", validarParentesco3);
+
+    const campoNome4 = document.getElementById("txtNomePessoaAutorizada4");
+    const campoCpf4 = document.getElementById('txtCpfAutorizada4');
+    const campoTelefone4 = document.getElementById('txtTelefoneAutorizada4');
+    const campoParentesco4 = document.getElementById('txtParentesco4');
+
+    if (campoNome4) campoNome4.addEventListener("input", validarNomeAutorizada4);
+    if (campoCpf4) campoCpf4.addEventListener("input", validarCpfAutorizada4);
+    if (campoTelefone4) campoTelefone4.addEventListener("input", validarTelefoneAutorizada4);
+    if (campoParentesco4) campoParentesco4.addEventListener("change", validarParentesco4);
+});
+
 async function validarAluno() {
     const validacaoNome = validarCampoNomeAluno();
     const validarRA = validarRa()

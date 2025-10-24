@@ -70,11 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo_moradia = $_POST['tipo_moradia'] ?? null;
 
     $valor_aluguel = ($tipo_moradia === 'alugada')
-        ? ($_POST['txtValorAluguel'] ?? null) 
+        ? ($_POST['txtValorAluguel'] ?? null)
         : null;
 
     $valor_aluguel = limparValorMonetario($valor_aluguel);
-    
+
     $numero_filhos               = $_POST['numero_filhos'] ?? null;
 
     $valor                       = $recebe_bolsa_familia ? ($_POST['valor'] ?? null) : null;
@@ -235,20 +235,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
     var_dump($aluno_id);
-
+    // Pessoa autorizada 1
     $txtNomePessoaAutorizada = $_POST['txtNomePessoaAutorizada'] ?? null;
     $txtCpfAutorizada = $_POST['txtCpfAutorizada'] ?? null;
     $txtTelefoneAutorizada = $_POST['txtTelefoneAutorizada'] ?? null;
     $txtParentesnco = $_POST['txtParentenco'] ?? null;
 
     $pessoa_autorizada = new PessoaAutorizada();
-
     $pessoa_autorizada_id = $pessoa_autorizada->cadastrarPessoaAutorizada(
         $txtNomePessoaAutorizada,
         $txtCpfAutorizada,
         $txtTelefoneAutorizada,
         $txtParentesnco
     );
+
+    // Pessoa autorizada 2
     if (!empty($_POST['txtNomePessoaAutorizada2'])) {
         $txtNomePessoaAutorizada2 = $_POST['txtNomePessoaAutorizada2'] ?? null;
         $txtCpfAutorizada2 = $_POST['txtCpfAutorizada2'] ?? null;
@@ -256,19 +257,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $txtParentesco2 = $_POST['txtParentenco2'] ?? null;
 
         $pessoa_autorizada2 = new PessoaAutorizada();
-
         $pessoa_autorizada_id_2 = $pessoa_autorizada2->cadastrarPessoaAutorizada(
             $txtNomePessoaAutorizada2,
             $txtCpfAutorizada2,
             $txtTelefoneAutorizada2,
             $txtParentesco2
         );
+    }
 
-        var_dump($pessoa_autorizada_id_2);
+    // Pessoa autorizada 3
+    if (!empty($_POST['txtNomePessoaAutorizada3'])) {
+        $txtNomePessoaAutorizada3 = $_POST['txtNomePessoaAutorizada3'] ?? null;
+        $txtCpfAutorizada3 = $_POST['txtCpfAutorizada3'] ?? null;
+        $txtTelefoneAutorizada3 = $_POST['txtTelefoneAutorizada3'] ?? null;
+        $txtParentesco3 = $_POST['txtParentenco3'] ?? null;
+
+        $pessoa_autorizada3 = new PessoaAutorizada();
+        $pessoa_autorizada_id_3 = $pessoa_autorizada3->cadastrarPessoaAutorizada(
+            $txtNomePessoaAutorizada3,
+            $txtCpfAutorizada3,
+            $txtTelefoneAutorizada3,
+            $txtParentesco3
+        );
+    }
+
+    // Pessoa autorizada 4
+    if (!empty($_POST['txtNomePessoaAutorizada4'])) {
+        $txtNomePessoaAutorizada4 = $_POST['txtNomePessoaAutorizada4'] ?? null;
+        $txtCpfAutorizada4 = $_POST['txtCpfAutorizada4'] ?? null;
+        $txtTelefoneAutorizada4 = $_POST['txtTelefoneAutorizada4'] ?? null;
+        $txtParentesco4 = $_POST['txtParentenco4'] ?? null;
+
+        $pessoa_autorizada4 = new PessoaAutorizada();
+        $pessoa_autorizada_id_4 = $pessoa_autorizada4->cadastrarPessoaAutorizada(
+            $txtNomePessoaAutorizada4,
+            $txtCpfAutorizada4,
+            $txtTelefoneAutorizada4,
+            $txtParentesco4
+        );
     }
 
     $matricula = new Matricula();
-    $matricula_id = $matricula->cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id, $responsavel_2_id, $pessoa_autorizada_id, $pessoa_autorizada_id_2 ?? null);
+    $matricula_id = $matricula->cadastrarMatricula(
+    $aluno_id,
+    $estrutura_familiar_id,
+    $funcionario_id,
+    $responsavel_1_id,
+    $responsavel_2_id,
+    $pessoa_autorizada_id,
+    $pessoa_autorizada_id_2 ?? null,
+    $pessoa_autorizada_id_3 ?? null,
+    $pessoa_autorizada_id_4 ?? null
+);
 
     $matriculaPessoaAutorizada = new matriculaPessoaAutorizada();
     $matriculaPessoaAutorizada->cadastrarMatriculaPessoaAutorizada($matricula_id, $pessoa_autorizada_id);

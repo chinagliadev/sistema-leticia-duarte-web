@@ -29,7 +29,7 @@ class EstruturaFamiliar
         $ja_fez_cirurgia,
         $qual_cirurgia,
         $vacina_catapora_varicela,
-        $tipo_moradia,
+        $tipo_moradia = null,
         $valor_aluguel,
         $doenca_anemia,
         $doenca_bronquite,
