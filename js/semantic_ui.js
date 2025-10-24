@@ -58,6 +58,7 @@ $(document).ready(function () {
     });
 
     $('#txtCep').mask('00000-000');
+    $('#txtValorAluguel').mask('R$ 000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
     $('#txtTelefone_1').mask('(00) 00000-0000');
     $('#txtTelefone_2').mask('(00) 00000-0000');
     $('#txtTelefoneTrabalho_1').mask('(00) 00000-0000');

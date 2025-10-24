@@ -8,9 +8,10 @@ require './class/Matricula.php';
 require './class/MatriculaPessoaAutorizada.php';
 require './config.php';
 
-function limparValorMonetario($valor) {
+function limparValorMonetario($valor)
+{
     if (is_null($valor) || $valor === '') {
-        return null; 
+        return null;
     }
     $valor = str_replace(['R$', ' ', '.'], '', $valor);
     $valor = str_replace(',', '.', $valor);
@@ -49,12 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $recebe_bolsa_familia = isset($_POST['recebe_bolsa_familia']) ? 1 : 0;
     $recebe_bolsa_familia = limparValorMonetario($recebe_bolsa_familia);
-    
+
     $possui_alergia = isset($_POST['possui_alergia']) ? 1 : 0;
     $especifique_alergia = $possui_alergia ? ($_POST['especifique_alergia'] ?? null) : null;
 
     $possui_convenio = isset($_POST['possui_convenio']) ? 1 : 0;
-
     $qual_convenio = $possui_convenio ? ($_POST['qual_convenio'] ?? null) : null;
 
     $portador_necessidade_especial = isset($_POST['portador_necessidade_especial']) ? 1 : 0;
@@ -67,6 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $vacina_catapora_varicela = isset($_POST['vacina_catapora_varicela']) ? 1 : 0;
 
+    $tipo_moradia = $_POST['tipo_moradia'] ?? null;
+
+    $valor_aluguel = ($tipo_moradia === 'alugada')
+        ? ($_POST['txtValorAluguel'] ?? null) 
+        : null;
+
+    $valor_aluguel = limparValorMonetario($valor_aluguel);
+    
     $numero_filhos               = $_POST['numero_filhos'] ?? null;
 
     $valor                       = $recebe_bolsa_familia ? ($_POST['valor'] ?? null) : null;
@@ -104,6 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ja_fez_cirurgia,
         $qual_cirurgia,
         $vacina_catapora_varicela,
+        $tipo_moradia,
+        $valor_aluguel,
         $doenca_anemia,
         $doenca_bronquite,
         $doenca_catapora,
@@ -120,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $transporte_a_pe,
         $transporte_outros_desc
     );
-    
+
     $responsavel = new Responsavel();
 
     $tipo_responsavel_1     = $_POST['txtTipoResponsavel_1'] ?? null;

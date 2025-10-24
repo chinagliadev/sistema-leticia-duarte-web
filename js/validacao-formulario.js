@@ -3,15 +3,15 @@ function mensagemErroCampos(divMensagemErro, divDoCampo, spanTextoErro, mensagem
     divMensagemErro.classList.remove('hidden');
     divMensagemErro.classList.add('visible', 'error');
 
-    divDoCampo.classList.add('error'); 
-    
+    divDoCampo.classList.add('error');
+
     spanTextoErro.textContent = mensagem;
 }
 
 function limparErro(divMensagemErro, divDoCampo, spanTextoErro) {
     divMensagemErro.classList.remove('visible', 'error');
     divMensagemErro.classList.add('hidden');
-    
+
     divDoCampo.classList.remove('error');
 
     spanTextoErro.textContent = "";
@@ -620,20 +620,20 @@ function validarEscolaridade2() {
     const responsavel2 = document.getElementById('responsavel_2');
     if (responsavel2.classList.contains('oculto')) return true;
 
-        const div = document.getElementById('escolaridade_responsavel_2_div');
-        const valor = document.getElementById('txtEscolaridade_2').value;
-        const mensagemErro = document.getElementById('mensagem-erro-escolaridade-2');
-        const spanErro = document.getElementById('escolaridade-erro-2');
+    const div = document.getElementById('escolaridade_responsavel_2_div');
+    const valor = document.getElementById('txtEscolaridade_2').value;
+    const mensagemErro = document.getElementById('mensagem-erro-escolaridade-2');
+    const spanErro = document.getElementById('escolaridade-erro-2');
 
-        limparErro(mensagemErro, div, spanErro);
+    limparErro(mensagemErro, div, spanErro);
 
-        if (valor === '') {
-            mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione a escolaridade');
-            return false;
-        }
+    if (valor === '') {
+        mensagemErroCampos(mensagemErro, div, spanErro, 'Selecione a escolaridade');
+        return false;
+    }
 
-        limparErro(mensagemErro, div, spanErro);
-        return true;
+    limparErro(mensagemErro, div, spanErro);
+    return true;
 }
 
 
@@ -816,6 +816,40 @@ function validarConvenioMedico() {
     }
 }
 
+function validarCampoAluguel() {
+    const valorAluguel = document.getElementById('txtValorAluguel').value
+    const radioAluguel = document.getElementById('moradia_alugada')
+    const divAluguelValor = document.getElementById('divAluguel')
+    const mensagemErro = document.getElementById('mensagem-erro-aluguel')
+    const spanError = document.getElementById('aluguel-erro')
+
+    if (!radioAluguel.checked) {
+        limparErro(mensagemErro, divAluguelValor, spanError)
+        return true
+    }
+
+    if (valorAluguel.trim() === '') {
+        mensagemErroCampos(mensagemErro, divAluguelValor, spanError, 'Informe o aluguel')
+        return false
+    }
+
+    limparErro(mensagemErro, divAluguelValor, spanError)
+    return true
+}
+
+function ativarCampoAluguel() {
+    const radioAluguel = document.getElementById('moradia_alugada')
+    const divAluguel = document.getElementById('divAluguel')
+    const mensagemErro = document.getElementById('mensagem-erro-aluguel')
+    const spanError = document.getElementById('aluguel-erro')
+
+    if (radioAluguel.checked) {
+        divAluguel.classList.remove('oculto')
+    } else {
+        divAluguel.classList.add('oculto')
+        limparErro(mensagemErro, divAluguel, spanError)
+    }
+}
 function validarNecessidadeEspecial() {
     const possuiNecessidadeEspecial = document.getElementById('toggle-necessidade-especial');
     const divNecessidade = document.getElementById('qual-necessidade');
@@ -835,7 +869,7 @@ function validarNecessidadeEspecial() {
     } else {
         divNecessidade.classList.add('oculto');
         limparErro(divMensagemErro, divNecessidade, spanMensagemErro);
-        return true; // não marcado => válido
+        return true;
     }
 }
 
@@ -981,13 +1015,13 @@ function validarCpfAutorizada() {
         mensagemErroCampos(divMensagem, inputCpf, spanMensagem, 'CPF inválido');
         return false;
     }
-    
+
     return true;
 }
 
 function validarCpfAluno() {
     const cpfAluno = document.getElementById("txtCpfAluno").value.trim();
-    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/; 
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
 
     const divMensagem = document.getElementById('mensagem-erro-cpf-aluno');
     const spanMensagem = document.getElementById('cpf-aluno-erro');
@@ -999,7 +1033,7 @@ function validarCpfAluno() {
         mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'Informe o CPF do aluno');
         return false;
     }
-    
+
     if (!regexCpf.test(cpfAluno)) {
         mensagemErroCampos(divMensagem, inputCpfDiv, spanMensagem, 'Informe um CPF no formato válido (xxx.xxx.xxx-xx)');
         return false;
@@ -1207,6 +1241,7 @@ function validarParentesco2() {
 async function validarAluno() {
     const validacaoNome = validarCampoNomeAluno();
     const validarRA = validarRa()
+    const validarCpf = validarCpfAluno()
     const validacaoEndereco = validarEndereco();
     const validacaoNumero = validarNumero();
     const validacaoBairro = validarBairro();
@@ -1218,7 +1253,7 @@ async function validarAluno() {
 
     const validacaoCep = await validarCep();
 
-    const formularioValido = validacaoNome && validarRA && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoDataNascimento && validarGotas && validacaoCep;
+    const formularioValido = validacaoNome && validarRA && validarCpf && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoDataNascimento && validarGotas && validacaoCep;
 
     return formularioValido;
 }
@@ -1285,12 +1320,14 @@ function validarEstruturaFamiliar() {
     const convenioValido = validarConvenioMedico();
     const necessidadeEspecialValida = validarNecessidadeEspecial();
     const alergiaValida = validarAlergia();
+    const aluguelFamiliar = validarCampoAluguel()
 
     const estruturaFamiliarValida =
         bolsaFamiliaValida &&
         convenioValido &&
         necessidadeEspecialValida &&
-        alergiaValida;
+        alergiaValida &&
+        aluguelFamiliar;
 
     if (!estruturaFamiliarValida) {
         console.warn('Estrutura familiar inválida. Verifique os seguintes campos:', {

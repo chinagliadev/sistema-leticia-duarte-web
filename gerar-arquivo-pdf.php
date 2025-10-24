@@ -368,10 +368,18 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             doc.text(`Recebe bolsa familia: ${recebeBolsa}`, 10, posY)
 
             if (estrutura.recebe_bolsa_familia) {
-                doc.text(`valor:R$ ${estrutura.valor}`, 130, posY)
+                doc.text(`Valor:R$ ${estrutura.valor}`, 130, posY)
             }
             posY += 8;
 
+            const tipoMoradia = estrutura.tipo_moradia;
+            doc.text(`Tipo Moradia: ${tipoMoradia}`, 10, posY);
+
+            if (tipoMoradia === 'alugada') {
+                doc.text(`Valor do Aluguel: R$ ${estrutura.valor_aluguel}`, 130, posY);
+            }
+
+            posY += 8;
             doc.setFillColor(230, 230, 230);
             doc.rect(8, posY - 6, 190, 7, 'F');
 
