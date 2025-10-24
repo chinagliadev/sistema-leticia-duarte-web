@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require './class/Aluno.php';
 require './class/Responsavel.php';
 require './class/Endereco.php';
@@ -17,10 +19,6 @@ function limparValorMonetario($valor)
     $valor = str_replace(',', '.', $valor);
     return (float) $valor;
 }
-
-var_dump($_POST);
-
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
