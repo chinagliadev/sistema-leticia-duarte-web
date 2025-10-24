@@ -63,7 +63,6 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
                 <section class="ui segment blue">
                     <div class="ui two column stackable grid">
-                        <!-- Coluna dos botões e texto -->
                         <div class="eight wide column">
                             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                                 <h2>Gerar um PDF do aluno(a) <?= $aluno['nome'] ?></h2>
@@ -474,10 +473,9 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
                 doc.text(`CPF: ${pessoa_autorizada1.cpf} `, 10, posY);
                 doc.text(`Telefone: ${pessoa_autorizada1.celular} `, 130, posY);
-                posY += 8;
 
             }
-            posY += 3;
+            posY += 6;
 
             if (pessoa_autorizada2 && pessoa_autorizada2.nome) {
                 doc.text(`Nome: ${pessoa_autorizada2.nome} `, 10, posY);
@@ -487,7 +485,28 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
                 doc.text(`CPF: ${pessoa_autorizada2.cpf} `, 10, posY);
                 doc.text(`Telefone: ${pessoa_autorizada2.celular} `, 130, posY);
             }
-            posY += 12;
+            posY += 6;
+
+            if (pessoa_autorizada2 && pessoa_autorizada2.nome) {
+                doc.text(`Nome: ${pessoa_autorizada2.nome} `, 10, posY);
+                doc.text(`Parentesco: ${pessoa_autorizada2.parentesco} `, 130, posY);
+                posY += 8;
+
+                doc.text(`CPF: ${pessoa_autorizada2.cpf} `, 10, posY);
+                doc.text(`Telefone: ${pessoa_autorizada2.celular} `, 130, posY);
+            }
+            posY += 6;
+
+            if (pessoa_autorizada2 && pessoa_autorizada2.nome) {
+                doc.text(`Nome: ${pessoa_autorizada2.nome} `, 10, posY);
+                doc.text(`Parentesco: ${pessoa_autorizada2.parentesco} `, 130, posY);
+                posY += 8;
+
+                doc.text(`CPF: ${pessoa_autorizada2.cpf} `, 10, posY);
+                doc.text(`Telefone: ${pessoa_autorizada2.celular} `, 130, posY);
+            }
+
+            posY += 10;
 
             doc.text('Horário de entrada: das 7h ás 7:30 saída: das 15:45h as 16:30h sem tolerancia de atrasos.', 10, posY)
             posY += 8
@@ -499,7 +518,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             posY += 8
             doc.text('Declaro ter conhecimento das normas e regras estabelecidas pela instituição e estou ciente em\ncumprilas para evitar o cancelamento da vaga, caso aja derespeito das mesmas .', 10, posY)
             posY += 14
-            posY += 14
+            posY += 8
 
             doc.text('_________________________________________________', 10, posY)
             posY += 8

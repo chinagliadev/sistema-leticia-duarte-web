@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24/10/2025 às 11:28
+-- Tempo de geração: 24/10/2025 às 16:49
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,11 +42,9 @@ CREATE TABLE `endereco` (
 --
 
 INSERT INTO `endereco` (`id_endereco`, `cep`, `endereco`, `numero`, `bairro`, `cidade`, `complemento`) VALUES
-(9, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd'),
-(10, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd'),
-(11, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd'),
-(12, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd'),
-(13, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd');
+(21, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd'),
+(22, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', 'dasdasd'),
+(29, '13470-070', 'Rua Florindo Cibin', 2, 'Parque das Nações', 'Americana', '');
 
 -- --------------------------------------------------------
 
@@ -77,11 +75,9 @@ CREATE TABLE `tb_alunos` (
 --
 
 INSERT INTO `tb_alunos` (`id`, `ra_aluno`, `nome`, `cpf`, `rg`, `data_nascimento`, `etnia`, `turma`, `autorizacao_febre`, `remedio`, `gotas`, `permissao_foto`, `data_cadastro`, `endereco_id`, `funcionario_id`) VALUES
-(9, '44532-A', 'VICTOR CHINAGLIA NETO', '473.016.388-50', '47.800.994-8', '2025-10-13', 'parda', 'Bercario 2 C', 0, NULL, NULL, 0, '2025-10-23 19:11:40', 9, 1),
-(10, '123123asdasd', 'VICTOR CHINAGLIA NETO', '473.016.388-50', '23.423.423-4', '2025-10-05', 'amarela', 'Bercario 2 C', 1, 'asdasdas', 12, 0, '2025-10-23 19:14:10', 10, 1),
-(11, '123123', 'VICTOR CHINAGLIA NETO', '473.016.388-50', '32.423.423-4', '2025-10-05', 'parda', 'Maternal I A', 0, NULL, NULL, 0, '2025-10-23 19:21:38', 11, 1),
-(12, '123123', 'VICTOR CHINAGLIA NETO', '473.016.388-50', '32.423.423-4', '2025-10-05', 'amarela', 'Bercario 2 C', 1, 'Dipirona', 123, 0, '2025-10-23 19:24:30', 12, 1),
-(13, 'asdasd1231231', 'VICTOR CHINAGLIA NETO', '473.016.388-50', '32.423.423-4', '2025-10-05', 'parda', 'Bercario 2 B', 1, 'Dipirona', 12, 0, '2025-10-23 19:25:27', 13, 1);
+(21, '213123e', 'VICTOR CHINAGLIA NETO', '473.016.388-50', '28.349.823-0', '2025-10-13', 'parda', 'Bercario 2 B', 1, 'dasdasd', 123, 0, '2025-10-24 14:07:06', 21, 1),
+(22, '213123e', 'VICTOR CHINAGLIA NETO', '473.016.388-50', '28.349.823-0', '2025-10-13', 'parda', 'Bercario 2 B', 1, 'dasdasd', 123, 0, '2025-10-24 14:08:53', 22, 1),
+(29, '123v', 'Juvenal da Silva', '473.016.388-50', '28.349.823-0', '2012-05-02', 'preta', 'Bercario 2 A', 1, 'floral', 50, 1, '2025-10-24 14:46:48', 29, 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +101,8 @@ CREATE TABLE `tb_estrutura_familiar` (
   `ja_fez_cirurgia` tinyint(1) DEFAULT NULL,
   `qual_cirurgia` varchar(100) DEFAULT NULL,
   `vacina_catapora_varicela` tinyint(1) DEFAULT NULL,
+  `tipo_moradia` varchar(255) DEFAULT NULL,
+  `valor_aluguel` decimal(10,2) DEFAULT NULL,
   `doenca_anemia` tinyint(1) DEFAULT NULL,
   `doenca_bronquite` tinyint(1) DEFAULT NULL,
   `doenca_catapora` tinyint(1) DEFAULT NULL,
@@ -126,13 +124,11 @@ CREATE TABLE `tb_estrutura_familiar` (
 -- Despejando dados para a tabela `tb_estrutura_familiar`
 --
 
-INSERT INTO `tb_estrutura_familiar` (`id`, `pais_vivem_juntos`, `numero_filhos`, `recebe_bolsa_familia`, `valor`, `possui_alergia`, `especifique_alergia`, `possui_convenio`, `qual_convenio`, `portador_necessidade_especial`, `qual_necessidade_especial`, `problemas_visao`, `ja_fez_cirurgia`, `qual_cirurgia`, `vacina_catapora_varicela`, `doenca_anemia`, `doenca_bronquite`, `doenca_catapora`, `doenca_covid`, `doenca_cardiaca`, `doenca_meningite`, `doenca_pneumonia`, `doenca_convulsao`, `doenca_diabete`, `doenca_refluxo`, `outras_doencas`, `transporte_carro`, `transporte_van`, `transporte_a_pe`, `transporte_outros_desc`) VALUES
-(4, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0'),
-(10, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0'),
-(11, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0'),
-(12, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0'),
-(13, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0'),
-(14, 1, 0, 1, 231.00, 1, 'asdasdasd', 1, 'asdasdasd', 1, 'asdasdasd', 1, 1, 'asdasdasd', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0');
+INSERT INTO `tb_estrutura_familiar` (`id`, `pais_vivem_juntos`, `numero_filhos`, `recebe_bolsa_familia`, `valor`, `possui_alergia`, `especifique_alergia`, `possui_convenio`, `qual_convenio`, `portador_necessidade_especial`, `qual_necessidade_especial`, `problemas_visao`, `ja_fez_cirurgia`, `qual_cirurgia`, `vacina_catapora_varicela`, `tipo_moradia`, `valor_aluguel`, `doenca_anemia`, `doenca_bronquite`, `doenca_catapora`, `doenca_covid`, `doenca_cardiaca`, `doenca_meningite`, `doenca_pneumonia`, `doenca_convulsao`, `doenca_diabete`, `doenca_refluxo`, `outras_doencas`, `transporte_carro`, `transporte_van`, `transporte_a_pe`, `transporte_outros_desc`) VALUES
+(4, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, '', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0'),
+(22, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0'),
+(23, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '0'),
+(30, 1, 9, 1, 12.31, 1, 'pó', 1, 'Unimed', 1, 'daltonismo', 1, 1, 'medula', 1, 'propria', NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '', 1, 1, 0, '0');
 
 -- --------------------------------------------------------
 
@@ -173,19 +169,17 @@ CREATE TABLE `tb_matricula` (
   `responsavel_1_id` int(11) DEFAULT NULL,
   `responsavel_2_id` int(11) DEFAULT NULL,
   `pessoa_autorizada_1_id` int(11) DEFAULT NULL,
-  `pessoa_autorizada_2_id` int(11) DEFAULT NULL
+  `pessoa_autorizada_2_id` int(11) DEFAULT NULL,
+  `pessoa_autorizada_3_id` int(11) DEFAULT NULL,
+  `pessoa_autorizada_4_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tb_matricula`
 --
 
-INSERT INTO `tb_matricula` (`id_matricula`, `aluno_id`, `estrutura_familiar_id`, `funcionario_id`, `data`, `responsavel_1_id`, `responsavel_2_id`, `pessoa_autorizada_1_id`, `pessoa_autorizada_2_id`) VALUES
-(9, 9, 10, 1, '2025-10-23 16:11:40', 10, NULL, 10, NULL),
-(10, 10, 11, 1, '2025-10-23 16:14:10', 11, 12, 11, NULL),
-(11, 11, 12, 1, '2025-10-23 16:21:38', 13, NULL, 12, NULL),
-(12, 12, 13, 1, '2025-10-23 16:24:30', 14, NULL, 13, NULL),
-(13, 13, 14, 1, '2025-10-23 16:25:27', 15, NULL, 14, NULL);
+INSERT INTO `tb_matricula` (`id_matricula`, `aluno_id`, `estrutura_familiar_id`, `funcionario_id`, `data`, `responsavel_1_id`, `responsavel_2_id`, `pessoa_autorizada_1_id`, `pessoa_autorizada_2_id`, `pessoa_autorizada_3_id`, `pessoa_autorizada_4_id`) VALUES
+(27, 29, 30, 1, '2025-10-24 11:46:48', 35, 36, 49, 50, 51, 52);
 
 -- --------------------------------------------------------
 
@@ -203,11 +197,7 @@ CREATE TABLE `tb_matricula_pessoas_autorizadas` (
 --
 
 INSERT INTO `tb_matricula_pessoas_autorizadas` (`matricula_id`, `pessoa_autorizada_id`) VALUES
-(9, 10),
-(10, 11),
-(11, 12),
-(12, 13),
-(13, 14);
+(27, 49);
 
 -- --------------------------------------------------------
 
@@ -228,11 +218,24 @@ CREATE TABLE `tb_pessoas_autorizadas` (
 --
 
 INSERT INTO `tb_pessoas_autorizadas` (`id`, `nome`, `cpf`, `celular`, `parentesco`) VALUES
-(10, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmã'),
-(11, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmã'),
-(12, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmã'),
-(13, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmã'),
-(14, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Irmão');
+(23, 'Vanessa Oliveira', '473.016.388-50', '(19) 98354-1308', 'Mãe'),
+(24, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1300', 'Pai'),
+(25, 'Vanessa Oliveira', '473.016.388-50', '(19) 98354-1308', 'Mãe'),
+(26, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1300', 'Pai'),
+(31, 'VICTOR CHINAGLIA ', '473.016.388-50', '19983541308', 'Irmão'),
+(32, 'Victor Netinho', '473.016.388-50', '19983541308', 'Tia'),
+(35, 'Isabelle Santos', '473.016.388-50', '(43) 24234-2342', 'Irmão'),
+(36, 'Isabelle Santos', '473.016.388-50', '(43) 24234-2342', 'Irmã'),
+(39, 'Isabelle Santos', '473.016.388-50', '(43) 24234-2342', 'Irmão'),
+(40, 'Isabelle Santos', '473.016.388-50', '(43) 24234-2342', 'Irmã'),
+(43, 'Isabelle Santos', '473.016.388-50', '(43) 24234-2342', 'Irmão'),
+(44, 'Isabelle Santos', '473.016.388-50', '(43) 24234-2342', 'Irmã'),
+(47, 'Isabelle Santos', '473.016.388-50', '(43) 24234-2342', 'Irmão'),
+(48, 'Isabelle Santos', '473.016.388-50', '(43) 24234-2342', 'Irmã'),
+(49, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Pai'),
+(50, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '(19) 98354-1308', 'Mãe'),
+(51, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '19983541308', 'Mãe'),
+(52, 'VICTOR CHINAGLIA NETO', '473.016.388-50', '19983541300', 'Avó');
 
 -- --------------------------------------------------------
 
@@ -263,12 +266,10 @@ CREATE TABLE `tb_responsaveis` (
 --
 
 INSERT INTO `tb_responsaveis` (`id_responsavel`, `tipo_responsavel`, `nome`, `data_nascimento`, `estado_civil`, `escolaridade`, `celular`, `email`, `nome_empresa`, `profissao`, `telefone_trabalho`, `horario_trabalho`, `salario`, `renda_extra`, `valor_renda_extra`) VALUES
-(10, 'Avô', 'VICTOR CHINAGLIA NETO', '2025-10-13', 'Solteiro', 'Médio', '(19) 98354-1308', 'ASDASDASD@ASDASDASDA.com', '', '', '', '', NULL, 0, NULL),
-(11, 'Avô', 'VICTOR CHINAGLIA NETO', '2025-10-05', 'Solteiro', 'Médio', '(19) 98354-1308', 'ASDASDASD@ASDASDASDA.com', '', '', '', '', NULL, 1, 1231.23),
-(12, 'Mãe', 'VICTOR CHINAGLIA NETO', '2025-10-19', 'União Estável', 'Técnico', '(19) 98354-1308', 'dasdasdasd@asddasdasd.com', '', '', '', '', NULL, 0, NULL),
-(13, 'Mãe', 'VICTOR CHINAGLIA NETO', '2025-10-12', 'Solteiro', 'Médio', '(19) 98354-1308', 'ASDASDASD@ASDASDASDA.com', '', '', '', '', NULL, 0, NULL),
-(14, 'Avô', 'VICTOR CHINAGLIA NETO', '2025-10-05', 'Solteiro', 'Técnico', '(19) 98354-1308', 'ASDASDASD@ASDASDASDA.com', '', '', '', '', NULL, 0, NULL),
-(15, 'Mãe', 'VICTOR CHINAGLIA NETO', '2025-05-10', 'Solteiro', 'Fundamental', '(19) 98354-1308', 'ASDASDASD@ASDASDASDA.com', '', '', '', '', NULL, 0, NULL);
+(23, 'Irmã', 'VICTOR CHINAGLIA NETO', '2025-10-12', 'Solteiro', 'Médio', '(19) 98354-1308', 'sadasdasd@dadasda.com', '', '', '', '', NULL, 0, NULL),
+(24, 'Irmã', 'VICTOR CHINAGLIA NETO', '2025-10-12', 'Solteiro', 'Médio', '(19) 98354-1308', 'sadasdasd@dadasda.com', '', '', '', '', NULL, 0, NULL),
+(35, 'Pai', 'VICTOR CHINAGLIA NETO', '2025-05-10', 'Casado', 'Pós-graduação', '(19) 98354-1308', 'vanessa@email.com', 'Microsoft', 'Programador', '(19) 98354-1308', '8h as 17h', 1900.00, 1, 2000.00),
+(36, 'Mãe', 'VICTORia CHINAGLIA Filha', '1985-02-13', 'Solteiro', 'Técnico', '(19) 98354-1308', 'victorjunior@yahoot.com', 'Caula', 'Arquiteto', '(19) 98354-1308', '8h as 16h', 1000.00, 1, 100000.00);
 
 --
 -- Índices para tabelas despejadas
@@ -340,19 +341,19 @@ ALTER TABLE `tb_responsaveis`
 -- AUTO_INCREMENT de tabela `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_endereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `tb_alunos`
 --
 ALTER TABLE `tb_alunos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `tb_estrutura_familiar`
 --
 ALTER TABLE `tb_estrutura_familiar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `tb_funcionario`
@@ -364,19 +365,19 @@ ALTER TABLE `tb_funcionario`
 -- AUTO_INCREMENT de tabela `tb_matricula`
 --
 ALTER TABLE `tb_matricula`
-  MODIFY `id_matricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_matricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `tb_pessoas_autorizadas`
 --
 ALTER TABLE `tb_pessoas_autorizadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `tb_responsaveis`
 --
 ALTER TABLE `tb_responsaveis`
-  MODIFY `id_responsavel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_responsavel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Restrições para tabelas despejadas
