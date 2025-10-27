@@ -1,55 +1,14 @@
 <!-- modal-esqueceu-senha.php -->
 <style>
 /* Modal básico */
-#kk-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-  padding: 20px;
-}
-#kk-modal {
-  width: 100%;
-  max-width: 520px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-  overflow: visible;
-}
-#kk-modal .kk-modal-header {
-  padding: 14px 18px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  background: #1C86CC;
-  color: #fff;
-  font-weight: 700;
-  font-size: 18px;
-}
+#kk-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 99999; padding: 20px; }
+#kk-modal { width: 100%; max-width: 520px; background: #fff; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.35); overflow: visible; }
+#kk-modal .kk-modal-header { padding: 14px 18px; border-top-left-radius: 12px; border-top-right-radius: 12px; background: #1C86CC; color: #fff; font-weight: 700; font-size: 18px; }
 #kk-modal .kk-modal-body { padding: 18px; color: #222; }
-#kk-modal .kk-modal-footer {
-  padding: 12px 18px 18px;
-  display:flex; gap:10px;
-  justify-content: flex-end;
-  align-items:center;
-}
-#kk-modal input[type="email"],
-#kk-modal input[type="text"],
-#kk-modal input[type="password"] {
-  width: 100%; padding: 10px 12px; margin-bottom: 10px;
-  border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
-  box-sizing: border-box;
-}
-.kk-btn-primary {
-  background: #1C86CC; color: #fff; border: none;
-  padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 700;
-}
-.kk-btn-ghost {
-  background: transparent; color: #333; border: 1px solid #ddd;
-  padding: 10px 14px; border-radius: 8px; cursor: pointer;
-}
+#kk-modal .kk-modal-footer { padding: 12px 18px 18px; display:flex; gap:10px; justify-content: flex-end; align-items:center; }
+#kk-modal input[type="email"], #kk-modal input[type="text"], #kk-modal input[type="password"] { width: 100%; padding: 10px 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+.kk-btn-primary { background: #1C86CC; color: #fff; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+.kk-btn-ghost { background: transparent; color: #333; border: 1px solid #ddd; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
 @media (max-width:480px){#kk-modal{max-width:95%;}}
 </style>
 
@@ -58,30 +17,32 @@
     <div class="kk-modal-header" id="kk-modal-title">Recuperar senha</div>
 
     <div class="kk-modal-body">
-      <!-- Step 1 -->
+      <!-- Step 1: Apenas E-mail -->
       <div id="kk-step-1">
-        <p>Informe o e-mail, celular e CPF cadastrados:</p>
+        <p>Informe seu e-mail cadastrado:</p>
         <label>E-mail</label>
         <input id="kk_fp_email" type="email" placeholder="exemplo@dominio.com" />
+      </div>
+
+      <!-- Step 2: Celular + CPF -->
+      <div id="kk-step-2" style="display:none">
+        <p>Confirme seu celular e CPF:</p>
         <label>Celular</label>
         <input id="kk_fp_celular" type="text" placeholder="(xx) xxxxx-xxxx" />
         <label>CPF</label>
         <input id="kk_fp_cpf" type="text" placeholder="000.000.000-00" />
       </div>
 
-      <!-- Step 2 -->
-      <div id="kk-step-2" style="display:none">
+      <!-- Step 3: Código + redefinir senha -->
+      <div id="kk-step-3" style="display:none">
         <p>Insira o código de 6 dígitos enviado por e-mail:</p>
         <input id="kk_fp_otp" type="text" maxlength="6" placeholder="000000" />
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
           <small>Tempo restante: <span id="kk_fp_timer">03:00</span></small>
           <button id="kk_fp_resend" class="kk-btn-ghost" disabled>Reenviar</button>
         </div>
-      </div>
 
-      <!-- Step 3 -->
-      <div id="kk-step-3" style="display:none">
-        <p>Defina a nova senha:</p>
+        <p style="margin-top:15px;">Defina a nova senha:</p>
         <input id="kk_fp_new" type="password" placeholder="Nova senha" />
         <input id="kk_fp_confirm" type="password" placeholder="Confirmar nova senha" />
       </div>
@@ -89,7 +50,7 @@
 
     <div class="kk-modal-footer">
       <button id="kk_fp_close" class="kk-btn-ghost">Cancelar</button>
-      <button id="kk_fp_next" class="kk-btn-primary">Enviar código</button>
+      <button id="kk_fp_next" class="kk-btn-primary">Próximo</button>
     </div>
   </div>
 </div>
@@ -110,6 +71,11 @@
   let timerInterval = null;
   let expiresAt = null;
 
+  const loadingEl = document.createElement('div');
+  loadingEl.textContent = 'Aguarde...';
+  loadingEl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);background:#fff;padding:12px 20px;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.3);display:none;z-index:100000;';
+  document.body.appendChild(loadingEl);
+
   function openModal(){ backdrop.style.display='flex'; gotoStep(1); }
   function closeModal(){ backdrop.style.display='none'; clearInterval(timerInterval); }
 
@@ -118,8 +84,8 @@
     step1.style.display=(n===1?'block':'none');
     step2.style.display=(n===2?'block':'none');
     step3.style.display=(n===3?'block':'none');
-    btnNext.textContent=(n===1?'Enviar código':n===2?'Verificar código':'Redefinir senha');
-    btnResend.disabled=(n===1||n===3);
+    btnNext.textContent=(n===1?'Próximo':n===2?'Enviar código':'Redefinir senha');
+    btnResend.disabled=(n!==3);
   }
 
   function startTimer(seconds){
@@ -129,6 +95,7 @@
     updateTimer();
     timerInterval = setInterval(updateTimer, 500);
   }
+
   function updateTimer(){
     const diff = Math.max(0, expiresAt - Date.now());
     const mm = String(Math.floor(diff/60000)).padStart(2,'0');
@@ -137,84 +104,92 @@
     if(diff<=0){ clearInterval(timerInterval); btnResend.disabled=false; timerEl.textContent='00:00'; }
   }
 
+  function showLoading(){ loadingEl.style.display='block'; }
+  function hideLoading(){ loadingEl.style.display='none'; }
+  function showMessage(msg){ alert(msg); }
+
   btnClose.addEventListener('click', closeModal);
   backdrop.addEventListener('click', e=>{ if(e.target===backdrop) closeModal(); });
-  document.addEventListener('click', e=>{
-    const el=e.target; if(el.matches('.checkPassword a')||el.closest('.checkPassword a')){ e.preventDefault(); openModal(); }
-  });
+  document.addEventListener('click', e=>{ const el=e.target; if(el.matches('.checkPassword a')||el.closest('.checkPassword a')){ e.preventDefault(); openModal(); } });
 
   btnNext.addEventListener('click', function(){
     if(currentStep===1){
-      const email=document.getElementById('kk_fp_email').value.trim();
-      const cel=document.getElementById('kk_fp_celular').value.trim();
-      const cpf=document.getElementById('kk_fp_cpf').value.trim();
-      if(!email||!cel||!cpf){ alert('Preencha todos os campos.'); return; }
+      const email = document.getElementById('kk_fp_email').value.trim();
+      if(!email){ showMessage('Informe o e-mail'); return; }
 
-      // AJAX POST para auth.php
+      showLoading();
       fetch('auth.php', {
         method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body:`acao=forgot_start&email=${encodeURIComponent(email)}&celular=${encodeURIComponent(cel)}&cpf=${encodeURIComponent(cpf)}`
+        body:`acao=check_email&email=${encodeURIComponent(email)}`
       })
       .then(res=>res.json())
       .then(data=>{
-        if(data.success){
-          Swal.fire('Sucesso','Código enviado para seu e-mail.','success');
-          gotoStep(2);
-          startTimer(600); // 10 minutos
-        } else {
-          Swal.fire('Erro',data.message,'error');
-        }
-      })
-      .catch(err=>alert('Erro na requisição'));
+        hideLoading();
+        if(data.success){ gotoStep(2); } else { showMessage(data.message); }
+      }).catch(err=>{ hideLoading(); showMessage('Erro na requisição'); });
+
     } else if(currentStep===2){
-      const otp=document.getElementById('kk_fp_otp').value.trim();
-      if(otp.length!==6){ alert('Digite o código correto.'); return; }
+      const email = document.getElementById('kk_fp_email').value.trim();
+      const cel = document.getElementById('kk_fp_celular').value.trim();
+      const cpf = document.getElementById('kk_fp_cpf').value.trim();
+      if(!cel || !cpf){ showMessage('Preencha celular e CPF'); return; }
 
-      const email=document.getElementById('kk_fp_email').value.trim();
-      fetch('auth.php',{
+      showLoading();
+      fetch('auth.php', {
         method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body:`acao=verify_otp&email=${encodeURIComponent(email)}&codigo=${encodeURIComponent(otp)}`
+        body:`acao=check_cel_cpf&email=${encodeURIComponent(email)}&celular=${encodeURIComponent(cel)}&cpf=${encodeURIComponent(cpf)}`
       })
       .then(res=>res.json())
       .then(data=>{
-        if(data.success){ gotoStep(3); } else { Swal.fire('Erro',data.message,'error'); }
-      });
+        hideLoading();
+        if(data.success){ showMessage('Código enviado para seu e-mail'); gotoStep(3); startTimer(180); }
+        else { showMessage(data.message); }
+      }).catch(err=>{ hideLoading(); showMessage('Erro na requisição'); });
+
     } else if(currentStep===3){
-      const n=document.getElementById('kk_fp_new').value.trim();
-      const c=document.getElementById('kk_fp_confirm').value.trim();
-      if(!n||!c){ alert('Preencha as senhas'); return; }
-      if(n!==c){ alert('Senhas não conferem'); return; }
+      const email = document.getElementById('kk_fp_email').value.trim();
+      const otp = document.getElementById('kk_fp_otp').value.trim();
+      const n = document.getElementById('kk_fp_new').value.trim();
+      const c = document.getElementById('kk_fp_confirm').value.trim();
 
-      const email=document.getElementById('kk_fp_email').value.trim();
+      if(otp.length!==6){ showMessage('Digite o código correto'); return; }
+      if(!n||!c){ showMessage('Preencha as senhas'); return; }
+      if(n!==c){ showMessage('Senhas não conferem'); return; }
+
+      showLoading();
       fetch('auth.php',{
         method:'POST',
         headers:{'Content-Type':'application/x-www-form-urlencoded'},
-        body:`acao=reset_password&email=${encodeURIComponent(email)}&nova_senha=${encodeURIComponent(n)}&confirmar=${encodeURIComponent(c)}`
+        body:`acao=reset_password&email=${encodeURIComponent(email)}&nova_senha=${encodeURIComponent(n)}&confirmar=${encodeURIComponent(c)}&codigo=${encodeURIComponent(otp)}`
       })
       .then(res=>res.json())
       .then(data=>{
-        if(data.success){ Swal.fire('Sucesso','Senha redefinida','success'); closeModal(); }
-        else{ Swal.fire('Erro',data.message,'error'); }
-      });
+        hideLoading();
+        if(data.success){ showMessage('Senha redefinida'); closeModal(); } 
+        else { showMessage(data.message); }
+      }).catch(err=>{ hideLoading(); showMessage('Erro na requisição'); });
     }
   });
 
   btnResend.addEventListener('click',function(){
-    const email=document.getElementById('kk_fp_email').value.trim();
-    const cel=document.getElementById('kk_fp_celular').value.trim();
-    const cpf=document.getElementById('kk_fp_cpf').value.trim();
+    const email = document.getElementById('kk_fp_email').value.trim();
+    const cel = document.getElementById('kk_fp_celular').value.trim();
+    const cpf = document.getElementById('kk_fp_cpf').value.trim();
+
+    showLoading();
     fetch('auth.php',{
       method:'POST',
       headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:`acao=forgot_start&email=${encodeURIComponent(email)}&celular=${encodeURIComponent(cel)}&cpf=${encodeURIComponent(cpf)}`
+      body:`acao=check_cel_cpf&email=${encodeURIComponent(email)}&celular=${encodeURIComponent(cel)}&cpf=${encodeURIComponent(cpf)}`
     })
     .then(res=>res.json())
     .then(data=>{
-      if(data.success){ Swal.fire('Sucesso','Código reenviado','success'); startTimer(600); }
-      else{ Swal.fire('Erro',data.message,'error'); }
-    });
+      hideLoading();
+      if(data.success){ showMessage('Código reenviado'); startTimer(180); }
+      else{ showMessage(data.message); }
+    }).catch(err=>{ hideLoading(); showMessage('Erro na requisição'); });
   });
 })();
 </script>
