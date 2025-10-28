@@ -64,6 +64,7 @@ class Matricula
         tb_alunos.ra_aluno, 
         tb_alunos.nome AS nome_aluno, 
         tb_alunos.data_nascimento, 
+        tb_alunos.turma, 
         tb_responsaveis.nome AS nome_responsavel,
         tb_matricula.matricula_ativada AS matricula
             FROM tb_matricula
@@ -164,6 +165,7 @@ class Matricula
                 tb_alunos.ra_aluno, 
                 tb_alunos.nome AS nome_aluno, 
                 tb_alunos.data_nascimento, 
+                tb_alunos.turma,
                 tb_responsaveis.nome AS nome_responsavel,
                 tb_matricula.matricula_ativada AS matricula
                     FROM tb_matricula

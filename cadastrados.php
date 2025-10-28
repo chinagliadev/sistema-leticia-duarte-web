@@ -30,6 +30,7 @@ if (empty($pesquisa)) {
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
     <script src="./js/semantic_ui.js"></script>
     <script src="./js/validacao-formulario.js"></script>
+
 </head>
 
 <body>
@@ -67,7 +68,63 @@ if (empty($pesquisa)) {
                             </form>
                         </div>
                         <div class="eight wide column">
-                            <a href="./cadastrados.php" class="ui yellow button right floated"><i class="th list icon"></i> Listar alunos</a>
+                            <div class="ui floating labeled icon dropdown button right floated">
+                                <i class="filter icon"></i>
+                                <span class="text">Filtro</span>
+                                <div class="menu ">
+                                    <div class="ui left icon input">
+                                        <i class="search icon"></i>
+                                        <input type="text" name="pesquisar_filtro" placeholder="Filtrar Turma">
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="header icon"> <i class="filter icon"></i>Filtrar Turma</div>
+                                    <div class="item" data-value="listarTudo">
+                                        <i class="list icon"></i> Listar Todos
+                                    </div>
+
+                                    <div class="item" data-value="bercario2a">
+                                        
+                                        <div class="ui empty circular label label-bercario"></div> Berçário 2 A
+                                    </div>
+                                    <div class="item" data-value="bercario2b">
+                                        <div class="ui empty circular label label-bercario"></div> Berçário 2 B
+                                    </div>
+                                    <div class="item" data-value="bercario2c">
+                                        <div class="ui empty circular label label-bercario"></div> Berçário 2 C
+                                    </div>
+
+                                    <div class="item" data-value="maternal1a">
+                                        <div class="ui empty circular label label-maternal1"></div> Maternal I A
+                                    </div>
+                                    <div class="item" data-value="maternal1b">
+                                        <div class="ui empty circular label label-maternal1"></div> Maternal I B
+                                    </div>
+                                    <div class="item" data-value="maternal1c">
+                                        <div class="ui empty circular label label-maternal1"></div> Maternal I C
+                                    </div>
+
+                                    <div class="item" data-value="maternal2a">
+                                        <div class="ui empty circular label label-maternal2"></div> Maternal II A
+                                    </div>
+                                    <div class="item" data-value="maternal2b">
+                                        <div class="ui empty circular label label-maternal2"></div> Maternal II B
+                                    </div>
+
+                                    <div class="item" data-value="multisseriada-mm">
+                                        <div class="ui empty circular label label-multisseriada"></div> Multisseriada M.M
+                                    </div>
+                                    <div class="item" data-value="multisseriada-bm">
+                                        <div class="ui empty circular label label-multisseriada"></div> Multisseriada B.M
+                                    </div>
+                                    <div class="item" data-value="matriculas-ativadas">
+                                        <div class="ui green empty circular label"></div> Matriculas Ativada
+                                    </div>
+                                    <div class="item" data-value="matriculas-desativadas">
+                                        <div class="ui red empty circular label"></div> Matriculas Desativadas
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </section>
@@ -78,6 +135,7 @@ if (empty($pesquisa)) {
                             <th><i class="user icon"></i> Nome</th>
                             <th><i class="calendar alternate outline icon"></i> Data de Nascimento</th>
                             <th><i class="users icon"></i> Responsável</th>
+                            <th><i class="users icon"></i> turma</th>
                             <th><i class="users icon"></i> Matricula</th>
                             <th><i class="cog icon"></i> Ações</th>
                         </tr>
@@ -85,7 +143,7 @@ if (empty($pesquisa)) {
                     <tbody>
                         <?php if (empty($dadosMatricula)) { ?>
                             <tr>
-                                <td colspan="5">
+                                <td colspan="7">
                                     <div class="ui center aligned">
                                         <img src="img/cadastrados/nenhum_aluno_cadastrado.png" class="ui image medium centered fluid" alt="">
                                         <div class="content">
@@ -117,12 +175,31 @@ if (empty($pesquisa)) {
                                     $status_matricula = 'Desativada';
                                     $cor_label = 'red';
                                 }
+
+                                $cor_label_turma = '';
+                                $tipo_turma = $matricula['turma'];
+                                
+                                if($tipo_turma === 'Bercario 2 A' || $tipo_turma === 'Bercario 2 B '|| $tipo_turma === 'Bercario 2 C'){
+                                    $cor_label_turma = 'label-bercario';
+                                }else if($tipo_turma === 'Maternal I A' || $tipo_turma === 'Maternal I B' || $tipo_turma === 'Maternal I C'){
+                                    $cor_label_turma = 'label-maternal1';
+                                }else if($tipo_turma === 'Maternal II A' || $tipo_turma === 'Maternal II B' || $tipo_turma === 'Maternal II C'){
+                                    $cor_label_turma = 'label-maternal2';
+                                }else if($tipo_turma === 'Multisseriada M.M' || $tipo_turma === 'Multisseriada B.M'){
+                                    $cor_label_turma = 'label-multisseriada';
+                                }
+
                             ?>
                                 <tr>
                                     <td><?= $matricula['ra_aluno'] ?></td>
                                     <td><?= $matricula['nome_aluno'] ?></td>
-                                    <td><?= $matricula['data_nascimento'] ?></td>
+                                    <td>  <?= date('d/m/Y', strtotime($matricula['data_nascimento'])) ?></td>
                                     <td><?= $matricula['nome_responsavel'] ?></td>
+                                    <td>
+                                        <div class="ui <?= $cor_label_turma ?> label white">
+                                            <?= $matricula['turma'] ?>    
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="ui <?= $cor_label ?> label"><?= $status_matricula ?></div>
                                     </td>
@@ -166,6 +243,10 @@ if (empty($pesquisa)) {
         </main>
     </section>
     <?php include './template/modal/modal-excluir-aluno.php' ?>
+
+    <script>
+        $('.ui.dropdown').dropdown();
+    </script>
 </body>
 
 </html>
