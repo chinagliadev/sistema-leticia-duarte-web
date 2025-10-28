@@ -21,6 +21,7 @@ function criarMsgErro(input) {
 }
 
 // Inputs
+const nomeCadastro = $("#nameComplete");
 const senhaCadastro = $("#passwordCad");
 const confirmarSenhaCadastro = $("#passwordConfirm");
 const emailCadastro = $("#emailCad");
@@ -30,6 +31,7 @@ const emailLogin = $("#emailLogin");
 const passwordLogin = $("#passwordLogin");
 
 // Mensagens de erro
+const msgNome = criarMsgErro(nomeCadastro);
 const msgSenha = criarMsgErro(senhaCadastro);
 const msgConfirmarSenha = criarMsgErro(confirmarSenhaCadastro);
 const msgEmail = criarMsgErro(emailCadastro);
@@ -164,8 +166,32 @@ function validarSenhasCampo() {
 }
 
 // ========= Validações por campo =========
+function validarNomeCampo() {
+  const valorNome = nomeCadastro.value.trim();
+
+  if (valorNome === "") {
+    esconderErroCampo(msgNome);
+    return false;
+  }
+
+  if (valorNome.split(/\s+/).length < 2) {
+    mostrarErroCampo(msgNome, "Informe nome e sobrenome corretamente.");
+    return false;
+  } else {
+    esconderErroCampo(msgNome);
+    return true;
+  }
+}
+
 function validarEmailCampo() {
-  if (!validarEmail(emailCadastro.value.trim())) {
+  const valorEmail = emailCadastro.value.trim();
+
+  if (valorEmail === "") { // se vazio, não mostra erro
+    esconderErroCampo(msgEmail);
+    return false;
+  }
+
+  if (!validarEmail(valorEmail)) {
     mostrarErroCampo(msgEmail, "E-mail inválido! Use o formato exemplo@dominio.com");
     return false;
   } else {
@@ -175,7 +201,14 @@ function validarEmailCampo() {
 }
 
 function validarCelularCampo() {
-  if (!validarCelular(inputCelular.value.trim())) {
+  const valorCelular = inputCelular.value.trim();
+
+  if (valorCelular === "") {
+    esconderErroCampo(msgCelular);
+    return false;
+  }
+
+  if (!validarCelular(valorCelular)) {
     mostrarErroCampo(msgCelular, "Celular inválido! Use o formato (xx) xxxxx-xxxx");
     return false;
   } else {
@@ -185,7 +218,14 @@ function validarCelularCampo() {
 }
 
 function validarCPFCampo() {
-  if (!validarCPF(cpfInput.value.trim())) {
+  const valorCPF = cpfInput.value.trim();
+
+  if (valorCPF === "") {
+    esconderErroCampo(msgCPF);
+    return false;
+  }
+
+  if (!validarCPF(valorCPF)) {
     mostrarErroCampo(msgCPF, "CPF inválido! Certifique-se de que contém 11 números e não é repetido.");
     return false;
   } else {
@@ -194,7 +234,34 @@ function validarCPFCampo() {
   }
 }
 
+function validarSenhasCampo() {
+  const valorSenha = senhaCadastro.value;
+  const valorConfirmar = confirmarSenhaCadastro.value;
+
+  if (valorSenha === "" && valorConfirmar === "") {
+    esconderErroCampo(msgSenha);
+    esconderErroCampo(msgConfirmarSenha);
+    return false;
+  }
+
+  const erros = validarSintaxeSenha(valorSenha);
+  if (erros.length) {
+    mostrarErroCampo(msgSenha, "Senha inválida:<br>• " + erros.join("<br>• "));
+  } else {
+    esconderErroCampo(msgSenha);
+  }
+
+  if (valorSenha && valorConfirmar && valorSenha !== valorConfirmar) {
+    mostrarErroCampo(msgConfirmarSenha, "As senhas não coincidem.");
+  } else {
+    esconderErroCampo(msgConfirmarSenha);
+  }
+
+  return erros.length === 0 && valorSenha === valorConfirmar;
+}
+
 // ========= Eventos de input =========
+nomeCadastro.addEventListener("input", validarNomeCampo);
 senhaCadastro.addEventListener("input", validarSenhasCampo);
 confirmarSenhaCadastro.addEventListener("input", validarSenhasCampo);
 emailCadastro.addEventListener("input", validarEmailCampo);
@@ -214,12 +281,13 @@ document.querySelectorAll(".toggle-password").forEach((icon) => {
 
 // ========= Submissão do formulário =========
 formCadastro.addEventListener("submit", (e) => {
+  const nomeValido = validarNomeCampo();
   const senhasValidas = validarSenhasCampo();
   const emailValido = validarEmailCampo();
   const celularValido = validarCelularCampo();
   const cpfValido = validarCPFCampo();
 
-  if (!senhasValidas || !emailValido || !celularValido || !cpfValido) {
+  if (!nomeValido || !senhasValidas || !emailValido || !celularValido || !cpfValido) {
     e.preventDefault();
   }
 });

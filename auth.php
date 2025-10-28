@@ -17,7 +17,7 @@ function enviarEmail($emailDestino, $codigo) {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'sistemaleticiaduarte@gmail.com';
-        $mail->Password = 'tokierjgeerdzero'; // senha de app
+        $mail->Password = 'tokierjgeerdzero';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
@@ -25,10 +25,11 @@ function enviarEmail($emailDestino, $codigo) {
         $mail->addAddress($emailDestino);
 
         $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
         $mail->Subject = 'Código de recuperação de senha';
         $mail->Body = "<p>Seu código de recuperação é:</p>
                        <h2 style='color:#1C86CC;'>$codigo</h2>
-                       <p>O código expira em 10 minutos.</p>";
+                       <p>O código expira em 3 minutos.</p>";
 
         $mail->send();
         return true;
@@ -49,11 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $senha_confirm = $_POST['senha_confirm'];
         $celular = $_POST['celular'];
         $cpf = $_POST['cpf'];
-
-        if ($senha !== $senha_confirm) {
-            $_SESSION['mensagem'] = ['tipo'=>'error','titulo'=>'Erro!','texto'=>'As senhas não conferem.'];
-            header("Location: login.php"); exit;
-        }
 
         $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
         try {
@@ -105,35 +101,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // ===================== ESQUECEU SENHA - ENVIAR CÓDIGO =====================
-    if($acao=="forgot_start"){
+    // ===================== ESQUECEU SENHA - VERIFICA EMAIL =====================
+    if($acao=="check_email"){
         $email = $_POST['email'];
-
         $sql = "SELECT * FROM tb_funcionario WHERE email=:email";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":email",$email);
         $stmt->execute();
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if(!$usuario){
-            echo json_encode(['success'=>false,'message'=>'E-mail não encontrado']);
-            exit;
-        }
-
-        $codigo = rand(100000,999999);
-        $expira_em = date("Y-m-d H:i:s", strtotime("+10 minutes"));
-
-        $sql = "UPDATE tb_funcionario SET reset_token=:codigo, token_expira=:expira WHERE email=:email";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(":codigo",$codigo);
-        $stmt->bindParam(":expira",$expira_em);
-        $stmt->bindParam(":email",$email);
-        $stmt->execute();
-
-        if(enviarEmail($email,$codigo)){
+        if($usuario){
             echo json_encode(['success'=>true]);
         } else {
-            echo json_encode(['success'=>false,'message'=>'Não foi possível enviar o e-mail']);
+            echo json_encode(['success'=>false,'message'=>'E-mail não encontrado']);
+        }
+        exit;
+    }
+
+    // ===================== ESQUECEU SENHA - VERIFICA CELULAR + CPF =====================
+    if($acao=="check_cel_cpf"){
+        $email = $_POST['email'];
+        $cel = $_POST['celular'];
+        $cpf = $_POST['cpf'];
+
+        $sql = "SELECT * FROM tb_funcionario WHERE email=:email AND celular=:celular AND cpf=:cpf";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":email",$email);
+        $stmt->bindParam(":celular",$cel);
+        $stmt->bindParam(":cpf",$cpf);
+        $stmt->execute();
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($usuario){
+            // Gerar código e enviar e-mail
+            $codigo = rand(100000,999999);
+            $expira_em = date("Y-m-d H:i:s", strtotime("+3 minutes"));
+
+            $sql = "UPDATE tb_funcionario SET reset_token=:codigo, token_expira=:expira WHERE email=:email";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":codigo",$codigo);
+            $stmt->bindParam(":expira",$expira_em);
+            $stmt->bindParam(":email",$email);
+            $stmt->execute();
+
+            if(enviarEmail($email,$codigo)){
+                echo json_encode(['success'=>true]);
+            } else {
+                echo json_encode(['success'=>false,'message'=>'Não foi possível enviar o e-mail']);
+            }
+        } else {
+            echo json_encode(['success'=>false,'message'=>'Celular ou CPF incorretos']);
         }
         exit;
     }
