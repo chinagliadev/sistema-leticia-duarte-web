@@ -13,10 +13,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($id_aluno !== null){
         $matricula = new Matricula();
         
-        $sucesso = $matricula->deletarAlunoCompleto($id_aluno); 
-        if ($sucesso) {
-            header('location: ./cadastrados.php');
-        }
+        $matricula->desativarMatricula($id_aluno); 
+        header('location: ./cadastrados.php');
+        var_dump($matricula);
 
     }
 }

@@ -1,13 +1,13 @@
 <div class="ui basic modal modal-excluir" id="modal-excluir">
     <div class="header">
-        Excluir Aluno
+        Desativar matricula do aluno
     </div>
     <div class="content">
-        <p>Você tem certeza que deseja excluir o <strong id="nome-aluno-modal"></strong> com o RA: <strong id="ra-aluno-no-modal"></strong>?</p>
-        <p>Esta ação não poderá ser desfeita.</p>
+        <p>Você tem certeza que desativar a matricula do <strong id="nome-aluno-modal"></strong> com o RA: <strong id="ra-aluno-no-modal"></strong>?</p>
+        <p>Esta ação vai desativar a matricula do aluno.</p>
     </div>
     <div class="actions">
-        <form method="POST" action="./excluir-cadastro-aluno.php" id="form-excluir-aluno">
+        <form method="POST" action="./desativar-cadastro-aluno.php" id="form-excluir-aluno">
             
             <input type="hidden" name="id_aluno" id="input-id-excluir" value="">
             
@@ -16,7 +16,7 @@
             </div>
             
             <button id="btn-excluir-cadastro" type="submit" class="ui inverted red ok button">
-                Excluir
+                Desativar Matricula
             </button>
         </form>
     </div>
