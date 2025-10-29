@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Login</title>
+    <title>Sistema Leticia Duarte</title>
 </head>
 
 <body>
