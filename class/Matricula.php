@@ -77,7 +77,7 @@ class Matricula
         return $dados;
     }
 
-        public function listarMatriculaDesativada(): array
+    public function listarMatriculaDesativada(): array
     {
         $sqlListar =
             "SELECT 
@@ -207,11 +207,12 @@ class Matricula
         return $stmt->fetchAll();
     }
 
-    public function filtrarTurma($turma){
-        
-        if($turma === 'matriculas-ativadas'){
+    public function filtrarTurma($turma)
+    {
+
+        if ($turma === 'matriculas-ativadas') {
             return $this->listarMatricula();
-        }else if($turma === 'matriculas-desativadas'){
+        } else if ($turma === 'matriculas-desativadas') {
             return $this->listarMatriculaDesativada();
         }
 
@@ -233,9 +234,7 @@ class Matricula
         $dadosFiltro->execute([
             ':turma' => $turma
         ]);
-        
+
         return $dadosFiltro->fetchAll();
     }
-
- 
 }
