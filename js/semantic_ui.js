@@ -27,6 +27,18 @@ $(document).ready(function () {
         $('#formulario-aluno').submit();
     });
 
+     $(document).on("click", ".btn-ativar-aluno", function () {
+        let id = $(this).data('id');
+        let ra_aluno = $(this).data('ra');
+        let nomeAluno = $(this).data('nome');
+
+        $('#input-id-ativar').val(id);
+        $('#ra-aluno-no-modal').text(ra_aluno);
+        $('#nome-aluno-modal').text(nomeAluno);
+
+        $('#modal-ativar-matricula').modal('show');
+    });
+    
      $(document).on("click", ".btn-deletar-aluno", function () {
         let id = $(this).data('id');
         let ra_aluno = $(this).data('ra');
@@ -40,6 +52,7 @@ $(document).ready(function () {
     });
 
     $('#modal-excluir').modal({});
+
 
     $('#btn-excluir-cadastro').on("click", function () {
         $('#form-excluir-cadastro').submit();
