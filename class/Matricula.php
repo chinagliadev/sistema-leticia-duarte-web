@@ -73,7 +73,28 @@ class Matricula
         WHERE matricula_ativada = 1;
 ";
 
-        $dados = $this->conn->query($sqlListar)->fetchAll(PDO::FETCH_ASSOC);
+        $dados = $this->conn->query($sqlListar)->fetchAll();
+        return $dados;
+    }
+
+        public function listarMatriculaDesativada(): array
+    {
+        $sqlListar =
+            "SELECT 
+        tb_alunos.id, 
+        tb_alunos.ra_aluno, 
+        tb_alunos.nome AS nome_aluno, 
+        tb_alunos.data_nascimento, 
+        tb_alunos.turma, 
+        tb_responsaveis.nome AS nome_responsavel,
+        tb_matricula.matricula_ativada AS matricula
+            FROM tb_matricula
+        INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+        INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+        WHERE matricula_ativada = 0;
+";
+
+        $dados = $this->conn->query($sqlListar)->fetchAll();
         return $dados;
     }
 
@@ -156,7 +177,7 @@ class Matricula
         return $dadosCompletos;
     }
 
-    function pesquisarAluno($termoPesquisa)
+    public function pesquisarAluno($termoPesquisa)
     {
         $termoLike = '%' . $termoPesquisa . '%';
 
@@ -185,4 +206,36 @@ class Matricula
 
         return $stmt->fetchAll();
     }
+
+    public function filtrarTurma($turma){
+        
+        if($turma === 'matriculas-ativadas'){
+            return $this->listarMatricula();
+        }else if($turma === 'matriculas-desativadas'){
+            return $this->listarMatriculaDesativada();
+        }
+
+        $sqlFiltrar = "SELECT 
+        tb_alunos.id, 
+        tb_alunos.ra_aluno, 
+        tb_alunos.nome AS nome_aluno, 
+        tb_alunos.data_nascimento, 
+        tb_alunos.turma,
+        tb_responsaveis.nome AS nome_responsavel,
+        tb_matricula.matricula_ativada AS matricula
+            FROM tb_matricula
+        INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+        INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+        WHERE matricula_ativada = 1 AND turma = :turma";
+
+        $dadosFiltro = $this->conn->prepare($sqlFiltrar);
+
+        $dadosFiltro->execute([
+            ':turma' => $turma
+        ]);
+        
+        return $dadosFiltro->fetchAll();
+    }
+
+ 
 }

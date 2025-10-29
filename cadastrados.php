@@ -5,8 +5,11 @@ include './class/Matricula.php';
 $matricula = new Matricula();
 
 $pesquisa = $_GET['txtPesquisar'] ?? '';
+$filtro = isset($_GET['campo_filtro']) ? $_GET['campo_filtro'] : '';
 
-if (empty($pesquisa)) {
+if ($filtro) {
+    $dadosMatricula = $matricula->filtrarTurma($filtro);;
+} else if (empty($pesquisa)) {
     $dadosMatricula = $matricula->listarMatricula();
 } else {
     $dadosMatricula = $matricula->pesquisarAluno($pesquisa);
@@ -68,63 +71,66 @@ if (empty($pesquisa)) {
                             </form>
                         </div>
                         <div class="eight wide column">
-                            <div class="ui floating labeled icon dropdown button right floated">
-                                <i class="filter icon"></i>
-                                <span class="text">Filtro</span>
-                                <div class="menu ">
-                                    <div class="ui left icon input">
-                                        <i class="search icon"></i>
-                                        <input type="text" name="pesquisar_filtro" placeholder="Filtrar Turma">
-                                    </div>
-                                    <div class="divider"></div>
-                                    <div class="header icon"> <i class="filter icon"></i>Filtrar Turma</div>
-                                    <div class="item" data-value="listarTudo">
-                                        <i class="list icon"></i> Listar Todos
-                                    </div>
+                            <form action="./cadastrados.php" id="formulario_filtro" method="GET">
+                                <div class="ui floating labeled icon dropdown button right floated">
+                                    <input type="hidden" name="campo_filtro" id="campo_filtro">
+                                    <i class="filter icon"></i>
+                                    <span class="text">Filtro</span>
+                                    <div class="menu ">
+                                        <div class="header icon"> <i class="filter icon"></i>Filtrar Turma</div>
+                                        <div class="divider"></div>
 
-                                    <div class="item" data-value="bercario2a">
-                                        
-                                        <div class="ui empty circular label label-bercario"></div> Berçário 2 A
-                                    </div>
-                                    <div class="item" data-value="bercario2b">
-                                        <div class="ui empty circular label label-bercario"></div> Berçário 2 B
-                                    </div>
-                                    <div class="item" data-value="bercario2c">
-                                        <div class="ui empty circular label label-bercario"></div> Berçário 2 C
-                                    </div>
+                                        <div class="ui left pointing dropdown link item" data-value="listarTudo">
+                                            <i class="dropdown icon"></i>
+                                            Listar Todos
+                                            <div class="menu">
+                                                <div class="item" data-value="matriculas-ativadas">
+                                                    <div class="ui green empty circular label"></div> Matriculas Ativadas
+                                                </div>
+                                                <div class="item" data-value="matriculas-desativadas">
+                                                    <div class="ui red empty circular label"></div> Matriculas Desativadas
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <div class="item" data-value="maternal1a">
-                                        <div class="ui empty circular label label-maternal1"></div> Maternal I A
-                                    </div>
-                                    <div class="item" data-value="maternal1b">
-                                        <div class="ui empty circular label label-maternal1"></div> Maternal I B
-                                    </div>
-                                    <div class="item" data-value="maternal1c">
-                                        <div class="ui empty circular label label-maternal1"></div> Maternal I C
-                                    </div>
+                                        <div class="item" data-value="Bercario 2 A">
 
-                                    <div class="item" data-value="maternal2a">
-                                        <div class="ui empty circular label label-maternal2"></div> Maternal II A
-                                    </div>
-                                    <div class="item" data-value="maternal2b">
-                                        <div class="ui empty circular label label-maternal2"></div> Maternal II B
-                                    </div>
+                                            <div class="ui empty circular label label-bercario"></div> Berçário 2 A
+                                        </div>
+                                        <div class="item" data-value="Bercario 2 B">
+                                            <div class="ui empty circular label label-bercario"></div> Berçário 2 B
+                                        </div>
+                                        <div class="item" data-value="Bercario 2 C">
+                                            <div class="ui empty circular label label-bercario"></div> Berçário 2 C
+                                        </div>
 
-                                    <div class="item" data-value="multisseriada-mm">
-                                        <div class="ui empty circular label label-multisseriada"></div> Multisseriada M.M
-                                    </div>
-                                    <div class="item" data-value="multisseriada-bm">
-                                        <div class="ui empty circular label label-multisseriada"></div> Multisseriada B.M
-                                    </div>
-                                    <div class="item" data-value="matriculas-ativadas">
-                                        <div class="ui green empty circular label"></div> Matriculas Ativada
-                                    </div>
-                                    <div class="item" data-value="matriculas-desativadas">
-                                        <div class="ui red empty circular label"></div> Matriculas Desativadas
+                                        <div class="item" data-value="Maternal I A">
+                                            <div class="ui empty circular label label-maternal1"></div> Maternal I A
+                                        </div>
+                                        <div class="item" data-value="Maternal I B">
+                                            <div class="ui empty circular label label-maternal1"></div> Maternal I B
+                                        </div>
+                                        <div class="item" data-value="Maternal I C">
+                                            <div class="ui empty circular label label-maternal1"></div> Maternal I C
+                                        </div>
+
+                                        <div class="item" data-value="Maternal II A">
+                                            <div class="ui empty circular label label-maternal2"></div> Maternal II A
+                                        </div>
+                                        <div class="item" data-value="Maternal II B">
+                                            <div class="ui empty circular label label-maternal2"></div> Maternal II B
+                                        </div>
+
+                                        <div class="item" data-value="Multisseriada M.M">
+                                            <div class="ui empty circular label label-multisseriada"></div> Multisseriada M.M
+                                        </div>
+                                        <div class="item" data-value="Multisseriada B.M">
+                                            <div class="ui empty circular label label-multisseriada"></div> Multisseriada B.M
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
-
+                            </form>
                         </div>
                     </div>
                 </section>
@@ -178,14 +184,14 @@ if (empty($pesquisa)) {
 
                                 $cor_label_turma = '';
                                 $tipo_turma = $matricula['turma'];
-                                
-                                if($tipo_turma === 'Bercario 2 A' || $tipo_turma === 'Bercario 2 B '|| $tipo_turma === 'Bercario 2 C'){
+
+                                if ($tipo_turma === 'Bercario 2 A' || $tipo_turma === 'Bercario 2 B' || $tipo_turma === 'Bercario 2 C') {
                                     $cor_label_turma = 'label-bercario';
-                                }else if($tipo_turma === 'Maternal I A' || $tipo_turma === 'Maternal I B' || $tipo_turma === 'Maternal I C'){
+                                } else if ($tipo_turma === 'Maternal I A' || $tipo_turma === 'Maternal I B' || $tipo_turma === 'Maternal I C') {
                                     $cor_label_turma = 'label-maternal1';
-                                }else if($tipo_turma === 'Maternal II A' || $tipo_turma === 'Maternal II B' || $tipo_turma === 'Maternal II C'){
+                                } else if ($tipo_turma === 'Maternal II A' || $tipo_turma === 'Maternal II B' || $tipo_turma === 'Maternal II C') {
                                     $cor_label_turma = 'label-maternal2';
-                                }else if($tipo_turma === 'Multisseriada M.M' || $tipo_turma === 'Multisseriada B.M'){
+                                } else if ($tipo_turma === 'Multisseriada M.M' || $tipo_turma === 'Multisseriada B.M') {
                                     $cor_label_turma = 'label-multisseriada';
                                 }
 
@@ -193,11 +199,11 @@ if (empty($pesquisa)) {
                                 <tr>
                                     <td><?= $matricula['ra_aluno'] ?></td>
                                     <td><?= $matricula['nome_aluno'] ?></td>
-                                    <td>  <?= date('d/m/Y', strtotime($matricula['data_nascimento'])) ?></td>
+                                    <td> <?= date('d/m/Y', strtotime($matricula['data_nascimento'])) ?></td>
                                     <td><?= $matricula['nome_responsavel'] ?></td>
                                     <td>
                                         <div class="ui <?= $cor_label_turma ?> label white">
-                                            <?= $matricula['turma'] ?>    
+                                            <?= $matricula['turma'] ?>
                                         </div>
                                     </td>
                                     <td>
@@ -213,7 +219,8 @@ if (empty($pesquisa)) {
                                             data-id="<?= $matricula['id'] ?>"
                                             data-ra="<?= $matricula['ra_aluno'] ?>"
                                             data-nome="<?= $matricula['nome_aluno'] ?>"
-                                            title="Excluir">
+                                            title="Excluir"
+                                            <?= ($status_db == 0) ? 'style="display:none;"' : '' ?>>
                                             <i class="trash icon"></i>
                                         </button>
                                         <button
@@ -226,7 +233,8 @@ if (empty($pesquisa)) {
                                         <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
                                             data-tooltip="Editar Aluno"
                                             data-inverted=""
-                                            class="ui small yellow icon button">
+                                            class="ui small yellow icon button"
+                                            <?= ($status_db == 0) ? 'style="display:none;"' : '' ?>>
                                             <i class="edit icon"></i>
                                         </a>
                                         <a href="./gerar-arquivo-pdf.php?idAluno=<?= $matricula['ra_aluno'] ?>" class="ui small icon button" data-tooltip="Baixar PDF" data-inverted="">
@@ -245,7 +253,16 @@ if (empty($pesquisa)) {
     <?php include './template/modal/modal-excluir-aluno.php' ?>
 
     <script>
-        $('.ui.dropdown').dropdown();
+        $(document).ready(function() {
+            $('.ui.dropdown').dropdown({
+                onChange: function(value, text, $choice) {
+                    if (value) {
+                        $('#campo_filtro').val(value);
+                        $('#formulario_filtro').submit();
+                    }
+                }
+            });
+        });
     </script>
 </body>
 
