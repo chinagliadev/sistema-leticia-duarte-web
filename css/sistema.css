@@ -218,7 +218,9 @@ a {
     margin-top: 20px;
     width: 100%;
 }
-
+.texto-detalhes{
+    font-size: 18px;
+}
 
 .ui.steps {
     display: flex;

@@ -31,26 +31,20 @@
             </section>
 
             <div class="ui grid">
-                <div class="ui four wide column">
-                    <section class="sessao_tabela ui segment yellow">
-                        <div class="ui card">
-                            <div class="content">
-                                <div class="center aligned header">Victor Chinalgia</div>
-                                <div class="center aligned description">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                <div class="center aligned author">
-                                   <div class="ui label-bercario large label">Berçario 2 A</div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="two columns">
+                    <div class="column">
+                        <section class="sessao_tabela ui segment yellow">
+                            
+                        </section>
+                    </div>
+                    <div class="column">
+                        <section class="sessao_tabela ui segment yellow">
+                            
+                        </section>
+                    </div>
                 </div>
             </div>
-    </section>
-    </div>
-    </div>
-    </main>
+
+        </main>
     </section>
 </body>
