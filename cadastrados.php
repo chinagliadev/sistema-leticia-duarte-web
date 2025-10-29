@@ -224,6 +224,19 @@ if ($filtro) {
                                             <i class="trash icon"></i>
                                         </button>
                                         <button
+                                            data-tooltip="Ativar Matricula"
+                                            data-inverted=""
+                                            id="btn-ativar-aluno"
+                                            type="button"
+                                            class="btn-ativar-aluno ui small green icon button"
+                                            data-id="<?= $matricula['id'] ?>"
+                                            data-ra="<?= $matricula['ra_aluno'] ?>"
+                                            data-nome="<?= $matricula['nome_aluno'] ?>"
+                                            title="Ativar"
+                                            <?= ($status_db == 1) ? 'style="display:none;"' : '' ?>>
+                                            <i class="check icon"></i>
+                                        </button>
+                                        <button
                                             data-inverted=""
                                             data-tooltip="Detalhes Aluno"
                                             class="ui small icon button blue"
@@ -251,7 +264,7 @@ if ($filtro) {
         </main>
     </section>
     <?php include './template/modal/modal-excluir-aluno.php' ?>
-
+    <?php include  './template/modal/modal-ativar-matricula.php'?>
     <script>
         $(document).ready(function() {
             $('.ui.dropdown').dropdown({

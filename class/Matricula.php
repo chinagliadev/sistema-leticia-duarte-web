@@ -113,6 +113,20 @@ class Matricula
         return $dadosDesativarMatricula->rowCount() > 0;
     }
 
+    public function reativarMatricula($idAluno):bool{
+        $sqlAtivarMatricula = "UPDATE tb_matricula 
+                                  SET matricula_ativada = :situacao WHERE aluno_id = :id
+        ";
+
+        $dadosAtivarMatricula = $this->conn->prepare($sqlAtivarMatricula);
+        $dadosAtivarMatricula->execute([
+            ':situacao' => self::MATRICULA_ATIVA,
+            ':id' => $idAluno
+        ]);
+
+        return $dadosAtivarMatricula->rowCount() > 0;
+    }
+
     public function buscarDadosCompletosAluno($ra_aluno)
     {
         $dadosCompletos = [
