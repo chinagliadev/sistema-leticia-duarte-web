@@ -1,3 +1,9 @@
+/* ff8454
+    f0cd3a
+    88c87b
+*/
+
+
 @font-face {
     font-family: "Baloo2";
     src: url(../fonts/Baloo2-VariableFont_wght.ttf);
@@ -338,39 +344,77 @@ select.ui.dropdown {
     margin-top: 14.8px;
 }
 
-#mensagem-erro-estado-civil-1{
+#mensagem-erro-estado-civil-1 {
     margin-top: 14.8px;
 }
 
-#mensagem_erro_tipo_responsavel_2{
+#mensagem_erro_tipo_responsavel_2 {
     margin-top: 14.8px;
 }
 
-#mensagem-erro-estado-civil-2{
+#mensagem-erro-estado-civil-2 {
     margin-top: 14.8px;
 }
 
-#mensagem-erro-parentesco-autorizada{
+#mensagem-erro-parentesco-autorizada {
     margin-top: 14.8px;
 }
 
-#mensagem-erro-parentesco-autorizada2{
+#mensagem-erro-parentesco-autorizada2 {
     margin-top: 14.8px;
 }
 
-.pesquisar_alunos{
+.pesquisar_alunos {
     width: 100%;
 }
 
-.img-sem-resultado{
-    width: 100%; 
-    max-width: 400px; 
+.img-sem-resultado {
+    width: 100%;
+    max-width: 400px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     height: auto;
 }
 
-.mensagem_cadastrados{
-    padding: 20px!important;
+.mensagem_cadastrados {
+    padding: 20px !important;
+}
+
+.ui.dropdown .menu>.item .ui.empty.circular.label {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.ui.label {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: baseline;
+    margin: 0 .14285714em;
+    background-color: #e8e8e8;
+    background-image: none;
+    padding: .5833em .833em;
+    color: rgba(255, 255, 255, 1);
+    text-transform: none;
+    font-weight: 700;
+    border: 0 solid transparent;
+    border-radius: .28571429rem;
+    transition: background .1s 
+ease;
+}
+
+.label-bercario {
+    background-color: #ff8454 !important;
+}
+
+.label-maternal1 {
+    background-color: #f2c513 !important;
+}
+
+.label-maternal2 {
+    background-color: #a333c8 !important;
+}
+
+.label-multisseriada {
+    background-color: #4c8bf5 !important;
 }
