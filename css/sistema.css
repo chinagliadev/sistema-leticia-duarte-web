@@ -442,3 +442,15 @@ ease;
 .label-multisseriada {
     background-color: #4c8bf5 !important;
 }
+
+.background_card_detalhes {
+    background-color: #4c8bf5 !important;
+}
+
+.background_card_detalhes .ui.header {
+    color: white !important;
+}
+
+.ui.card>.content p{
+    font-size: 15px;
+}

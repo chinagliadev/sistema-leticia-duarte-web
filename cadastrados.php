@@ -236,8 +236,7 @@ if ($filtro) {
                                             <?= ($status_db == 1) ? 'style="display:none;"' : '' ?>>
                                             <i class="check icon"></i>
                                         </button>
-                                        <a
-                                            href="./detalhes-aluno.php"
+                                        <a href="./detalhes-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
                                             data-inverted=""
                                             data-tooltip="Detalhes Aluno"
                                             class="ui small icon button blue"
