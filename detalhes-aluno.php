@@ -29,22 +29,8 @@
                 <img class="ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
                     alt="logo da leticia duarte na tela de cadastros de alunos">
             </section>
-
-            <div class="ui grid">
-                <div class="two columns">
-                    <div class="column">
-                        <section class="sessao_tabela ui segment yellow">
-                            
-                        </section>
-                    </div>
-                    <div class="column">
-                        <section class="sessao_tabela ui segment yellow">
-                            
-                        </section>
-                    </div>
-                </div>
-            </div>
-
+            
+          
         </main>
     </section>
 </body>
