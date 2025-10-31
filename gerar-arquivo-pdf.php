@@ -363,15 +363,20 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             );
             posY += 8;
 
-            const recebeBolsa = estrutura.recebe_bolsa_familia ? 'Sim' : 'Não'
-            doc.text(`Recebe bolsa familia: ${recebeBolsa}`, 10, posY)
+            const recebeBolsa = Number(estrutura.recebe_bolsa_familia) === 1 ? 'Sim' : 'Não';
+            doc.text(`Recebe bolsa família: ${recebeBolsa}`, 10, posY);
+
 
             if (estrutura.recebe_bolsa_familia) {
-                doc.text(`Valor:R$ ${estrutura.valor}`, 130, posY)
+                const valor = estrutura.valor ? `R$ ${estrutura.valor}` : "Não informado";
+                doc.text(`Valor: ${valor}`, 130, posY);
+            } else {
+                doc.text("Valor: Não informado", 130, posY);
             }
             posY += 8;
 
-            const tipoMoradia = estrutura.tipo_moradia;
+            const tipoMoradia = estrutura.tipo_moradia ? `${estrutura.tipo_moradia}` : "Não informado";
+            
             doc.text(`Tipo Moradia: ${tipoMoradia}`, 10, posY);
 
             if (tipoMoradia === 'alugada') {

@@ -152,7 +152,7 @@ class Matricula
         $sqlMatricula = "SELECT * FROM tb_matricula WHERE aluno_id = :aluno_id";
         $stmtMatricula = $this->conn->prepare($sqlMatricula);
         $stmtMatricula->execute([':aluno_id' => $idAluno]);
-        $dadosCompletos['matricula'] = $stmtMatricula->fetch(PDO::FETCH_ASSOC);
+        $dadosCompletos['matricula'] = $stmtMatricula->fetch();
 
         if (!$dadosCompletos['matricula']) {
             return false;
@@ -169,7 +169,7 @@ class Matricula
         $sqlAluno = "SELECT * FROM tb_alunos WHERE id = :id";
         $stmtAluno = $this->conn->prepare($sqlAluno);
         $stmtAluno->execute([':id' => $idAluno]);
-        $dadosCompletos['aluno'] = $stmtAluno->fetch(PDO::FETCH_ASSOC);
+        $dadosCompletos['aluno'] = $stmtAluno->fetch();
 
         $endereco_id = $dadosCompletos['aluno']['endereco_id'] ?? null;
 
@@ -178,7 +178,7 @@ class Matricula
             $sql = "SELECT * FROM $tabela WHERE $colunaId = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch();
         };
 
         $dadosCompletos['endereco'] = $buscarPorId('endereco', 'id_endereco', $endereco_id);
