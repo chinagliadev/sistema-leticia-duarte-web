@@ -52,11 +52,11 @@
                 <div class="default text">Selecione uma turma</div>
                 <div class="menu">
                     <?php
-                        $turmas = ["Bercario 2 A","Bercario 2 B","Bercario 2 C","Maternal I A","Maternal I B","Maternal I C","Maternal II A","Maternal II B","Multisseriada M.M","Multisseriada B.M"];
-                        foreach($turmas as $turma){
-                            $selected = ($aluno['turma'] ?? '') === $turma ? 'selected' : '';
-                            echo "<div class='item' data-value='$turma' $selected>$turma</div>";
-                        }
+                    $turmas = ["Bercario 2 A", "Bercario 2 B", "Bercario 2 C", "Maternal I A", "Maternal I B", "Maternal I C", "Maternal II A", "Maternal II B", "Multisseriada M.M", "Multisseriada B.M"];
+                    foreach ($turmas as $turma) {
+                        $selected = ($aluno['turma'] ?? '') === $turma ? 'selected' : '';
+                        echo "<div class='item' data-value='$turma' $selected>$turma</div>";
+                    }
                     ?>
                 </div>
             </div>
@@ -89,12 +89,13 @@
         <div class="three wide field" id="divRaca">
             <label for="txtRaca">Cor / Raça</label>
             <select class="ui search dropdown" id="txtRaca" name="corRaca" onchange="validarRaca()">
+                <option value="">Selecione Cor/Raça</option>
                 <?php
-                    $opcoesRaca = ["branca","preta","parda","amarela","indigena","não declarada","outra"];
-                    foreach($opcoesRaca as $raca){
-                        $selected = ($aluno['cor_raca'] ?? '') === $raca ? 'selected' : '';
-                        echo "<option value='$raca' $selected>$raca</option>";
-                    }
+                $opcoesRaca = ["branca", "preta", "parda", "amarela", "indigena", "não declarada", "outra"];
+                foreach ($opcoesRaca as $raca) {
+                    $selected = ($aluno['cor_raca'] ?? '') === $raca ? 'selected' : '';
+                    echo "<option value='$raca' $selected>$raca</option>";
+                }
                 ?>
             </select>
             <div class="ui hidden negative message" id="mensagem-erro-raca" style="margin-top:15px">
@@ -168,7 +169,7 @@
         <div class="ten wide field">
             <label>Em caso de febre autoriza medicar a criança?</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" id="autorizacaoMed" name="autorizacaoMed" onchange="validarCampoGotas();validarRemedio()" <?= !empty($aluno['autorizacao_medicacao']) ? '' : 'checked' ?>>
+                <input type="checkbox" id="autorizacaoMed" name="autorizacaoMed" onchange="validarCampoGotas();validarRemedio()" <?= !empty($aluno['autorizacao_medicacao']) ? 'checked' : '' ?>>
                 <label></label>
             </div>
         </div>
