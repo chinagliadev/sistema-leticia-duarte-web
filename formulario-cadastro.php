@@ -18,25 +18,25 @@
         <script src="./js/semantic_ui.js"></script>
         <script src="./js/validacao-formulario.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui-calendar@0.0.8/dist/calendar.min.css">
-    
-    
+
+
 </head>
 
 <body>
     <button id="btn-menu" class="ui icon button">
         <i class="sidebar icon"></i>
     </button>
-    
+
     <section class="corpo_pagina">
         <?php include './template/menuLateral.php' ?>
-        
+
         <main class="conteudo_cadastrados">
-            
+
             <section class="sessao_cadastro">
                 <section class="cabecalho_cadastrados ui segment blue">
                     <h2>Cadastro <br>de alunos</h2>
                     <img class="tamanho-img ui small image fluid" src="./img/apresentacao_img/Logo Leiticia Duarte.png"
-                    alt="logo da leticia duarte na tela de cadastros de alunos">
+                        alt="logo da leticia duarte na tela de cadastros de alunos">
                 </section>
                 <form method="post" action="./salvar-cadastro-aluno.php" class="ui form form-cadastro-aluno" id="formulario-aluno">
                     <?php include './template/cadastro_aluno/aluno.php'; ?>
@@ -46,9 +46,9 @@
                     <div class="ui error message"></div>
                 </form>
 
-                <?php include './template/modal/modal-salvar-dados.php'?>
-                <?php include './template/modal/modal-formulario-invalido.php'?>
-                
+                <?php include './template/modal/modal-salvar-dados.php' ?>
+                <?php include './template/modal/modal-formulario-invalido.php' ?>
+
             </section>
         </main>
     </section>
