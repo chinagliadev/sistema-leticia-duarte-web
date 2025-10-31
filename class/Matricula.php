@@ -77,7 +77,7 @@ class Matricula
         return $dados;
     }
 
-        public function listarMatriculaDesativada(): array
+    public function listarMatriculaDesativada(): array
     {
         $sqlListar =
             "SELECT 
@@ -113,7 +113,8 @@ class Matricula
         return $dadosDesativarMatricula->rowCount() > 0;
     }
 
-    public function reativarMatricula($idAluno):bool{
+    public function reativarMatricula($idAluno): bool
+    {
         $sqlAtivarMatricula = "UPDATE tb_matricula 
                                   SET matricula_ativada = :situacao WHERE aluno_id = :id
         ";
@@ -137,7 +138,9 @@ class Matricula
             'responsavel_2' => null,
             'estrutura_familiar' => null,
             'pessoa_autorizada_1' => null,
-            'pessoa_autorizada_2' => null
+            'pessoa_autorizada_2' => null,
+            'pessoa_autorizada_3' => null, 
+            'pessoa_autorizada_4' => null  
         ];
 
         $sqlIdAluno = "SELECT id FROM tb_alunos WHERE ra_aluno = :ra_aluno";
@@ -165,6 +168,8 @@ class Matricula
         $estrutura_id = $matricula['estrutura_familiar_id'];
         $pessoa_autorizada_1_id = $matricula['pessoa_autorizada_1_id'];
         $pessoa_autorizada_2_id = $matricula['pessoa_autorizada_2_id'];
+        $pessoa_autorizada_3_id = $matricula['pessoa_autorizada_3_id']; // Novo
+        $pessoa_autorizada_4_id = $matricula['pessoa_autorizada_4_id']; // Novo
 
         $sqlAluno = "SELECT * FROM tb_alunos WHERE id = :id";
         $stmtAluno = $this->conn->prepare($sqlAluno);
@@ -187,9 +192,12 @@ class Matricula
         $dadosCompletos['estrutura_familiar'] = $buscarPorId('tb_estrutura_familiar', 'id', $estrutura_id);
         $dadosCompletos['pessoa_autorizada_1'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_1_id);
         $dadosCompletos['pessoa_autorizada_2'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_2_id);
+        $dadosCompletos['pessoa_autorizada_3'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_3_id); // Novo
+        $dadosCompletos['pessoa_autorizada_4'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_4_id); // Novo
 
         return $dadosCompletos;
     }
+
 
     public function pesquisarAluno($termoPesquisa)
     {
@@ -221,11 +229,12 @@ class Matricula
         return $stmt->fetchAll();
     }
 
-    public function filtrarTurma($turma){
-        
-        if($turma === 'matriculas-ativadas'){
+    public function filtrarTurma($turma)
+    {
+
+        if ($turma === 'matriculas-ativadas') {
             return $this->listarMatricula();
-        }else if($turma === 'matriculas-desativadas'){
+        } else if ($turma === 'matriculas-desativadas') {
             return $this->listarMatriculaDesativada();
         }
 
@@ -247,9 +256,7 @@ class Matricula
         $dadosFiltro->execute([
             ':turma' => $turma
         ]);
-        
+
         return $dadosFiltro->fetchAll();
     }
-
- 
 }

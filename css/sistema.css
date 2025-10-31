@@ -454,3 +454,8 @@ ease;
 .ui.card>.content p{
     font-size: 15px;
 }
+
+.label-detalhes{
+    background-color: #6094ee !important;
+    font-size: 14px !important;
+}

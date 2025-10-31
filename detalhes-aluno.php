@@ -14,7 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $responsavel = $dadosCompleto['responsavel_1'];
     $responsavel2 = $dadosCompleto['responsavel_2'];
     $estrutura_familiar = $dadosCompleto['estrutura_familiar'];
-
+    $pessoa_autorizada_1 = $dadosCompleto['pessoa_autorizada_1'];
+    $pessoa_autorizada_2 = $dadosCompleto['pessoa_autorizada_2'];
+    $pessoa_autorizada_3 = $dadosCompleto['pessoa_autorizada_3'];
+    $pessoa_autorizada_4 = $dadosCompleto['pessoa_autorizada_4'];
 }
 
 ?>
@@ -53,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </section>
 
             <div class="ui grid relaxed ">
-                <div class="two column row">
+                <div class="ui stackable two column row">
                     <div class="four wide column">
                         <div class="ui card" style="width: 100%;">
                             <?php
@@ -101,7 +104,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 </div>
                             </div>
                             <div class="extra content">
-
+                                <a href="./gerar-arquivo-pdf.php?idAluno=<?=$aluno['ra_aluno']?>">
+                            <div class="ui bottom attached button red">
+                                        <i class="file pdf outline icon"></i>
+                                        Gerar PDF do <?=$aluno['nome']?>
+                                    </div>
+                            </a>
                             </div>
                         </div>
                     </div>
@@ -157,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             </div>
 
                             <div class="content paragrafo-card">
-                                <div class="ui two column grid">
+                                <div class="ui stackable two column grid">
 
                                     <div class="column">
                                         <?php
@@ -207,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                 <?php if (!empty($responsavel2['nome'])) { ?>
                                     <div class="ui divider horizontal">Segundo Responsável</div>
-                                    <div class="ui two column grid">
+                                    <div class="ui stackable two column grid">
                                         <div class="column">
                                             <?php
                                             $tipo_responsavel = !empty($responsavel2['tipo_responsavel']) ? $responsavel2['tipo_responsavel'] : 'Não informado';
@@ -247,14 +255,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
 
                         <!-- Estrutura Familiar -->
-
                         <div class="ui card" style="width: 100%;">
                             <div class="content background_card_detalhes">
                                 <div class="ui header centered">ESTRUTURA FAMILIAR</div>
                             </div>
 
                             <div class="content paragrafo-card">
-                                <div class="ui two column grid">
+                                <div class="ui stackable two column grid">
 
                                     <div class="column">
                                         <?php
@@ -295,12 +302,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                         $valor_aluguel = !empty($estrutura_familiar['valor_aluguel']) ? $estrutura_familiar['valor_aluguel'] : 'Não informado';
 
+                                        $ja_fez_cirurgia = simNao($estrutura_familiar['ja_fez_cirurgia'] ?? null);
+                                        $qual_cirurgia = !empty($estrutura_familiar['qual_cirurgia']) ? $estrutura_familiar['qual_cirurgia'] : 'Não informado';
                                         ?>
 
                                         <p><strong>Numero de Filhos: </strong> <?= $estrutura_familiar['numero_filhos'] ?></p>
                                         <p><strong>Tipo de transporte: </strong><?= $transporte_selecionado ?></p>
                                         <p><strong>Recebe Bolsa Familia: </strong> <?= $recebe_bolsa_familia ?></p>
                                         <p><strong>Tipo da Moradia: </strong> <?= $tipo_moradia ?></p>
+
                                     </div>
 
                                     <div class="column">
@@ -308,13 +318,124 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         <p><strong>Valor bolsa familia:</strong> <?= $valor_bolsa_familia ?></p>
                                         <p><strong>Valor do Aluguel:</strong> <?= $valor_aluguel ?></p>
                                     </div>
+                                    <div class="ui label-detalhes label" style="width: 100%;text-align:center">INFORMAÇÕES IMPORTANTES SOBRE A CRIANÇA</div>
+                                    <div class="column">
+                                        <?php
+                                        function simNao($valor)
+                                        {
+                                            if (!isset($valor)) return 'Não informado';
+                                            return $valor == 1 ? 'Sim' : 'Não';
+                                        }
+
+                                        $possui_convenio = simNao($estrutura_familiar['possui_convenio'] ?? null);
+                                        $qual_convenio = !empty($estrutura_familiar['qual_convenio']) ? $estrutura_familiar['qual_convenio'] : 'Não informado';
+
+                                        $portador_necessidade_especial = simNao($estrutura_familiar['portador_necessidade_especial'] ?? null);
+                                        $qual_necessidade_especial = !empty($estrutura_familiar['qual_necessidade_especial']) ? $estrutura_familiar['qual_necessidade_especial'] : 'Não informado';
+
+                                        $possui_alergia = simNao($estrutura_familiar['possui_alergia'] ?? null);
+                                        $qual_alergia = !empty($estrutura_familiar['especifique_alergia']) ? $estrutura_familiar['especifique_alergia'] : 'Não informado';
+
+                                        $tomou_vacina = isset($estrutura_familiar['vacina_catapora_varicela'])
+                                            ? ($estrutura_familiar['vacina_catapora_varicela'] == 1 ? 'Sim' : 'Não')
+                                            : 'Não informado';
+
+                                        $doencas_campos = [
+                                            'doenca_anemia' => 'Anemia',
+                                            'doenca_bronquite' => 'Bronquite',
+                                            'doenca_catapora' => 'Catapora',
+                                            'doenca_covid' => 'Covid',
+                                            'doenca_cardiaca' => 'Doença Cardíaca',
+                                            'doenca_meningite' => 'Meningite',
+                                            'doenca_pneumonia' => 'Pneumonia',
+                                            'doenca_convulsao' => 'Convulsão',
+                                            'doenca_diabete' => 'Diabetes',
+                                            'doenca_refluxo' => 'Refluxo'
+                                        ];
+
+                                        $doencas_list = [];
+                                        foreach ($doencas_campos as $campo => $nome) {
+                                            if (!empty($estrutura_familiar[$campo]) && $estrutura_familiar[$campo] == 1) {
+                                                $doencas_list[] = $nome;
+                                            }
+                                        }
+
+                                        if (!empty($estrutura_familiar['outras_doencas'])) {
+                                            $doencas_list[] = $estrutura_familiar['outras_doencas'];
+                                        }
+
+                                        $doencas_string = !empty($doencas_list) ? implode(', ', $doencas_list) : 'Não informado';
+                                        ?>
+
+                                        <p><strong>Possui convênio: </strong> <?= $possui_convenio ?></p>
+                                        <p><strong>Qual convênio: </strong> <?= $qual_convenio ?></p>
+
+                                        <p><strong>Portador de alguma necessidade especial: </strong> <?= $portador_necessidade_especial ?></p>
+                                        <p><strong>Qual necessidade especial: </strong> <?= $qual_necessidade_especial ?></p>
+
+                                        <p><strong>Possui alergia: </strong> <?= $possui_alergia ?></p>
+                                        <p><strong>Qual alergia: </strong> <?= $qual_alergia ?></p>
+                                    </div>
+                                    <div class="column">
+                                        <p><strong>Já fez cirurgia: </strong> <?= $ja_fez_cirurgia ?></p>
+                                        <p><strong>Qual cirurgia: </strong> <?= $qual_cirurgia ?></p>
+                                        <p><strong>Tomou vacina contra catapora ou varicela: </strong> <?= $tomou_vacina ?></p>
+                                        <p><strong>Doença que a criança já teve:</strong> <?= $doencas_string ?></p>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
 
+                        <div class="ui card" style="width: 100%;">
+                            <div class="content background_card_detalhes">
+                                <div class="ui header centered">PESSOAS AUTORIZADAS A BUSCAR MEU FILHO(A) NA CRECHE</div>
+                            </div>
+
+                            <div class="content paragrafo-card">
+                                <div class="ui stackable two column grid">
+                                    <?php
+                                    $pessoas_autorizadas = [
+                                        $pessoa_autorizada_1 ?? null,
+                                        $pessoa_autorizada_2 ?? null,
+                                        $pessoa_autorizada_3 ?? null,
+                                        $pessoa_autorizada_4 ?? null
+                                    ];
+
+                                    $temPessoas = false;
+
+                                    foreach ($pessoas_autorizadas as $pessoa) {
+                                        if (!empty($pessoa['nome'])) {
+                                            $temPessoas = true;
+                                            $nome = $pessoa['nome'] ?? 'Não informado';
+                                            $cpf = $pessoa['cpf'] ?? 'Não informado';
+                                            $celular = $pessoa['celular'] ?? 'Não informado';
+                                            $parentesco = $pessoa['parentesco'] ?? 'Não informado';
+                                    ?>
+                                            <div class="column">
+                                                <p><strong>Nome:</strong> <?= $nome ?></p>
+                                                <p><strong>CPF:</strong> <?= $cpf ?></p>
+                                            </div>
+                                            <div class="column">
+                                                <p><strong>Telefone:</strong> <?= $celular ?></p>
+                                                <p><strong>Parentesco:</strong> <?= $parentesco ?></p>
+                                            </div>
+                                    <?php
+                                        }
+                                    }
+
+                                    if (!$temPessoas) {
+                                        echo '<p><em>Nenhuma pessoa autorizada informada.</em></p>';
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
+            </div>
             </div>
         </main>
     </section>
