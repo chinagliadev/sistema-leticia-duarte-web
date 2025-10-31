@@ -113,7 +113,8 @@ class Matricula
         return $dadosDesativarMatricula->rowCount() > 0;
     }
 
-    public function reativarMatricula($idAluno):bool{
+    public function reativarMatricula($idAluno): bool
+    {
         $sqlAtivarMatricula = "UPDATE tb_matricula 
                                   SET matricula_ativada = :situacao WHERE aluno_id = :id
         ";
@@ -137,7 +138,9 @@ class Matricula
             'responsavel_2' => null,
             'estrutura_familiar' => null,
             'pessoa_autorizada_1' => null,
-            'pessoa_autorizada_2' => null
+            'pessoa_autorizada_2' => null,
+            'pessoa_autorizada_3' => null, 
+            'pessoa_autorizada_4' => null  
         ];
 
         $sqlIdAluno = "SELECT id FROM tb_alunos WHERE ra_aluno = :ra_aluno";
@@ -152,7 +155,7 @@ class Matricula
         $sqlMatricula = "SELECT * FROM tb_matricula WHERE aluno_id = :aluno_id";
         $stmtMatricula = $this->conn->prepare($sqlMatricula);
         $stmtMatricula->execute([':aluno_id' => $idAluno]);
-        $dadosCompletos['matricula'] = $stmtMatricula->fetch(PDO::FETCH_ASSOC);
+        $dadosCompletos['matricula'] = $stmtMatricula->fetch();
 
         if (!$dadosCompletos['matricula']) {
             return false;
@@ -165,11 +168,13 @@ class Matricula
         $estrutura_id = $matricula['estrutura_familiar_id'];
         $pessoa_autorizada_1_id = $matricula['pessoa_autorizada_1_id'];
         $pessoa_autorizada_2_id = $matricula['pessoa_autorizada_2_id'];
+        $pessoa_autorizada_3_id = $matricula['pessoa_autorizada_3_id']; // Novo
+        $pessoa_autorizada_4_id = $matricula['pessoa_autorizada_4_id']; // Novo
 
         $sqlAluno = "SELECT * FROM tb_alunos WHERE id = :id";
         $stmtAluno = $this->conn->prepare($sqlAluno);
         $stmtAluno->execute([':id' => $idAluno]);
-        $dadosCompletos['aluno'] = $stmtAluno->fetch(PDO::FETCH_ASSOC);
+        $dadosCompletos['aluno'] = $stmtAluno->fetch();
 
         $endereco_id = $dadosCompletos['aluno']['endereco_id'] ?? null;
 
@@ -178,7 +183,7 @@ class Matricula
             $sql = "SELECT * FROM $tabela WHERE $colunaId = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetch();
         };
 
         $dadosCompletos['endereco'] = $buscarPorId('endereco', 'id_endereco', $endereco_id);
@@ -187,9 +192,12 @@ class Matricula
         $dadosCompletos['estrutura_familiar'] = $buscarPorId('tb_estrutura_familiar', 'id', $estrutura_id);
         $dadosCompletos['pessoa_autorizada_1'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_1_id);
         $dadosCompletos['pessoa_autorizada_2'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_2_id);
+        $dadosCompletos['pessoa_autorizada_3'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_3_id); // Novo
+        $dadosCompletos['pessoa_autorizada_4'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_4_id); // Novo
 
         return $dadosCompletos;
     }
+
 
     public function pesquisarAluno($termoPesquisa)
     {

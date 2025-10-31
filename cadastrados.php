@@ -24,7 +24,7 @@ if ($filtro) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sistema com seu CSS e sidebar Semantic UI.</title>
+    <title>Sistema Leticia Duarte.</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css" />
     <link rel="stylesheet" href="./css/sistema.css" />
@@ -236,13 +236,13 @@ if ($filtro) {
                                             <?= ($status_db == 1) ? 'style="display:none;"' : '' ?>>
                                             <i class="check icon"></i>
                                         </button>
-                                        <button
+                                        <a href="./detalhes-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
                                             data-inverted=""
                                             data-tooltip="Detalhes Aluno"
                                             class="ui small icon button blue"
                                             title="Detalhes">
                                             <i class="eye icon"></i>
-                                        </button>
+                                            </a>
                                         <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
                                             data-tooltip="Editar Aluno"
                                             data-inverted=""

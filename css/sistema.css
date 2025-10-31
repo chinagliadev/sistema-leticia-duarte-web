@@ -218,7 +218,9 @@ a {
     margin-top: 20px;
     width: 100%;
 }
-
+.texto-detalhes{
+    font-size: 18px;
+}
 
 .ui.steps {
     display: flex;
@@ -439,4 +441,21 @@ ease;
 
 .label-multisseriada {
     background-color: #4c8bf5 !important;
+}
+
+.background_card_detalhes {
+    background-color: #4c8bf5 !important;
+}
+
+.background_card_detalhes .ui.header {
+    color: white !important;
+}
+
+.ui.card>.content p{
+    font-size: 15px;
+}
+
+.label-detalhes{
+    background-color: #6094ee !important;
+    font-size: 14px !important;
 }
