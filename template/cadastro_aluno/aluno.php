@@ -92,8 +92,9 @@
                 <option value="">Selecione Cor/Raça</option>
                 <?php
                 $opcoesRaca = ["branca", "preta", "parda", "amarela", "indigena", "não declarada", "outra"];
+                echo "$opcoesRaca";
                 foreach ($opcoesRaca as $raca) {
-                    $selected = ($aluno['cor_raca'] ?? '') === $raca ? 'selected' : '';
+                    $selected = ($aluno['etnia'] ?? '') === $raca ? 'selected' : '';
                     echo "<option value='$raca' $selected>$raca</option>";
                 }
                 ?>
@@ -169,31 +170,49 @@
         <div class="ten wide field">
             <label>Em caso de febre autoriza medicar a criança?</label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" id="autorizacaoMed" name="autorizacaoMed" onchange="validarCampoGotas();validarRemedio()" <?= !empty($aluno['autorizacao_medicacao']) ? 'checked' : '' ?>>
+                <input
+                    type="checkbox"
+                    id="autorizacaoMed"
+                    name="autorizacaoMed"
+                    onchange="validarCampoGotas(); validarRemedio()"
+                    <?= !empty($aluno['autorizacao_febre']) && $aluno['autorizacao_febre'] == 1 ? 'checked' : '' ?>>
                 <label></label>
             </div>
         </div>
 
-        <div class="three wide field oculto" id="camposGotas">
+        <div class="three wide field <?= !empty($aluno['autorizacao_febre']) && $aluno['autorizacao_febre'] == 1 ? '' : 'oculto' ?>" id="camposGotas">
             <label for="txtGotas">Quantas gotas</label>
-            <input type="number" id="txtGotas" name="txtGotas" placeholder="1, 2, 3..." onblur="validarCampoGotas()" value="<?= $aluno['quantidade_gotas'] ?? '' ?>">
+            <input
+                type="number"
+                id="txtGotas"
+                name="txtGotas"
+                placeholder="1, 2, 3..."
+                onblur="validarCampoGotas()"
+                value="<?= $aluno['gotas'] ?? '' ?>">
             <div class="ui hidden negative message" id="mensagem-erro-gotas">
                 <div class="content">
-                    <i class=""></i><span id="gotas-erro"></span>
+                    <span id="gotas-erro"></span>
                 </div>
             </div>
         </div>
 
-        <div class="three wide field oculto" id="fieldRemedio">
+        <div class="three wide field <?= !empty($aluno['autorizacao_febre']) && $aluno['autorizacao_febre'] == 1 ? '' : 'oculto' ?>" id="fieldRemedio">
             <label for="txtRemedio">Qual remédio</label>
-            <input type="text" id="txtRemedio" name="txtRemedio" placeholder="" onblur="validarRemedio()" value="<?= $aluno['remedio'] ?? '' ?>">
+            <input
+                type="text"
+                id="txtRemedio"
+                name="txtRemedio"
+                placeholder=""
+                onblur="validarRemedio()"
+                value="<?= $aluno['remedio'] ?? '' ?>">
             <div class="ui hidden negative message" id="mensagem-erro-remedio">
                 <div class="content">
-                    <i class=""></i><span id="remedio-erro"></span>
+                    <span id="remedio-erro"></span>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="fields">
         <div class="ten wide field">

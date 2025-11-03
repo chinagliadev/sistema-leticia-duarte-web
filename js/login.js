@@ -175,7 +175,7 @@ function validarNomeCampo() {
   }
 
   if (valorNome.split(/\s+/).length < 2) {
-    mostrarErroCampo(msgNome, "Informe nome e sobrenome corretamente.");
+    mostrarErroCampo(msgNome, "Informe nome e sobrenome.");
     return false;
   } else {
     esconderErroCampo(msgNome);
@@ -226,7 +226,7 @@ function validarCPFCampo() {
   }
 
   if (!validarCPF(valorCPF)) {
-    mostrarErroCampo(msgCPF, "CPF inválido! Certifique-se de que contém 11 números e não é repetido.");
+    mostrarErroCampo(msgCPF, "CPF inválido! Certifique-se de colocar um CPF corretamente.");
     return false;
   } else {
     esconderErroCampo(msgCPF);
