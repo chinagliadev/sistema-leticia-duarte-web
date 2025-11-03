@@ -152,6 +152,39 @@ A classe possui atributos públicos que representam os campos da tabela `tb_alun
 | **Segurança** | Utiliza **Prepared Statements** para proteger contra Injeção SQL. |
 | **Retorno** | Retorna o ID do registro de aluno recém-criado (`$this->conn->lastInsertId()`), crucial para a próxima etapa da matrícula. |
 
+```php
+
+    public function cadastrarAluno($raAluno, $nome,$cpf,$rg=null ,$data_nascimento, $etnia, $turma, $autorizacao_febre, $remedio, $gotas, $permissao_foto, $endereco_id, $funcionario_id){
+
+        $sqlInserir = "INSERT INTO tb_alunos 
+        (ra_aluno, nome, cpf, rg, data_nascimento, etnia, turma, autorizacao_febre, remedio, gotas, permissao_foto, endereco_id, funcionario_id)
+        VALUES
+        (:ra_aluno, :nome, :cpf, :rg, :data_nascimento, :etnia, :turma, :autorizacao_febre, :remedio, :gotas, :permissao_foto, :endereco_id, :funcionario_id)
+        ";
+
+        $dados = $this->conn->prepare($sqlInserir);
+
+        $dados->execute([
+            ':ra_aluno' => $raAluno,
+            ':nome' => $nome,
+            ':cpf' => $cpf,
+            ':rg' => $rg,
+            ':data_nascimento' => $data_nascimento,
+            ':etnia' => $etnia,
+            ':turma' => $turma,
+            ':autorizacao_febre' => $autorizacao_febre,
+            ':remedio' => $remedio,
+            ':gotas' => $gotas,
+            ':permissao_foto' => $permissao_foto,
+            ':endereco_id' => $endereco_id,
+            ':funcionario_id' => $funcionario_id
+        ]);
+
+        return $this->conn->lastInsertId();
+    }
+
+```
+
 --- 
 
  ###  Class: Endereco.php
@@ -197,6 +230,29 @@ A classe está diretamente mapeada para a tabela: **`endereco`**.
 * `id_endereco` (Chave Primária, implícita no `lastInsertId()`)
 
 ---
+
+***Codigo Endereco.php***
+
+```php
+public function cadastrarEndereco($cep, $endereco, $numero, $bairro, $cidade, $complemento = 'Sem complemento'){
+        $sqlInserir = "INSERT INTO endereco (cep, endereco, numero, bairro, cidade, complemento) 
+                        VALUES 
+                        (:cep, :endereco, :numero, :bairro, :cidade, :complemento)";
+
+        $dados = $this->conn->prepare($sqlInserir);
+
+        $dados->execute([
+            ':cep' => $cep,
+            ':endereco' => $endereco,
+            ':numero' => $numero,
+            ':bairro' => $bairro,
+            ':cidade' => $cidade,
+            ':complemento' => $complemento
+        ]);
+
+         return $this->conn->lastInsertId();
+    }
+```
 
 ### Class: EstruturaFamiliar.php
 
@@ -612,7 +668,7 @@ Arquivo PHP responsável por processar e salvar os dados do formulário de cadas
 ```php
 // Insere dados básicos do aluno
 $aluno = new Aluno();
-$idAluno = $aluno->cadastrarAluno($nome, $ra, $cpf, ...);
+
 ```
 
 2. Endereço
@@ -666,4 +722,59 @@ $autorizada->cadastrarAutorizada($idAluno, $nome, $cpf, ...);
     // ...campos do formulário
 </form>
 ```
+---
 
+# desativar-cadastro-aluno.php
+[![Versão PHP](https://img.shields.io/badge/PHP-v7.4%2B-blue.svg)](https://www.php.net/)
+
+## Descrição
+Arquivo PHP responsável por desativar (marcar como inativa) a matrícula de um aluno no sistema. Recebe requisição POST com o identificador do aluno, valida a entrada, executa a rotina de negócio para alterar o status no banco e redireciona para a página de listagem.
+
+## Principais funcionalidades
+- Recebe POST com o campo `id_aluno`.
+- Validação básica do input (`isset` / não vazio).
+- Chamada ao método de domínio para desativar a matrícula (ex.: `Matricula::desativarMatricula($id)`).
+- Redirecionamento para a lista de matriculados (`cadastrados.php`) após execução.
+- Registra mensagens de sucesso/erro via sessão ou direciona com HTTP status adequado.
+
+## Fluxo resumido
+1. Verifica método da requisição: POST.
+2. Lê e sanitiza `$_POST['id_aluno']`.
+3. Instancia a classe de matrícula e chama o método de desativação.
+4. Tratar retorno/erros e redirecionar para `cadastrados.php`.
+
+
+## Dependências
+- config.php (conexão com BD)
+- class/Matricula.php (método `desativarMatricula`)
+- sessões iniciadas para mensagens (session_start())
+- página de listagem: cadastrados.php
+
+
+## Saída esperada
+- Redirecionamento para `cadastrados.php`.
+- Mensagem de sucesso/erro disponível na sessão para exibição ao usuário.
+
+# detalhes-aluno.php
+[![Versão PHP](https://img.shields.io/badge/PHP-v7.4%2B-blue.svg)](https://www.php.net/)
+
+## Descrição
+Página responsável por exibir os detalhes de um aluno. Recupera os dados pelo ID (via GET), normaliza o retorno (array/objeto) e apresenta informações pessoais, contato, endereço e status da matrícula. Caso o aluno não exista, redireciona para a lista com mensagem de erro.
+
+## Principais funcionalidades
+- Recebe parâmetro `id` via GET
+- Inicia sessão e garante inclusão de configuração (`config.php`) e, se disponível, a classe `Aluno`.
+- Tenta obter dados usando métodos da classe `Aluno` (quando existir).
+
+## Fluxo resumido
+1. session_start() para mensagens/controle.
+4. Se não houver classe/metodo, usa consulta direta PDO: SELECT * FROM alunos WHERE id = :id.
+5. Se não encontrar, seta $_SESSION['erro'] e redireciona para cadastrados.php.
+6. Normaliza os dados e os exibe no template HTML com proteção htmlspecialchars().
+
+## Dependências
+- config.php (conexão com BD, p.ex. variável $pdo)
+- class/Aluno.php (opcional; melhora reutilização)
+- template/menuLateral.php (layout)
+- CSS/JS: Semantic UI, css/sistema.css, js/semantic_ui.js, js/validacao-formulario.js
+- cadastrados.php (página de listagem para redirecionamento)
