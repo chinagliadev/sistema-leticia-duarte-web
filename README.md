@@ -57,6 +57,161 @@ A identidade visual do Sistema Leticia Duarte é definida pela seguinte paleta d
 * **Títulos/Destaques:** `Bungee`
 * **Corpo de Texto:** `Baloo 2`
 
+## Estrutura do banco de dados - Sistema Leticia Duarte
+[![Banco de Dados](https://img.shields.io/badge/MariaDB-10.4%2B-orange.svg)](https://mariadb.org/)
+
+**Tabela - endereco**
+```SQL
+CREATE TABLE endereco (
+    id_endereco INT(11) NOT NULL AUTO_INCREMENT,
+    cep VARCHAR(10) DEFAULT NULL,
+    endereco VARCHAR(255) DEFAULT NULL,
+    numero INT(11) DEFAULT NULL,
+    bairro VARCHAR(100) DEFAULT NULL,
+    cidade VARCHAR(100) DEFAULT 'Americana',
+    complemento VARCHAR(50) DEFAULT NULL,
+    PRIMARY KEY (id_endereco)
+);
+
+```
+**Tabela - tb_alunos**
+
+```sql
+CREATE TABLE tb_alunos (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    ra_aluno VARCHAR(100) NOT NULL,
+    nome VARCHAR(200) DEFAULT NULL,
+    cpf VARCHAR(14) DEFAULT NULL,
+    rg VARCHAR(12) DEFAULT NULL,
+    data_nascimento DATE DEFAULT NULL,
+    etnia VARCHAR(20) DEFAULT NULL,
+    turma ENUM('Bercario 2 A','Bercario 2 B','Bercario 2 C','Maternal I A','Maternal I B','Maternal I C','Maternal II A','Maternal II B','Multisseriada M.M','Multisseriada B.M') DEFAULT NULL,
+    autorizacao_febre TINYINT(1) DEFAULT 0,
+    remedio VARCHAR(100) DEFAULT NULL,
+    gotas INT(11) DEFAULT NULL,
+    permissao_foto TINYINT(1) DEFAULT 0,
+    data_cadastro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    endereco_id INT(11) DEFAULT NULL,
+    funcionario_id INT(11) DEFAULT NULL,
+    PRIMARY KEY (id),
+    KEY endereco_id (endereco_id),
+    KEY funcionario_id (funcionario_id)
+);
+```
+**Tabela - tb_estrutura_familiar**
+```sql
+CREATE TABLE tb_estrutura_familiar (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    pais_vivem_juntos TINYINT(1) DEFAULT NULL,
+    numero_filhos INT(11) DEFAULT NULL,
+    recebe_bolsa_familia TINYINT(1) DEFAULT NULL,
+    valor DECIMAL(10,2) DEFAULT NULL,
+    possui_alergia TINYINT(1) DEFAULT NULL,
+    especifique_alergia VARCHAR(100) DEFAULT NULL,
+    possui_convenio TINYINT(1) DEFAULT NULL,
+    qual_convenio VARCHAR(100) DEFAULT NULL,
+    portador_necessidade_especial TINYINT(1) DEFAULT NULL,
+    qual_necessidade_especial VARCHAR(100) DEFAULT NULL,
+    problemas_visao TINYINT(1) DEFAULT NULL,
+    ja_fez_cirurgia TINYINT(1) DEFAULT NULL,
+    qual_cirurgia VARCHAR(100) DEFAULT NULL,
+    vacina_catapora_varicela TINYINT(1) DEFAULT NULL,
+    tipo_moradia VARCHAR(255) DEFAULT NULL,
+    valor_aluguel DECIMAL(10,2) DEFAULT NULL,
+    doenca_anemia TINYINT(1) DEFAULT NULL,
+    doenca_bronquite TINYINT(1) DEFAULT NULL,
+    doenca_catapora TINYINT(1) DEFAULT NULL,
+    doenca_covid TINYINT(4) DEFAULT NULL,
+    doenca_cardiaca TINYINT(1) DEFAULT NULL,
+    doenca_meningite TINYINT(1) DEFAULT NULL,
+    doenca_pneumonia TINYINT(1) DEFAULT NULL,
+    doenca_convulsao TINYINT(1) DEFAULT NULL,
+    doenca_diabete TINYINT(4) DEFAULT NULL,
+    doenca_refluxo TINYINT(1) DEFAULT NULL,
+    outras_doencas VARCHAR(100) DEFAULT NULL,
+    transporte_carro TINYINT(1) DEFAULT 0,
+    transporte_van TINYINT(1) DEFAULT 0,
+    transporte_a_pe TINYINT(1) DEFAULT 0,
+    transporte_outros_desc VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+```
+**Tabela - tb_funcionario**
+
+```sql
+CREATE TABLE tb_funcionario (
+    id_funcionario INT(11) NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(200) DEFAULT NULL,
+    email VARCHAR(100) DEFAULT NULL,
+    senha VARCHAR(255) NOT NULL,
+    celular VARCHAR(20) DEFAULT NULL,
+    cpf VARCHAR(14) DEFAULT NULL,
+    reset_token VARCHAR(6) DEFAULT NULL,
+    token_expira DATETIME DEFAULT NULL,
+    PRIMARY KEY (id_funcionario)
+);
+```
+
+**Tabela - tb_pessoas_autorizadas**
+```sql
+CREATE TABLE tb_pessoas_autorizadas (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(100) DEFAULT NULL,
+    cpf VARCHAR(14) DEFAULT NULL,
+    celular VARCHAR(20) DEFAULT NULL,
+    parentesco VARCHAR(20) DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+```
+
+**Tabela - tb_responsaveis**
+```sql
+CREATE TABLE tb_responsaveis (
+    id_responsavel INT(11) NOT NULL AUTO_INCREMENT,
+    tipo_responsavel ENUM('Pai','Mãe','Avô','Avó','Irmão','Irmã','Tio','Tia','Outro') NOT NULL,
+    nome VARCHAR(200) DEFAULT NULL,
+    data_nascimento DATE DEFAULT NULL,
+    estado_civil ENUM('Solteiro','Casado','Divorciado','Viúvo','União Estável') DEFAULT NULL,
+    escolaridade ENUM('Fundamental','Médio','Técnico','Superior','Pós-graduação','Outro') NOT NULL,
+    celular VARCHAR(20) DEFAULT NULL,
+    email VARCHAR(100) DEFAULT NULL,
+    nome_empresa VARCHAR(100) DEFAULT NULL,
+    profissao VARCHAR(100) DEFAULT NULL,
+    telefone_trabalho VARCHAR(20) DEFAULT NULL,
+    horario_trabalho VARCHAR(100) DEFAULT NULL,
+    salario DECIMAL(10,2) DEFAULT NULL,
+    renda_extra TINYINT(1) DEFAULT NULL,
+    valor_renda_extra DECIMAL(10,2) DEFAULT NULL,
+    PRIMARY KEY (id_responsavel)
+);
+```
+
+**Tabela - tb_matricula**
+```sql
+CREATE TABLE tb_matricula (
+    id_matricula INT(11) NOT NULL AUTO_INCREMENT,
+    aluno_id INT(11) DEFAULT NULL,
+    estrutura_familiar_id INT(11) DEFAULT NULL,
+    funcionario_id INT(11) DEFAULT NULL,
+    data DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    responsavel_1_id INT(11) DEFAULT NULL,
+    responsavel_2_id INT(11) DEFAULT NULL,
+    pessoa_autorizada_1_id INT(11) DEFAULT NULL,
+    pessoa_autorizada_2_id INT(11) DEFAULT NULL,
+    pessoa_autorizada_3_id INT(11) DEFAULT NULL,
+    pessoa_autorizada_4_id INT(11) DEFAULT NULL,
+    matricula_ativada TINYINT(2) DEFAULT 1,
+    PRIMARY KEY (id_matricula),
+    KEY aluno_id (aluno_id),
+    KEY estrutura_familiar_id (estrutura_familiar_id),
+    KEY funcionario_id (funcionario_id),
+    KEY responsavel_1_id (responsavel_1_id),
+    KEY responsavel_2_id (responsavel_2_id),
+    KEY pessoa_autorizada_1_id (pessoa_autorizada_1_id),
+    KEY pessoa_autorizada_2_id (pessoa_autorizada_2_id)
+);
+```
+
 ## Estrutura do projeto
 Projeto: Sistema-Leticia-Duarte/
 
@@ -1406,7 +1561,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 [![Versão PHP](https://img.shields.io/badge/PHP-v7.4%2B-blue.svg)](https://www.php.net/)
 
 ## Descrição
-Página responsável por exibir os detalhes de um aluno. Recupera os dados pelo ID (via GET), normaliza o retorno (array/objeto) e apresenta informações pessoais, contato, endereço e status da matrícula. Caso o aluno não exista, redireciona para a lista com mensagem de erro.
+Página responsável por exibir os detalhes de um aluno. Recupera os dados pelo ID (via GET), normaliza o retorno (array/objeto) e apresenta informações pessoais, responsaveis, endereço e status da matrícula, pessoa autorizada a busca-lo e estrutura familiar. Caso o aluno não exista, redireciona para a lista com mensagem de erro.
 
 ## Principais funcionalidades
 - Recebe parâmetro `id` via GET
@@ -1423,9 +1578,6 @@ buscarDadosCompletosAluno($idAluno)
 ```php
 $dadosCompleto = $matricula->buscarDadosCompletosAluno($idAluno);
 ```
-5. Se não encontrar, seta $_SESSION['erro'] e redireciona para cadastrados.php.
-6. Normaliza os dados e os exibe no template HTML com proteção htmlspecialchars().
-
 ## Dependências
 - config.php (conexão com BD, p.ex. variável $pdo)
 - class/Aluno.php (opcional; melhora reutilização)
