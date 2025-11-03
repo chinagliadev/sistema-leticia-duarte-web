@@ -451,7 +451,7 @@ function validarEstadoCivilResponsavel1() {
 }
 
 function validarEscolaridade() {
-    const div = document.getElementById('escolariadade_responsavel_div');
+    const div = document.getElementById('escolaridade_responsavel_div');
     const valor = document.getElementById('txtEscolaridade').value;
     const mensagemErro = document.getElementById('mensagem-erro-escolaridade-1');
     const spanErro = document.getElementById('escolaridade-erro-1');
@@ -598,8 +598,8 @@ function validarTipoResponsavel2() {
 
     const div = document.getElementById('tipo_responsavel_2_div');
     const valor = document.getElementById('txtTipoResponsavel_2').value;
-    const mensagemErro = document.getElementById('mensagem_erro_tipo_responsavel_2');
-    const spanErro = document.getElementById('tipo_responsavel_erro_2');
+    const mensagemErro = document.getElementById('mensagem-erro-tipo-responsavel-2'); 
+    const spanErro = document.getElementById('tipo-responsavel-erro-2');
 
     limparErro(mensagemErro, div, spanErro);
 
@@ -610,7 +610,6 @@ function validarTipoResponsavel2() {
 
     limparErro(mensagemErro, div, spanErro);
     return true;
-
 }
 
 
