@@ -62,7 +62,6 @@ A identidade visual do Sistema Leticia Duarte é definida pela seguinte paleta d
 
 **Tabela - endereco**
 
-![img]["C:\Users\victor.cneto1\Documents\sistema-leticia-duarte-web_1.png"]
 
 ```SQL
 CREATE TABLE endereco (
