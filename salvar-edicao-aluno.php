@@ -4,14 +4,12 @@ include './class/Matricula.php';
 
 $matricula = new Matricula();
 
-// Pega o RA enviado pela URL
 $ra_aluno = $_GET['idAluno'] ?? '';
 
 if (empty($ra_aluno)) {
     die("Erro: Nenhum aluno selecionado.");
 }
 
-// Busca todos os dados do aluno
 $dadosCompletos = $matricula->buscarDadosCompletosAluno($ra_aluno);
 
 if (!$dadosCompletos) {
@@ -62,9 +60,7 @@ $pessoas_autorizadas = $dadosCompletos['pessoas_autorizadas'] ?? [];
                 <form method="post" action="./salvar-edicao-aluno.php" class="ui form form-cadastro-aluno" id="formulario-aluno">
                     <input type="hidden" name="ra_aluno" value="<?= htmlspecialchars($aluno['ra_aluno']) ?>">
 
-                    <?php 
-                        // Estes includes devem receber os valores preenchidos
-                        // Basta adaptar cada campo dentro deles com value="<?= htmlspecialchars($aluno['campo']) ?>"
+                    <?php
                         include './template/cadastro_aluno/aluno.php'; 
                         include './template/cadastro_aluno/responsavel.php';
                         include './template/cadastro_aluno/estrutura-familiar.php';
