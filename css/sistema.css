@@ -20,7 +20,7 @@
     font-family: "Baloo2";
 }
 
-/* Links */
+
 a {
     text-decoration: none;
 }
@@ -39,6 +39,12 @@ a {
     align-items: center;
     padding: 30px;
     border-right: 2px solid rgb(222, 222, 222);
+
+    height: 100vh;
+    position: sticky; 
+    top: 0; 
+   
+    box-sizing: border-box; 
 }
 
 .menu_lateral .opcoes_menu {
