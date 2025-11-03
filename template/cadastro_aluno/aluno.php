@@ -213,13 +213,19 @@
         </div>
     </div>
 
-
     <div class="fields">
         <div class="ten wide field">
-            <label>Autorizo a divulgação de imagem do meu filho(a) para uso de projetos na escola, fotos, filmagem, Facebook, Instagram e site.</label>
+            <label>
+                Autorizo a divulgação de imagem do meu filho(a) para uso de projetos na escola,
+                fotos, filmagem, Facebook, Instagram e site.
+            </label>
             <div class="ui toggle checkbox">
-                <input type="checkbox" name="autorizacaoImagem" <?= !empty($aluno['autorizacao_imagem']) ? 'checked' : '' ?>>
-                <label></label>
+                <input
+                    type="checkbox"
+                    id="permissaoFoto"
+                    name="permissaoFoto"
+                    <?= !empty($aluno['permissao_foto']) && $aluno['permissao_foto'] == 1 ? 'checked' : '' ?>>
+                <label for="permissaoFoto"></label>
             </div>
         </div>
     </div>
