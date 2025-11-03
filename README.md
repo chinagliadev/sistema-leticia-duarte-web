@@ -290,7 +290,260 @@ Esta classe tem como foco o registro detalhado do contexto de vida do aluno, pos
 | **Necessidades Especiais**| `portador_necessidade_especial`, `qual_necessidade_especial`. |
 | **Histórico de Doenças**| Múltiplos campos booleanos (flags) para doenças como `doenca_anemia`, `doenca_covid`, `doenca_meningite`, etc., além de um campo para outras doenças (`outras_doencas`). |
 | **Transporte** | Flags para tipo de transporte (`transporte_carro`, `transporte_van`, `transporte_pé`, `outro`
+
+**Codigo EstruturaFamiliar.php**
+
+```php
+  public function cadastrarEstruturaFamiliar(
+        $pais_vivem_juntos,
+        $numero_filhos,
+        $recebe_bolsa_familia,
+        $valor,
+        $possui_alergia,
+        $especifique_alergia,
+        $possui_convenio,
+        $qual_convenio,
+        $portador_necessidade_especial,
+        $qual_necessidade_especial,
+        $problemas_visao,
+        $ja_fez_cirurgia,
+        $qual_cirurgia,
+        $vacina_catapora_varicela,
+        $tipo_moradia = null,
+        $valor_aluguel,
+        $doenca_anemia,
+        $doenca_bronquite,
+        $doenca_cardiaca,
+        $doenca_covid,
+        $doenca_catapora,
+        $doenca_convulsao,
+        $doenca_diabetes,
+        $doenca_meningite,
+        $doenca_pneumonia,
+        $doenca_refluxo,
+        $doenca_outra,
+        $transporte_carro,
+        $transporte_van,
+        $transporte_a_pe,
+        $transporte_outros_desc
+    ) {
+
+        $sqlInserir = "INSERT INTO tb_estrutura_familiar (
+    pais_vivem_juntos, numero_filhos, recebe_bolsa_familia, valor, possui_alergia, especifique_alergia,
+    possui_convenio, qual_convenio, portador_necessidade_especial, qual_necessidade_especial,
+    problemas_visao, ja_fez_cirurgia, qual_cirurgia,
+    vacina_catapora_varicela, tipo_moradia, valor_aluguel, doenca_anemia, doenca_bronquite, doenca_catapora, doenca_covid, doenca_cardiaca,
+    doenca_meningite, doenca_pneumonia, doenca_convulsao, 
+    doenca_diabete, doenca_refluxo, outras_doencas,
+    transporte_carro, transporte_van, transporte_a_pe, transporte_outros_desc
+) 
+VALUES (
+    :pais_vivem_juntos, :numero_filhos, :recebe_bolsa_familia, :valor, :possui_alergia, :especifique_alergia,
+    :possui_convenio, :qual_convenio, :portador_necessidade_especial, :qual_necessidade_especial,
+    :problemas_visao, :ja_fez_cirurgia, :qual_cirurgia,
+    :vacina_catapora_varicela, :tipo_moradia, :valor_aluguel, :doenca_anemia, :doenca_bronquite, :doenca_catapora, :doenca_covid, :doenca_cardiaca,
+    :doenca_meningite, :doenca_pneumonia, :doenca_convulsao, 
+    :doenca_diabete, :doenca_refluxo, :outras_doencas,
+    :transporte_carro, :transporte_van, :transporte_a_pe, :transporte_outros_desc
+)";
+
+        $dados = $this->conn->prepare($sqlInserir);
+
+        $dados->execute([
+            'pais_vivem_juntos' => $pais_vivem_juntos,
+            'numero_filhos' => $numero_filhos,
+            'recebe_bolsa_familia' => $recebe_bolsa_familia,
+            'valor' => $valor,
+            'possui_alergia' => $possui_alergia,
+            'especifique_alergia' => $especifique_alergia,
+            'possui_convenio' => $possui_convenio,
+            'qual_convenio' => $qual_convenio,
+            'portador_necessidade_especial' => $portador_necessidade_especial,
+            'qual_necessidade_especial' => $qual_necessidade_especial,
+            'problemas_visao' => $problemas_visao,
+            'ja_fez_cirurgia' => $ja_fez_cirurgia,
+            'qual_cirurgia' => $qual_cirurgia,
+            'vacina_catapora_varicela' => $vacina_catapora_varicela,
+            'tipo_moradia' => $tipo_moradia,
+            'valor_aluguel' => $valor_aluguel,
+            'doenca_anemia' => $doenca_anemia,
+            'doenca_bronquite' => $doenca_bronquite,
+            'doenca_catapora' => $doenca_catapora,
+            'doenca_covid' => $doenca_covid,
+            'doenca_cardiaca' => $doenca_cardiaca,
+            'doenca_meningite' => $doenca_meningite,
+            'doenca_pneumonia' => $doenca_pneumonia,
+            'doenca_convulsao' => $doenca_convulsao,
+            'doenca_diabete' => $doenca_diabetes, 
+            'doenca_refluxo' => $doenca_refluxo,
+            'outras_doencas' => $doenca_outra,
+            'transporte_carro' => $transporte_carro,
+            'transporte_van' => $transporte_van,
+            'transporte_a_pe' => $transporte_a_pe,
+            'transporte_outros_desc' => $transporte_outros_desc
+        ]);
+
+        return $this->conn->lastInsertId();
+    }
+```
  ---
+
+### PessoaAutorizada.php
+
+A classe `PessoaAutorizada` é um **Modelo de Dados (Data Model)** essencial que gerencia o registro de indivíduos autorizados a ter contato ou interagir com o aluno em nome dos responsáveis. Ela atua como a interface de dados para a tabela `tb_pessoas_autorizadas`.
+
+## Funcionalidades e Métodos
+
+Esta classe é focada na persistência de dados e na segurança da conexão com o banco de dados.
+
+### `__construct()`
+
+| Tipo | Descrição |
+| :--- | :--- |
+| **Ação** | Inicializa a conexão com o banco de dados. |
+| **Detalhes** | Utiliza a classe `PDO` (PHP Data Objects) e carrega as credenciais de acesso (`DBNAME`, `HOST`, etc.) a partir das **variáveis de ambiente** (`$_ENV`). |
+| **Princípio** | Mantém as informações sensíveis de conexão isoladas do código da aplicação. |
+
+### `cadastrarPessoaAutorizada($nome, $cpf, $celular, $parentesco)`
+
+| Tipo | Descrição |
+| :--- | :--- |
+| **Ação** | Insere um novo registro de pessoa autorizada na tabela `tb_pessoas_autorizadas`. |
+| **Parâmetros** | Recebe os dados básicos de identificação da pessoa autorizada: `$nome`, `$cpf`, `$celular` e `$parentesco`. |
+| **Segurança** | Emprega **Prepared Statements** (`$this->conn->prepare()`) para prevenir vulnerabilidades de Injeção SQL. |
+| **Retorno** | Retorna o **ID** do novo registro inserido (`$this->conn->lastInsertId()`), possibilitando a associação imediata com o aluno (tabela de cadastro principal). |
+
+## Estrutura da Tabela Mapeada
+
+A classe está diretamente mapeada para a tabela: **`tb_pessoas_autorizadas`**.
+
+**Principais Atributos Mapeados (Campos de Tabela):**
+
+* `nome`
+* `cpf`
+* `celular`
+* `parentesco`
+* `id` (Gerado automaticamente)
+
+---
+
+**Codigo Pessoa Autorizada**
+```php
+public function cadastrarPessoaAutorizada($nome, $cpf, $celular, $parentesco){
+
+        $sqlInserir = "INSERT INTO tb_pessoas_autorizadas (nome, cpf, celular, parentesco) VALUES (:nome, :cpf, :celular, :parentesco)";
+
+        $dados = $this->conn->prepare($sqlInserir);
+
+        $dados->execute([
+            ":nome" => $nome,
+            ":cpf" => $cpf,
+            ":celular" => $celular,
+            ":parentesco" => $parentesco
+        ]);
+
+
+        return $this->conn->lastInsertId();
+    }
+```
+
+---
+### Responsavel.php
+
+A classe `Responsavel` atua como o **Modelo de Dados (Data Model)** no sistema, sendo responsável por toda a lógica de persistência e gerenciamento dos dados dos responsáveis pelos alunos ou assistidos da Fundação.
+
+Ela é a ponte entre a aplicação PHP e a tabela `tb_responsaveis` no banco de dados.
+
+## Funcionalidades e Métodos
+
+A classe implementa a conexão com o banco de dados via **PDO** e oferece o método principal para registrar novos responsáveis.
+
+### `__construct()`
+
+| Tipo | Descrição |
+| :--- | :--- |
+| **Ação** | Estabelece a conexão com o banco de dados. |
+| **Detalhes** | Utiliza a classe nativa `PDO` e carrega as credenciais de conexão (`DBNAME`, `HOST`, `USUARIO`, `SENHA`) a partir das **variáveis de ambiente** (`$_ENV`). |
+| **Segurança** | Implementa a boa prática de separar credenciais do código principal. |
+
+### `cadastrarResponsavel(...)`
+
+| Tipo | Descrição |
+| :--- | :--- |
+| **Ação** | Insere um novo registro de responsável na tabela `tb_responsaveis`. |
+| **Parâmetros** | Recebe 15 parâmetros, que mapeiam todos os campos do formulário/tabela (e.g., `$nome`, `$celular`, `$salario`, `$valor_renda_extra`). |
+| **Segurança** | Utiliza **Prepared Statements** (`$this->conn->prepare()`) para proteger contra ataques de Injeção SQL. |
+| **Retorno** | Retorna o `ID` do último registro inserido (`$this->conn->lastInsertId()`), permitindo que o sistema associe este responsável a outras entidades (como o aluno) imediatamente. |
+
+## Estrutura da Tabela Mapeada
+
+A classe está diretamente mapeada para a tabela: **`tb_responsaveis`**.
+
+**Principais Atributos Mapeados (Campos de Tabela):**
+
+* `tipo_responsavel`
+* `nome`
+* `data_nascimento`
+* `estado_civil`
+* `escolaridade`
+* `celular`
+* `email`
+* `nome_empresa`
+* `profissao`
+* `telefone_trabalho`
+* `horario_trabalho`
+* `salario`
+* `renda_extra`
+* `valor_renda_extra`
+
+**Codigo Responsavel.php**
+```php
+
+    public function cadastrarResponsavel(
+        $tipo_responsavel,
+        $nome,
+        $data_nascimento,
+        $estado_civil,
+        $escolaridade,
+        $celular,
+        $email,
+        $nome_empresa,
+        $profissao,
+        $telefone_trabalho,
+        $horario_trabalho,
+        $salario,
+        $renda_extra,
+        $valor_renda_extra
+    ) {
+        $sqlInserir = "INSERT INTO tb_responsaveis
+            (tipo_responsavel, nome, data_nascimento, estado_civil, escolaridade, celular, email, nome_empresa, profissao, telefone_trabalho, horario_trabalho, salario, renda_extra, valor_renda_extra)
+            VALUES
+            (:tipo_responsavel, :nome, :data_nascimento, :estado_civil, :escolaridade, :celular, :email, :nome_empresa, :profissao, :telefone_trabalho, :horario_trabalho, :salario, :renda_extra, :valor_renda_extra)";
+
+        $dados = $this->conn->prepare($sqlInserir);
+
+        $dados->execute([
+            ':tipo_responsavel' => $tipo_responsavel,
+            ':nome' => $nome,
+            ':data_nascimento' => $data_nascimento,
+            ':estado_civil' => $estado_civil,
+            ':escolaridade' => $escolaridade,
+            ':celular' => $celular,
+            ':email' => $email,
+            ':nome_empresa' => $nome_empresa,
+            ':profissao' => $profissao,
+            ':telefone_trabalho' => $telefone_trabalho,
+            ':horario_trabalho' => $horario_trabalho,
+            ':salario' => $salario,
+            ':renda_extra' => $renda_extra,
+            ':valor_renda_extra' => $valor_renda_extra
+        ]);
+
+        return $this->conn->lastInsertId();
+    }
+```
+
+---
 
 ### Class: Matricula.php
 
@@ -359,94 +612,178 @@ A classe armazena diversas propriedades que são chaves estrangeiras (FKs) da ta
 | **Processo** | 1. Busca o `aluno_id` pelo `ra_aluno`. 2. Busca o registro da `tb_matricula`. 3. Usa uma função auxiliar interna (`$buscarPorId`) para buscar todos os dados relacionados (aluno, endereço, matrícula, dois responsáveis, estrutura familiar, quatro pessoas autorizadas). |
 | **Retorno** | Retorna um array associativo contendo todos os dados do aluno em sub-arrays (e.g., `['aluno' => [...], 'responsavel_1' => [...], ...]`). |
 
----
 
-### PessoaAutorizada.php
+**Codigo Matricula.php**
+```php
 
-A classe `PessoaAutorizada` é um **Modelo de Dados (Data Model)** essencial que gerencia o registro de indivíduos autorizados a ter contato ou interagir com o aluno em nome dos responsáveis. Ela atua como a interface de dados para a tabela `tb_pessoas_autorizadas`.
+    public function cadastrarMatricula($aluno_id, $estrutura_familiar_id, $funcionario_id, $responsavel_1_id, $responsavel_2_id, $pessoa_autorizada_1_id, $pessoa_autorizada_2_id, $pessoa_autorizada_3_id, $pessoa_autorizada_4_id)
+    {
+        $sqlInserir = "INSERT INTO tb_matricula 
+                         (aluno_id, estrutura_familiar_id, funcionario_id, responsavel_1_id, responsavel_2_id, pessoa_autorizada_1_id, pessoa_autorizada_2_id, pessoa_autorizada_3_id, pessoa_autorizada_4_id) 
+                         VALUES 
+                         (:aluno_id, :estrutura_familiar_id, :funcionario_id, :responsavel_1_id, :responsavel_2_id, :pessoa_autorizada_1_id, :pessoa_autorizada_2_id, :pessoa_autorizada_3_id, :pessoa_autorizada_4_id)";
 
-## Funcionalidades e Métodos
+        $dados = $this->conn->prepare($sqlInserir);
 
-Esta classe é focada na persistência de dados e na segurança da conexão com o banco de dados.
+        $dados->execute([
+            ":aluno_id" => $aluno_id,
+            ":estrutura_familiar_id" => $estrutura_familiar_id,
+            ":funcionario_id" => $funcionario_id,
+            ":responsavel_1_id" => $responsavel_1_id,
+            ":responsavel_2_id" => $responsavel_2_id,
+            ":pessoa_autorizada_1_id" => $pessoa_autorizada_1_id,
+            ":pessoa_autorizada_2_id" => $pessoa_autorizada_2_id,
+            ":pessoa_autorizada_3_id" => $pessoa_autorizada_3_id,
+            ":pessoa_autorizada_4_id" => $pessoa_autorizada_4_id
+        ]);
 
-### `__construct()`
+        return $this->conn->lastInsertId();
+    }
 
-| Tipo | Descrição |
-| :--- | :--- |
-| **Ação** | Inicializa a conexão com o banco de dados. |
-| **Detalhes** | Utiliza a classe `PDO` (PHP Data Objects) e carrega as credenciais de acesso (`DBNAME`, `HOST`, etc.) a partir das **variáveis de ambiente** (`$_ENV`). |
-| **Princípio** | Mantém as informações sensíveis de conexão isoladas do código da aplicação. |
 
-### `cadastrarPessoaAutorizada($nome, $cpf, $celular, $parentesco)`
+    public function listarMatricula(): array
+    {
+        $sqlListar =
+            "SELECT 
+        tb_alunos.id, 
+        tb_alunos.ra_aluno, 
+        tb_alunos.nome AS nome_aluno, 
+        tb_alunos.data_nascimento, 
+        tb_alunos.turma, 
+        tb_responsaveis.nome AS nome_responsavel,
+        tb_matricula.matricula_ativada AS matricula
+            FROM tb_matricula
+        INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+        INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+        WHERE matricula_ativada = 1;
+";
 
-| Tipo | Descrição |
-| :--- | :--- |
-| **Ação** | Insere um novo registro de pessoa autorizada na tabela `tb_pessoas_autorizadas`. |
-| **Parâmetros** | Recebe os dados básicos de identificação da pessoa autorizada: `$nome`, `$cpf`, `$celular` e `$parentesco`. |
-| **Segurança** | Emprega **Prepared Statements** (`$this->conn->prepare()`) para prevenir vulnerabilidades de Injeção SQL. |
-| **Retorno** | Retorna o **ID** do novo registro inserido (`$this->conn->lastInsertId()`), possibilitando a associação imediata com o aluno (tabela de cadastro principal). |
+        $dados = $this->conn->query($sqlListar)->fetchAll();
+        return $dados;
+    }
 
-## Estrutura da Tabela Mapeada
+    public function listarMatriculaDesativada(): array
+    {
+        $sqlListar =
+            "SELECT 
+        tb_alunos.id, 
+        tb_alunos.ra_aluno, 
+        tb_alunos.nome AS nome_aluno, 
+        tb_alunos.data_nascimento, 
+        tb_alunos.turma, 
+        tb_responsaveis.nome AS nome_responsavel,
+        tb_matricula.matricula_ativada AS matricula
+            FROM tb_matricula
+        INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+        INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+        WHERE matricula_ativada = 0;
+";
 
-A classe está diretamente mapeada para a tabela: **`tb_pessoas_autorizadas`**.
+        $dados = $this->conn->query($sqlListar)->fetchAll();
+        return $dados;
+    }
 
-**Principais Atributos Mapeados (Campos de Tabela):**
+    public function desativarMatricula($idAluno): bool
+    {
+        $sqlDesativarMatricula = "UPDATE tb_matricula 
+                                  SET matricula_ativada = :situacao WHERE aluno_id = :id
+        ";
 
-* `nome`
-* `cpf`
-* `celular`
-* `parentesco`
-* `id` (Gerado automaticamente)
+        $dadosDesativarMatricula = $this->conn->prepare($sqlDesativarMatricula);
+        $dadosDesativarMatricula->execute([
+            ':situacao' => self::MATRICULA_DESATIVADA,
+            ':id' => $idAluno
+        ]);
 
----
+        return $dadosDesativarMatricula->rowCount() > 0;
+    }
 
-### Responsavel.php
+    public function reativarMatricula($idAluno): bool
+    {
+        $sqlAtivarMatricula = "UPDATE tb_matricula 
+                                  SET matricula_ativada = :situacao WHERE aluno_id = :id
+        ";
 
-A classe `Responsavel` atua como o **Modelo de Dados (Data Model)** no sistema, sendo responsável por toda a lógica de persistência e gerenciamento dos dados dos responsáveis pelos alunos ou assistidos da Fundação.
+        $dadosAtivarMatricula = $this->conn->prepare($sqlAtivarMatricula);
+        $dadosAtivarMatricula->execute([
+            ':situacao' => self::MATRICULA_ATIVA,
+            ':id' => $idAluno
+        ]);
 
-Ela é a ponte entre a aplicação PHP e a tabela `tb_responsaveis` no banco de dados.
+        return $dadosAtivarMatricula->rowCount() > 0;
+    }
 
-## Funcionalidades e Métodos
+    public function buscarDadosCompletosAluno($ra_aluno)
+    {
+        $dadosCompletos = [
+            'aluno' => null,
+            'endereco' => null,
+            'matricula' => null,
+            'responsavel_1' => null,
+            'responsavel_2' => null,
+            'estrutura_familiar' => null,
+            'pessoa_autorizada_1' => null,
+            'pessoa_autorizada_2' => null,
+            'pessoa_autorizada_3' => null, 
+            'pessoa_autorizada_4' => null  
+        ];
 
-A classe implementa a conexão com o banco de dados via **PDO** e oferece o método principal para registrar novos responsáveis.
+        $sqlIdAluno = "SELECT id FROM tb_alunos WHERE ra_aluno = :ra_aluno";
+        $stmtId = $this->conn->prepare($sqlIdAluno);
+        $stmtId->execute([':ra_aluno' => $ra_aluno]);
+        $idAluno = $stmtId->fetchColumn();
 
-### `__construct()`
+        if (!$idAluno) {
+            return false;
+        }
 
-| Tipo | Descrição |
-| :--- | :--- |
-| **Ação** | Estabelece a conexão com o banco de dados. |
-| **Detalhes** | Utiliza a classe nativa `PDO` e carrega as credenciais de conexão (`DBNAME`, `HOST`, `USUARIO`, `SENHA`) a partir das **variáveis de ambiente** (`$_ENV`). |
-| **Segurança** | Implementa a boa prática de separar credenciais do código principal. |
+        $sqlMatricula = "SELECT * FROM tb_matricula WHERE aluno_id = :aluno_id";
+        $stmtMatricula = $this->conn->prepare($sqlMatricula);
+        $stmtMatricula->execute([':aluno_id' => $idAluno]);
+        $dadosCompletos['matricula'] = $stmtMatricula->fetch();
 
-### `cadastrarResponsavel(...)`
+        if (!$dadosCompletos['matricula']) {
+            return false;
+        }
 
-| Tipo | Descrição |
-| :--- | :--- |
-| **Ação** | Insere um novo registro de responsável na tabela `tb_responsaveis`. |
-| **Parâmetros** | Recebe 15 parâmetros, que mapeiam todos os campos do formulário/tabela (e.g., `$nome`, `$celular`, `$salario`, `$valor_renda_extra`). |
-| **Segurança** | Utiliza **Prepared Statements** (`$this->conn->prepare()`) para proteger contra ataques de Injeção SQL. |
-| **Retorno** | Retorna o `ID` do último registro inserido (`$this->conn->lastInsertId()`), permitindo que o sistema associe este responsável a outras entidades (como o aluno) imediatamente. |
+        $matricula = $dadosCompletos['matricula'];
 
-## Estrutura da Tabela Mapeada
+        $resp1_id = $matricula['responsavel_1_id'];
+        $resp2_id = $matricula['responsavel_2_id'];
+        $estrutura_id = $matricula['estrutura_familiar_id'];
+        $pessoa_autorizada_1_id = $matricula['pessoa_autorizada_1_id'];
+        $pessoa_autorizada_2_id = $matricula['pessoa_autorizada_2_id'];
+        $pessoa_autorizada_3_id = $matricula['pessoa_autorizada_3_id']; // Novo
+        $pessoa_autorizada_4_id = $matricula['pessoa_autorizada_4_id']; // Novo
 
-A classe está diretamente mapeada para a tabela: **`tb_responsaveis`**.
+        $sqlAluno = "SELECT * FROM tb_alunos WHERE id = :id";
+        $stmtAluno = $this->conn->prepare($sqlAluno);
+        $stmtAluno->execute([':id' => $idAluno]);
+        $dadosCompletos['aluno'] = $stmtAluno->fetch();
 
-**Principais Atributos Mapeados (Campos de Tabela):**
+        $endereco_id = $dadosCompletos['aluno']['endereco_id'] ?? null;
 
-* `tipo_responsavel`
-* `nome`
-* `data_nascimento`
-* `estado_civil`
-* `escolaridade`
-* `celular`
-* `email`
-* `nome_empresa`
-* `profissao`
-* `telefone_trabalho`
-* `horario_trabalho`
-* `salario`
-* `renda_extra`
-* `valor_renda_extra`
+        $buscarPorId = function ($tabela, $colunaId, $id) {
+            if (!$id) return null;
+            $sql = "SELECT * FROM $tabela WHERE $colunaId = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch();
+        };
+
+        $dadosCompletos['endereco'] = $buscarPorId('endereco', 'id_endereco', $endereco_id);
+        $dadosCompletos['responsavel_1'] = $buscarPorId('tb_responsaveis', 'id_responsavel', $resp1_id);
+        $dadosCompletos['responsavel_2'] = $buscarPorId('tb_responsaveis', 'id_responsavel', $resp2_id);
+        $dadosCompletos['estrutura_familiar'] = $buscarPorId('tb_estrutura_familiar', 'id', $estrutura_id);
+        $dadosCompletos['pessoa_autorizada_1'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_1_id);
+        $dadosCompletos['pessoa_autorizada_2'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_2_id);
+        $dadosCompletos['pessoa_autorizada_3'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_3_id); // Novo
+        $dadosCompletos['pessoa_autorizada_4'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_4_id); // Novo
+
+        return $dadosCompletos;
+    }
+```
+
 
 ---
 
@@ -664,40 +1001,326 @@ Arquivo PHP responsável por processar e salvar os dados do formulário de cadas
 - Sanitiza inputs
 
 ### Processamento de Dados
-1. Dados do Aluno
-```php
-// Insere dados básicos do aluno
-$aluno = new Aluno();
+**salvar-cadastro-aluno.php**
 
+```php
+<?php
+session_start();
+
+require './class/Aluno.php';
+require './class/Responsavel.php';
+require './class/Endereco.php';
+require './class/PessoaAutorizada.php';
+require './class/EstrturaFamiliar.php';
+require './class/Matricula.php';
+require './class/MatriculaPessoaAutorizada.php';
+require './config.php';
+
+function limparValorMonetario($valor)
+{
+    if (is_null($valor) || $valor === '') {
+        return null;
+    }
+    $valor = str_replace(['R$', ' ', '.'], '', $valor);
+    $valor = str_replace(',', '.', $valor);
+    return (float) $valor;
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $nome = $_POST['txtNomeCrianca'] ?? null;
+    $cpfAluno = $_POST['txtCpfAluno'] ?? null;
+    $rg = $_POST['txtRgAluno'] ?? null;
+    $raAluno = $_POST['txtRaAluno'] ?? null;
+
+    var_dump($raAluno);
+    $turma = $_POST['turma'] ?? null;
+    $dataNascimento = $_POST['data_nascimento'] ?? null;
+    $corRaca = $_POST['corRaca'] ?? null;
+
+    $autorizacaoMed = isset($_POST['autorizacaoMed']) ? 1 : 0;
+    $remedio = $autorizacaoMed ? ($_POST['txtRemedio'] ?? null) : null;
+    $gotas = $autorizacaoMed ? ($_POST['txtGotas'] ?? null) : null;
+    $autorizacaoImagem = isset($_POST['autorizacaoImagem']) ? 1 : 0;
+
+    $cep = $_POST['txtCep'] ?? null;
+    $logradouro = $_POST['txtEndereco'] ?? null;
+    $numero = $_POST['txtNumero'] ?? null;
+    $bairro = $_POST['txtBairro'] ?? null;
+    $cidade = $_POST['txtCidade'] ?? null;
+    $complemento = $_POST['txtComplemento'] ?? null;
+
+    $pais_vivem_juntos = isset($_POST['pais_vivem_juntos']) ? 1 : 0;
+
+    $recebe_bolsa_familia = isset($_POST['recebe_bolsa_familia']) ? 1 : 0;
+
+    $possui_alergia = isset($_POST['possui_alergia']) ? 1 : 0;
+    $especifique_alergia = $possui_alergia ? ($_POST['especifique_alergia'] ?? null) : null;
+
+    $possui_convenio = isset($_POST['possui_convenio']) ? 1 : 0;
+    $qual_convenio = $possui_convenio ? ($_POST['qual_convenio'] ?? null) : null;
+
+    $portador_necessidade_especial = isset($_POST['portador_necessidade_especial']) ? 1 : 0;
+    $qual_necessidade_especial = $portador_necessidade_especial ? ($_POST['qual_necessidade'] ?? null) : null;
+
+    $problemas_visao = isset($_POST['problemas_visao']) ? 1 : 0;
+
+    $ja_fez_cirurgia = isset($_POST['ja_fez_cirurgia']) ? 1 : 0;
+    $qual_cirurgia = $ja_fez_cirurgia ? ($_POST['qual_cirurgia'] ?? null) : null;
+
+    $vacina_catapora_varicela = isset($_POST['vacina_catapora_varicela']) ? 1 : 0;
+
+    $tipo_moradia = $_POST['tipo_moradia'] ?? null;
+
+    $valor_aluguel = ($tipo_moradia === 'alugada')
+        ? ($_POST['txtValorAluguel'] ?? null)
+        : null;
+
+    $valor_aluguel = limparValorMonetario($valor_aluguel);
+
+    $numero_filhos               = $_POST['numero_filhos'] ?? null;
+
+    $valor                       = $recebe_bolsa_familia ? ($_POST['valor'] ?? null) : null;
+    $valor = limparValorMonetario($valor);
+    
+    $doenca_anemia     = isset($_POST['doenca_anemia']) ? 1 : 0;
+    $doenca_bronquite  = isset($_POST['doenca_bronquite']) ? 1 : 0;
+    $doenca_catapora   = isset($_POST['doenca_catapora']) ? 1 : 0;
+    $doenca_covid      = isset($_POST['doenca_covid']) ? 1 : 0;
+    $doenca_cardiaca   = isset($_POST['doenca_cardiaca']) ? 1 : 0;
+    $doenca_meningite  = isset($_POST['doenca_meningite']) ? 1 : 0;
+    $doenca_pneumonia  = isset($_POST['doenca_pneumonia']) ? 1 : 0;
+    $doenca_convulsao  = isset($_POST['doenca_convulsao']) ? 1 : 0;
+    $doenca_diabete    = isset($_POST['doenca_diabete']) ? 1 : 0;
+    $doenca_refluxo    = isset($_POST['doenca_refluxo']) ? 1 : 0;
+    $outras_doencas    = $_POST['outras_doencas'] ?? null;
+
+    $transporte_carro       = isset($_POST['transporte_carro']) ? 1 : 0;
+    $transporte_van         = isset($_POST['transporte_van']) ? 1 : 0;
+    $transporte_a_pe        = isset($_POST['transporte_pe']) ? 1 : 0;
+    $transporte_outros_desc = isset($_POST['transporte_outros_desc']) ? 1 : 0;
+
+    $estruturaFamiliar = new EstruturaFamiliar();
+    $estrutura_familiar_id = $estruturaFamiliar->cadastrarEstruturaFamiliar(
+        $pais_vivem_juntos,
+        $numero_filhos,
+        $recebe_bolsa_familia,
+        $valor,
+        $possui_alergia,
+        $especifique_alergia,
+        $possui_convenio,
+        $qual_convenio,
+        $portador_necessidade_especial,
+        $qual_necessidade_especial,
+        $problemas_visao,
+        $ja_fez_cirurgia,
+        $qual_cirurgia,
+        $vacina_catapora_varicela,
+        $tipo_moradia,
+        $valor_aluguel,
+        $doenca_anemia,
+        $doenca_bronquite,
+        $doenca_catapora,
+        $doenca_covid,
+        $doenca_cardiaca,
+        $doenca_meningite,
+        $doenca_pneumonia,
+        $doenca_convulsao,
+        $doenca_diabete,
+        $doenca_refluxo,
+        $outras_doencas,
+        $transporte_carro,
+        $transporte_van,
+        $transporte_a_pe,
+        $transporte_outros_desc
+    );
+
+    $responsavel = new Responsavel();
+
+    $tipo_responsavel_1     = $_POST['txtTipoResponsavel_1'] ?? null;
+    $nome_responsavel_1     = $_POST['txtNomeResponsavel_1'] ?? null;
+    $data_nascimento_1      = $_POST['data_nascimento_1'] ?? null;
+    $estado_civil_1         = $_POST['txtEstadoCivil_1'] ?? null;
+    $escolaridade_1         = $_POST['txtEscolaridade'] ?? 'Não informado';
+    $celular_1              = $_POST['txtTelefone_1'] ?? null;
+    $email_1                = $_POST['txtEmail_1'] ?? null;
+    $nome_empresa_1         = $_POST['txtNomeEmpresa_1'] ?? null;
+    $profissao_1            = $_POST['txtProfissao_1'] ?? null;
+    $telefone_trabalho_1    = $_POST['txtTelefoneTrabalho_1'] ?? null;
+    $horario_trabalho_1     = $_POST['txtHorarioTrabalho_1'] ?? null;
+    $salario_1              = $_POST['txtSalario_1'] ?? null;
+    $renda_extra_1          = isset($_POST['toggleRendaExtra_1']) ? 1 : 0;
+    $valor_renda_extra      = $_POST['txtRendaExtra'] ?? null;
+
+    $salario_1 = limparValorMonetario($salario_1);
+    $valor_renda_extra = limparValorMonetario($valor_renda_extra);
+
+    $responsavel_1_id = $responsavel->cadastrarResponsavel(
+        $tipo_responsavel_1,
+        $nome_responsavel_1,
+        $data_nascimento_1,
+        $estado_civil_1,
+        $escolaridade_1,
+        $celular_1,
+        $email_1,
+        $nome_empresa_1,
+        $profissao_1,
+        $telefone_trabalho_1,
+        $horario_trabalho_1,
+        $salario_1,
+        $renda_extra_1,
+        $valor_renda_extra
+    );
+
+    if (!empty($_POST['txtNomeResponsavel_2'])) {
+        $tipo_responsavel_2     = $_POST['txtTipoResponsavel_2'] ?? null;
+        $nome_responsavel_2     = $_POST['txtNomeResponsavel_2'] ?? null;
+        $data_nascimento_2      = $_POST['data_nascimento_2'] ?? null;
+        $estado_civil_2         = $_POST['txtEstadoCivil_2'] ?? 'Não informado';
+        $escolaridade_2         = $_POST['txtEscolaridade_2'] ?? 'Não informado';
+        $celular_2              = $_POST['txtTelefone_2'] ?? null;
+        $email_2                = $_POST['txtEmail_2'] ?? null;
+        $nome_empresa_2         = $_POST['txtNomeEmpresa_2'] ?? null;
+        $profissao_2            = $_POST['txtProfissao_2'] ?? null;
+        $telefone_trabalho_2    = $_POST['txtTelefoneTrabalho_2'] ?? null;
+        $horario_trabalho_2     = $_POST['txtHorarioTrabalho_2'] ?? null;
+        $salario_2              = $_POST['txtSalario_2'] ?? null;
+        $renda_extra_2          = isset($_POST['toggleRendaExtra_2']) ? 1 : 0;
+        $valor_renda_extra_2    = $_POST['txtRendaExtra_2'] ?? null;
+
+        $salario_2 = limparValorMonetario($salario_2);
+        $valor_renda_extra_2 = limparValorMonetario($valor_renda_extra_2);
+
+        $responsavel_2_id = $responsavel->cadastrarResponsavel(
+            $tipo_responsavel_2,
+            $nome_responsavel_2,
+            $data_nascimento_2,
+            $estado_civil_2,
+            $escolaridade_2,
+            $celular_2,
+            $email_2,
+            $nome_empresa_2,
+            $profissao_2,
+            $telefone_trabalho_2,
+            $horario_trabalho_2,
+            $salario_2,
+            $renda_extra_2,
+            $valor_renda_extra_2
+        );
+    }
+
+    $aluno = new Aluno();
+    $enderecoObj = new Endereco();
+    $funcionario_id = $_SESSION['usuario']['id'] ?? null;
+
+    $endereco_id = $enderecoObj->cadastrarEndereco(
+        $cep,
+        $logradouro,
+        $numero,
+        $bairro,
+        $cidade,
+        $complemento
+    );
+
+    $aluno_id = $aluno->cadastrarAluno(
+        $raAluno,
+        $nome,
+        $cpfAluno,
+        $rg,
+        $dataNascimento,
+        $corRaca,
+        $turma,
+        $autorizacaoMed,
+        $remedio,
+        $gotas,
+        $autorizacaoImagem,
+        $endereco_id,
+        $funcionario_id
+    );
+
+    var_dump($aluno_id);
+    // Pessoa autorizada 1
+    $txtNomePessoaAutorizada = $_POST['txtNomePessoaAutorizada'] ?? null;
+    $txtCpfAutorizada = $_POST['txtCpfAutorizada'] ?? null;
+    $txtTelefoneAutorizada = $_POST['txtTelefoneAutorizada'] ?? null;
+    $txtParentesnco = $_POST['txtParentenco'] ?? null;
+
+    $pessoa_autorizada = new PessoaAutorizada();
+    $pessoa_autorizada_id = $pessoa_autorizada->cadastrarPessoaAutorizada(
+        $txtNomePessoaAutorizada,
+        $txtCpfAutorizada,
+        $txtTelefoneAutorizada,
+        $txtParentesnco
+    );
+
+    // Pessoa autorizada 2
+    if (!empty($_POST['txtNomePessoaAutorizada2'])) {
+        $txtNomePessoaAutorizada2 = $_POST['txtNomePessoaAutorizada2'] ?? null;
+        $txtCpfAutorizada2 = $_POST['txtCpfAutorizada2'] ?? null;
+        $txtTelefoneAutorizada2 = $_POST['txtTelefoneAutorizada2'] ?? null;
+        $txtParentesco2 = $_POST['txtParentenco2'] ?? null;
+
+        $pessoa_autorizada2 = new PessoaAutorizada();
+        $pessoa_autorizada_id_2 = $pessoa_autorizada2->cadastrarPessoaAutorizada(
+            $txtNomePessoaAutorizada2,
+            $txtCpfAutorizada2,
+            $txtTelefoneAutorizada2,
+            $txtParentesco2
+        );
+    }
+
+    // Pessoa autorizada 3
+    if (!empty($_POST['txtNomePessoaAutorizada3'])) {
+        $txtNomePessoaAutorizada3 = $_POST['txtNomePessoaAutorizada3'] ?? null;
+        $txtCpfAutorizada3 = $_POST['txtCpfAutorizada3'] ?? null;
+        $txtTelefoneAutorizada3 = $_POST['txtTelefoneAutorizada3'] ?? null;
+        $txtParentesco3 = $_POST['txtParentenco3'] ?? null;
+
+        $pessoa_autorizada3 = new PessoaAutorizada();
+        $pessoa_autorizada_id_3 = $pessoa_autorizada3->cadastrarPessoaAutorizada(
+            $txtNomePessoaAutorizada3,
+            $txtCpfAutorizada3,
+            $txtTelefoneAutorizada3,
+            $txtParentesco3
+        );
+    }
+
+    // Pessoa autorizada 4
+    if (!empty($_POST['txtNomePessoaAutorizada4'])) {
+        $txtNomePessoaAutorizada4 = $_POST['txtNomePessoaAutorizada4'] ?? null;
+        $txtCpfAutorizada4 = $_POST['txtCpfAutorizada4'] ?? null;
+        $txtTelefoneAutorizada4 = $_POST['txtTelefoneAutorizada4'] ?? null;
+        $txtParentesco4 = $_POST['txtParentenco4'] ?? null;
+
+        $pessoa_autorizada4 = new PessoaAutorizada();
+        $pessoa_autorizada_id_4 = $pessoa_autorizada4->cadastrarPessoaAutorizada(
+            $txtNomePessoaAutorizada4,
+            $txtCpfAutorizada4,
+            $txtTelefoneAutorizada4,
+            $txtParentesco4
+        );
+    }
+
+    $matricula = new Matricula();
+    $matricula_id = $matricula->cadastrarMatricula(
+    $aluno_id,
+    $estrutura_familiar_id,
+    $funcionario_id,
+    $responsavel_1_id,
+    $responsavel_2_id,
+    $pessoa_autorizada_id,
+    $pessoa_autorizada_id_2 ?? null,
+    $pessoa_autorizada_id_3 ?? null,
+    $pessoa_autorizada_id_4 ?? null
+);
+
+    $matriculaPessoaAutorizada = new matriculaPessoaAutorizada();
+    $matriculaPessoaAutorizada->cadastrarMatriculaPessoaAutorizada($matricula_id, $pessoa_autorizada_id);
+
+    header('location: ./cadastrados.php');
+}
 ```
 
-2. Endereço
-```php
-// Cadastra endereço vinculado ao aluno
-$endereco = new Endereco();
-$endereco->cadastrarEndereco($idAluno, $logradouro, $numero, ...);
-```
-
-3. Estrutura Familiar
-```php
-// Registra dados da estrutura familiar
-$estrutura = new EstruturaFamiliar();
-$estrutura->cadastrarEstrutura($idAluno, $bolsaFamilia, ...);
-```
-
-4. Responsáveis
-```php
-// Cadastra responsável(is)
-$responsavel = new Responsavel();
-$responsavel->cadastrarResponsavel($idAluno, $nome, $tipo, ...);
-```
-
-5. Pessoas Autorizadas
-```php
-// Registra pessoas autorizadas
-$autorizada = new MatriculaPessoaAutorizada();
-$autorizada->cadastrarAutorizada($idAluno, $nome, $cpf, ...);
-```
 
 ## Outputs
 - Redirecionamento em caso de sucesso
@@ -755,6 +1378,30 @@ Arquivo PHP responsável por desativar (marcar como inativa) a matrícula de um 
 - Redirecionamento para `cadastrados.php`.
 - Mensagem de sucesso/erro disponível na sessão para exibição ao usuário.
 
+```php
+<?php
+
+include './class/Matricula.php';
+include './config.php';
+
+echo "<h1>excluir-cadastro-aluno.php</h1>";
+
+var_dump($_POST);
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     $id_aluno = $_POST['id_aluno'] ?? null;
+
+    if($id_aluno !== null){
+        $matricula = new Matricula();
+        
+        $matricula->desativarMatricula($id_aluno); 
+        header('location: ./cadastrados.php');
+        var_dump($matricula);
+
+    }
+}
+```
+
 # detalhes-aluno.php
 [![Versão PHP](https://img.shields.io/badge/PHP-v7.4%2B-blue.svg)](https://www.php.net/)
 
@@ -768,7 +1415,14 @@ Página responsável por exibir os detalhes de um aluno. Recupera os dados pelo 
 
 ## Fluxo resumido
 1. session_start() para mensagens/controle.
-4. Se não houver classe/metodo, usa consulta direta PDO: SELECT * FROM alunos WHERE id = :id.
+2. Pega o id do aluno atraves do metodo get e assim passa como parametro o id no aluno no metodo 
+```php
+buscarDadosCompletosAluno($idAluno)
+```
+
+```php
+$dadosCompleto = $matricula->buscarDadosCompletosAluno($idAluno);
+```
 5. Se não encontrar, seta $_SESSION['erro'] e redireciona para cadastrados.php.
 6. Normaliza os dados e os exibe no template HTML com proteção htmlspecialchars().
 
@@ -778,3 +1432,28 @@ Página responsável por exibir os detalhes de um aluno. Recupera os dados pelo 
 - template/menuLateral.php (layout)
 - CSS/JS: Semantic UI, css/sistema.css, js/semantic_ui.js, js/validacao-formulario.js
 - cadastrados.php (página de listagem para redirecionamento)
+
+**Codigo Detalhes Aluno**
+
+```php
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+    $idAluno = $_GET['idAluno'];
+
+    $matricula = new Matricula();
+    $dadosCompleto = $matricula->buscarDadosCompletosAluno($idAluno);
+
+    $aluno = $dadosCompleto['aluno'];
+    $endereco = $dadosCompleto['endereco'];
+    $responsavel = $dadosCompleto['responsavel_1'];
+    $responsavel2 = $dadosCompleto['responsavel_2'];
+    $estrutura_familiar = $dadosCompleto['estrutura_familiar'];
+    $pessoa_autorizada_1 = $dadosCompleto['pessoa_autorizada_1'];
+    $pessoa_autorizada_2 = $dadosCompleto['pessoa_autorizada_2'];
+    $pessoa_autorizada_3 = $dadosCompleto['pessoa_autorizada_3'];
+    $pessoa_autorizada_4 = $dadosCompleto['pessoa_autorizada_4'];
+}
+
+?>
+```
