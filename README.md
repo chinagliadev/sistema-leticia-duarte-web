@@ -106,112 +106,135 @@ Projeto: Sistema-Leticia-Duarte/
 ```
 ---
 
-## Descrição dos arquivos importantes
-- .env — Variáveis sensíveis (DB, SMTP). Não comitar.  
-- env-exemplo — Modelo de .env para referências.  
-- config.php — Carrega variáveis do .env e fornece conexão PDO.  
-- auth.php — Verificação de sessão, proteção de rotas e redirecionamentos.  
-- index.html — Página inicial/landing do sistema.  
-- login.php / verificarAdmin.php — Fluxo de autenticação do usuário/administrador.  
-- perfil.php / - Visualização e atualização de dados do usuário.  
-- formulario-cadastro.php — Formulário composto por partes em template/cadastro_aluno.  
-- salvar-cadastro-aluno.php — Sanitiza, valida e persiste dados em várias tabelas (aluno, endereço, matrícula, autorizados).  
-- editar-aluno.php  — Edição de cadastro com reuso de templates.  
-- cadastrados.php — Listagem e filtros; ações: editar, ativar/desativar, gerar PDF, excluir.  
-- detalhes-aluno.php — Exibição detalhada (dados do aluno, endereço, estrutura familiar, autorizados).  
-- gerar-arquivo-pdf.php — Geração de PDF do cadastro (pode integrar jsPDF).  
-- PHPMailer-master/ — Biblioteca para envio de e‑mail (configure credenciais SMTP no .env/arquivo correspondente).
+## Classes do Projeto
 
-# Classes do Projeto
+```bash
+├── 📦 class/                       
+│   ├── Aluno.php  
+│   ├── Endereco.php  
+│   ├── EstrturaFamiliar.php  
+│   ├── Matricula.php  
+│   └── MatriculaPessoaAutorizada.php
+│   ├── PessoaAutorizada.php
+│   ├── Responsavel.php    
+```
 
-### Responsavel.php
+ ###  Class: Aluno.php
 
-A classe `Responsavel` atua como o **Modelo de Dados (Data Model)** no sistema, sendo responsável por toda a lógica de persistência e gerenciamento dos dados dos responsáveis pelos alunos ou assistidos da Fundação.
+A classe `Aluno` (ou `Assistido`) é o **Modelo de Dados (Data Model)** fundamental do sistema. Ela é responsável por gerenciar as informações de identificação, saúde básica, e afiliação do aluno na Fundação, mapeando diretamente a tabela `tb_alunos`.
 
-Ela é a ponte entre a aplicação PHP e a tabela `tb_responsaveis` no banco de dados.
+## 🛠 Funcionalidades e Métodos
 
-## Funcionalidades e Métodos
+A classe concentra a lógica de registro da entidade principal do sistema.
 
-A classe implementa a conexão com o banco de dados via **PDO** e oferece o método principal para registrar novos responsáveis.
+### Propriedades
 
-### `__construct()`
+A classe possui atributos públicos que representam os campos da tabela `tb_alunos`, incluindo chaves estrangeiras:
 
-| Tipo | Descrição |
-| :--- | :--- |
-| **Ação** | Estabelece a conexão com o banco de dados. |
-| **Detalhes** | Utiliza a classe nativa `PDO` e carrega as credenciais de conexão (`DBNAME`, `HOST`, `USUARIO`, `SENHA`) a partir das **variáveis de ambiente** (`$_ENV`). |
-| **Segurança** | Implementa a boa prática de separar credenciais do código principal. |
-
-### `cadastrarResponsavel(...)`
-
-| Tipo | Descrição |
-| :--- | :--- |
-| **Ação** | Insere um novo registro de responsável na tabela `tb_responsaveis`. |
-| **Parâmetros** | Recebe 15 parâmetros, que mapeiam todos os campos do formulário/tabela (e.g., `$nome`, `$celular`, `$salario`, `$valor_renda_extra`). |
-| **Segurança** | Utiliza **Prepared Statements** (`$this->conn->prepare()`) para proteger contra ataques de Injeção SQL. |
-| **Retorno** | Retorna o `ID` do último registro inserido (`$this->conn->lastInsertId()`), permitindo que o sistema associe este responsável a outras entidades (como o aluno) imediatamente. |
-
-## Estrutura da Tabela Mapeada
-
-A classe está diretamente mapeada para a tabela: **`tb_responsaveis`**.
-
-**Principais Atributos Mapeados (Campos de Tabela):**
-
-* `tipo_responsavel`
-* `nome`
-* `data_nascimento`
-* `estado_civil`
-* `escolaridade`
-* `celular`
-* `email`
-* `nome_empresa`
-* `profissao`
-* `telefone_trabalho`
-* `horario_trabalho`
-* `salario`
-* `renda_extra`
-* `valor_renda_extra`
-
----
-
-### PessoaAutorizada.php
-
-A classe `PessoaAutorizada` é um **Modelo de Dados (Data Model)** essencial que gerencia o registro de indivíduos autorizados a ter contato ou interagir com o aluno em nome dos responsáveis. Ela atua como a interface de dados para a tabela `tb_pessoas_autorizadas`.
-
-## Funcionalidades e Métodos
-
-Esta classe é focada na persistência de dados e na segurança da conexão com o banco de dados.
+* **Identificação:** `$nome`, `$cpf`, `$raAluno`, `$data_nascimento`, `$etnia`, `$turma`.
+* **Saúde e Permissões:** `$autorizacao_febre`, `$remedio`, `$gotas`, `$permissao_foto`.
+* **Chaves Estrangeiras (FK):** `$endereco_id` (ID do endereço registrado na classe `Endereco`), `$funcionario_id` (ID do funcionário que realizou o cadastro).
 
 ### `__construct()`
 
 | Tipo | Descrição |
 | :--- | :--- |
-| **Ação** | Inicializa a conexão com o banco de dados. |
-| **Detalhes** | Utiliza a classe `PDO` (PHP Data Objects) e carrega as credenciais de acesso (`DBNAME`, `HOST`, etc.) a partir das **variáveis de ambiente** (`$_ENV`). |
-| **Princípio** | Mantém as informações sensíveis de conexão isoladas do código da aplicação. |
+| **Ação** | Inicializa a conexão com o banco de dados via PDO. |
+| **Detalhes** | Garante uma conexão segura, carregando as credenciais a partir das variáveis de ambiente (`$_ENV`). |
 
-### `cadastrarPessoaAutorizada($nome, $cpf, $celular, $parentesco)`
+### `cadastrarAluno(...)`
+
+| Tipo | Ação |
+| :--- | :--- |
+| **Função** | Insere um novo registro de aluno na tabela `tb_alunos`. |
+| **Parâmetros** | Recebe todos os dados de identificação, saúde, e as chaves estrangeiras (`$endereco_id`, `$funcionario_id`). O campo `$rg` é opcional (`=null`). |
+| **Fluxo** | Este método é tipicamente chamado após a inserção do Endereço. O ID retornado é, em seguida, utilizado no método `cadastrarMatricula()` da classe `Matricula`. |
+| **Segurança** | Utiliza **Prepared Statements** para proteger contra Injeção SQL. |
+| **Retorno** | Retorna o ID do registro de aluno recém-criado (`$this->conn->lastInsertId()`), crucial para a próxima etapa da matrícula. |
+
+--- 
+
+ ###  Class: Endereco.php
+
+A classe `Endereco` é um **Modelo de Dados (Data Model)** simples e específico, responsável por gerenciar e persistir as informações de endereço no sistema. Ela mapeia a tabela `endereco` e é utilizada para fornecer dados de localização tanto para os alunos quanto para seus responsáveis.
+
+## Funcionalidades e Métodos
+
+A classe é focada na inserção de novos registros de endereço no banco de dados.
+
+### Propriedades
+
+A classe possui atributos públicos que mapeiam diretamente os campos da tabela: `$cep`, `$endereco`, `$numero`, `$bairro`, `$cidade`, e `$complemento`.
+
+### `__construct()`
 
 | Tipo | Descrição |
 | :--- | :--- |
-| **Ação** | Insere um novo registro de pessoa autorizada na tabela `tb_pessoas_autorizadas`. |
-| **Parâmetros** | Recebe os dados básicos de identificação da pessoa autorizada: `$nome`, `$cpf`, `$celular` e `$parentesco`. |
-| **Segurança** | Emprega **Prepared Statements** (`$this->conn->prepare()`) para prevenir vulnerabilidades de Injeção SQL. |
-| **Retorno** | Retorna o **ID** do novo registro inserido (`$this->conn->lastInsertId()`), possibilitando a associação imediata com o aluno (tabela de cadastro principal). |
+| **Ação** | Inicializa a conexão com o banco de dados via PDO. |
+| **Detalhes** | As credenciais de conexão são carregadas de forma segura a partir das variáveis de ambiente (`$_ENV`). |
+
+### `cadastrarEndereco($cep, $endereco, $numero, $bairro, $cidade, $complemento = 'Sem complemento')`
+
+| Tipo | Ação |
+| :--- | :--- |
+| **Função** | Insere um novo registro de endereço na tabela `endereco`. |
+| **Parâmetros** | Recebe todos os componentes de um endereço. O parâmetro `$complemento` é opcional, possuindo o valor padrão 'Sem complemento'. |
+| **Segurança** | Utiliza **Prepared Statements** para garantir a segurança da inserção no banco de dados. |
+| **Retorno** | Retorna o ID do registro de endereço recém-criado (`$this->conn->lastInsertId()`), o qual será usado como chave estrangeira (`endereco_id`) na tabela do aluno ou responsável. |
 
 ## Estrutura da Tabela Mapeada
 
-A classe está diretamente mapeada para a tabela: **`tb_pessoas_autorizadas`**.
+A classe está diretamente mapeada para a tabela: **`endereco`**.
 
 **Principais Atributos Mapeados (Campos de Tabela):**
 
-* `nome`
-* `cpf`
-* `celular`
-* `parentesco`
-* `id` (Gerado automaticamente)
+* `cep`
+* `endereco`
+* `numero`
+* `bairro`
+* `cidade`
+* `complemento`
+* `id_endereco` (Chave Primária, implícita no `lastInsertId()`)
 
 ---
+
+### Class: EstruturaFamiliar.php
+
+A classe `EstruturaFamiliar` é um **Modelo de Dados (Data Model)** dedicado a gerenciar as informações sociais, de saúde, e do ambiente familiar e domiciliar do aluno. Ela mapeia a tabela `tb_estrutura_familiar` e é crucial para o levantamento socioeconômico e o cuidado com a saúde dos assistidos.
+
+## Funcionalidades e Métodos
+
+Esta classe tem como foco o registro detalhado do contexto de vida do aluno, possuindo um método de inserção com um grande número de parâmetros.
+
+### `__construct()`
+
+| Tipo | Descrição |
+| :--- | :--- |
+| **Ação** | Inicializa a conexão com o banco de dados via PDO. |
+| **Detalhes** | Carrega as credenciais de conexão a partir das variáveis de ambiente (`$_ENV`), seguindo as melhores práticas de segurança. |
+
+### `cadastrarEstruturaFamiliar(...)`
+
+| Tipo | Ação |
+| :--- | :--- |
+| **Função** | Insere um registro completo de Estrutura Familiar na tabela `tb_estrutura_familiar`. |
+| **Parâmetros** | Recebe um número extenso de parâmetros (mais de 30), cobrindo detalhes como união dos pais, número de filhos, condição de moradia, transporte, e histórico detalhado de doenças/condições de saúde. |
+| **Estrutura** | A query SQL e a execução utilizam **Prepared Statements** para mapear cada parâmetro de forma segura. |
+| **Retorno** | Retorna o ID do registro recém-inserido (`$this->conn->lastInsertId()`), que será usado como chave estrangeira na tabela `tb_matricula`. |
+
+## Tabela Mapeada e Tipos de Dados
+
+**Grupos de Informação Gerenciados:**
+
+| Grupo | Exemplos de Campos Mapeados |
+| :--- | :--- |
+| **Estrutura Familiar** | `pais_vivem_juntos`, `numero_filhos`. |
+| **Condição Social/Renda**| `recebe_bolsa_familia`, `valor` (Bolsa Família), `tipo_moradia`, `valor_aluguel`. |
+| **Saúde Básica** | `possui_alergia`, `especifique_alergia`, `possui_convenio`, `qual_convenio`, `problemas_visao`, `ja_fez_cirurgia`. |
+| **Necessidades Especiais**| `portador_necessidade_especial`, `qual_necessidade_especial`. |
+| **Histórico de Doenças**| Múltiplos campos booleanos (flags) para doenças como `doenca_anemia`, `doenca_covid`, `doenca_meningite`, etc., além de um campo para outras doenças (`outras_doencas`). |
+| **Transporte** | Flags para tipo de transporte (`transporte_carro`, `transporte_van`, `transporte_pé`, `outro`
+ ---
 
 ### Class: Matricula.php
 
@@ -282,121 +305,95 @@ A classe armazena diversas propriedades que são chaves estrangeiras (FKs) da ta
 
 ---
 
-### Class: EstruturaFamiliar.php
+### PessoaAutorizada.php
 
-A classe `EstruturaFamiliar` é um **Modelo de Dados (Data Model)** dedicado a gerenciar as informações sociais, de saúde, e do ambiente familiar e domiciliar do aluno. Ela mapeia a tabela `tb_estrutura_familiar` e é crucial para o levantamento socioeconômico e o cuidado com a saúde dos assistidos.
+A classe `PessoaAutorizada` é um **Modelo de Dados (Data Model)** essencial que gerencia o registro de indivíduos autorizados a ter contato ou interagir com o aluno em nome dos responsáveis. Ela atua como a interface de dados para a tabela `tb_pessoas_autorizadas`.
 
 ## Funcionalidades e Métodos
 
-Esta classe tem como foco o registro detalhado do contexto de vida do aluno, possuindo um método de inserção com um grande número de parâmetros.
+Esta classe é focada na persistência de dados e na segurança da conexão com o banco de dados.
 
 ### `__construct()`
 
 | Tipo | Descrição |
 | :--- | :--- |
-| **Ação** | Inicializa a conexão com o banco de dados via PDO. |
-| **Detalhes** | Carrega as credenciais de conexão a partir das variáveis de ambiente (`$_ENV`), seguindo as melhores práticas de segurança. |
+| **Ação** | Inicializa a conexão com o banco de dados. |
+| **Detalhes** | Utiliza a classe `PDO` (PHP Data Objects) e carrega as credenciais de acesso (`DBNAME`, `HOST`, etc.) a partir das **variáveis de ambiente** (`$_ENV`). |
+| **Princípio** | Mantém as informações sensíveis de conexão isoladas do código da aplicação. |
 
-### `cadastrarEstruturaFamiliar(...)`
-
-| Tipo | Ação |
-| :--- | :--- |
-| **Função** | Insere um registro completo de Estrutura Familiar na tabela `tb_estrutura_familiar`. |
-| **Parâmetros** | Recebe um número extenso de parâmetros (mais de 30), cobrindo detalhes como união dos pais, número de filhos, condição de moradia, transporte, e histórico detalhado de doenças/condições de saúde. |
-| **Estrutura** | A query SQL e a execução utilizam **Prepared Statements** para mapear cada parâmetro de forma segura. |
-| **Retorno** | Retorna o ID do registro recém-inserido (`$this->conn->lastInsertId()`), que será usado como chave estrangeira na tabela `tb_matricula`. |
-
-## Tabela Mapeada e Tipos de Dados
-
-**Grupos de Informação Gerenciados:**
-
-| Grupo | Exemplos de Campos Mapeados |
-| :--- | :--- |
-| **Estrutura Familiar** | `pais_vivem_juntos`, `numero_filhos`. |
-| **Condição Social/Renda**| `recebe_bolsa_familia`, `valor` (Bolsa Família), `tipo_moradia`, `valor_aluguel`. |
-| **Saúde Básica** | `possui_alergia`, `especifique_alergia`, `possui_convenio`, `qual_convenio`, `problemas_visao`, `ja_fez_cirurgia`. |
-| **Necessidades Especiais**| `portador_necessidade_especial`, `qual_necessidade_especial`. |
-| **Histórico de Doenças**| Múltiplos campos booleanos (flags) para doenças como `doenca_anemia`, `doenca_covid`, `doenca_meningite`, etc., além de um campo para outras doenças (`outras_doencas`). |
-| **Transporte** | Flags para tipo de transporte (`transporte_carro`, `transporte_van`, `transporte_pé`, `outro`
- ---
-
- ###  Class: Endereco.php
-
-A classe `Endereco` é um **Modelo de Dados (Data Model)** simples e específico, responsável por gerenciar e persistir as informações de endereço no sistema. Ela mapeia a tabela `endereco` e é utilizada para fornecer dados de localização tanto para os alunos quanto para seus responsáveis.
-
-## Funcionalidades e Métodos
-
-A classe é focada na inserção de novos registros de endereço no banco de dados.
-
-### Propriedades
-
-A classe possui atributos públicos que mapeiam diretamente os campos da tabela: `$cep`, `$endereco`, `$numero`, `$bairro`, `$cidade`, e `$complemento`.
-
-### `__construct()`
+### `cadastrarPessoaAutorizada($nome, $cpf, $celular, $parentesco)`
 
 | Tipo | Descrição |
 | :--- | :--- |
-| **Ação** | Inicializa a conexão com o banco de dados via PDO. |
-| **Detalhes** | As credenciais de conexão são carregadas de forma segura a partir das variáveis de ambiente (`$_ENV`). |
-
-### `cadastrarEndereco($cep, $endereco, $numero, $bairro, $cidade, $complemento = 'Sem complemento')`
-
-| Tipo | Ação |
-| :--- | :--- |
-| **Função** | Insere um novo registro de endereço na tabela `endereco`. |
-| **Parâmetros** | Recebe todos os componentes de um endereço. O parâmetro `$complemento` é opcional, possuindo o valor padrão 'Sem complemento'. |
-| **Segurança** | Utiliza **Prepared Statements** para garantir a segurança da inserção no banco de dados. |
-| **Retorno** | Retorna o ID do registro de endereço recém-criado (`$this->conn->lastInsertId()`), o qual será usado como chave estrangeira (`endereco_id`) na tabela do aluno ou responsável. |
+| **Ação** | Insere um novo registro de pessoa autorizada na tabela `tb_pessoas_autorizadas`. |
+| **Parâmetros** | Recebe os dados básicos de identificação da pessoa autorizada: `$nome`, `$cpf`, `$celular` e `$parentesco`. |
+| **Segurança** | Emprega **Prepared Statements** (`$this->conn->prepare()`) para prevenir vulnerabilidades de Injeção SQL. |
+| **Retorno** | Retorna o **ID** do novo registro inserido (`$this->conn->lastInsertId()`), possibilitando a associação imediata com o aluno (tabela de cadastro principal). |
 
 ## Estrutura da Tabela Mapeada
 
-A classe está diretamente mapeada para a tabela: **`endereco`**.
+A classe está diretamente mapeada para a tabela: **`tb_pessoas_autorizadas`**.
 
 **Principais Atributos Mapeados (Campos de Tabela):**
 
-* `cep`
-* `endereco`
-* `numero`
-* `bairro`
-* `cidade`
-* `complemento`
-* `id_endereco` (Chave Primária, implícita no `lastInsertId()`)
+* `nome`
+* `cpf`
+* `celular`
+* `parentesco`
+* `id` (Gerado automaticamente)
 
 ---
- ###  Class: Aluno.php
 
-A classe `Aluno` (ou `Assistido`) é o **Modelo de Dados (Data Model)** fundamental do sistema. Ela é responsável por gerenciar as informações de identificação, saúde básica, e afiliação do aluno na Fundação, mapeando diretamente a tabela `tb_alunos`.
+### Responsavel.php
 
-## 🛠 Funcionalidades e Métodos
+A classe `Responsavel` atua como o **Modelo de Dados (Data Model)** no sistema, sendo responsável por toda a lógica de persistência e gerenciamento dos dados dos responsáveis pelos alunos ou assistidos da Fundação.
 
-A classe concentra a lógica de registro da entidade principal do sistema.
+Ela é a ponte entre a aplicação PHP e a tabela `tb_responsaveis` no banco de dados.
 
-### Propriedades
+## Funcionalidades e Métodos
 
-A classe possui atributos públicos que representam os campos da tabela `tb_alunos`, incluindo chaves estrangeiras:
-
-* **Identificação:** `$nome`, `$cpf`, `$raAluno`, `$data_nascimento`, `$etnia`, `$turma`.
-* **Saúde e Permissões:** `$autorizacao_febre`, `$remedio`, `$gotas`, `$permissao_foto`.
-* **Chaves Estrangeiras (FK):** `$endereco_id` (ID do endereço registrado na classe `Endereco`), `$funcionario_id` (ID do funcionário que realizou o cadastro).
+A classe implementa a conexão com o banco de dados via **PDO** e oferece o método principal para registrar novos responsáveis.
 
 ### `__construct()`
 
 | Tipo | Descrição |
 | :--- | :--- |
-| **Ação** | Inicializa a conexão com o banco de dados via PDO. |
-| **Detalhes** | Garante uma conexão segura, carregando as credenciais a partir das variáveis de ambiente (`$_ENV`). |
+| **Ação** | Estabelece a conexão com o banco de dados. |
+| **Detalhes** | Utiliza a classe nativa `PDO` e carrega as credenciais de conexão (`DBNAME`, `HOST`, `USUARIO`, `SENHA`) a partir das **variáveis de ambiente** (`$_ENV`). |
+| **Segurança** | Implementa a boa prática de separar credenciais do código principal. |
 
-### `cadastrarAluno(...)`
+### `cadastrarResponsavel(...)`
 
-| Tipo | Ação |
+| Tipo | Descrição |
 | :--- | :--- |
-| **Função** | Insere um novo registro de aluno na tabela `tb_alunos`. |
-| **Parâmetros** | Recebe todos os dados de identificação, saúde, e as chaves estrangeiras (`$endereco_id`, `$funcionario_id`). O campo `$rg` é opcional (`=null`). |
-| **Fluxo** | Este método é tipicamente chamado após a inserção do Endereço. O ID retornado é, em seguida, utilizado no método `cadastrarMatricula()` da classe `Matricula`. |
-| **Segurança** | Utiliza **Prepared Statements** para proteger contra Injeção SQL. |
-| **Retorno** | Retorna o ID do registro de aluno recém-criado (`$this->conn->lastInsertId()`), crucial para a próxima etapa da matrícula. |
+| **Ação** | Insere um novo registro de responsável na tabela `tb_responsaveis`. |
+| **Parâmetros** | Recebe 15 parâmetros, que mapeiam todos os campos do formulário/tabela (e.g., `$nome`, `$celular`, `$salario`, `$valor_renda_extra`). |
+| **Segurança** | Utiliza **Prepared Statements** (`$this->conn->prepare()`) para proteger contra ataques de Injeção SQL. |
+| **Retorno** | Retorna o `ID` do último registro inserido (`$this->conn->lastInsertId()`), permitindo que o sistema associe este responsável a outras entidades (como o aluno) imediatamente. |
 
---- 
+## Estrutura da Tabela Mapeada
+
+A classe está diretamente mapeada para a tabela: **`tb_responsaveis`**.
+
+**Principais Atributos Mapeados (Campos de Tabela):**
+
+* `tipo_responsavel`
+* `nome`
+* `data_nascimento`
+* `estado_civil`
+* `escolaridade`
+* `celular`
+* `email`
+* `nome_empresa`
+* `profissao`
+* `telefone_trabalho`
+* `horario_trabalho`
+* `salario`
+* `renda_extra`
+* `valor_renda_extra`
+
+---
+
 # Documentação semantic_ui.js
 ![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
 ![Semantic UI](https://img.shields.io/badge/Semantic%20UI-35BDB2?style=for-the-badge&logo=semantic-ui-react&logoColor=white)
