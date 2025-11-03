@@ -49,6 +49,9 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 </head>
 
 <body>
+    <button id="btn-menu" class="ui icon button">
+        <i class="sidebar icon"></i>
+    </button>
     <section class="corpo_pagina">
         <?php include './template/menuLateral.php' ?>
 
@@ -376,7 +379,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
             posY += 8;
 
             const tipoMoradia = estrutura.tipo_moradia ? `${estrutura.tipo_moradia}` : "Não informado";
-            
+
             doc.text(`Tipo Moradia: ${tipoMoradia}`, 10, posY);
 
             if (tipoMoradia === 'alugada') {
