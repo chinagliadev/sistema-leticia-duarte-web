@@ -61,6 +61,9 @@ A identidade visual do Sistema Leticia Duarte é definida pela seguinte paleta d
 [![Banco de Dados](https://img.shields.io/badge/MariaDB-10.4%2B-orange.svg)](https://mariadb.org/)
 
 **Tabela - endereco**
+
+![img]["C:\Users\victor.cneto1\Documents\sistema-leticia-duarte-web_1.png"]
+
 ```SQL
 CREATE TABLE endereco (
     id_endereco INT(11) NOT NULL AUTO_INCREMENT,
