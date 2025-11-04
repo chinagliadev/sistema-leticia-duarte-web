@@ -1,6 +1,5 @@
 <?php
 
-
 class Responsavel
 {
 
@@ -28,6 +27,7 @@ class Responsavel
         $senha = $_ENV['SENHA'];
 
         $this->conn = new PDO($dsn, $usuario, $senha);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public function cadastrarResponsavel(
@@ -71,5 +71,60 @@ class Responsavel
         ]);
 
         return $this->conn->lastInsertId();
+    }
+
+    public function atualizarResponsavel($id_responsavel,
+        $tipo_responsavel,
+        $nome,
+        $data_nascimento,
+        $estado_civil,
+        $escolaridade,
+        $celular,
+        $email,
+        $nome_empresa,
+        $profissao,
+        $telefone_trabalho,
+        $horario_trabalho,
+        $salario,
+        $renda_extra,
+        $valor_renda_extra
+    ) {
+        $sql = "UPDATE tb_responsaveis SET
+                    tipo_responsavel = :tipo_responsavel,
+                    nome = :nome,
+                    data_nascimento = :data_nascimento,
+                    estado_civil = :estado_civil,
+                    escolaridade = :escolaridade,
+                    celular = :celular,
+                    email = :email,
+                    nome_empresa = :nome_empresa,
+                    profissao = :profissao,
+                    telefone_trabalho = :telefone_trabalho,
+                    horario_trabalho = :horario_trabalho,
+                    salario = :salario,
+                    renda_extra = :renda_extra,
+                    valor_renda_extra = :valor_renda_extra
+                WHERE id_responsavel = :id_responsavel";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':tipo_responsavel' => $tipo_responsavel,
+            ':nome' => $nome,
+            ':data_nascimento' => $data_nascimento,
+            ':estado_civil' => $estado_civil,
+            ':escolaridade' => $escolaridade,
+            ':celular' => $celular,
+            ':email' => $email,
+            ':nome_empresa' => $nome_empresa,
+            ':profissao' => $profissao,
+            ':telefone_trabalho' => $telefone_trabalho,
+            ':horario_trabalho' => $horario_trabalho,
+            ':salario' => $salario,
+            ':renda_extra' => $renda_extra ? 1 : 0,
+            ':valor_renda_extra' => $valor_renda_extra,
+            ':id_responsavel' => $id_responsavel
+        ]);
+
+        return $stmt->rowCount();
     }
 }

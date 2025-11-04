@@ -1,11 +1,8 @@
 <?php
-
-class matriculaPessoaAutorizada
+class PessoaAutorizada
 {
-    private $conn;
 
-    public $matricula_id;
-    public $pessoa_autorizada_id;
+    private $conn;
 
     public function __construct()
     {
@@ -14,20 +11,44 @@ class matriculaPessoaAutorizada
         $senha = $_ENV['SENHA'];
 
         $this->conn = new PDO($dsn, $usuario, $senha);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function cadastrarPessoaAutorizada($nome, $cpf, $celular, $parentesco){
 
-    public function cadastrarMatriculaPessoaAutorizada($matricula_id ,$pessoa_autorizada_id){
-        $sqlInserir = "INSERT INTO tb_matricula_pessoas_autorizadas (matricula_id, pessoa_autorizada_id) 
-                        VALUES (:matricula_id, :pessoa_autorizada_id)";
+        $sqlInserir = "INSERT INTO tb_pessoas_autorizadas (nome, cpf, celular, parentesco) VALUES (:nome, :cpf, :celular, :parentesco)";
 
         $dados = $this->conn->prepare($sqlInserir);
 
         $dados->execute([
-            ":matricula_id" => $matricula_id,
-            ":pessoa_autorizada_id" => $pessoa_autorizada_id
+            ":nome" => $nome,
+            ":cpf" => $cpf,
+            ":celular" => $celular,
+            ":parentesco" => $parentesco
         ]);
+
+
+        return $this->conn->lastInsertId();
     }
 
+    public function atualizarPessoaAutorizada($id, $nome, $cpf, $celular, $parentesco)
+    {
+        $sql = "UPDATE tb_pessoas_autorizadas SET
+                    nome = :nome,
+                    cpf = :cpf,
+                    celular = :celular,
+                    parentesco = :parentesco
+                WHERE id = :id";
 
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':nome' => $nome,
+            ':cpf' => $cpf,
+            ':celular' => $celular,
+            ':parentesco' => $parentesco,
+            ':id' => $id
+        ]);
+
+        return $stmt->rowCount();
+    }
 }
