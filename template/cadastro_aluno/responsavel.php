@@ -297,7 +297,7 @@
             <div class="four wide field" id="renda_extra_responsavel_2_div">
                 <label for="toggleRendaExtra_2">Possui Renda Extra?</label>
                 <div class="ui toggle checkbox">
-                    <input type="checkbox" id="toggleRendaExtra_2" name="toggleRendaExtra_2" <?= !empty($responsavel_2['renda_extra']) ? 'checked' : '' ?>>
+                    <input type="checkbox" id="toggleRendaExtra_2" name="toggleRendaExtra_2" <?= !empty($responsavel_2['renda_extra']) ? 'checked' : '' ?> onchange="validarRendaExtraResponsavel2()">
                     <label></label>
                 </div>
             </div>
