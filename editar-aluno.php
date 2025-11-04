@@ -71,14 +71,6 @@ $pessoa_autorizada_4 = $dadosCompletos['pessoa_autorizada_4'] ?? [];
                     include './template/cadastro_aluno/estrutura-familiar.php';
                     include './template/cadastro_aluno/pessoas-autorizadas.php';
                     ?>
-
-                    <div class="ui error message"></div>
-                    <div style="margin-top: 20px;">
-                        <button type="submit" class="ui primary button">
-                            <i class="save icon"></i> Salvar Alterações
-                        </button>
-                        <a href="./cadastrados.php" class="ui button">Cancelar</a>
-                    </div>
                 </form>
 
                 <?php include './template/modal/modal-salvar-dados.php' ?>

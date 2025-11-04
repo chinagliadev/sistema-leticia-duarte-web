@@ -55,23 +55,21 @@ class Matricula
         return $this->conn->lastInsertId();
     }
 
-
     public function listarMatricula(): array
     {
         $sqlListar =
             "SELECT 
-        tb_alunos.id, 
-        tb_alunos.ra_aluno, 
-        tb_alunos.nome AS nome_aluno, 
-        tb_alunos.data_nascimento, 
-        tb_alunos.turma, 
-        tb_responsaveis.nome AS nome_responsavel,
-        tb_matricula.matricula_ativada AS matricula
+                tb_alunos.id, 
+                tb_alunos.ra_aluno, 
+                tb_alunos.nome AS nome_aluno, 
+                tb_alunos.data_nascimento, 
+                tb_alunos.turma, 
+                tb_responsaveis.nome AS nome_responsavel,
+                tb_matricula.matricula_ativada AS matricula
             FROM tb_matricula
-        INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
-        INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
-        WHERE matricula_ativada = 1;
-";
+                INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+                INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+            WHERE matricula_ativada = 1;";
 
         $dados = $this->conn->query($sqlListar)->fetchAll();
         return $dados;
@@ -81,18 +79,17 @@ class Matricula
     {
         $sqlListar =
             "SELECT 
-        tb_alunos.id, 
-        tb_alunos.ra_aluno, 
-        tb_alunos.nome AS nome_aluno, 
-        tb_alunos.data_nascimento, 
-        tb_alunos.turma, 
-        tb_responsaveis.nome AS nome_responsavel,
-        tb_matricula.matricula_ativada AS matricula
+                tb_alunos.id, 
+                tb_alunos.ra_aluno, 
+                tb_alunos.nome AS nome_aluno, 
+                tb_alunos.data_nascimento, 
+                tb_alunos.turma, 
+                tb_responsaveis.nome AS nome_responsavel,
+                tb_matricula.matricula_ativada AS matricula
             FROM tb_matricula
-        INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
-        INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
-        WHERE matricula_ativada = 0;
-";
+                INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+                INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+            WHERE matricula_ativada = 0;";
 
         $dados = $this->conn->query($sqlListar)->fetchAll();
         return $dados;
@@ -101,8 +98,8 @@ class Matricula
     public function desativarMatricula($idAluno): bool
     {
         $sqlDesativarMatricula = "UPDATE tb_matricula 
-                                  SET matricula_ativada = :situacao WHERE aluno_id = :id
-        ";
+                                  SET matricula_ativada = :situacao 
+                                  WHERE aluno_id = :id";
 
         $dadosDesativarMatricula = $this->conn->prepare($sqlDesativarMatricula);
         $dadosDesativarMatricula->execute([
@@ -116,8 +113,8 @@ class Matricula
     public function reativarMatricula($idAluno): bool
     {
         $sqlAtivarMatricula = "UPDATE tb_matricula 
-                                  SET matricula_ativada = :situacao WHERE aluno_id = :id
-        ";
+                               SET matricula_ativada = :situacao 
+                               WHERE aluno_id = :id";
 
         $dadosAtivarMatricula = $this->conn->prepare($sqlAtivarMatricula);
         $dadosAtivarMatricula->execute([
@@ -139,7 +136,7 @@ class Matricula
             'estrutura_familiar' => null,
             'pessoa_autorizada_1' => null,
             'pessoa_autorizada_2' => null,
-            'pessoa_autorizada_3' => null, 
+            'pessoa_autorizada_3' => null,
             'pessoa_autorizada_4' => null  
         ];
 
@@ -168,8 +165,8 @@ class Matricula
         $estrutura_id = $matricula['estrutura_familiar_id'];
         $pessoa_autorizada_1_id = $matricula['pessoa_autorizada_1_id'];
         $pessoa_autorizada_2_id = $matricula['pessoa_autorizada_2_id'];
-        $pessoa_autorizada_3_id = $matricula['pessoa_autorizada_3_id']; // Novo
-        $pessoa_autorizada_4_id = $matricula['pessoa_autorizada_4_id']; // Novo
+        $pessoa_autorizada_3_id = $matricula['pessoa_autorizada_3_id'];
+        $pessoa_autorizada_4_id = $matricula['pessoa_autorizada_4_id'];
 
         $sqlAluno = "SELECT * FROM tb_alunos WHERE id = :id";
         $stmtAluno = $this->conn->prepare($sqlAluno);
@@ -192,12 +189,11 @@ class Matricula
         $dadosCompletos['estrutura_familiar'] = $buscarPorId('tb_estrutura_familiar', 'id', $estrutura_id);
         $dadosCompletos['pessoa_autorizada_1'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_1_id);
         $dadosCompletos['pessoa_autorizada_2'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_2_id);
-        $dadosCompletos['pessoa_autorizada_3'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_3_id); // Novo
-        $dadosCompletos['pessoa_autorizada_4'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_4_id); // Novo
+        $dadosCompletos['pessoa_autorizada_3'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_3_id);
+        $dadosCompletos['pessoa_autorizada_4'] = $buscarPorId('tb_pessoas_autorizadas', 'id', $pessoa_autorizada_4_id);
 
         return $dadosCompletos;
     }
-
 
     public function pesquisarAluno($termoPesquisa)
     {
@@ -211,10 +207,10 @@ class Matricula
                 tb_alunos.turma,
                 tb_responsaveis.nome AS nome_responsavel,
                 tb_matricula.matricula_ativada AS matricula
-                    FROM tb_matricula
-                    INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
-                    INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
-                WHERE 
+            FROM tb_matricula
+                INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+                INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+            WHERE 
                 tb_alunos.ra_aluno = :termoPesquisa  
                 OR tb_alunos.nome LIKE :termoLike    
                 OR tb_responsaveis.nome LIKE :termoLike";
@@ -231,7 +227,6 @@ class Matricula
 
     public function filtrarTurma($turma)
     {
-
         if ($turma === 'matriculas-ativadas') {
             return $this->listarMatricula();
         } else if ($turma === 'matriculas-desativadas') {
@@ -239,17 +234,17 @@ class Matricula
         }
 
         $sqlFiltrar = "SELECT 
-        tb_alunos.id, 
-        tb_alunos.ra_aluno, 
-        tb_alunos.nome AS nome_aluno, 
-        tb_alunos.data_nascimento, 
-        tb_alunos.turma,
-        tb_responsaveis.nome AS nome_responsavel,
-        tb_matricula.matricula_ativada AS matricula
+                tb_alunos.id, 
+                tb_alunos.ra_aluno, 
+                tb_alunos.nome AS nome_aluno, 
+                tb_alunos.data_nascimento, 
+                tb_alunos.turma,
+                tb_responsaveis.nome AS nome_responsavel,
+                tb_matricula.matricula_ativada AS matricula
             FROM tb_matricula
-        INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
-        INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
-        WHERE matricula_ativada = 1 AND turma = :turma";
+                INNER JOIN tb_alunos ON tb_matricula.aluno_id = tb_alunos.id
+                INNER JOIN tb_responsaveis ON tb_matricula.responsavel_1_id = tb_responsaveis.id_responsavel
+            WHERE matricula_ativada = 1 AND turma = :turma";
 
         $dadosFiltro = $this->conn->prepare($sqlFiltrar);
 
@@ -258,5 +253,40 @@ class Matricula
         ]);
 
         return $dadosFiltro->fetchAll();
+    }
+
+    /**
+     * Atualiza campos da tabela tb_matricula conforme o aluno_id
+     */
+    public function atualizarMatriculaByAlunoId(
+        $aluno_id,
+        $responsavel_1_id = null,
+        $responsavel_2_id = null,
+        $estrutura_familiar_id = null,
+        $pessoa_autorizada_1_id = null,
+        $pessoa_autorizada_2_id = null,
+        $pessoa_autorizada_3_id = null,
+        $pessoa_autorizada_4_id = null
+    ) {
+        $updates = [];
+        $params = [':aluno_id' => $aluno_id];
+
+        if (!is_null($responsavel_1_id)) { $updates[] = "responsavel_1_id = :responsavel_1_id"; $params[':responsavel_1_id'] = $responsavel_1_id; }
+        if (!is_null($responsavel_2_id)) { $updates[] = "responsavel_2_id = :responsavel_2_id"; $params[':responsavel_2_id'] = $responsavel_2_id; }
+        if (!is_null($estrutura_familiar_id)) { $updates[] = "estrutura_familiar_id = :estrutura_familiar_id"; $params[':estrutura_familiar_id'] = $estrutura_familiar_id; }
+        if (!is_null($pessoa_autorizada_1_id)) { $updates[] = "pessoa_autorizada_1_id = :pessoa_autorizada_1_id"; $params[':pessoa_autorizada_1_id'] = $pessoa_autorizada_1_id; }
+        if (!is_null($pessoa_autorizada_2_id)) { $updates[] = "pessoa_autorizada_2_id = :pessoa_autorizada_2_id"; $params[':pessoa_autorizada_2_id'] = $pessoa_autorizada_2_id; }
+        if (!is_null($pessoa_autorizada_3_id)) { $updates[] = "pessoa_autorizada_3_id = :pessoa_autorizada_3_id"; $params[':pessoa_autorizada_3_id'] = $pessoa_autorizada_3_id; }
+        if (!is_null($pessoa_autorizada_4_id)) { $updates[] = "pessoa_autorizada_4_id = :pessoa_autorizada_4_id"; $params[':pessoa_autorizada_4_id'] = $pessoa_autorizada_4_id; }
+
+        if (empty($updates)) {
+            return 0; // nada a atualizar
+        }
+
+        $sql = "UPDATE tb_matricula SET " . implode(', ', $updates) . " WHERE aluno_id = :aluno_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->rowCount();
     }
 }

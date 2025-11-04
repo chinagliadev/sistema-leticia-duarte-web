@@ -1,12 +1,12 @@
 <?php
 
-class Aluno{
+class Aluno {
 
     private $conn;
 
     public $nome;
     public $cpf;
-    public $raAluno;
+    public $ra_aluno;
     public $data_nascimento;
     public $etnia;
     public $turma;
@@ -24,8 +24,8 @@ class Aluno{
         $senha = $_ENV['SENHA'];
 
         $this->conn = new PDO($dsn, $usuario, $senha);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-
 
     public function cadastrarAluno($raAluno, $nome,$cpf,$rg=null ,$data_nascimento, $etnia, $turma, $autorizacao_febre, $remedio, $gotas, $permissao_foto, $endereco_id, $funcionario_id){
 
@@ -56,8 +56,47 @@ class Aluno{
         return $this->conn->lastInsertId();
     }
 
-    
+    public function atualizarAlunoByRa($ra_aluno, $dados)
+    {
+        $sql = "UPDATE tb_alunos SET
+                    nome = :nome,
+                    cpf = :cpf,
+                    rg = :rg,
+                    data_nascimento = :data_nascimento,
+                    etnia = :etnia,
+                    turma = :turma,
+                    autorizacao_febre = :autorizacao_febre,
+                    remedio = :remedio,
+                    gotas = :gotas,
+                    permissao_foto = :permissao_foto
+                WHERE ra_aluno = :ra_aluno";
 
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':nome' => $dados['nome'] ?? null,
+            ':cpf' => $dados['cpf'] ?? null,
+            ':rg' => $dados['rg'] ?? null,
+            ':data_nascimento' => $dados['data_nascimento'] ?? null,
+            ':etnia' => $dados['etnia'] ?? null,
+            ':turma' => $dados['turma'] ?? null,
+            ':autorizacao_febre' => $dados['autorizacao_febre'] ?? 0,
+            ':remedio' => $dados['remedio'] ?? null,
+            ':gotas' => $dados['gotas'] ?? null,
+            ':permissao_foto' => $dados['permissao_foto'] ?? 0,
+            ':ra_aluno' => $ra_aluno
+        ]);
+
+        return $stmt->rowCount();
+    }
+
+    public function atualizarEnderecoIdByRa($ra_aluno, $endereco_id)
+    {
+        $sql = "UPDATE tb_alunos SET endereco_id = :endereco_id WHERE ra_aluno = :ra_aluno";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':endereco_id' => $endereco_id,
+            ':ra_aluno' => $ra_aluno
+        ]);
+        return $stmt->rowCount();
+    }
 }
-
-?>
