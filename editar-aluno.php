@@ -23,6 +23,8 @@ $responsavel_2 = $dadosCompletos['responsavel_2'] ?? [];
 $estrutura_familiar = $dadosCompletos['estrutura_familiar'] ?? [];
 $pessoa_autorizada_1 = $dadosCompletos['pessoa_autorizada_1'] ?? [];
 $pessoa_autorizada_2 = $dadosCompletos['pessoa_autorizada_2'] ?? [];
+$pessoa_autorizada_3 = $dadosCompletos['pessoa_autorizada_3'] ?? [];
+$pessoa_autorizada_4 = $dadosCompletos['pessoa_autorizada_4'] ?? [];
 ?>
 
 <!DOCTYPE html>
