@@ -34,7 +34,7 @@
 
             <div class="four wide field" id="div_parentesco">
                 <label for="txtParentesco">Parentesco</label>
-                <select class="ui search dropdown" id="txtParentesco" name="txtParentenco">
+                <select class="ui search dropdown" id="txtParentesco" name="txtParentesco">
                     <option value="" disabled hidden <?= empty($pessoa_autorizada_1['parentesco']) ? 'selected' : '' ?>>Selecione o parentesco</option>
                     <?php
                     $parentescos = ['Pai', 'Mãe', 'Avô', 'Avó', 'Irmão', 'Irmã', 'Tio', 'Tia', 'Outro'];
@@ -106,7 +106,7 @@
 
             <div class="four wide field" id="div_parentesco2">
                 <label for="txtParentenco2">Parentesco</label>
-                <select class="ui search dropdown" id="txtParentenco2" name="txtParentenco2" onblur="validarParentesco2()">
+                <select class="ui search dropdown" id="txtParentenco2" name="txtParentesco2" onblur="validarParentesco2()">
                     <option value="" disabled hidden <?= empty($pessoa_autorizada_2['parentesco']) ? 'selected' : '' ?>>Selecione o parentesco</option>
                     <?php
                     foreach ($parentescos as $p) {

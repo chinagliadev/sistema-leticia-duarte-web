@@ -14,9 +14,40 @@ $responsavelClass = new Responsavel();
 $estruturaClass = new EstruturaFamiliar();
 $pessoaAutorizadaClass = new PessoaAutorizada();
 
+function formatarDataParaDB($data)
+{
+    if (is_null($data) || $data === '') {
+        return null;
+    }
+
+    if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $data, $matches)) {
+        return "{$matches[3]}-{$matches[2]}-{$matches[1]}";
+    }
+
+    if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $data)) {
+        return $data;
+    }
+
+    return null;
+}
+
+
+function limparValorMonetario($valor)
+{
+    if (is_null($valor) || $valor === '') {
+        return null;
+    }
+    $valor = str_replace(['R$', ' ', '.'], '', $valor);
+    $valor = str_replace(',', '.', $valor);
+    return (float) $valor;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Acesso inválido.");
 }
+
+print_r($_POST);
 
 $ra_aluno = $_POST['ra_aluno'] ?? '';
 if (empty($ra_aluno)) die("Erro: RA do aluno não informado.");
@@ -58,24 +89,29 @@ try {
         'nome' => $_POST['txtNomeCrianca'] ?? '',
         'cpf' => $_POST['txtCpfAluno'] ?? '',
         'rg' => $_POST['txtRgAluno'] ?? '',
-        'data_nascimento' => $_POST['txtDataNascimento'] ?? '',
+        'data_nascimento' => formatarDataParaDB($_POST['txtDataNascimento'] ?? null),
         'etnia' => $_POST['corRaca'] ?? '',
         'turma' => $_POST['turma'] ?? '',
         'autorizacao_febre' => isset($_POST['autorizacaoMed']) ? 1 : 0,
         'remedio' => $_POST['txtRemedio'] ?? '',
         'gotas' => $_POST['txtGotas'] ?? '',
-        'permissao_foto' => isset($_POST['autorizacaoImagem']) ? 1 : 0
+        'permissao_foto' => isset($_POST['permissaoFoto']) ? 1 : 0
     ];
     $alunoClass->atualizarAlunoByRa($ra_aluno, $dadosAluno);
 
     for ($i = 1; $i <= 2; $i++) {
         $responsavelId = ($i === 1) ? $responsavel1_id : $responsavel2_id;
 
+        $sufixo_i = ($i === 1) ? '' : "_$i";
+
+
+        $dataNascimento = formatarDataParaDB($_POST["data_nascimento" . $sufixo_i] ?? '');
+
+
         $tipo = $_POST["txtTipoResponsavel_$i"] ?? '';
         $nome = $_POST["txtNomeResponsavel_$i"] ?? '';
-        $dataNascimento = $_POST["data_nascimento_$i"] ?? '';
         $estadoCivil = $_POST["txtEstadoCivil_$i"] ?? '';
-        $escolaridade = $_POST["txtEscolaridade" . ($i === 1 ? '' : "_$i")] ?? '';
+        $escolaridade = $_POST["txtEscolaridade" . $sufixo_i] ?? ''; 
         $telefone = $_POST["txtTelefone_$i"] ?? '';
         $email = $_POST["txtEmail_$i"] ?? '';
         $nomeEmpresa = $_POST["txtNomeEmpresa_$i"] ?? '';
@@ -83,8 +119,10 @@ try {
         $telefoneTrabalho = $_POST["txtTelefoneTrabalho_$i"] ?? '';
         $horarioTrabalho = $_POST["txtHorarioTrabalho_$i"] ?? '';
         $salario = $_POST["txtSalario_$i"] ?? '';
+        $salario = limparValorMonetario($salario);
         $rendaExtra = isset($_POST["toggleRendaExtra_$i"]) ? 1 : 0;
-        $valorRendaExtra = $_POST["txtRendaExtra" . ($i === 1 ? '' : "_$i")] ?? '';
+        $valorRendaExtra = $_POST["txtRendaExtra" . $sufixo_i] ?? '';
+        $valorRendaExtra = limparValorMonetario($valorRendaExtra);
 
         if ($responsavelId) {
             $responsavelClass->atualizarResponsavel($responsavelId, $tipo, $nome, $dataNascimento, $estadoCivil, $escolaridade, $telefone, $email, $nomeEmpresa, $profissao, $telefoneTrabalho, $horarioTrabalho, $salario, $rendaExtra, $valorRendaExtra);
@@ -114,6 +152,7 @@ try {
     $vacina_catapora_varicela = isset($_POST['vacina_catapora_varicela']) ? 1 : 0;
     $tipo_moradia = $_POST['tipo_moradia'] ?? null;
     $valor_aluguel = $_POST['txtValorAluguel'] ?? null;
+    $valor_aluguel = limparValorMonetario($valor_aluguel);
 
     $doenca_anemia = isset($_POST['doenca_anemia']) ? 1 : 0;
     $doenca_bronquite = isset($_POST['doenca_bronquite']) ? 1 : 0;
@@ -210,7 +249,7 @@ try {
         $nome = $_POST["txtNomePessoaAutorizada" . ($i === 1 ? '' : $i)] ?? '';
         $cpf = $_POST["txtCpfAutorizada" . ($i === 1 ? '' : $i)] ?? '';
         $telefone = $_POST["txtTelefoneAutorizada" . ($i === 1 ? '' : $i)] ?? '';
-        $parentesco = $_POST["txtParentenco" . ($i === 1 ? '' : $i)] ?? '';
+        $parentesco = $_POST["txtParentesco" . ($i === 1 ? '' : $i)] ?? '';
 
         if ($pessoaId) {
             $pessoaAutorizadaClass->atualizarPessoaAutorizada($pessoaId, $nome, $cpf, $telefone, $parentesco);

@@ -32,7 +32,7 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_1">
                     <div class="ui input">
-                        <input type="text" id="txtDataNascimento_1" value="<?= $responsavel_1['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
+                        <input type="text" id="txtDataNascimento_1" value="<?= $data_formatada_responsavel ?? '' ?>" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
                     </div>
                 </div>
                 <input type="hidden" name="data_nascimento_1" id="hiddenDataNascimento_1" value="<?= $aluno['data_nascimento_1'] ?? '' ?>">
@@ -150,7 +150,7 @@
         <div class="fields">
             <div class="four wide field" id="tipo_responsavel_2_div">
                 <label for="txtTipoResponsavel_2">Tipo do responsável</label>
-                <select class="ui search dropdown" id="txtTipoResponsavel_2" name="txtTipoResponsavel_2">
+                <select class="ui search dropdown" id="txtTipoResponsavel_2" name="txtTipoResponsavel_2" onchange="validarTipoResponsavel2()">
                     <option value="" disabled hidden <?= empty($responsavel_2['tipo_responsavel']) ? 'selected' : '' ?>>Selecione o tipo</option>
                     <?php
                     foreach ($tipos as $tipo) {
@@ -176,7 +176,7 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_2">
                     <div class="ui input">
-                        <input type="text" id="txtDataNascimento_2" value="<?= $responsavel_2['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel2()">
+                        <input type="text" id="txtDataNascimento_2" value="<?= $data_formatada_responsavel2 ?? '' ?>" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel2()">
                     </div>
                 </div>
                 <input type="hidden" name="data_nascimento_2" id="hiddenDataNascimento_2" value="<?= $responsavel_2['data_nascimento'] ?? '' ?>">
@@ -189,7 +189,7 @@
         <div class="fields">
             <div class="four wide field" id="estado_civil_responsavel_2_div">
                 <label for="txtEstadoCivil_2">Estado Civil</label>
-                <select class="ui search dropdown" id="txtEstadoCivil_2" name="txtEstadoCivil_2">
+                <select class="ui search dropdown" id="txtEstadoCivil_2" name="txtEstadoCivil_2" onchange="validarEstadoCivilResponsavel2()">
                     <option value="" disabled hidden <?= empty($responsavel_2['estado_civil']) ? 'selected' : '' ?>>Selecione o estado civil</option>
                     <?php
                     foreach ($estados as $estado) {
@@ -205,7 +205,7 @@
 
             <div class="four wide field" id="escolaridade_responsavel_2_div">
                 <label for="txtEscolaridade_2">Escolaridade</label>
-                <select class="ui search dropdown" id="txtEscolaridade_2" name="txtEscolaridade_2">
+                <select class="ui search dropdown" id="txtEscolaridade_2" name="txtEscolaridade_2"  onchange="validarEscolaridade2()">
                     <option value="" disabled hidden <?= empty($responsavel_2['escolaridade']) ? 'selected' : '' ?>>Selecione a escolaridade</option>
                     <?php
                     foreach ($escolaridades as $esc) {
@@ -277,7 +277,7 @@
 
             <div class="four wide field <?= !empty($responsavel_2['renda_extra']) ? '' : 'oculto' ?>" id="renda_extra_div_2">
                 <label for="txtRendaExtra_2">Valor da renda extra</label>
-                <input type="text" id="txtRendaExtra_2" name="txtRendaExtra_2" value="<?= $responsavel_2['valor_renda_extra'] ?? '' ?>">
+                <input type="text" id="txtRendaExtra_2" name="txtRendaExtra_2" value="<?= $responsavel_2['valor_renda_extra'] ?? '' ?>" onblur="validarRendaExtraResponsavel2()">
                 <div id="mensagem-erro-renda-extra-2" class="ui hidden message error">
                     <span id="renda-extra-erro-2"></span>
                 </div>

@@ -10,7 +10,6 @@ require './class/Matricula.php';
 require './class/MatriculaPessoaAutorizada.php';
 require './config.php';
 
-var_dump($_POST);
 
 function limparValorMonetario($valor)
 {
@@ -50,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $turma = $_POST['turma'] ?? null;
     
-    // APLICAÇÃO DA FUNÇÃO DE VALIDAÇÃO/CONVERSÃO DE DATA
     $dataNascimento = formatarDataParaDB($_POST['data_nascimento'] ?? null); 
     
     $corRaca = $_POST['corRaca'] ?? null;
@@ -58,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $autorizacaoMed = isset($_POST['autorizacaoMed']) ? 1 : 0;
     $remedio = $autorizacaoMed ? ($_POST['txtRemedio'] ?? null) : null;
     $gotas = $autorizacaoMed ? ($_POST['txtGotas'] ?? null) : null;
-    $autorizacaoImagem = isset($_POST['autorizacaoImagem']) ? 1 : 0;
+    $autorizacaoImagem = isset($_POST['permissaoFoto']) ? 1 : 0;
 
     $cep = $_POST['txtCep'] ?? null;
     $logradouro = $_POST['txtEndereco'] ?? null;
@@ -158,7 +156,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo_responsavel_1  = $_POST['txtTipoResponsavel_1'] ?? null;
     $nome_responsavel_1  = $_POST['txtNomeResponsavel_1'] ?? null;
     
-    // APLICAÇÃO DA FUNÇÃO DE VALIDAÇÃO/CONVERSÃO DE DATA
     $data_nascimento_1  = formatarDataParaDB($_POST['data_nascimento_1'] ?? null); 
     
     $estado_civil_1  = $_POST['txtEstadoCivil_1'] ?? 'Não informado';
@@ -271,7 +268,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $txtNomePessoaAutorizada = $_POST['txtNomePessoaAutorizada'] ?? null;
         $txtCpfAutorizada = $_POST['txtCpfAutorizada'] ?? null;
         $txtTelefoneAutorizada = $_POST['txtTelefoneAutorizada'] ?? null;
-        $txtParentesnco = $_POST['txtParentenco'] ?? null;
+        $txtParentesnco = $_POST['txtParentesco'] ?? null;
 
         $pessoa_autorizada = new PessoaAutorizada();
         $pessoa_autorizada_id = $pessoa_autorizada->cadastrarPessoaAutorizada(
@@ -287,7 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $txtNomePessoaAutorizada2 = $_POST['txtNomePessoaAutorizada2'] ?? null;
         $txtCpfAutorizada2 = $_POST['txtCpfAutorizada2'] ?? null;
         $txtTelefoneAutorizada2 = $_POST['txtTelefoneAutorizada2'] ?? null;
-        $txtParentesco2 = $_POST['txtParentenco2'] ?? null;
+        $txtParentesco2 = $_POST['txtParentesco2'] ?? null;
 
         $pessoa_autorizada2 = new PessoaAutorizada();
         $pessoa_autorizada_id_2 = $pessoa_autorizada2->cadastrarPessoaAutorizada(
@@ -302,7 +299,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $txtNomePessoaAutorizada3 = $_POST['txtNomePessoaAutorizada3'] ?? null;
         $txtCpfAutorizada3 = $_POST['txtCpfAutorizada3'] ?? null;
         $txtTelefoneAutorizada3 = $_POST['txtTelefoneAutorizada3'] ?? null;
-        $txtParentesco3 = $_POST['txtParentenco3'] ?? null;
+        $txtParentesco3 = $_POST['txtParentesco3'] ?? null;
 
         $pessoa_autorizada3 = new PessoaAutorizada();
         $pessoa_autorizada_id_3 = $pessoa_autorizada3->cadastrarPessoaAutorizada(
@@ -317,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $txtNomePessoaAutorizada4 = $_POST['txtNomePessoaAutorizada4'] ?? null;
         $txtCpfAutorizada4 = $_POST['txtCpfAutorizada4'] ?? null;
         $txtTelefoneAutorizada4 = $_POST['txtTelefoneAutorizada4'] ?? null;
-        $txtParentesco4 = $_POST['txtParentenco4'] ?? null;
+        $txtParentesco4 = $_POST['txtParentesco4'] ?? null;
 
         $pessoa_autorizada4 = new PessoaAutorizada();
         $pessoa_autorizada_id_4 = $pessoa_autorizada4->cadastrarPessoaAutorizada(
