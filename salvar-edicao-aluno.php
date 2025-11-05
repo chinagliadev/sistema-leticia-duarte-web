@@ -14,7 +14,6 @@ $responsavelClass = new Responsavel();
 $estruturaClass = new EstruturaFamiliar();
 $pessoaAutorizadaClass = new PessoaAutorizada();
 
-var_dump($_POST);
 
 function formatarDataParaDB($data)
 {
