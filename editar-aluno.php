@@ -13,22 +13,18 @@ if (empty($ra_aluno)) {
 function formatarDataParaExibicao($data)
 {
     if (is_null($data) || $data === '') {
-        return ''; 
+        return '';
     }
 
-    $partes = explode('-', $data);
+    try {
+        $dateObj = new DateTime($data);
+        
+        return $dateObj->format('d/m/Y'); 
 
-    if (count($partes) === 3) {
-        [$ano, $mes, $dia] = $partes;
-        return sprintf('%02d/%02d/%04d', $dia, $mes, $ano);
+    } catch (Exception $e) {
+        return '';
     }
-
-    return '';
 }
-
-
-
-
 $dadosCompletos = $matricula->buscarDadosCompletosAluno($ra_aluno);
 
 if (!$dadosCompletos) {
@@ -46,8 +42,11 @@ $pessoa_autorizada_3 = $dadosCompletos['pessoa_autorizada_3'] ?? [];
 $pessoa_autorizada_4 = $dadosCompletos['pessoa_autorizada_4'] ?? [];
 
 var_dump($aluno['data_nascimento']);
+var_dump($responsavel_1['data_nascimento']);
 $data_formatada_aluno = formatarDataParaExibicao($aluno['data_nascimento']);
-var_dump($data_formatada_aluno)
+$data_formatada_responsavel = formatarDataParaExibicao($responsavel_1['data_nascimento']);
+var_dump($data_formatada_aluno);
+var_dump($data_formatada_responsavel);
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +110,7 @@ var_dump($data_formatada_aluno)
             $('#txtCpfAluno').val('<?= $aluno['cpf'] ?>');
             $('#txtRgAluno').val('<?= $aluno['rg'] ?>');
             $('#txtTurma').val('<?= $aluno['turma'] ?>');
-            $('#txtDataNascimento').val('<?= $aluno['data_nascimento'] ?>');
+            $('#txtDataNascimento').val('<?= $data_formatada_aluno ?? '' ?>');
             $('#txtRaca').val('<?= $aluno['cor_raca'] ?>');
             $('#txtCep').val('<?= $endereco['cep'] ?>');
             $('#txtEndereco').val('<?= $aluno['endereco'] ?>');

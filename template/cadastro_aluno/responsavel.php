@@ -32,10 +32,10 @@
                 <label>Data Nascimento</label>
                 <div class="ui calendar" id="dataNascimentoCalendar_1">
                     <div class="ui input">
-                        <input type="text" id="txtDataNascimento_1" value="<?= $data_formatada_responsavel ?? '' ?>" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
+                        <input type="text"  id="txtDataNascimento_1" value="<?= $data_formatada_responsavel ?? '' ?>" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
                     </div>
                 </div>
-                <input type="hidden" name="data_nascimento_1" id="hiddenDataNascimento_1" value="<?= $aluno['data_nascimento_1'] ?? '' ?>">
+                <input type="hidden" name="data_nascimento_1" id="hiddenDataNascimento_1" value="<?= $responsavel_1['data_nascimento'] ?? '' ?>">
                 <div id="mensagem-erro-data-responsavel-1" class="ui hidden message error">
                     <span id="data-responsavel-erro-1"></span>
                 </div>

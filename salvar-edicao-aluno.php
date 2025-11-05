@@ -14,6 +14,8 @@ $responsavelClass = new Responsavel();
 $estruturaClass = new EstruturaFamiliar();
 $pessoaAutorizadaClass = new PessoaAutorizada();
 
+var_dump($_POST);
+
 function formatarDataParaDB($data)
 {
     if (is_null($data) || $data === '') {
@@ -47,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Acesso inválido.");
 }
 
-print_r($_POST);
 
 $ra_aluno = $_POST['ra_aluno'] ?? '';
 if (empty($ra_aluno)) die("Erro: RA do aluno não informado.");
@@ -97,21 +98,23 @@ try {
         'gotas' => $_POST['txtGotas'] ?? '',
         'permissao_foto' => isset($_POST['permissaoFoto']) ? 1 : 0
     ];
+
+    var_dump($dadosAluno['data_nascimento']);
     $alunoClass->atualizarAlunoByRa($ra_aluno, $dadosAluno);
 
     for ($i = 1; $i <= 2; $i++) {
         $responsavelId = ($i === 1) ? $responsavel1_id : $responsavel2_id;
 
-        $sufixo_i = ($i === 1) ? '' : "_$i";
+        $sufixo_i_generic = ($i === 1) ? '' : "_$i"; 
 
 
-        $dataNascimento = formatarDataParaDB($_POST["data_nascimento" . $sufixo_i] ?? '');
-
+        $nome_campo_data = "data_nascimento_" . $i; 
+        $dataNascimento = formatarDataParaDB($_POST[$nome_campo_data] ?? '');
 
         $tipo = $_POST["txtTipoResponsavel_$i"] ?? '';
         $nome = $_POST["txtNomeResponsavel_$i"] ?? '';
         $estadoCivil = $_POST["txtEstadoCivil_$i"] ?? '';
-        $escolaridade = $_POST["txtEscolaridade" . $sufixo_i] ?? ''; 
+        $escolaridade = $_POST["txtEscolaridade" . $sufixo_i_generic] ?? ''; 
         $telefone = $_POST["txtTelefone_$i"] ?? '';
         $email = $_POST["txtEmail_$i"] ?? '';
         $nomeEmpresa = $_POST["txtNomeEmpresa_$i"] ?? '';
@@ -121,7 +124,8 @@ try {
         $salario = $_POST["txtSalario_$i"] ?? '';
         $salario = limparValorMonetario($salario);
         $rendaExtra = isset($_POST["toggleRendaExtra_$i"]) ? 1 : 0;
-        $valorRendaExtra = $_POST["txtRendaExtra" . $sufixo_i] ?? '';
+        // O campo 'txtRendaExtra' funciona com o sufixo genérico: '' ou '_2'
+        $valorRendaExtra = $_POST["txtRendaExtra" . $sufixo_i_generic] ?? '';
         $valorRendaExtra = limparValorMonetario($valorRendaExtra);
 
         if ($responsavelId) {
@@ -244,6 +248,7 @@ try {
         if ($novoEstruturaId) $estrutura_id = $novoEstruturaId;
     }
 
+    // --- Atualização de Pessoas Autorizadas ---
     for ($i = 1; $i <= 4; $i++) {
         $pessoaId = $pessoa_aut_ids[$i];
         $nome = $_POST["txtNomePessoaAutorizada" . ($i === 1 ? '' : $i)] ?? '';
@@ -259,6 +264,7 @@ try {
         }
     }
 
+    // --- Atualização da Matrícula ---
     $matriculaClass->atualizarMatriculaByAlunoId(
         $aluno_id,
         $responsavel1_id,
@@ -276,6 +282,8 @@ try {
     exit;
 } catch (Exception $e) {
     $conn->rollBack();
+    error_log("Erro ao salvar edição: " . $e->getMessage()); 
     echo "Erro ao salvar edição: " . $e->getMessage();
     exit;
 }
+?>
