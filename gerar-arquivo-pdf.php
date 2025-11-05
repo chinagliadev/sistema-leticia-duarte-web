@@ -348,9 +348,7 @@ $pessoa_autorizada2 = $dadosCompletos['pessoa_autorizada_2'];
 
             doc.text(`Pais vivem juntos: ${paisVivemJuntosTexto}`, 130, posY);
 
-            // posY += 8;
-            // doc.text(`Tipo de moradia: `, 10, posY);
-            // doc.text(`Valor do aluguel: `, 130, posY);
+        
             posY += 8;
 
 

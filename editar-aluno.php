@@ -10,21 +10,7 @@ if (empty($ra_aluno)) {
     die("Erro: Nenhum aluno selecionado.");
 }
 
-function formatarDataParaExibicao($data)
-{
-    if (is_null($data) || $data === '') {
-        return '';
-    }
 
-    try {
-        $dateObj = new DateTime($data);
-        
-        return $dateObj->format('d/m/Y'); 
-
-    } catch (Exception $e) {
-        return '';
-    }
-}
 $dadosCompletos = $matricula->buscarDadosCompletosAluno($ra_aluno);
 
 if (!$dadosCompletos) {
@@ -43,10 +29,7 @@ $pessoa_autorizada_4 = $dadosCompletos['pessoa_autorizada_4'] ?? [];
 
 var_dump($aluno['data_nascimento']);
 var_dump($responsavel_1['data_nascimento']);
-$data_formatada_aluno = formatarDataParaExibicao($aluno['data_nascimento']);
-$data_formatada_responsavel = formatarDataParaExibicao($responsavel_1['data_nascimento']);
-var_dump($data_formatada_aluno);
-var_dump($data_formatada_responsavel);
+
 ?>
 
 <!DOCTYPE html>
