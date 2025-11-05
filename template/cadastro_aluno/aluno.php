@@ -73,8 +73,9 @@
             <label for="txtDataNascimento">Data Nascimento</label>
             <div class="ui calendar" id="dataNascimentoCalendar">
                 <div class="ui input">
+
                     <input id="txtDataNascimento" name="txtDataNascimento" type="text" placeholder="dd/mm/aaaa" onblur="validarDataNascimento()"
-                        value="<?= $aluno['data_nascimento'] ?? '' ?>">
+                        value="<?= $data_formatada_aluno ?? '' ?>">
                 </div>
             </div>
             <input type="hidden" name="data_nascimento" id="data_nascimento" value="<?= $aluno['data_nascimento'] ?? '' ?>">
