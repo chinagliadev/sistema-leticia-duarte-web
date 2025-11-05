@@ -1,5 +1,5 @@
 <?php
-class PessoaAutorizada
+class MatriculaPessoaAutorizada
 {
 
     private $conn;
@@ -14,19 +14,15 @@ class PessoaAutorizada
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function cadastrarPessoaAutorizada($nome, $cpf, $celular, $parentesco){
-
-        $sqlInserir = "INSERT INTO tb_pessoas_autorizadas (nome, cpf, celular, parentesco) VALUES (:nome, :cpf, :celular, :parentesco)";
-
-        $dados = $this->conn->prepare($sqlInserir);
-
-        $dados->execute([
-            ":nome" => $nome,
-            ":cpf" => $cpf,
-            ":celular" => $celular,
-            ":parentesco" => $parentesco
+    public function cadastrarMatriculaPessoaAutorizada($matricula_id, $pessoa_autorizada_id)
+    {
+        $sql = "INSERT INTO tb_matricula_pessoas_autorizadas (matricula_id, pessoa_autorizada_id)
+                VALUES (:matricula_id, :pessoa_autorizada_id)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':matricula_id' => $matricula_id,
+            ':pessoa_autorizada_id' => $pessoa_autorizada_id
         ]);
-
 
         return $this->conn->lastInsertId();
     }

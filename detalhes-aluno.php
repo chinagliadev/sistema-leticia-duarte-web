@@ -2,18 +2,14 @@
 require('./class/Matricula.php');
 require('./config.php');
 
-// Função para formatar a data do banco de dados (YYYY-MM-DD) para o formato brasileiro (DD/MM/YYYY)
 function formatarDataBrasileira($data_db)
 {
-    // Verifica se a data está vazia ou é uma data nula do banco
     if (empty($data_db) || $data_db === '0000-00-00') {
         return 'Não informado';
     }
-    // Converte e formata
     return date('d/m/Y', strtotime($data_db));
 }
 
-// Função para retornar 'Sim' ou 'Não' com base no valor booleano
 function simNao($valor)
 {
     if (!isset($valor)) return 'Não informado';
@@ -37,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $pessoa_autorizada_2 = $dadosCompleto['pessoa_autorizada_2'];
     $pessoa_autorizada_3 = $dadosCompleto['pessoa_autorizada_3'];
     $pessoa_autorizada_4 = $dadosCompleto['pessoa_autorizada_4'];
+
 }
 
 ?>
@@ -90,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 <?php
 
                                 $rg_aluno = !empty($aluno['rg']) ? $aluno['rg'] : 'Não informado';
-                                // APLICANDO A FORMATAÇÃO DE DATA AQUI
                                 $data_nascimento = formatarDataBrasileira($aluno['data_nascimento'] ?? null);
                                 $endereco_completo = !empty($endereco['endereco']) ? $endereco['endereco'] : 'Não informado';
                                 $bairro_completo = !empty($endereco['bairro']) ? $endereco['bairro'] : 'Não informado';
@@ -112,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 } else if ($tipo_turma === 'Multisseriada M.M' || $tipo_turma === 'Multisseriada B.M') {
                                     $cor_label_turma = 'label-multisseriada';
                                 } else {
-                                    $cor_label_turma = 'blue'; // Cor padrão caso não caia em nenhuma classe
+                                    $cor_label_turma = 'blue'; 
                                 }
 
                                 ?>
@@ -225,9 +221,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                     <div class="column">
                                         <p><strong>Estado Civil:</strong> <?= $responsavel['estado_civil'] ?? 'Não informado' ?></p>
-                                        <p><strong>Telefone:</strong> <?= $responsavel['telefone'] ?? 'Não informado' ?></p>
+                                        <p><strong>Telefone:</strong> <?= $responsavel['celular'] ?? 'Não informado' ?></p>
                                         <p><strong>Profissão:</strong> <?= $responsavel['profissao'] ?? 'Não informado' ?></p>
-                                        <p><strong>Horario:</strong> <?= $responsavel['horario'] ?? 'Não informado' ?></p>
+                                        <p><strong>Horario:</strong> <?= $responsavel['horario_trabalho'] ?? 'Não informado' ?></p>
                                         <p><strong>Possui Outra Renda:</strong> <?= $renda_extra ?></p>
                                         <p><strong>Valor renda extra:</strong><?= $valor_renda_extra ?></p>
                                     </div>
@@ -243,7 +239,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             <?php
                                             $tipo_responsavel = !empty($responsavel2['tipo_responsavel']) ? $responsavel2['tipo_responsavel'] : 'Não informado';
                                             $nome_responsavel = !empty($responsavel2['nome']) ? $responsavel2['nome'] : 'Não informado';
-                                            // APLICANDO A FORMATAÇÃO DE DATA AQUI
                                             $data_nascimento_resp2 = formatarDataBrasileira($responsavel2['data_nascimento'] ?? null);
                                             $escolaridade = !empty($responsavel2['escolaridade']) ? $responsavel2['escolaridade'] : 'Não informado';
                                             $email = !empty($responsavel2['email']) ? $responsavel2['email'] : 'Não informado';
@@ -270,9 +265,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                         <div class="column <?= $oculto ?? '' ?>">
                                             <p><strong>Estado Civil:</strong> <?= $responsavel2['estado_civil'] ?? 'Não informado' ?></p>
-                                            <p><strong>Telefone:</strong> <?= $responsavel2['telefone'] ?? 'Não informado' ?></p>
+                                            <p><strong>Telefone:</strong> <?= $responsavel2['celular'] ?? 'Não informado' ?></p>
                                             <p><strong>Profissão:</strong> <?= $responsavel2['profissao'] ?? 'Não informado' ?></p>
-                                            <p><strong>Horario:</strong> <?= $responsavel2['horario'] ?? 'Não informado' ?></p>
+                                            <p><strong>Horario:</strong> <?= $responsavel2['horario_trabalho'] ?? 'Não informado' ?></p>
                                             <p><strong>Possui Outra Renda:</strong> <?= $renda_extra ?></p>
                                             <p><strong>Valor Renda Extra:</strong> <?= $valor_renda_extra ?></p>
                                         </div>

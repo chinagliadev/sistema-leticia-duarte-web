@@ -26,9 +26,22 @@
 
         <div class="four wide field <?= !empty($estrutura_familiar['recebe_bolsa_familia']) && $estrutura_familiar['recebe_bolsa_familia'] == 1 ? '' : 'oculto' ?>" id="valor-bolsa-field">
             <label>Valor</label>
-            <input type="text" placeholder="R$" name="valor" id="valor_bolsa_familia"
-                value="<?= $estrutura_familiar['valor'] ?? '' ?>" onblur="validarBolsaFamilia()">
+            <input
+                type="text"
+                placeholder="R$"
+                name="valor"
+                id="valor_bolsa_familia"
+                value="<?= $estrutura_familiar['valor'] ?? '' ?>"
+                onblur="validarBolsaFamilia()">
+
+            <div class="ui hidden negative message" id="mensagem-erro-bolsa-familia" style="margin-top:15px">
+                <div class="content">
+                    <i class="exclamation triangle icon"></i>
+                    <span id="bolsa-familia-erro"></span>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <div class="fields">
@@ -44,8 +57,19 @@
 
         <div class="four wide field <?= !empty($estrutura_familiar['possui_alergia']) && $estrutura_familiar['possui_alergia'] == 1 ? '' : 'oculto' ?>" id="especifique-alergia">
             <label>Especifique</label>
-            <input type="text" name="especifique_alergia" id="qual_alergia"
-                value="<?= $estrutura_familiar['especifique_alergia'] ?? '' ?>" onblur="validarAlergia()">
+            <input
+                type="text"
+                name="especifique_alergia"
+                id="qual_alergia"
+                value="<?= $estrutura_familiar['especifique_alergia'] ?? '' ?>"
+                onblur="validarAlergia()">
+
+            <div class="ui hidden negative message" id="mensagem-erro-alergia">
+                <div class="content">
+                    <i class="exclamation triangle icon"></i>
+                    <span id="alergia-erro"></span>
+                </div>
+            </div>
         </div>
 
         <div class="four wide field">
@@ -60,9 +84,22 @@
 
         <div class="four wide field <?= !empty($estrutura_familiar['possui_convenio']) && $estrutura_familiar['possui_convenio'] == 1 ? '' : 'oculto' ?>" id="qual-convenio-field">
             <label>Qual convênio</label>
-            <input type="text" name="qual_convenio" id="qual_convenio"
-                value="<?= $estrutura_familiar['qual_convenio'] ?? '' ?>" onblur="validarConvenioMedico()">
+            <input
+                type="text"
+                name="qual_convenio"
+                id="qual_convenio"
+                value="<?= $estrutura_familiar['qual_convenio'] ?? '' ?>"
+                onblur="validarConvenioMedico()">
+
+            <div class="ui hidden negative message" id="mensagem-erro-convenio">
+                <div class="content">
+                    <i class="exclamation triangle icon"></i>
+                    <span id="convenio-erro"></span>
+                </div>
+            </div>
         </div>
+
+
     </div>
 
     <div class="fields">
@@ -78,8 +115,20 @@
 
         <div class="four wide field <?= !empty($estrutura_familiar['portador_necessidade_especial']) && $estrutura_familiar['portador_necessidade_especial'] == 1 ? '' : 'oculto' ?>" id="qual-necessidade">
             <label>Qual</label>
-            <input type="text" name="qual_necessidade" id="necessidade_especial"
-                value="<?= $estrutura_familiar['qual_necessidade_especial'] ?? '' ?>" onblur="validarNecessidadeEspecial()">
+            <input
+                type="text"
+                name="qual_necessidade"
+                id="necessidade_especial"
+                value="<?= $estrutura_familiar['qual_necessidade_especial'] ?? '' ?>"
+                onblur="validarNecessidadeEspecial()">
+
+
+            <div class="ui hidden negative message" id="mensagem-erro-necessidade">
+                <div class="content">
+                    <i class="exclamation triangle icon"></i>
+                    <span id="necessidade-erro"></span>
+                </div>
+            </div>
         </div>
 
         <div class="four wide field">
@@ -105,9 +154,21 @@
 
         <div class="four wide field <?= !empty($estrutura_familiar['ja_fez_cirurgia']) && $estrutura_familiar['ja_fez_cirurgia'] == 1 ? '' : 'oculto' ?>" id="divCirurgia">
             <label>Qual</label>
-            <input type="text" name="qual_cirurgia" id="cirurgia"
-                value="<?= $estrutura_familiar['qual_cirurgia'] ?? '' ?>" onblur="validarCirurgia()">
+            <input
+                type="text"
+                name="qual_cirurgia"
+                id="cirurgia"
+                value="<?= $estrutura_familiar['qual_cirurgia'] ?? '' ?>"
+                onblur="validarCirurgia()">
+
+            <div class="ui hidden negative message" id="mensagem-erro-cirurgia" style="margin-top:15px">
+                <div class="content">
+                    <i class="exclamation triangle icon"></i>
+                    <span id="cirurgia-erro"></span>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <div class="fields">
@@ -121,7 +182,6 @@
         </div>
     </div>
 
-    <!-- Tipo de moradia -->
     <h4 class="ui dividing header">Tipo de moradia</h4>
     <div class="fields">
         <div class="field">
@@ -144,7 +204,7 @@
 
         <div class="field">
             <div class="ui radio checkbox">
-                <input type="radio" name="tipo_moradia" value="alugada"
+                <input type="radio" id="moradia_alugada" name="tipo_moradia" value="alugada"
                     <?= ($estrutura_familiar['tipo_moradia'] ?? '') == 'alugada' ? 'checked' : '' ?>
                     onclick="ativarCampoAluguel()">
                 <label>Alugada</label>
@@ -155,11 +215,23 @@
     <div class="field <?= ($estrutura_familiar['tipo_moradia'] ?? '') == 'alugada' ? '' : 'oculto' ?>" id="divAluguel">
         <label for="txtValorAluguel">Valor do aluguel</label>
         <div class="ui small input">
-            <input name="txtValorAluguel" id="txtValorAluguel" type="text"
-                value="<?= $estrutura_familiar['valor_aluguel'] ?? '' ?>" placeholder="Valor do aluguel"
+            <input
+                name="txtValorAluguel"
+                id="txtValorAluguel"
+                type="text"
+                value="<?= $estrutura_familiar['valor_aluguel'] ?? '' ?>"
+                placeholder="Valor do aluguel"
                 onblur="validarCampoAluguel()">
         </div>
+
+        <div class="ui hidden negative message" id="mensagem-erro-aluguel" style="margin-top: 10px">
+            <div class="content">
+                <i class="exclamation triangle icon"></i>
+                <span id="aluguel-erro"></span>
+            </div>
+        </div>
     </div>
+
 
     <!-- Transporte -->
     <h4 class="ui dividing header">Transporte para a escola</h4>
