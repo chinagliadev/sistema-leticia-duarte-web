@@ -13,7 +13,7 @@ $(document).ready(function () {
         closable: true,
         onApprove: function () {
             $('#form-editar-aluno').submit();
-            return true; 
+            return true;
         }
     });
 
@@ -27,7 +27,7 @@ $(document).ready(function () {
         $('#formulario-aluno').submit();
     });
 
-     $(document).on("click", ".btn-ativar-aluno", function () {
+    $(document).on("click", ".btn-ativar-aluno", function () {
         let id = $(this).data('id');
         let ra_aluno = $(this).data('ra');
         let nomeAluno = $(this).data('nome');
@@ -38,8 +38,8 @@ $(document).ready(function () {
 
         $('#modal-ativar-matricula').modal('show');
     });
-    
-     $(document).on("click", ".btn-deletar-aluno", function () {
+
+    $(document).on("click", ".btn-deletar-aluno", function () {
         let id = $(this).data('id');
         let ra_aluno = $(this).data('ra');
         let nomeAluno = $(this).data('nome');
@@ -75,13 +75,21 @@ $(document).ready(function () {
     $('#txtTelefone_1').mask('(00) 00000-0000');
     $('#txtTelefone_2').mask('(00) 00000-0000');
     $('#txtTelefoneTrabalho_1').mask('(00) 00000-0000');
-    $('#txtCpfAutorizada').mask('000.000.000-00');
-    $('#txtCpfAutorizada2').mask('000.000.000-00');
+    $('#txtTelefoneTrabalho_2').mask('(00) 00000-0000');
+
     $('#txtCpfAluno').mask('000.000.000-00');
     $('#txtRgAluno').mask('00.000.000-0');
+
+    $('#txtCpfAutorizada').mask('000.000.000-00');
+    $('#txtCpfAutorizada2').mask('000.000.000-00');
+    $('#txtCpfAutorizada3').mask('000.000.000-00');
+    $('#txtCpfAutorizada4').mask('000.000.000-00');
+
     $('#txtTelefoneAutorizada').mask('(00) 00000-0000');
     $('#txtTelefoneAutorizada2').mask('(00) 00000-0000');
-    $('#txtTelefoneTrabalho_2').mask('(00) 00000-0000');
+    $('#txtTelefoneAutorizada3').mask('(00) 00000-0000');
+    $('#txtTelefoneAutorizada4').mask('(00) 00000-0000');
+
     $('#txtSalario_1').mask('000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
     $('#txtSalario_2').mask('R$ 000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
     $('#txtRendaExtra').mask('R$ 000.000.000.000.000,00', { reverse: true, selectOnFocus: true });

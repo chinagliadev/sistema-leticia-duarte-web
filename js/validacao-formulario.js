@@ -840,7 +840,7 @@ function validarConvenioMedico() {
     } else {
         divConvenio.classList.add('oculto');
         limparErro(divMensagemErro, divConvenio, spanMensagemErro);
-        return true; // não marcado => válido
+        return true; 
     }
 }
 
@@ -1618,29 +1618,32 @@ async function validarFormularioCompleto() {
     }
 }
 
-function removerResponsavel2() {
+
+
+function removerResponsavel() {
     document.getElementById('responsavel_2').classList.add('oculto');
     document.getElementById('divBotaoRemoverResponsavel').classList.add('oculto');
     document.getElementById('divBotaoResponsavel').classList.remove('oculto');
 
     document.getElementById('apagarResp2').value = '1';
 
-    const inputs = document.querySelectorAll('#responsavel_2 input, #responsavel_2 select');
-    inputs.forEach(input => {
-        if (input.type !== 'hidden') input.value = '';
-        if (input.tagName === 'SELECT') input.selectedIndex = 0;
-    });
-}
+    document.getElementById('txtTipoResponsavel_2').selectedIndex = 0;
+    document.getElementById('txtNomeResponsavel_2').value = '';
+    document.getElementById('txtDataNascimento_2').value = '';
+    document.getElementById('hiddenDataNascimento_2').value = '';
+    document.getElementById('txtEstadoCivil_2').selectedIndex = 0;
+    document.getElementById('txtEscolaridade_2').selectedIndex = 0;
+    document.getElementById('txtTelefone_2').value = '';
+    document.getElementById('txtEmail_2').value = '';
+    document.getElementById('txtNomeEmpresa_2').value = '';
+    document.getElementById('txtProfissao_2').value = '';
+    document.getElementById('txtTelefoneTrabalho_2').value = '';
+    document.getElementById('txtHorarioTrabalho_2').value = '';
+    document.getElementById('txtSalario_2').value = '';
+    document.getElementById('toggleRendaExtra_2').checked = false;
+    document.getElementById('txtRendaExtra_2').value = '';
 
-
-function removerResponsavel() {
-    const divBotaoRemoverResponsavel = document.getElementById('divBotaoRemoverResponsavel')
-    const divBotaoResponsavel = document.getElementById('divBotaoResponsavel')
-    const responsavel_2 = document.getElementById('responsavel_2')
-
-    divBotaoRemoverResponsavel.classList.add('oculto')
-    divBotaoResponsavel.classList.remove('oculto')
-    responsavel_2.classList.add('oculto')
+    document.getElementById('renda_extra_div_2').classList.add('oculto');
 
 }
 
