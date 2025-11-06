@@ -98,7 +98,6 @@ try {
         'permissao_foto' => isset($_POST['permissaoFoto']) ? 1 : 0
     ];
 
-    var_dump($dadosAluno['data_nascimento']);
     $alunoClass->atualizarAlunoByRa($ra_aluno, $dadosAluno);
 
     for ($i = 1; $i <= 2; $i++) {

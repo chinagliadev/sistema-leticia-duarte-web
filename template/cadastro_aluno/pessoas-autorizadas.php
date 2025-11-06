@@ -267,7 +267,7 @@
                 </a>
             </div>
             <div class="right floated column">
-                <button type="button" onclick="validarFormularioCompleto()" id="btn-salvar-dados" class="ui green icon button right floated">
+                <button type="button" onclick="validarFormularioCompleto('salvar')" id="btn-salvar-dados" class="ui green icon button right floated">
                     <i class="save icon"></i> Salvar Cadastro
                 </button>
             </div>

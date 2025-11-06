@@ -47,22 +47,6 @@ function validarCampoNomeAluno() {
     return true;
 }
 
-function validarRa() {
-    const raAluno = document.getElementById("txtRaAluno").value
-
-    const divMensagem = document.getElementById('mensagem-erro-ra');
-    const spanMensagem = document.getElementById('ra-erro');
-    const inputNome = document.getElementById("validacao-ra");
-
-    if (raAluno === "") {
-        mensagemErroCampos(divMensagem, inputNome, spanMensagem, "Informe o ra do aluno");
-        return false;
-    }
-
-    limparErro(divMensagem, inputNome, spanMensagem);
-    return true
-}
-
 function validarCpfAluno() {
     const cpfAluno = document.getElementById("txtCpfAluno").value.trim();
     const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
@@ -262,14 +246,14 @@ async function buscarCep(cep) {
 
         if (!response.ok) {
             console.warn("API ViaCEP fora do ar ou retornou erro.");
-            return null; 
+            return null;
         }
 
         const dados = await response.json();
         return dados;
     } catch (error) {
         console.warn("Erro na função buscarCep (API pode estar fora do ar):", error);
-        return null; 
+        return null;
     }
 }
 
@@ -443,27 +427,7 @@ function validarEmailResponsavel1() {
     return true;
 }
 
-// function validarSalarioResponsavel1() {
-//     const div = document.getElementById('salario_responsavel_div');
-//     const valor = document.getElementById('txtSalario_1').value.trim();
-//     const mensagemErro = document.getElementById('mensagem-erro-salario-1');
-//     const spanErro = document.getElementById('salario-erro-1');
 
-//     limparErro(mensagemErro, div, spanErro);
-
-//     if (valor === '') {
-//         mensagemErroCampos(mensagemErro, div, spanErro, 'Informe o salário do responsável');
-//         return false;
-//     }
-
-//     if (isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
-//         mensagemErroCampos(mensagemErro, div, spanErro, 'Informe um valor numérico válido');
-//         return false;
-//     }
-
-//     limparErro(mensagemErro, div, spanErro);
-//     return true;
-// }
 
 function validarRendaExtra() {
     const possuiRenda = document.getElementById('toggleRendaExtra_1');
@@ -477,18 +441,25 @@ function validarRendaExtra() {
         campoRendaExtraDiv.classList.remove('oculto');
 
         if (rendaExtra.trim() === '') {
-            mensagemErroCampos(divMensagemErro, campoRendaExtraInput, spanMensagemErro, 'Informe a renda extra');
+            mensagemErroCampos(
+                divMensagemErro,
+                campoRendaExtraDiv,
+                spanMensagemErro,
+                'Informe a renda extra'
+            );
             return false;
         } else {
-            limparErro(divMensagemErro, campoRendaExtraInput, spanMensagemErro);
+            limparErro(divMensagemErro, campoRendaExtraDiv, spanMensagemErro);
+            return true;
         }
     } else {
         campoRendaExtraDiv.classList.add('oculto');
-        limparErro(divMensagemErro, campoRendaExtraInput, spanMensagemErro);
+        limparErro(divMensagemErro, campoRendaExtraDiv, spanMensagemErro);
         campoRendaExtraInput.value = "";
         return true;
     }
 }
+
 
 function adicionarResponsavel() {
     const responsavel2 = document.getElementById('responsavel_2')
@@ -528,7 +499,7 @@ function validarTipoResponsavel2() {
 
     const div = document.getElementById('tipo_responsavel_2_div');
     const valor = document.getElementById('txtTipoResponsavel_2').value;
-    const mensagemErro = document.getElementById('mensagem-erro-tipo-responsavel-2'); 
+    const mensagemErro = document.getElementById('mensagem-erro-tipo-responsavel-2');
     const spanErro = document.getElementById('tipo-responsavel-erro-2');
 
     limparErro(mensagemErro, div, spanErro);
@@ -729,7 +700,7 @@ function validarConvenioMedico() {
     } else {
         divConvenio.classList.add('oculto');
         limparErro(divMensagemErro, divConvenio, spanMensagemErro);
-        return true; 
+        return true;
     }
 }
 
@@ -1317,6 +1288,42 @@ function validarParentesco4() {
     return true;
 }
 
+function validarDataNascimentoResponsavel2() {
+    const input = document.getElementById('txtDataNascimento_2');
+    const divMensagemErro = document.getElementById('mensagem-erro-data-responsavel-2');
+    const divCampo = document.getElementById('data_nascimento_responsavel_2_div');
+    const spanErro = document.getElementById('data-responsavel-erro-2');
+
+    const valor = input.value;
+
+    if (!valor) {
+        limparErro(divMensagemErro, divCampo, spanErro);
+        return false; // Campo vazio é inválido
+    }
+
+    const dataDigitada = new Date(valor);
+    const hoje = new Date();
+
+    dataDigitada.setHours(0, 0, 0, 0);
+    hoje.setHours(0, 0, 0, 0);
+
+    if (dataDigitada > hoje) {
+        mensagemErroCampos(
+            divMensagemErro,
+            divCampo,
+            spanErro,
+            'A data de nascimento não pode ser uma data futura.'
+        );
+        input.value = ''; // limpa o campo
+        return false;
+    }
+
+    limparErro(divMensagemErro, divCampo, spanErro);
+    return true;
+}
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const campoNome1 = document.getElementById("txtNomePessoaAutorizada");
     const campoCpf1 = document.getElementById('txtCpfAutorizada');
@@ -1361,11 +1368,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function validarAluno() {
     const validacaoNome = validarCampoNomeAluno();
-    const validarRA = validarRa()
+    const validarRaAluno = verificarRaAluno();
     const validarCpf = validarCpfAluno()
     const validacaoEndereco = validarEndereco();
     const validacaoNumero = validarNumero();
     const validacaoBairro = validarBairro();
+    const dataNascimento = validarDataNascimentoAluno();
     const validacaoCidade = validarCidade();
     const validacaoRaca = validarRaca();
     const validacaoTurma = validarTurma();
@@ -1373,7 +1381,7 @@ async function validarAluno() {
 
     const validacaoCep = await validarCep();
 
-    const formularioValido = validacaoNome && validarRA && validarCpf && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validarGotas && validacaoCep;
+    const formularioValido = validacaoNome && validarRaAluno && validarCpf && validacaoEndereco && validacaoNumero && validacaoBairro && dataNascimento && validacaoCidade && validacaoRaca && validacaoTurma && validarGotas && validacaoCep;
 
     return formularioValido;
 }
@@ -1384,10 +1392,11 @@ function validarResponsavel1() {
     const nome = validarNomeResponsavel1();
     const estadoCivil = validarEstadoCivilResponsavel1();
     const telefone = validarTelefoneResponsavel1();
+    const dataNascimento = validarDataNascimentoResponsavel1();
     const email = validarEmailResponsavel1();
     const escolaridade = validarEscolaridade()
 
-    const formularioValidoResponsavel = tipo && nome && estadoCivil && telefone && email && escolaridade;
+    const formularioValidoResponsavel = tipo && nome && estadoCivil && telefone && dataNascimento && email && escolaridade;
     return formularioValidoResponsavel;
 }
 
@@ -1395,11 +1404,12 @@ function validarResponsavel2() {
     const tipo = validarTipoResponsavel2();
     const nome = validarNomeResponsavel2();
     const estadoCivil = validarEstadoCivilResponsavel2();
+    const dataNascimento = validarDataNascimentoResponsavel2()
     const telefone = validarTelefoneResponsavel2();
     const email = validarEmailResponsavel2();
     const escolaridade2 = validarEscolaridade2()
 
-    const formularioValidoResponsavel2 = tipo && nome  && estadoCivil && telefone && email && escolaridade2;
+    const formularioValidoResponsavel2 = tipo && nome && estadoCivil && telefone && dataNascimento && email && escolaridade2;
     return formularioValidoResponsavel2;
 }
 
@@ -1433,6 +1443,77 @@ function validarPessoaAutorizada2() {
     return true;
 }
 
+function validarDataNascimentoAluno() {
+    const input = document.getElementById('txtDataNascimento');
+    const divMensagemErro = document.getElementById('mensagem-erro-data-nascimento');
+    const divCampo = document.getElementById('validacao-data-nascimento');
+    const spanErro = document.getElementById('data-nascimento-erro');
+
+    const valor = input.value;
+
+    if (!valor) {
+        limparErro(divMensagemErro, divCampo, spanErro);
+        return false; // Campo vazio é inválido
+    }
+
+    const dataDigitada = new Date(valor);
+    const hoje = new Date();
+
+    // Normaliza a comparação (ignora hora)
+    dataDigitada.setHours(0, 0, 0, 0);
+    hoje.setHours(0, 0, 0, 0);
+
+    if (dataDigitada > hoje) {
+        mensagemErroCampos(
+            divMensagemErro,
+            divCampo,
+            spanErro,
+            'A data de nascimento não pode ser uma data futura.'
+        );
+        input.value = ''; // limpa o campo
+        return false;
+    }
+
+    limparErro(divMensagemErro, divCampo, spanErro);
+    return true;
+}
+
+function validarDataNascimentoResponsavel1() {
+    const input = document.getElementById('txtDataNascimento_1');
+    const divMensagemErro = document.getElementById('mensagem-erro-data-responsavel-1');
+    const divCampo = document.getElementById('data_nascimento_responsavel_div');
+    const spanErro = document.getElementById('data-responsavel-erro-1');
+
+    const valor = input.value;
+
+    if (!valor) {
+        limparErro(divMensagemErro, divCampo, spanErro);
+        return false;
+    }
+
+    const dataDigitada = new Date(valor);
+    const hoje = new Date();
+
+    dataDigitada.setHours(0, 0, 0, 0);
+    hoje.setHours(0, 0, 0, 0);
+
+    if (dataDigitada > hoje) {
+        mensagemErroCampos(
+            divMensagemErro,
+            divCampo,
+            spanErro,
+            'A data de nascimento não pode ser uma data futura.'
+        );
+        input.value = '';
+        return false;
+    }
+
+    limparErro(divMensagemErro, divCampo, spanErro);
+    return true;
+}
+
+
+
 function validarEstruturaFamiliar() {
     const bolsaFamiliaValida = validarBolsaFamilia();
     const convenioValido = validarConvenioMedico();
@@ -1462,7 +1543,7 @@ function validarEstruturaFamiliar() {
 }
 
 
-async function validarFormularioCompleto() {
+async function validarFormularioCompleto(acao = 'salvar') {
     const erros = [];
 
     const alunoValido = await validarAluno();
@@ -1497,7 +1578,30 @@ async function validarFormularioCompleto() {
 
     if (formularioValido) {
         console.log('Formulário válido!');
-        $('#modal-salvar-dados').modal('show');
+
+        if (acao === 'salvar') {
+            $('#modal-salvar-dados').modal('show');
+        } else if (acao === 'editar') {
+            const nomeAluno = $('#txtNomeCrianca').val();
+            const raAluno = $('input[name="ra_aluno"]').val();
+
+            $('#nome-aluno-modal-editar').text(nomeAluno);
+            $('#ra-aluno-no-modal-editar').text(raAluno);
+            $('#input-ra-editar').val(raAluno);
+
+            $('.ui.modal.modal-editar').modal('show');
+
+
+            $('.ui.modal.modal-editar .cancel.button').on('click', function () {
+                $('.ui.modal.modal-editar').modal('hide');
+            });
+
+            $('#btn-editar-cadastro').on('click', function () {
+                $('.ui.modal.modal-editar').modal('hide');
+
+                $('#formulario-aluno').submit();
+            });
+        }
     } else {
         console.warn('Formulário inválido. Seções com erro:', erros);
         $('#modal_formulario_invalido').modal('show');
@@ -1564,3 +1668,36 @@ function validarPesquisar(event) {
 
     return true;
 }
+
+async function verificarRaAluno() {
+    const ra = document.getElementById('txtRaAluno').value.trim();
+
+    const divMensagemErro = document.getElementById('mensagem-erro-ra');
+    const divDoCampo = document.getElementById('validacao-ra');
+    const spanTextoErro = document.getElementById('ra-erro');
+
+    if (!ra) {
+        limparErro(divMensagemErro, divDoCampo, spanTextoErro);
+        return false;
+    }
+
+    try {
+        const response = await fetch(`verificar_ra.php?ra=${encodeURIComponent(ra)}`);
+        const data = await response.json();
+
+        if (data.existe) {
+            mensagemErroCampos(divMensagemErro, divDoCampo, spanTextoErro, 'Este RA já está cadastrado!');
+            return true; 
+        } else {
+            limparErro(divMensagemErro, divDoCampo, spanTextoErro);
+            return false; 
+        }
+    } catch (error) {
+        console.error('Erro ao verificar o RA:', error);
+        return false;
+    }
+}
+
+
+
+

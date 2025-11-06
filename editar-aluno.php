@@ -341,7 +341,7 @@ $pessoa_autorizada_4 = $dadosCompletos['pessoa_autorizada_4'] ?? [];
                                     </a>
                                 </div>
                                 <div class="right floated column">
-                                    <button type="button" id="btn-editar-dados" class="ui yellow icon button right floated">
+                                    <button onclick="validarFormularioCompleto('editar')" type="button" id="btn-editar-dados" class="ui yellow icon button right floated">
                                         <i class="save icon"></i> Editar Cadastro
                                     </button>
                                 </div>
@@ -350,9 +350,8 @@ $pessoa_autorizada_4 = $dadosCompletos['pessoa_autorizada_4'] ?? [];
                     </section>
                 </form>
 
-                <?php include './template/modal/modal-salvar-dados.php' ?>
                 <?php include './template/modal/modal-formulario-invalido.php' ?>
-                <?php include './template/modal/modal'?>
+                <?php include './template/modal/modal-editar-cadastro.php'?>
             </section>
         </main>
     </section>
