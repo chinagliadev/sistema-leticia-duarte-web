@@ -2,7 +2,7 @@
     <div class="fields">
         <div class="three wide field" id="validacao-ra">
             <label for="txtRaAluno">RA da Criança</label>
-            <input type="text" id="txtRaAluno" name="txtRaAluno" placeholder="Digite o RA da criança" onblur="validarRa()"
+            <input type="text" id="txtRaAluno" name="txtRaAluno" placeholder="Digite o RA da criança" onblur="verificarRaAluno()"
                 value="<?= $aluno['ra_aluno'] ?? '' ?>">
             <div class="ui hidden negative message" id="mensagem-erro-ra">
                 <div class="content">
@@ -73,7 +73,7 @@
             <label for="txtDataNascimento">Data Nascimento</label>
                 <div class="ui input">
                     <input id="txtDataNascimento" name="data_nascimento" type="date" placeholder="dd/mm/aaaa"
-                        value="<?= $aluno['data_nascimento'] ?>">
+                        value="<?= $aluno['data_nascimento'] ?>" onblur="validarDataNascimentoAluno()">
                 </div>
             <div class="ui hidden negative message" id="mensagem-erro-data-nascimento">
                 <div class="content">

@@ -58,17 +58,6 @@ $(document).ready(function () {
         $('#form-excluir-cadastro').submit();
     });
 
-    $('#btn-editar-dados').on("click", function () {
-        let raAluno = $(this).data('id');
-        let nomeAluno = $(this).data('nome');
-
-        $('#input-ra-editar').val(raAluno);
-        $('#ra-aluno-no-modal-editar').text(raAluno);
-        $('#nome-aluno-modal-editar').text(nomeAluno);
-
-
-        $('#modal-editar').modal('show');
-    });
 
     $('#txtCep').mask('00000-000');
     $('#txtValorAluguel').mask('R$ 000.000.000.000.000,00', { reverse: true, selectOnFocus: true });
@@ -130,27 +119,26 @@ $(document).ready(function () {
     };
 
    
+// $('#btn-editar-dados').on('click', function () {
+//         const nomeAluno = $('#txtNomeCrianca').val();
+//         const raAluno = $('input[name="ra_aluno"]').val();
 
-    $('#btn-editar-dados').on('click', function () {
-        const nomeAluno = $('#txtNomeCrianca').val();
-        const raAluno = $('input[name="ra_aluno"]').val();
+//         $('#nome-aluno-modal-editar').text(nomeAluno);
+//         $('#ra-aluno-no-modal-editar').text(raAluno);
+//         $('#input-ra-editar').val(raAluno);
 
+//         $('.ui.modal.modal-editar').modal('show');
+//     });
 
-        $('#nome-aluno-modal-editar').text(nomeAluno);
-        $('#ra-aluno-no-modal-editar').text(raAluno);
-        $('#input-ra-editar').val(raAluno);
+//     $('.ui.modal.modal-editar .cancel.button').on('click', function () {
+//         $('.ui.modal.modal-editar').modal('hide');
+//     });
 
-        $('.ui.modal.modal-editar').modal('show');
-    });
+//     $('#btn-editar-cadastro').on('click', function () {
+//         $('.ui.modal.modal-editar').modal('hide');
 
-    $('.ui.modal.modal-editar .cancel.button').on('click', function () {
-        $('.ui.modal.modal-editar').modal('hide');
-    });
-
-    $('#btn-editar-cadastro').on('click', function () {
-        $('#form-editar-aluno').submit();
-    });
-
+//         $('#formulario-aluno').submit();
+//     });
    
 
 });

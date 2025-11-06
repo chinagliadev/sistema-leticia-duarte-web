@@ -1,20 +1,24 @@
 <div class="ui basic modal modal-editar" id="modal-editar">
-    <div class="header">Editar Aluno</div>
-    <div class="content">
-        <p>Você tem certeza que deseja editar o <strong id="nome-aluno-modal-editar"></strong> 
-           com o RA: <strong id="ra-aluno-no-modal-editar"></strong>?</p>
-        <p>Esta ação vai editar os dados do aluno.</p>
+  <div class="ui icon header">
+    <i class="edit icon"></i>
+    Confirmar Edição do Aluno
+  </div>
+  <div class="content" style="text-align:center;">
+    <p>
+      Deseja realmente salvar as alterações do aluno 
+      <strong id="nome-aluno-modal-editar"></strong> 
+      (RA: <span id="ra-aluno-no-modal-editar"></span>)?
+    </p>
+    <input type="hidden" id="input-ra-editar">
+  </div>
+  <div class="actions">
+    <div class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      Cancelar
     </div>
-    <div class="actions">
-        <form method="POST" action="salvar-edicao-aluno.php" id="form-editar-aluno">
-            <input type="hidden" name="ra_aluno" id="input-ra-editar" value="<?= ?>">
-            
-            <div class="ui inverted cancel button">
-                Cancelar
-            </div>
-            <button id="btn-editar-cadastro" type="submit" class="ui inverted yellow ok button">
-                Editar
-            </button>
-        </form>
+    <div class="ui green ok inverted button" id="btn-editar-cadastro">
+      <i class="checkmark icon"></i>
+      Confirmar Edição
     </div>
+  </div>
 </div>

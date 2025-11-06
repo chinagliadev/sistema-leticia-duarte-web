@@ -31,7 +31,7 @@
             <div class="four wide field" id="data_nascimento_responsavel_div">
                 <label>Data Nascimento</label>
                     <div class="ui input">
-                        <input type="date" name="data_nascimento_1"  id="txtDataNascimento_1" value="<?= $responsavel_1['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa">
+                        <input type="date" name="data_nascimento_1"  id="txtDataNascimento_1" value="<?= $responsavel_1['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa" onblur="validarDataNascimentoResponsavel1()">
                     </div>
                 <div id="mensagem-erro-data-responsavel-1" class="ui hidden message error">
                     <span id="data-responsavel-erro-1"></span>
@@ -69,7 +69,7 @@
                     }
                     ?>
                 </select>
-                <div id="mensagem-erro-escolaridade-1" class="ui hidden message error">
+                <div id="mensagem-erro-escolaridade-1" class="ui hidden message error" style="margin-top: 16px;">
                     <span id="escolaridade-erro-1"></span>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                     }
                     ?>
                 </select>
-                <div id="mensagem-erro-tipo-responsavel-2" class="ui hidden message error">
+                <div id="mensagem-erro-tipo-responsavel-2" class="ui hidden message error" style="margin-top: 16px;">
                     <span id="tipo-responsavel-erro-2" class="mensagem-margin"></span>
                 </div>
             </div>
@@ -172,7 +172,7 @@
             <div class="four wide field" id="data_nascimento_responsavel_2_div">
                 <label>Data Nascimento</label>
                     <div class="ui input">
-                        <input type="date" name="data_nascimento_2" id="txtDataNascimento_2" value="<?= $responsavel_2['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa">
+                        <input type="date" name="data_nascimento_2" id="txtDataNascimento_2" value="<?= $responsavel_2['data_nascimento'] ?? '' ?>" onblur="validarDataNascimentoResponsavel2()" placeholder="dd/mm/aaaa">
                     </div>
                 <div id="mensagem-erro-data-responsavel-2" class="ui hidden message error">
                     <span id="data-responsavel-erro-2"></span>
@@ -208,7 +208,7 @@
                     }
                     ?>
                 </select>
-                <div id="mensagem-erro-escolaridade-2" class="ui hidden message error">
+                <div id="mensagem-erro-escolaridade-2" class="ui hidden message error" style="margin-top: 16px;">
                     <span id="escolaridade-erro-2"></span>
                 </div>
             </div>
