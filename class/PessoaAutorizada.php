@@ -5,7 +5,7 @@ class PessoaAutorizada
 
     public function __construct()
     {
-        $_ENV = parse_ini_file('.env'); // garante que as variáveis do .env sejam carregadas
+        $_ENV = parse_ini_file('.env'); 
 
         $dsn = "mysql:dbname={$_ENV['BANCO']};host={$_ENV['HOST']}";
         $usuario = $_ENV['USUARIO'];
