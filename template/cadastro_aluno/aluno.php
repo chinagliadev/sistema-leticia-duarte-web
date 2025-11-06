@@ -2,8 +2,10 @@
     <div class="fields">
         <div class="three wide field" id="validacao-ra">
             <label for="txtRaAluno">RA da Criança</label>
-            <input type="text" id="txtRaAluno" name="txtRaAluno" placeholder="Digite o RA da criança" onblur="verificarRaAluno()"
-                value="<?= $aluno['ra_aluno'] ?? '' ?>">
+            <input type="text" id="txtRaAluno" name="txtRaAluno" placeholder="Digite o RA da criança"
+                onblur="verificarRaAluno()"
+                value="<?= $aluno['ra_aluno'] ?? '' ?>"
+                data-ra-original="<?= $aluno['ra_aluno'] ?? '' ?>">
             <div class="ui hidden negative message" id="mensagem-erro-ra">
                 <div class="content">
                     <i class="user icon"></i><span id="ra-erro"></span>
@@ -69,12 +71,12 @@
     </div>
 
     <div class="fields">
-         <div class="three wide field" id="validacao-data-nascimento">
+        <div class="three wide field" id="validacao-data-nascimento">
             <label for="txtDataNascimento">Data Nascimento</label>
-                <div class="ui input">
-                    <input id="txtDataNascimento" name="data_nascimento" type="date" placeholder="dd/mm/aaaa"
-                        value="<?= $aluno['data_nascimento'] ?>" onblur="validarDataNascimentoAluno()">
-                </div>
+            <div class="ui input">
+                <input id="txtDataNascimento" name="data_nascimento" type="date" placeholder="dd/mm/aaaa"
+                    value="<?= $aluno['data_nascimento'] ?>" onblur="validarDataNascimentoAluno()">
+            </div>
             <div class="ui hidden negative message" id="mensagem-erro-data-nascimento">
                 <div class="content">
                     <i class="calendar icon"></i>

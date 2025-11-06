@@ -1670,11 +1670,19 @@ function validarPesquisar(event) {
 }
 
 async function verificarRaAluno() {
-    const ra = document.getElementById('txtRaAluno').value.trim();
+    const inputRa = document.getElementById('txtRaAluno');
+    const ra = inputRa.value.trim();
 
     const divMensagemErro = document.getElementById('mensagem-erro-ra');
     const divDoCampo = document.getElementById('validacao-ra');
     const spanTextoErro = document.getElementById('ra-erro');
+
+    const raOriginal = inputRa.dataset.raOriginal || '';
+
+    if (raOriginal && ra === raOriginal) {
+        limparErro(divMensagemErro, divDoCampo, spanTextoErro);
+        return false;
+    }
 
     if (!ra) {
         limparErro(divMensagemErro, divDoCampo, spanTextoErro);
@@ -1687,17 +1695,16 @@ async function verificarRaAluno() {
 
         if (data.existe) {
             mensagemErroCampos(divMensagemErro, divDoCampo, spanTextoErro, 'Este RA já está cadastrado!');
-            return true; 
+            return true;
         } else {
             limparErro(divMensagemErro, divDoCampo, spanTextoErro);
-            return false; 
+            return false;
         }
     } catch (error) {
         console.error('Erro ao verificar o RA:', error);
         return false;
     }
 }
-
 
 
 
