@@ -125,7 +125,7 @@ class Matricula
         return $dadosAtivarMatricula->rowCount() > 0;
     }
 
-    public function buscarDadosCompletosAluno($ra_aluno)
+    public function buscarDadosCompletosAluno($idAluno)
     {
         $dadosCompletos = [
             'aluno' => null,
@@ -140,9 +140,9 @@ class Matricula
             'pessoa_autorizada_4' => null  
         ];
 
-        $sqlIdAluno = "SELECT id FROM tb_alunos WHERE ra_aluno = :ra_aluno";
+        $sqlIdAluno = "SELECT id FROM tb_alunos WHERE id = :idAluno";
         $stmtId = $this->conn->prepare($sqlIdAluno);
-        $stmtId->execute([':ra_aluno' => $ra_aluno]);
+        $stmtId->execute([':idAluno' => $idAluno]);
         $idAluno = $stmtId->fetchColumn();
 
         if (!$idAluno) {

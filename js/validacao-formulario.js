@@ -1298,7 +1298,7 @@ function validarDataNascimentoResponsavel2() {
 
     if (!valor) {
         limparErro(divMensagemErro, divCampo, spanErro);
-        return false; // Campo vazio é inválido
+        return false; 
     }
 
     const dataDigitada = new Date(valor);
@@ -1314,7 +1314,7 @@ function validarDataNascimentoResponsavel2() {
             spanErro,
             'A data de nascimento não pode ser uma data futura.'
         );
-        input.value = ''; // limpa o campo
+        input.value = ''; 
         return false;
     }
 

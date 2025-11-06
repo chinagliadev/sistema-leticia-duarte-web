@@ -65,7 +65,7 @@ $pessoa_autorizada_4 = $dadosCompletos['pessoa_autorizada_4'] ?? [];
                 </section>
 
                 <form method="post" action="./salvar-edicao-aluno.php" class="ui form form-cadastro-aluno" id="formulario-aluno">
-                    <input type="hidden" name="ra_aluno" value="<?= $aluno['ra_aluno'] ?>">
+                    <input type="hidden" name="id_aluo" value="<?= $aluno['id'] ?>">
 
                     <?php
                     include './template/cadastro_aluno/aluno.php';

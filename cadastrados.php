@@ -244,14 +244,14 @@ if ($filtro) {
                                             <?= ($status_db == 1) ? 'style="display:none;"' : '' ?>>
                                             <i class="check icon"></i>
                                         </button>
-                                        <a href="./detalhes-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
+                                        <a href="./detalhes-aluno.php?idAluno=<?= $matricula['id'] ?>"
                                             data-inverted=""
                                             data-tooltip="Detalhes Aluno"
                                             class="ui small icon button blue"
                                             title="Detalhes">
                                             <i class="eye icon"></i>
                                         </a>
-                                        <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
+                                        <a href="./editar-aluno.php?idAluno=<?= $matricula['id'] ?>"
                                             data-tooltip="Editar Aluno"
                                             data-inverted=""
                                             class="ui small yellow icon button"

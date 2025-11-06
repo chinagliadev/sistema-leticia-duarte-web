@@ -49,10 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 
-$ra_aluno = $_POST['ra_aluno'] ?? '';
-if (empty($ra_aluno)) die("Erro: RA do aluno não informado.");
+$id_aluno = $_POST['id_aluo'] ?? '';
+if (empty($id_aluno)) die("Erro: ID do aluno não informado.");
 
-$dadosCompletos = $matriculaClass->buscarDadosCompletosAluno($ra_aluno);
+$dadosCompletos = $matriculaClass->buscarDadosCompletosAluno($id_aluno);
 if (!$dadosCompletos) die("Aluno / matrícula não encontrados.");
 
 $aluno_id = $dadosCompletos['aluno']['id'] ?? null;
@@ -86,6 +86,7 @@ try {
     }
 
     $dadosAluno = [
+        'ra_aluno' => $_POST['txtRaAluno'] ?? '',
         'nome' => $_POST['txtNomeCrianca'] ?? '',
         'cpf' => $_POST['txtCpfAluno'] ?? '',
         'rg' => $_POST['txtRgAluno'] ?? '',
@@ -98,7 +99,7 @@ try {
         'permissao_foto' => isset($_POST['permissaoFoto']) ? 1 : 0
     ];
 
-    $alunoClass->atualizarAlunoByRa($ra_aluno, $dadosAluno);
+    $alunoClass->atualizarAlunoByRa($id_aluno, $dadosAluno);
 
     for ($i = 1; $i <= 2; $i++) {
         $responsavelId = ($i === 1) ? $responsavel1_id : $responsavel2_id;
