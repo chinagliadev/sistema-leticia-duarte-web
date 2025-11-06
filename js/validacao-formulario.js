@@ -261,15 +261,15 @@ async function buscarCep(cep) {
         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
 
         if (!response.ok) {
-            throw new Error("Erro ao buscar o CEP.");
+            console.warn("API ViaCEP fora do ar ou retornou erro.");
+            return null; 
         }
 
         const dados = await response.json();
         return dados;
-
     } catch (error) {
-        console.error("Erro na função buscarCep:", error);
-        return false;
+        console.warn("Erro na função buscarCep (API pode estar fora do ar):", error);
+        return null; 
     }
 }
 
@@ -278,10 +278,7 @@ async function validarCep() {
     const mensagemErro = document.getElementById('mensagem-erro-cep');
     const spanCep = document.getElementById('cep-erro');
 
-    console.log('ola')
-
     let cep = $('#txtCep').val().replace(/\D/g, '');
-
     limparErro(mensagemErro, divCep, spanCep);
 
     if (cep === '') {
@@ -294,10 +291,15 @@ async function validarCep() {
         return false;
     }
 
-
     const dadosCep = await buscarCep(cep);
 
-    if (!dadosCep || dadosCep.erro) {
+    // Se a API caiu, não valida nem exibe erro
+    if (dadosCep === null) {
+        console.warn("ViaCEP indisponível, pulando preenchimento automático.");
+        return true; // segue o fluxo normal, sem travar o usuário
+    }
+
+    if (dadosCep.erro) {
         mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP não encontrado.');
         return false;
     }
@@ -311,7 +313,7 @@ async function validarCep() {
     validarCidade();
 
     limparErro(mensagemErro, divCep, spanCep);
-    return true
+    return true;
 }
 
 

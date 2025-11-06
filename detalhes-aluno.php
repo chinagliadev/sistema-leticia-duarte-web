@@ -144,7 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         <?php
 
                                         $rg_aluno = !empty($aluno['rg']) ? $aluno['rg'] : 'Não informado';
-                                        // Variável $data_nascimento já está formatada acima.
                                         $endereco_completo = !empty($endereco['endereco']) ? $endereco['endereco'] : 'Não informado';
                                         $bairro_completo = !empty($endereco['bairro']) ? $endereco['bairro'] : 'Não informado';
 
@@ -304,7 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         }
 
                                         if (!empty($estrutura_familiar['transporte_outros_desc'])) {
-                                            $transportes[] = $estrutura_familiar['transporte_outros_desc'];
+                                            $transportes[] = 'Outros';
                                         }
 
                                         $transporte_selecionado = !empty($transportes) ? implode(', ', $transportes) : 'Não informado';

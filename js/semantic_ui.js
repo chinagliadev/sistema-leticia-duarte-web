@@ -129,88 +129,29 @@ $(document).ready(function () {
         dateFormat: 'dd/mm/yyyy',
     };
 
-    $('#dataNascimentoCalendar').calendar({
-        type: 'date',
-        maxDate: dataDeHoje,
-        text: settingsPtBr,
-        startMode: 'day',
+   
 
-        onChange: function (date, text) {
-            if (date) {
-                const dbFormattedDate = formatToDbDate(date);
-                $('input[name="data_nascimento"]').val(dbFormattedDate);
-            } else {
-                $('input[name="data_nascimento"]').val('');
-            }
-        },
+    $('#btn-editar-dados').on('click', function () {
+        const nomeAluno = $('#txtNomeCrianca').val();
+        const raAluno = $('input[name="ra_aluno"]').val();
 
-        formatter: {
-            date: function (date, settings) {
-                if (!date) return '';
-                var dia = date.getDate().toString().padStart(2, '0');
-                var mes = (date.getMonth() + 1).toString().padStart(2, '0');
-                var ano = date.getFullYear();
-                return dia + '/' + mes + '/' + ano;
-            }
-        },
 
+        $('#nome-aluno-modal-editar').text(nomeAluno);
+        $('#ra-aluno-no-modal-editar').text(raAluno);
+        $('#input-ra-editar').val(raAluno);
+
+        $('.ui.modal.modal-editar').modal('show');
     });
 
-    $('#dataNascimentoCalendar_1').calendar({
-        type: 'date',
-        maxDate: dataDeHoje,
-        text: settingsPtBr,
-        startMode: 'day',
-
-        onChange: function (date, text) {
-            if (date) {
-                const dbFormattedDate = formatToDbDate(date);
-                $('input[name="data_nascimento_1"]').val(dbFormattedDate);
-            } else {
-                $('input[name="data_nascimento_1"]').val('');
-            }
-        },
-
-        formatter: {
-            date: function (date, settings) {
-                if (!date) return '';
-                var dia = date.getDate().toString().padStart(2, '0');
-                var mes = (date.getMonth() + 1).toString().padStart(2, '0');
-                var ano = date.getFullYear();
-                return dia + '/' + mes + '/' + ano;
-            }
-        },
-
+    $('.ui.modal.modal-editar .cancel.button').on('click', function () {
+        $('.ui.modal.modal-editar').modal('hide');
     });
 
-    $('#dataNascimentoCalendar_2').calendar({
-        type: 'date',
-        maxDate: dataDeHoje,
-        text: settingsPtBr,
-        startMode: 'day',
-        disableManual: false,
-
-        // **Assumindo que você tem um <input type="hidden" name="data_nascimento_2"> no seu HTML.**
-        onChange: function (date, text) {
-            if (date) {
-                const dbFormattedDate = formatToDbDate(date);
-                $('input[name="data_nascimento_2"]').val(dbFormattedDate);
-            } else {
-                $('input[name="data_nascimento_2"]').val('');
-            }
-        },
-
-        formatter: {
-            date: function (date, settings) {
-                if (!date) return '';
-                var dia = date.getDate().toString().padStart(2, '0');
-                var mes = (date.getMonth() + 1).toString().padStart(2, '0');
-                var ano = date.getFullYear();
-                return dia + '/' + mes + '/' + ano;
-            }
-        },
+    $('#btn-editar-cadastro').on('click', function () {
+        $('#form-editar-aluno').submit();
     });
 
+   
 
 });
 

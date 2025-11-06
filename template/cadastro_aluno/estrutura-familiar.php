@@ -233,7 +233,6 @@
     </div>
 
 
-    <!-- Transporte -->
     <h4 class="ui dividing header">Transporte para a escola</h4>
     <div class="fields">
         <div class="field">
