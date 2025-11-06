@@ -116,8 +116,18 @@
         </div>
 
         <p style="margin-top:15px;">Defina a nova senha:</p>
-        <input id="kk_fp_new" type="password" placeholder="Nova senha" autocomplete="new-password" />
-        <input id="kk_fp_confirm" type="password" placeholder="Confirmar nova senha" autocomplete="new-password" />
+
+        <label for="kk_fp_new" class="password">Nova senha</label>
+        <div class="password-wrapper">
+          <input type="password" id="kk_fp_new" placeholder="Nova senha" autocomplete="new-password">
+          <i class="bi bi-eye-slash toggle-password" data-target="#kk_fp_new"></i>
+        </div>
+
+        <label for="kk_fp_confirm" class="password">Confirmar nova senha</label>
+        <div class="password-wrapper">
+          <input type="password" id="kk_fp_confirm" placeholder="Confirmar nova senha" autocomplete="new-password">
+          <i class="bi bi-eye-slash toggle-password" data-target="#kk_fp_confirm"></i>
+        </div>
       </div>
     </div>
 
@@ -500,11 +510,17 @@
     });
 
     function formatCPF(value) {
-      return value
-        .replace(/\D/g, '')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      value = value.replace(/\D/g, '');
+
+      if (value.length > 11) {
+        value = value.slice(0, 11);
+      }
+
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+      return value;
     }
 
     function formatCelular(value) {
@@ -521,5 +537,59 @@
     const inputCelular = document.getElementById('kk_fp_celular');
     inputCPF.addEventListener('input', e => e.target.value = formatCPF(e.target.value));
     inputCelular.addEventListener('input', e => e.target.value = formatCelular(e.target.value));
+
+    function validarSintaxeEsqueceuSenha(senha) {
+      return [
+          [/.{10,}/, "Mínimo de 10 caracteres"],
+          [/[A-Z]/, "1 letra maiúscula"],
+          [/[a-z]/, "1 letra minúscula"],
+          [/[0-9]/, "1 número"],
+          [/[^A-Za-z0-9]/, "1 caractere especial"],
+        ]
+        .filter(([r]) => !r.test(senha))
+        .map(([, m]) => m);
+    }
+
+    const novaSenha = document.getElementById('kk_fp_new');
+    const confirmarSenha = document.getElementById('kk_fp_confirm');
+
+    const msgErroNova = document.createElement('span');
+    msgErroNova.style = 'color:red;font-size:14px;display:none;';
+    novaSenha.insertAdjacentElement('afterend', msgErroNova);
+
+    const msgErroConfirmar = document.createElement('span');
+    msgErroConfirmar.style = 'color:red;font-size:14px;display:none;';
+    confirmarSenha.insertAdjacentElement('afterend', msgErroConfirmar);
+
+    function mostrarErro(span, msg) {
+      span.innerHTML = msg;
+      span.style.display = 'block';
+    }
+
+    function esconderErro(span) {
+      span.style.display = 'none';
+    }
+
+    function validarCamposEsqueceuSenha() {
+      const senha = novaSenha.value;
+      const confirmar = confirmarSenha.value;
+
+      const erros = validarSintaxeEsqueceuSenha(senha);
+      if (erros.length > 0) {
+        mostrarErro(msgErroNova, "Senha inválida:<br>• " + erros.join("<br>• "));
+      } else {
+        esconderErro(msgErroNova);
+      }
+    }
+
+    novaSenha.addEventListener('input', validarCamposEsqueceuSenha);
+    confirmarSenha.addEventListener('input', validarCamposEsqueceuSenha);
+
+    const inputOTP = document.getElementById('kk_fp_otp');
+    inputOTP.addEventListener('input', e => {
+      e.target.value = e.target.value
+        .replace(/\D/g, '')
+        .slice(0, 6);
+    });
   })();
 </script>

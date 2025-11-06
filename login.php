@@ -73,10 +73,6 @@
                     <i class="bi bi-eye-slash toggle-password" data-target="#passwordLogin"></i>
                 </div>
                 <div class="checkPassword">
-                    <div class="checkbox">
-                        <input type="checkbox" id="checkboxPassword" name="rememberMe">
-                        <label for="checkboxPassword" class="lembrarMim">Lembrar de mim</label>
-                    </div>
                     <a href="#">Esqueceu a senha?</a>
                 </div>
                 <button type="submit">Entrar</button>

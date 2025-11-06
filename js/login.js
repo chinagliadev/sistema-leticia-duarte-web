@@ -268,17 +268,6 @@ emailCadastro.addEventListener("input", validarEmailCampo);
 inputCelular.addEventListener("input", validarCelularCampo);
 cpfInput.addEventListener("input", validarCPFCampo);
 
-// ========= Mostrar/Ocultar Senha =========
-document.querySelectorAll(".toggle-password").forEach((icon) => {
-  icon.addEventListener("click", () => {
-    const input = document.querySelector(icon.getAttribute("data-target"));
-    const isHidden = input.type === "password";
-    input.type = isHidden ? "text" : "password";
-    icon.classList.toggle("bi-eye");
-    icon.classList.toggle("bi-eye-slash");
-  });
-});
-
 // ========= Submissão do formulário =========
 formCadastro.addEventListener("submit", (e) => {
   const nomeValido = validarNomeCampo();
@@ -290,4 +279,20 @@ formCadastro.addEventListener("submit", (e) => {
   if (!nomeValido || !senhasValidas || !emailValido || !celularValido || !cpfValido) {
     e.preventDefault();
   }
+});
+
+// === Controle global de exibir/ocultar senha ===
+document.addEventListener('click', function (e) {
+  const icon = e.target.closest('.toggle-password');
+  if (!icon) return;
+
+  const targetSelector = icon.getAttribute('data-target');
+  const input = document.querySelector(targetSelector);
+  if (!input) return;
+
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+
+  icon.classList.toggle('bi-eye');
+  icon.classList.toggle('bi-eye-slash');
 });
