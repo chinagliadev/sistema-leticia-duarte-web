@@ -14,7 +14,6 @@ $responsavelClass = new Responsavel();
 $estruturaClass = new EstruturaFamiliar();
 $pessoaAutorizadaClass = new PessoaAutorizada();
 
-var_dump($_POST);
 
 function formatarDataParaDB($data)
 {
@@ -90,7 +89,7 @@ try {
         'nome' => $_POST['txtNomeCrianca'] ?? '',
         'cpf' => $_POST['txtCpfAluno'] ?? '',
         'rg' => $_POST['txtRgAluno'] ?? '',
-        'data_nascimento' => formatarDataParaDB($_POST['txtDataNascimento'] ?? null),
+        'data_nascimento' => $_POST['data_nascimento'] ?? null,
         'etnia' => $_POST['corRaca'] ?? '',
         'turma' => $_POST['turma'] ?? '',
         'autorizacao_febre' => isset($_POST['autorizacaoMed']) ? 1 : 0,
@@ -109,7 +108,7 @@ try {
 
 
         $nome_campo_data = "data_nascimento_" . $i; 
-        $dataNascimento = formatarDataParaDB($_POST[$nome_campo_data] ?? '');
+        $dataNascimento = $_POST[$nome_campo_data] ?? '';
 
         $tipo = $_POST["txtTipoResponsavel_$i"] ?? '';
         $nome = $_POST["txtNomeResponsavel_$i"] ?? '';
@@ -124,7 +123,6 @@ try {
         $salario = $_POST["txtSalario_$i"] ?? '';
         $salario = limparValorMonetario($salario);
         $rendaExtra = isset($_POST["toggleRendaExtra_$i"]) ? 1 : 0;
-        // O campo 'txtRendaExtra' funciona com o sufixo genérico: '' ou '_2'
         $valorRendaExtra = $_POST["txtRendaExtra" . $sufixo_i_generic] ?? '';
         $valorRendaExtra = limparValorMonetario($valorRendaExtra);
 
@@ -248,7 +246,6 @@ try {
         if ($novoEstruturaId) $estrutura_id = $novoEstruturaId;
     }
 
-    // --- Atualização de Pessoas Autorizadas ---
     for ($i = 1; $i <= 4; $i++) {
         $pessoaId = $pessoa_aut_ids[$i];
         $nome = $_POST["txtNomePessoaAutorizada" . ($i === 1 ? '' : $i)] ?? '';
@@ -264,7 +261,6 @@ try {
         }
     }
 
-    // --- Atualização da Matrícula ---
     $matriculaClass->atualizarMatriculaByAlunoId(
         $aluno_id,
         $responsavel1_id,

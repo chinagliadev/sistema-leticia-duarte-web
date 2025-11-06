@@ -42,6 +42,8 @@ function formatarDataParaDB($data)
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    var_dump($_POST);
+
     $nome = $_POST['txtNomeCrianca'] ?? null;
     $cpfAluno = $_POST['txtCpfAluno'] ?? null;
     $rg = $_POST['txtRgAluno'] ?? null;
@@ -49,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $turma = $_POST['turma'] ?? null;
     
-    $dataNascimento = formatarDataParaDB($_POST['data_nascimento'] ?? null); 
+    $dataNascimento = $_POST['data_nascimento'] ?? null; 
     
     $corRaca = $_POST['corRaca'] ?? null;
 
@@ -156,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo_responsavel_1  = $_POST['txtTipoResponsavel_1'] ?? null;
     $nome_responsavel_1  = $_POST['txtNomeResponsavel_1'] ?? null;
     
-    $data_nascimento_1  = formatarDataParaDB($_POST['data_nascimento_1'] ?? null); 
+    $data_nascimento_1  = $_POST['data_nascimento_1'] ?? null; 
     
     $estado_civil_1  = $_POST['txtEstadoCivil_1'] ?? 'Não informado';
     $escolaridade_1  = $_POST['txtEscolaridade'] ?? 'Não informado';
@@ -196,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo_responsavel_2  = $_POST['txtTipoResponsavel_2'];
     $nome_responsavel_2  = $_POST['txtNomeResponsavel_2'];
     
-    $data_nascimento_2 = formatarDataParaDB($_POST['data_nascimento_2'] ?? null); 
+    $data_nascimento_2 = ($_POST['data_nascimento_2'] ?? null); 
     $estado_civil_2  = $_POST['txtEstadoCivil_2'] ?? 'Não informado';
     $escolaridade_2  = $_POST['txtEscolaridade_2'] ?? 'Não informado';
     $celular_2 = $_POST['txtTelefone_2'] ?? null;

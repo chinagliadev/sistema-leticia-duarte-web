@@ -261,15 +261,15 @@ async function buscarCep(cep) {
         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
 
         if (!response.ok) {
-            throw new Error("Erro ao buscar o CEP.");
+            console.warn("API ViaCEP fora do ar ou retornou erro.");
+            return null; 
         }
 
         const dados = await response.json();
         return dados;
-
     } catch (error) {
-        console.error("Erro na função buscarCep:", error);
-        return false;
+        console.warn("Erro na função buscarCep (API pode estar fora do ar):", error);
+        return null; 
     }
 }
 
@@ -278,10 +278,7 @@ async function validarCep() {
     const mensagemErro = document.getElementById('mensagem-erro-cep');
     const spanCep = document.getElementById('cep-erro');
 
-    console.log('ola')
-
     let cep = $('#txtCep').val().replace(/\D/g, '');
-
     limparErro(mensagemErro, divCep, spanCep);
 
     if (cep === '') {
@@ -294,10 +291,15 @@ async function validarCep() {
         return false;
     }
 
-
     const dadosCep = await buscarCep(cep);
 
-    if (!dadosCep || dadosCep.erro) {
+    // Se a API caiu, não valida nem exibe erro
+    if (dadosCep === null) {
+        console.warn("ViaCEP indisponível, pulando preenchimento automático.");
+        return true; // segue o fluxo normal, sem travar o usuário
+    }
+
+    if (dadosCep.erro) {
         mensagemErroCampos(mensagemErro, divCep, spanCep, 'CEP não encontrado.');
         return false;
     }
@@ -311,46 +313,8 @@ async function validarCep() {
     validarCidade();
 
     limparErro(mensagemErro, divCep, spanCep);
-    return true
-}
-
-function validarDataNascimento() {
-    const divData = document.getElementById('validacao-data-nascimento');
-    const inputData = document.getElementById('txtDataNascimento').value.trim();
-    const mensagemErro = document.getElementById('mensagem-erro-data-nascimento');
-    const spanErro = document.getElementById('data-nascimento-erro');
-
-    limparErro(mensagemErro, divData, spanErro);
-
-    if (inputData === '') {
-        mensagemErroCampos(mensagemErro, divData, spanErro, 'Informe a data');
-        return false;
-    }
-
-    const partes = inputData.split('/');
-
-    const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
-
-
-    const dataAtual = new Date();
-
-    dataAtual.setHours(0, 0, 0, 0);
-
-
-    const dataInvalida = isNaN(dataNascimento.getTime()) ||
-        dataNascimento.getDate() != partes[0] ||
-        dataNascimento.getMonth() + 1 != partes[1];
-
-
-    if (dataInvalida || dataNascimento > dataAtual) {
-        mensagemErroCampos(mensagemErro, divData, spanErro, 'A data de nascimento não pode ser futura ou inválida');
-        return false;
-    }
-
-    limparErro(mensagemErro, divData, spanErro);
     return true;
 }
-
 
 
 function validarTipoResponsavel1() {
@@ -398,40 +362,6 @@ function validarNomeResponsavel1() {
     return true;
 }
 
-function validarDataNascimentoResponsavel1() {
-    const div = document.getElementById('data_nascimento_responsavel_div');
-    const valor = document.getElementById('txtDataNascimento_1').value.trim();
-    const mensagemErro = document.getElementById('mensagem-erro-data-responsavel-1');
-    const spanErro = document.getElementById('data-responsavel-erro-1');
-
-    limparErro(mensagemErro, div, spanErro);
-
-    if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe a data de nascimento');
-        return false;
-    }
-
-    const partes = valor.split('/');
-
-    const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
-
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-
-
-    const dataInvalida = isNaN(dataNascimento.getTime()) ||
-        dataNascimento.getDate() != partes[0] ||
-        dataNascimento.getMonth() + 1 != partes[1];
-
-
-    if (dataInvalida || dataNascimento > hoje) {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Data de nascimento inválida ou futura');
-        return false;
-    }
-
-    limparErro(mensagemErro, div, spanErro);
-    return true;
-}
 
 function validarEstadoCivilResponsavel1() {
     const div = document.getElementById('estado_civil_responsavel_div');
@@ -665,46 +595,6 @@ function validarEscolaridade2() {
 }
 
 
-function validarDataNascimentoResponsavel2() {
-    const responsavel2 = document.getElementById('responsavel_2');
-    if (responsavel2.classList.contains('oculto')) {
-        return true;
-    }
-
-    const div = document.getElementById('data_nascimento_responsavel_2_div');
-    const valor = document.getElementById('txtDataNascimento_2').value.trim();
-    const mensagemErro = document.getElementById('mensagem-erro-data-responsavel-2');
-    const spanErro = document.getElementById('data-responsavel-erro-2');
-
-    limparErro(mensagemErro, div, spanErro);
-
-    if (valor === '') {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Informe a data de nascimento');
-        return false;
-    }
-
-    const partes = valor.split('/');
-
-    const dataNascimento = new Date(partes[2], partes[1] - 1, partes[0]);
-
-
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-
-
-    const dataInvalida = isNaN(dataNascimento.getTime()) ||
-        dataNascimento.getDate() != partes[0] ||
-        dataNascimento.getMonth() + 1 != partes[1];
-
-
-    if (dataInvalida || dataNascimento > hoje) {
-        mensagemErroCampos(mensagemErro, div, spanErro, 'Data de nascimento inválida ou futura');
-        return false;
-    }
-
-    limparErro(mensagemErro, div, spanErro);
-    return true;
-}
 
 
 function validarEstadoCivilResponsavel2() {
@@ -788,14 +678,13 @@ function validarEmailResponsavel2() {
 function validarResponsavel2() {
     const tipo = validarTipoResponsavel2();
     const nome = validarNomeResponsavel2();
-    const data = validarDataNascimentoResponsavel2();
     const estadoCivil = validarEstadoCivilResponsavel2();
     const telefone = validarTelefoneResponsavel2();
     const email = validarEmailResponsavel2();
     const rendaExtra = validarRendaExtraResponsavel2();
     const escolaridade = validarEscolaridade2()
 
-    return tipo && nome && data && estadoCivil && telefone && email && rendaExtra;
+    return tipo && nome && estadoCivil && telefone && email && rendaExtra;
 }
 
 function validarBolsaFamilia() {
@@ -1480,12 +1369,11 @@ async function validarAluno() {
     const validacaoCidade = validarCidade();
     const validacaoRaca = validarRaca();
     const validacaoTurma = validarTurma();
-    const validacaoDataNascimento = validarDataNascimento();
     const validarGotas = validarCampoGotas();
 
     const validacaoCep = await validarCep();
 
-    const formularioValido = validacaoNome && validarRA && validarCpf && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validacaoDataNascimento && validarGotas && validacaoCep;
+    const formularioValido = validacaoNome && validarRA && validarCpf && validacaoEndereco && validacaoNumero && validacaoBairro && validacaoCidade && validacaoRaca && validacaoTurma && validarGotas && validacaoCep;
 
     return formularioValido;
 }
@@ -1494,26 +1382,24 @@ async function validarAluno() {
 function validarResponsavel1() {
     const tipo = validarTipoResponsavel1();
     const nome = validarNomeResponsavel1();
-    const data = validarDataNascimentoResponsavel1();
     const estadoCivil = validarEstadoCivilResponsavel1();
     const telefone = validarTelefoneResponsavel1();
     const email = validarEmailResponsavel1();
     const escolaridade = validarEscolaridade()
 
-    const formularioValidoResponsavel = tipo && nome && data && estadoCivil && telefone && email && escolaridade;
+    const formularioValidoResponsavel = tipo && nome && estadoCivil && telefone && email && escolaridade;
     return formularioValidoResponsavel;
 }
 
 function validarResponsavel2() {
     const tipo = validarTipoResponsavel2();
     const nome = validarNomeResponsavel2();
-    const data = validarDataNascimentoResponsavel2();
     const estadoCivil = validarEstadoCivilResponsavel2();
     const telefone = validarTelefoneResponsavel2();
     const email = validarEmailResponsavel2();
     const escolaridade2 = validarEscolaridade2()
 
-    const formularioValidoResponsavel2 = tipo && nome && data && estadoCivil && telefone && email && escolaridade2;
+    const formularioValidoResponsavel2 = tipo && nome  && estadoCivil && telefone && email && escolaridade2;
     return formularioValidoResponsavel2;
 }
 
