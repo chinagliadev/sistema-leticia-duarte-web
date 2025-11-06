@@ -73,6 +73,10 @@
     cursor: pointer;
   }
 
+  .swal2-container {
+    z-index: 1000000 !important;
+  }
+
   @media (max-width:480px) {
     #kk-modal {
       max-width: 95%;
@@ -208,7 +212,13 @@
       if (currentStep === 1) {
         const email = document.getElementById('kk_fp_email').value.trim();
         if (!email) {
-          showMessage('Informe o e-mail');
+          Swal.fire({
+            icon: 'warning',
+            title: 'Atenção',
+            text: 'Informe um e-mail!',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#1C86CC'
+          });
           return;
         }
 
@@ -226,7 +236,13 @@
             if (data.success) {
               gotoStep(2);
             } else {
-              showMessage(data.message);
+              Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: data.message,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#1C86CC'
+              });
             }
           }).catch(err => {
             hideLoading();
@@ -238,7 +254,13 @@
         const cel = document.getElementById('kk_fp_celular').value.trim();
         const cpf = document.getElementById('kk_fp_cpf').value.trim();
         if (!cel || !cpf) {
-          showMessage('Preencha celular e CPF');
+          Swal.fire({
+            icon: 'warning',
+            title: 'Atenção',
+            text: 'Informe o Celular e CPF!',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#1C86CC'
+          });
           return;
         }
 
@@ -254,11 +276,26 @@
           .then(data => {
             hideLoading();
             if (data.success) {
-              showMessage('Código enviado para seu e-mail');
-              gotoStep(3);
-              startTimer(180);
+              Swal.fire({
+                icon: 'success',
+                title: 'Código enviado!',
+                text: 'O código foi enviado para seu e-mail.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#1C86CC'
+              }).then(() => {
+                gotoStep(3);
+                startTimer(180);
+              });
             } else {
-              showMessage(data.message);
+              if (data.message === 'Celular ou CPF incorretos') {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Erro',
+                  text: 'Celular ou CPF incorretos!',
+                  confirmButtonText: 'OK',
+                  confirmButtonColor: '#1C86CC'
+                });
+              }
             }
           }).catch(err => {
             hideLoading();
@@ -272,15 +309,33 @@
         const c = document.getElementById('kk_fp_confirm').value.trim();
 
         if (otp.length !== 6) {
-          showMessage('Digite o código correto');
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Código incorreto',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#1C86CC'
+          });
           return;
         }
         if (!n || !c) {
-          showMessage('Preencha as senhas');
+          Swal.fire({
+            icon: 'warning',
+            title: 'Atenção',
+            text: 'Informe e confirme sua nova senha',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#1C86CC'
+          });
           return;
         }
         if (n !== c) {
-          showMessage('Senhas não conferem');
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'As senhas não coincidem',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#1C86CC'
+          });
           return;
         }
 
@@ -296,8 +351,15 @@
           .then(data => {
             hideLoading();
             if (data.success) {
-              showMessage('Senha redefinida');
-              closeModal();
+              Swal.fire({
+                icon: 'success',
+                title: 'Senha redefinida!',
+                text: 'Sua senha foi alterada com sucesso.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#1C86CC'
+              }).then(() => {
+                closeModal();
+              });
             } else {
               showMessage(data.message);
             }
@@ -325,8 +387,15 @@
         .then(data => {
           hideLoading();
           if (data.success) {
-            showMessage('Código reenviado');
-            startTimer(180);
+            Swal.fire({
+              icon: 'success',
+              title: 'Código reenviado!',
+              text: 'Um novo código foi enviado para seu e-mail.',
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#1C86CC'
+            }).then(() => {
+              startTimer(180);
+            });
           } else {
             showMessage(data.message);
           }
@@ -334,6 +403,39 @@
           hideLoading();
           showMessage('Erro na requisição');
         });
+    });
+
+    function formatCPF(value) {
+      return value
+        .replace(/\D/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    }
+
+    function formatCelular(value) {
+      value = value.replace(/\D/g, '');
+      if (value.length > 11) value = value.slice(0, 11);
+      if (value.length <= 10) {
+        return value
+          .replace(/^(\d{2})(\d)/g, '($1) $2')
+          .replace(/(\d{4})(\d{1,4})$/, '$1-$2');
+      } else {
+        return value
+          .replace(/^(\d{2})(\d)/g, '($1) $2')
+          .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+      }
+    }
+
+    const inputCPF = document.getElementById('kk_fp_cpf');
+    const inputCelular = document.getElementById('kk_fp_celular');
+
+    inputCPF.addEventListener('input', e => {
+      e.target.value = formatCPF(e.target.value);
+    });
+
+    inputCelular.addEventListener('input', e => {
+      e.target.value = formatCelular(e.target.value);
     });
   })();
 </script>
