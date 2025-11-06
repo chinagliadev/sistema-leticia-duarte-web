@@ -72,10 +72,9 @@
          <div class="three wide field" id="validacao-data-nascimento">
             <label for="txtDataNascimento">Data Nascimento</label>
                 <div class="ui input">
-                    <input id="txtDataNascimento" name="txtDataNascimento" type="date" placeholder="dd/mm/aaaa"
+                    <input id="txtDataNascimento" name="data_nascimento" type="date" placeholder="dd/mm/aaaa"
                         value="<?= $aluno['data_nascimento'] ?>">
                 </div>
-            <input type="hidden" name="data_nascimento" id="data_nascimento" value="<?= $aluno['data_nascimento'] ?? '' ?>">
             <div class="ui hidden negative message" id="mensagem-erro-data-nascimento">
                 <div class="content">
                     <i class="calendar icon"></i>

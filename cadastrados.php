@@ -195,11 +195,19 @@ if ($filtro) {
                                     $cor_label_turma = 'label-multisseriada';
                                 }
 
+                                $dataNascimento = $matricula['data_nascimento'] ?? '';
+                                if (!empty($dataNascimento) && $dataNascimento !== '0000-00-00') {
+                                    $dataObj = DateTime::createFromFormat('Y-m-d', $dataNascimento);
+                                    $dataFormatada = $dataObj ? $dataObj->format('d/m/Y') : '';
+                                } else {
+                                    $dataFormatada = '';
+                                }
+
                             ?>
                                 <tr>
                                     <td><?= $matricula['ra_aluno'] ?></td>
                                     <td><?= $matricula['nome_aluno'] ?></td>
-                                    <td> <?= date('d/m/Y', strtotime($matricula['data_nascimento'])) ?></td>
+                                    <td> <?=$dataFormatada ?></td>
                                     <td><?= $matricula['nome_responsavel'] ?></td>
                                     <td>
                                         <div class="ui <?= $cor_label_turma ?> label white">
@@ -242,7 +250,7 @@ if ($filtro) {
                                             class="ui small icon button blue"
                                             title="Detalhes">
                                             <i class="eye icon"></i>
-                                            </a>
+                                        </a>
                                         <a href="./editar-aluno.php?idAluno=<?= $matricula['ra_aluno'] ?>"
                                             data-tooltip="Editar Aluno"
                                             data-inverted=""
@@ -264,7 +272,7 @@ if ($filtro) {
         </main>
     </section>
     <?php include './template/modal/modal-excluir-aluno.php' ?>
-    <?php include  './template/modal/modal-ativar-matricula.php'?>
+    <?php include  './template/modal/modal-ativar-matricula.php' ?>
     <script>
         $(document).ready(function() {
             $('.ui.dropdown').dropdown({

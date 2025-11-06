@@ -31,9 +31,8 @@
             <div class="four wide field" id="data_nascimento_responsavel_div">
                 <label>Data Nascimento</label>
                     <div class="ui input">
-                        <input type="date"  id="txtDataNascimento_1" value="<?= $responsavel_1['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa">
+                        <input type="date" name="data_nascimento_1"  id="txtDataNascimento_1" value="<?= $responsavel_1['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa">
                     </div>
-                <input type="hidden" name="data_nascimento_1" id="hiddenDataNascimento_1" value="<?= $responsavel_1['data_nascimento'] ?? '' ?>">
                 <div id="mensagem-erro-data-responsavel-1" class="ui hidden message error">
                     <span id="data-responsavel-erro-1"></span>
                 </div>
@@ -173,9 +172,8 @@
             <div class="four wide field" id="data_nascimento_responsavel_2_div">
                 <label>Data Nascimento</label>
                     <div class="ui input">
-                        <input type="date" id="txtDataNascimento_2" value="<?= $responsavel_2['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa">
+                        <input type="date" name="data_nascimento_2" id="txtDataNascimento_2" value="<?= $responsavel_2['data_nascimento'] ?? '' ?>" placeholder="dd/mm/aaaa">
                     </div>
-                <input type="hidden" name="data_nascimento_2" id="hiddenDataNascimento_2" value="<?= $responsavel_2['data_nascimento'] ?? '' ?>">
                 <div id="mensagem-erro-data-responsavel-2" class="ui hidden message error">
                     <span id="data-responsavel-erro-2"></span>
                 </div>
