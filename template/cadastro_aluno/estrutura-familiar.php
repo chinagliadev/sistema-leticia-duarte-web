@@ -249,7 +249,7 @@
         </div>
         <div class="field">
             <div class="ui checkbox">
-                <input type="checkbox" name="transporte_pe" value="1" <?= !empty($estrutura_familiar['transporte_pe']) ? 'checked' : '' ?>>
+                <input type="checkbox" name="transporte_pe" value="1" <?= !empty($estrutura_familiar['transporte_a_pe']) ? 'checked' : '' ?>>
                 <label>A Pé</label>
             </div>
         </div>
