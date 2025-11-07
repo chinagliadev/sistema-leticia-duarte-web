@@ -5,9 +5,9 @@ include './class/Matricula.php';
 
 $matricula = new Matricula();
 
-$ra_aluno = $_GET['idAluno'] ?? '';
+$idAluno = $_GET['idAluno'] ?? '';
 
-$dadosCompletos = $matricula->buscarDadosCompletosAluno($ra_aluno);
+$dadosCompletos = $matricula->buscarDadosCompletosAluno($idAluno);
 
 if (!$dadosCompletos) {
     die("Erro: Aluno não encontrado ou ID inválido.");

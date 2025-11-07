@@ -258,7 +258,7 @@ if ($filtro) {
                                             <?= ($status_db == 0) ? 'style="display:none;"' : '' ?>>
                                             <i class="edit icon"></i>
                                         </a>
-                                        <a href="./gerar-arquivo-pdf.php?idAluno=<?= $matricula['ra_aluno'] ?>" class="ui small icon button" data-tooltip="Baixar PDF" data-inverted="">
+                                        <a href="./gerar-arquivo-pdf.php?idAluno=<?= $matricula['id'] ?>" class="ui small icon button" data-tooltip="Baixar PDF" data-inverted="">
                                             <i class="file pdf outline red icon"></i>
                                         </a>
                                     </td>
