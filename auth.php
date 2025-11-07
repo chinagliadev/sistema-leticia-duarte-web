@@ -1,6 +1,6 @@
 <?php
-include "config.php";
 session_start();
+include "config.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;

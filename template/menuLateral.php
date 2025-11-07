@@ -42,7 +42,7 @@ $email_usuario = $_SESSION['usuario']['email'];
     </section>
 
     <section class="container_sair">
-        <a href="../sistema-leticia-duarte-web/login.php"><i class="sign-out icon"></i>Sair</a>
+        <a href="/sistema-leticia-duarte-web/logout.php"><i class="sign-out icon"></i>Sair</a>
     </section>
 </aside>
 

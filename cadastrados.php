@@ -1,4 +1,5 @@
 <?php
+require './verifica-login.php';
 require './config.php';
 include './class/Matricula.php';
 
