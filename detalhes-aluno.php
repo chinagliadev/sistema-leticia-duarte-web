@@ -189,7 +189,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                         $tipo_responsavel = !empty($responsavel['tipo_responsavel']) ? $responsavel['tipo_responsavel'] : 'Não informado';
                                         $nome_responsavel = !empty($responsavel['nome']) ? $responsavel['nome'] : 'Não informado';
-                                        // APLICANDO A FORMATAÇÃO DE DATA AQUI
                                         $data_nascimento_resp1 = formatarDataBrasileira($responsavel['data_nascimento'] ?? null);
                                         $escolaridade = !empty($responsavel['escolaridade']) ? $responsavel['escolaridade'] : 'Não informado';
                                         $email = !empty($responsavel['email']) ? $responsavel['email'] : 'Não informado';

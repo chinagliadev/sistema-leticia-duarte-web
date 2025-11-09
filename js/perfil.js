@@ -1,16 +1,13 @@
-// ========= Seletores =========
 const formPerfil = document.querySelector("#formPerfil");
 const btnEditarPerfil = document.querySelector("#editarPerfil");
 const inputCelular = document.querySelector("#celular");
 const inputCPF = document.querySelector("#cpf");
 
-// ========= Máscaras =========
 $(document).ready(function () {
   $(inputCelular).mask("(00) 00000-0000");
   $(inputCPF).mask("000.000.000-00");
 });
 
-// ========= Função validarCPF (idêntica ao login.js) =========
 function validarCPF(cpf) {
   cpf = cpf.replace(/\D/g, "");
   if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
@@ -25,7 +22,6 @@ function validarCPF(cpf) {
   return true;
 }
 
-// ========= Configuração inicial Semantic UI =========
 $("#formPerfil").form({
   fields: {
     nome: {
@@ -69,7 +65,6 @@ $("#formPerfil").form({
   on: "blur",
 });
 
-// ========= Validação manual do CPF (garante precisão do algoritmo) =========
 inputCPF.addEventListener("blur", function () {
   const value = this.value.trim();
   if (!validarCPF(value)) {
@@ -79,13 +74,11 @@ inputCPF.addEventListener("blur", function () {
   }
 });
 
-// ========= Botão Editar / Salvar =========
 btnEditarPerfil.addEventListener("click", function () {
   const inputs = formPerfil.querySelectorAll('input[name]:not([type="hidden"])');
   const isEditing = !inputs[0].readOnly;
 
   if (isEditing) {
-    // Valida formulário + CPF
     const cpfValido = validarCPF(inputCPF.value);
     const isValidForm = $("#formPerfil").form("is valid");
 
@@ -98,7 +91,6 @@ btnEditarPerfil.addEventListener("click", function () {
       }
     }
   } else {
-    // Ativar edição
     inputs.forEach((input) => (input.readOnly = false));
     btnEditarPerfil.classList.remove("primary");
     btnEditarPerfil.classList.add("green");

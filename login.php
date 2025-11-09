@@ -16,7 +16,6 @@
 </head>
 
 <body>
-    <!-- Mostra pop-up do auth.php, se existir -->
     <?php
     if (isset($_SESSION['mensagem'])) {
         $msg = $_SESSION['mensagem'];

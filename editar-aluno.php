@@ -27,7 +27,6 @@ $pessoa_autorizada_2 = $dadosCompletos['pessoa_autorizada_2'] ?? [];
 $pessoa_autorizada_3 = $dadosCompletos['pessoa_autorizada_3'] ?? [];
 $pessoa_autorizada_4 = $dadosCompletos['pessoa_autorizada_4'] ?? [];
 
-var_dump($pessoa_autorizada_1)
 
 ?>
 

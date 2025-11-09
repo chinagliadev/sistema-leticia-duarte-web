@@ -7,12 +7,10 @@ const loginBtn = $("#login");
 const formCadastro = $(".sign-up form");
 const formLogin = $(".sign-in form");
 
-// ========= Funções utilitárias =========
 const isMobile = () => window.innerWidth <= 768;
 const show = (el, display = "block") => (el.style.display = display);
 const hide = (el) => (el.style.display = "none");
 
-// ========= Criar spans de erro para cada campo =========
 function criarMsgErro(input) {
   const span = document.createElement("span");
   span.style = "color:red;font-size:14px;display:none;";
@@ -20,7 +18,6 @@ function criarMsgErro(input) {
   return span;
 }
 
-// Inputs
 const nomeCadastro = $("#nameComplete");
 const senhaCadastro = $("#passwordCad");
 const confirmarSenhaCadastro = $("#passwordConfirm");
@@ -30,7 +27,6 @@ const cpfInput = $("#cpf");
 const emailLogin = $("#emailLogin");
 const passwordLogin = $("#passwordLogin");
 
-// Mensagens de erro
 const msgNome = criarMsgErro(nomeCadastro);
 const msgSenha = criarMsgErro(senhaCadastro);
 const msgConfirmarSenha = criarMsgErro(confirmarSenhaCadastro);
@@ -38,7 +34,6 @@ const msgEmail = criarMsgErro(emailCadastro);
 const msgCelular = criarMsgErro(inputCelular);
 const msgCPF = criarMsgErro(cpfInput);
 
-// ========= Limpar campos =========
 function limparCampos() {
   [formCadastro, formLogin].forEach((form) => {
     form.querySelectorAll("input").forEach((input) => {
@@ -52,7 +47,6 @@ function limparCampos() {
   [msgSenha, msgConfirmarSenha, msgEmail, msgCelular, msgCPF].forEach(hide);
 }
 
-// ========= Alternância Login / Cadastro =========
 function toggleForms(isRegister) {
   limparCampos();
   if (isMobile()) {
@@ -63,7 +57,6 @@ function toggleForms(isRegister) {
   }
 }
 
-// Eventos dos botões
 registerBtn.addEventListener("click", (e) => {
   e.preventDefault();
   toggleForms(true);
@@ -73,7 +66,6 @@ loginBtn.addEventListener("click", (e) => {
   toggleForms(false);
 });
 
-// Ajuste de layout em resize / load / pageshow
 window.addEventListener("resize", () => toggleForms(container.classList.contains("active")));
 window.addEventListener("load", () => toggleForms(false));
 window.addEventListener("pageshow", (event) => {
@@ -82,7 +74,6 @@ window.addEventListener("pageshow", (event) => {
   }
 });
 
-// ========= Máscaras =========
 inputCelular.addEventListener("input", (e) => {
   let d = e.target.value.replace(/\D/g, "").slice(0, 11);
   e.target.value = d.replace(/(\d{0,2})(\d{0,5})(\d{0,4}).*/, (m, a, b, c) =>
@@ -95,7 +86,6 @@ cpfInput.addEventListener("input", (e) => {
   e.target.value = v.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, "$1.$2.$3-$4").replace(/[-.]$/, "");
 });
 
-// ========= Validações =========
 function validarCPF(cpf) {
   cpf = cpf.replace(/\D/g, "");
   if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
@@ -130,7 +120,6 @@ function validarSintaxeSenha(senha) {
     .map(([, m]) => m);
 }
 
-// ========= Remover espaços =========
 function removerEspacos(...inputs) {
   inputs.forEach((input) =>
     input.addEventListener("input", () => (input.value = input.value.replace(/\s/g, "")))
@@ -138,7 +127,6 @@ function removerEspacos(...inputs) {
 }
 removerEspacos(senhaCadastro, confirmarSenhaCadastro, emailCadastro, emailLogin, passwordLogin);
 
-// ========= Funções de erro individual =========
 function mostrarErroCampo(msgSpan, msg) {
   msgSpan.innerHTML = msg;
   msgSpan.style.display = "block";
@@ -147,7 +135,6 @@ function esconderErroCampo(msgSpan) {
   msgSpan.style.display = "none";
 }
 
-// ========= Validação Senhas Separada =========
 function validarSenhasCampo() {
   const erros = validarSintaxeSenha(senhaCadastro.value);
   if (erros.length) {
@@ -165,7 +152,6 @@ function validarSenhasCampo() {
   return erros.length === 0 && senhaCadastro.value === confirmarSenhaCadastro.value;
 }
 
-// ========= Validações por campo =========
 function validarNomeCampo() {
   const valorNome = nomeCadastro.value.trim();
 
@@ -186,7 +172,7 @@ function validarNomeCampo() {
 function validarEmailCampo() {
   const valorEmail = emailCadastro.value.trim();
 
-  if (valorEmail === "") { // se vazio, não mostra erro
+  if (valorEmail === "") {  
     esconderErroCampo(msgEmail);
     return false;
   }
@@ -260,7 +246,6 @@ function validarSenhasCampo() {
   return erros.length === 0 && valorSenha === valorConfirmar;
 }
 
-// ========= Eventos de input =========
 nomeCadastro.addEventListener("input", validarNomeCampo);
 senhaCadastro.addEventListener("input", validarSenhasCampo);
 confirmarSenhaCadastro.addEventListener("input", validarSenhasCampo);
@@ -268,7 +253,6 @@ emailCadastro.addEventListener("input", validarEmailCampo);
 inputCelular.addEventListener("input", validarCelularCampo);
 cpfInput.addEventListener("input", validarCPFCampo);
 
-// === Controle global de exibir/ocultar senha ===
 document.addEventListener('click', function (e) {
   const icon = e.target.closest('.toggle-password');
   if (!icon) return;
@@ -284,7 +268,6 @@ document.addEventListener('click', function (e) {
   icon.classList.toggle('bi-eye-slash');
 });
 
-// ========= Submissão do formulário =========
 formCadastro.addEventListener("submit", (e) => {
   const nomeValido = validarNomeCampo();
   const senhasValidas = validarSenhasCampo();

@@ -11,7 +11,6 @@ if($_SERVER['REQUEST_METHOD']=== 'POST'){
         
         $matricula->reativarMatricula($id_aluno);
         header('location: ./cadastrados.php');
-        var_dump($matricula);
 
     }
 }

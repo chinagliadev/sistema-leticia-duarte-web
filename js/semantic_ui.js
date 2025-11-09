@@ -118,28 +118,7 @@ $(document).ready(function () {
         dateFormat: 'dd/mm/yyyy',
     };
 
-   
-// $('#btn-editar-dados').on('click', function () {
-//         const nomeAluno = $('#txtNomeCrianca').val();
-//         const raAluno = $('input[name="ra_aluno"]').val();
 
-//         $('#nome-aluno-modal-editar').text(nomeAluno);
-//         $('#ra-aluno-no-modal-editar').text(raAluno);
-//         $('#input-ra-editar').val(raAluno);
-
-//         $('.ui.modal.modal-editar').modal('show');
-//     });
-
-//     $('.ui.modal.modal-editar .cancel.button').on('click', function () {
-//         $('.ui.modal.modal-editar').modal('hide');
-//     });
-
-//     $('#btn-editar-cadastro').on('click', function () {
-//         $('.ui.modal.modal-editar').modal('hide');
-
-//         $('#formulario-aluno').submit();
-//     });
-   
 
 });
 
