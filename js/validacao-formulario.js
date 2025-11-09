@@ -53,7 +53,7 @@ function validarCpfAluno() {
 
     const divMensagem = document.getElementById('mensagem-erro-cpf-aluno');
     const spanMensagem = document.getElementById('cpf-aluno-erro');
-    const inputCpfDiv = document.getElementById("div_cpf_aluno"); // Div principal para aplicar classes de erro
+    const inputCpfDiv = document.getElementById("div_cpf_aluno"); 
 
     limparErro(divMensagem, inputCpfDiv, spanMensagem);
 
@@ -277,10 +277,9 @@ async function validarCep() {
 
     const dadosCep = await buscarCep(cep);
 
-    // Se a API caiu, não valida nem exibe erro
     if (dadosCep === null) {
         console.warn("ViaCEP indisponível, pulando preenchimento automático.");
-        return true; // segue o fluxo normal, sem travar o usuário
+        return true;
     }
 
     if (dadosCep.erro) {
@@ -1453,13 +1452,13 @@ function validarDataNascimentoAluno() {
 
     if (!valor) {
         limparErro(divMensagemErro, divCampo, spanErro);
-        return false; // Campo vazio é inválido
+        return false;  
     }
 
     const dataDigitada = new Date(valor);
     const hoje = new Date();
 
-    // Normaliza a comparação (ignora hora)
+
     dataDigitada.setHours(0, 0, 0, 0);
     hoje.setHours(0, 0, 0, 0);
 
@@ -1470,7 +1469,7 @@ function validarDataNascimentoAluno() {
             spanErro,
             'A data de nascimento não pode ser uma data futura.'
         );
-        input.value = ''; // limpa o campo
+        input.value = ''; 
         return false;
     }
 

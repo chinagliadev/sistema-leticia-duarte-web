@@ -9,7 +9,6 @@ require __DIR__ . '/PHPMailer-master/src/Exception.php';
 require __DIR__ . '/PHPMailer-master/src/PHPMailer.php';
 require __DIR__ . '/PHPMailer-master/src/SMTP.php';
 
-// ===================== FUNÇÃO PARA ENVIAR E-MAIL COM PHPMailer =====================
 function enviarEmail($emailDestino, $codigo)
 {
     $mail = new PHPMailer(true);
@@ -39,11 +38,9 @@ function enviarEmail($emailDestino, $codigo)
     }
 }
 
-// ===================== TRATAMENTO DE REQUISIÇÕES =====================
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $acao = $_POST['acao'];
 
-    // ===================== CADASTRO =====================
     if ($acao == "cadastro") {
         $nome = $_POST['nome'];
         $email = $_POST['email'];
@@ -74,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // ===================== LOGIN =====================
     if ($acao == "login") {
         $email = $_POST['email'];
         $senha = $_POST['senha'];
@@ -106,7 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // ===================== ESQUECEU SENHA - VERIFICA EMAIL =====================
     if ($acao == "check_email") {
         $email = $_POST['email'];
         $sql = "SELECT * FROM tb_funcionario WHERE email=:email";
@@ -123,7 +118,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // ===================== ESQUECEU SENHA - VERIFICA CELULAR + CPF =====================
     if ($acao == "check_cel_cpf") {
         $email = $_POST['email'];
         $cel = $_POST['celular'];
@@ -160,7 +154,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // ===================== ESQUECEU SENHA - VALIDAR CÓDIGO =====================
     if ($acao == "verify_otp") {
         $email = $_POST['email'];
         $codigo = $_POST['codigo'];
@@ -181,7 +174,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // ===================== ESQUECEU SENHA - NOVA SENHA =====================
     if ($acao == "reset_password") {
         $nova_senha = $_POST['nova_senha'];
         $confirmar = $_POST['confirmar'];

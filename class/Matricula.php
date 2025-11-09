@@ -280,7 +280,7 @@ class Matricula
         if (!is_null($pessoa_autorizada_4_id)) { $updates[] = "pessoa_autorizada_4_id = :pessoa_autorizada_4_id"; $params[':pessoa_autorizada_4_id'] = $pessoa_autorizada_4_id; }
 
         if (empty($updates)) {
-            return 0; // nada a atualizar
+            return 0; 
         }
 
         $sql = "UPDATE tb_matricula SET " . implode(', ', $updates) . " WHERE aluno_id = :aluno_id";

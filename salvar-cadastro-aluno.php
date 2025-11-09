@@ -42,7 +42,6 @@ function formatarDataParaDB($data)
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    var_dump($_POST);
 
     $nome = $_POST['txtNomeCrianca'] ?? null;
     $cpfAluno = $_POST['txtCpfAluno'] ?? null;
