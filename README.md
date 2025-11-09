@@ -1609,3 +1609,91 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 ?>
 ```
+# editar-aluno.php
+[![Versão PHP](https://img.shields.io/badge/PHP-v7.4%2B-blue.svg)](https://www.php.net/)
+
+# editar-aluno.php
+
+[![Versão PHP](https://img.shields.io/badge/PHP-v7.4%2B-blue.svg)](https://www.php.net/)
+
+## Descrição
+Página que carrega os dados completos de um aluno para edição e exibe o formulário pré‑preenchido. Os dados são recuperados via a camada de matrícula (classe `Matricula`) e os partials de formulário (template/cadastro_aluno) são usados para renderizar seções reutilizáveis. O formulário envia para `salvar-edicao-aluno.php`.
+
+## Acesso
+URL típica:
+```
+editar-aluno.php?idAluno=123
+```
+- Parâmetro obrigatório: `idAluno` (GET)
+
+## Principais responsabilidades
+- Validar presença de `idAluno` e abortar com mensagem em caso de ausência.
+- Recuperar dados via:
+  ```php
+  $matricula = new Matricula();
+  $dadosCompletos = $matricula->buscarDadosCompletosAluno($ra_aluno);
+  ```
+- Normalizar retorno em arrays:
+  - `$aluno`, `$endereco`, `$responsavel_1`, `$responsavel_2`, `$estrutura_familiar`
+  - `$pessoa_autorizada_1` ... `$pessoa_autorizada_4`
+- Incluir partials do formulário:
+  - `template/cadastro_aluno/aluno.php`
+  - `template/cadastro_aluno/responsavel.php`
+  - `template/cadastro_aluno/estrutura-familiar.php`
+- Preencher campos via JavaScript (valores inline gerados pelo PHP).
+- Acionar validações cliente com `validarFormularioCompleto('editar')` antes de submeter.
+
+## Formulário / Destino
+- Método: `POST`
+- Action: `./salvar-edicao-aluno.php`
+- Observação: existe um input hidden:
+  ```html
+  <input type="hidden" name="id_aluo" value="<?= $aluno['id'] ?>">
+  ```
+  - Verificar se o nome `id_aluo` é intencional; esperado `id_aluno` no processamento backend.
+
+## Dependências (front / back)
+- Back-end:
+  - `config.php` (conexão/setting)
+  - `class/Matricula.php`
+- Front-end:
+  - Semantic UI CSS/JS (CDN)
+  - Semantic UI Calendar (CDN)
+  - jQuery (CDN)
+  - `js/semantic_ui.js`
+  - `js/validacao-formulario.js`
+  - `jquery.mask` (CDN carregado no final)
+- Templates/partials:
+  - `template/menuLateral.php`
+  - `template/modal/modal-formulario-invalido.php`
+  - `template/modal/modal-editar-cadastro.php`
+
+## Interações JS relevantes
+- Botão de salvar chama:
+  ```js
+  validarFormularioCompleto('editar')
+  ```
+  - Esta função valida todas as seções (aluno, responsáveis, autorizadas, estrutura familiar) e deve submeter o formulário se tudo OK.
+- Máscaras e calendários aplicados por `semantic_ui.js`.
+- Campos preenchidos no `$(document).ready()` com valores vindos do PHP.
+
+## Saídas / Comportamento
+- Em caso de aluno não encontrado: `die("Erro: Aluno não encontrado.")`
+- Em caso de sucesso da edição: redirecionamento / mensagem a cargo de `salvar-edicao-aluno.php`.
+
+## Segurança e validações sugeridas
+- Validar/filtrar `idAluno` (ex.: `filter_input(INPUT_GET, 'idAluno', FILTER_VALIDATE_INT)`).
+- Proteger rota com verificação de sessão/autenticação (incluir `auth.php`).
+- Escapar/encodar toda saída (já usado `htmlspecialchars()` em vários campos).
+- Implementar CSRF token no formulário.
+- Confirmar nomes de campos (ex.: fixar `id_aluno` no hidden) e corresponder ao backend.
+
+## Melhoria/Observações rápidas
+- Conferir consistência de nomes de campo ao salvar (`id_aluo` → `id_aluno`).
+- Centralizar preenchimento de campos em uma função JS para reduzir repetição.
+- Preferir Prepared Statements/Transações em `salvar-edicao-aluno.php`.
+
+## Exemplo mínimo de uso
+1. Acessar: `editar-aluno.php?idAluno=42`
+2. Editar campos no formulário.
+3. Clicar em "Editar Cadastro" — validação cliente executa; se OK, submete para `salvar-edicao-aluno.php`.
