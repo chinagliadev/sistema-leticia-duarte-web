@@ -7,6 +7,27 @@
 ![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=flat&logo=jquery&logoColor=white)
 [![Licença](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+## Colaboradores
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/chinagliadev">
+        <img src="https://avatars.githubusercontent.com/chinagliadev" width="100px;" alt="Victor Chinaglia"/><br />
+        <sub><b>Victor Chinaglia</b></sub>
+      </a><br />
+      <sub>Desenvolvedor Full Stack</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/KoalaStockler">
+        <img src="https://avatars.githubusercontent.com/KoalaStockler" width="100px;" alt="Keno Stockler"/><br />
+        <sub><b>Keno Stockler</b></sub>
+      </a><br />
+      <sub>Desenvolvedor Full Stack</sub>
+    </td>
+</table>
+
+
 ## Objetivo
 
 O Sistema Leticia Duarte Web tem como objetivo **facilitar e otimizar a gestão de cadastros e informações** de alunos ou beneficiários da Fundação Leticia Duarte. A iniciativa busca não apenas agilizar o processo de registro, mas também contribuir para a organização e eficiência das rotinas administrativas internas, oferecendo uma ferramenta de apoio prática e funcional para a equipe da Fundação.
