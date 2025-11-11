@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $pessoa_autorizada_2 = $dadosCompleto['pessoa_autorizada_2'];
     $pessoa_autorizada_3 = $dadosCompleto['pessoa_autorizada_3'];
     $pessoa_autorizada_4 = $dadosCompleto['pessoa_autorizada_4'];
-
 }
 
 ?>
@@ -122,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 </div>
                             </div>
                             <div class="extra content">
-                                <a href="./gerar-arquivo-pdf.php?idAluno=<?=$aluno['ra_aluno']?>">
+                                <a href="./gerar-arquivo-pdf.php?idAluno=<?=$aluno['id']?>">
                                 <div class="ui bottom attached button red">
                                         <i class="file pdf outline icon"></i>
                                         Gerar PDF do <?=$aluno['nome']?>
