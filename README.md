@@ -18,13 +18,6 @@
       </a><br />
       <sub>Desenvolvedor Full Stack</sub>
     </td>
-    <td align="center">
-      <a href="https://github.com/KoalaStockler">
-        <img src="https://avatars.githubusercontent.com/KoalaStockler" width="100px;" alt="Keno Stockler"/><br />
-        <sub><b>Keno Stockler</b></sub>
-      </a><br />
-      <sub>Desenvolvedor Full Stack</sub>
-    </td>
 </table>
 
 
